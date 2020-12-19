@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-class MenuScene final:
+class MenuScene final :
     public Engine::Scene
 {
 private:

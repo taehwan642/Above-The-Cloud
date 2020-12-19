@@ -2,7 +2,7 @@
 #include "Component.h"
 
 NAMESPACE(Engine)
-class Transform :
+class Transform final :
     public Component
 {
 public:

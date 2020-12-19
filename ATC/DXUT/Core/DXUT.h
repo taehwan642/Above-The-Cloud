@@ -360,12 +360,31 @@ using namespace std;
 const int windowWidth = 1280;
 const int windowHeight = 720;
 
+template <typename T>
+DWORD Safe_Release(T& t)
+{
+    DWORD refCount = 0;
+    if (t != 0)
+    {
+        refCount = t->Release();
+        if (refCount == 0)
+            t = NULL;
+    }
+    return refCount;
+}
+
 enum class MeshType
 {
     STATIC,
     DYNAMIC
 };
 
+struct INDEX16
+{
+    USHORT _0;
+    USHORT _1;
+    USHORT _2;
+};
 
 #endif
 
