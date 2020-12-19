@@ -57,6 +57,15 @@
     <Filter Include="1Engine\4Component\2Resources">
       <UniqueIdentifier>{8fd43d67-2d27-47c2-8493-fab0ea27157d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\6Manager\1ResourceManager">
+      <UniqueIdentifier>{28f4bb31-aeed-440e-99ea-f868ddbb0d45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4Component\3Mesh">
+      <UniqueIdentifier>{a9f246e2-a2c7-43bc-ae3a-f6ab8308db5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4Component\3Mesh\0StaticMesh">
+      <UniqueIdentifier>{6c1ce063-a9fc-496b-b925-190953209633}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -151,6 +160,12 @@
     <ClCompile Include="Resources.cpp">
       <Filter>1Engine\4Component\2Resources</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>1Engine\6Manager\1ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMesh.cpp">
+      <Filter>1Engine\4Component\3Mesh\0StaticMesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -188,6 +203,12 @@
     </ClInclude>
     <ClInclude Include="Resources.h">
       <Filter>1Engine\4Component\2Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>1Engine\6Manager\1ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMesh.h">
+      <Filter>1Engine\4Component\3Mesh\0StaticMesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

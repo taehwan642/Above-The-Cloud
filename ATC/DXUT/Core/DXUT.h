@@ -360,6 +360,13 @@ using namespace std;
 const int windowWidth = 1280;
 const int windowHeight = 720;
 
+enum class MeshType
+{
+    STATIC,
+    DYNAMIC
+};
+
+
 #endif
 
 
