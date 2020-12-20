@@ -3,7 +3,7 @@
 NAMESPACE(Engine)
 
 class Scene;
-class SceneManager :
+class SceneManager final :
     public Singleton<SceneManager>
 {
 private:

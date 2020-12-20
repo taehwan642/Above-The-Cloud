@@ -9,7 +9,12 @@ class Layer :
 private:
 protected:
 public:
+	explicit Layer(void) {};
+	virtual ~Layer(void) {};
+
 	map<wstring, list<GameObject*>> gameobjectgroup;
+
+	void AddGameObject(wstring _objecttag, GameObject* _object);
 
 	void Update(const FLOAT& dt);
 	void LateUpdate();

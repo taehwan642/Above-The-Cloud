@@ -17,7 +17,7 @@ public:
 	void LostDevice(void);
 
 	virtual void Update(const FLOAT& dt);
-	virtual void LateUpdate();
+	virtual void LateUpdate() {};
 	virtual void Render();
 
 	void Free(void) override;

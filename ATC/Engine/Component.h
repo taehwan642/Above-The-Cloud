@@ -15,7 +15,5 @@ public:
 
     virtual void Update(const FLOAT& dt) {};
     virtual void Render() {};
-
-    virtual Component* Clone(void) PURE;
 };
 END

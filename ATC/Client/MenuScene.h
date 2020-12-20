@@ -12,5 +12,7 @@ public:
     void LateUpdate(void) override;
     void Render(void) override;
     void Exit(void) override;
+
+    void Free(void) override;
 };
 

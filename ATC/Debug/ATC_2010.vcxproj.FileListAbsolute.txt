@@ -1,0 +1,2 @@
+D:\Programming\Above-The-Cloud\ATC\Debug\ATC.exe
+D:\Programming\Above-The-Cloud\ATC\Debug\ATC.pdb

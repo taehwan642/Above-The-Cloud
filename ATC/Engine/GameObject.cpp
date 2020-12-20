@@ -24,14 +24,6 @@ void GameObject::Update(const FLOAT& dt)
 	}
 }
 
-void GameObject::LateUpdate()
-{
-	for (auto& component : componentgroup)
-	{
-		component.second->ResetDevice();
-	}
-}
-
 void GameObject::Render()
 {
 	for (auto& component : componentgroup)

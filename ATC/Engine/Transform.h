@@ -19,5 +19,7 @@ public:
     D3DXMATRIX worldMatrix;
 
     void Update(const float& dt) override;
+
+    void Free(void) override {};
 };
 END

@@ -3,7 +3,7 @@
 
 NAMESPACE(Engine)
 class Resources;
-class ResourceManager :
+class ResourceManager final :
     public Singleton<ResourceManager>
 {
 private:

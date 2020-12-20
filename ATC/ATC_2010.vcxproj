@@ -386,6 +386,7 @@
   <ItemGroup>
     <ClCompile Include="Client\Camera.cpp" />
     <ClCompile Include="Client\MenuScene.cpp" />
+    <ClCompile Include="Client\test.cpp" />
     <ClCompile Include="Engine\Base.cpp" />
     <ClCompile Include="Engine\Component.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
@@ -399,6 +400,7 @@
     <ClCompile Include="Engine\Transform.cpp" />
     <ClInclude Include="Client\Camera.h" />
     <ClInclude Include="Client\MenuScene.h" />
+    <ClInclude Include="Client\test.h" />
     <ClInclude Include="Engine\Base.h" />
     <ClInclude Include="Engine\Component.h" />
     <ClInclude Include="Engine\GameObject.h" />

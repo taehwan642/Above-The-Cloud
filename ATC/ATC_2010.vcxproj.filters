@@ -75,6 +75,9 @@
     <Filter Include="2Client\1GameObject\0Camera">
       <UniqueIdentifier>{57d85de6-1bd0-4ebd-a419-58ba7460bbc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\1GameObject\test">
+      <UniqueIdentifier>{8ec42cc9-dd16-423e-abe3-c68ca20bee62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -178,6 +181,9 @@
     <ClCompile Include="Client\Camera.cpp">
       <Filter>2Client\1GameObject\0Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Client\test.cpp">
+      <Filter>2Client\1GameObject\test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -224,6 +230,9 @@
     </ClInclude>
     <ClInclude Include="Client\Camera.h">
       <Filter>2Client\1GameObject\0Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\test.h">
+      <Filter>2Client\1GameObject\test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
