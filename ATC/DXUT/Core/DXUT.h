@@ -357,6 +357,8 @@ using namespace std;
 #define END }
 #define USING(name) using namespace name;
 
+#define DEVICE DXUTGetD3D9Device()
+
 const int windowWidth = 1280;
 const int windowHeight = 720;
 

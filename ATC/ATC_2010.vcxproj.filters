@@ -27,9 +27,6 @@
     <Filter Include="1Engine\1Scene">
       <UniqueIdentifier>{8dc92a99-b5d7-4cfe-b9ff-acc6b03885bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1Engine\2Layer">
-      <UniqueIdentifier>{fb698d80-d412-4b15-9a37-c06ea4fd058d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1Engine\3GameObject">
       <UniqueIdentifier>{4f8e6eeb-7616-487b-9543-457e439b4721}</UniqueIdentifier>
     </Filter>
@@ -44,9 +41,6 @@
     </Filter>
     <Filter Include="1Engine\6Manager\0SceneManager">
       <UniqueIdentifier>{7756cbc9-d650-420d-a821-963b864b927b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2Client\0MenuScene">
-      <UniqueIdentifier>{9433ede7-ddda-43f8-8e5b-49a0581c9af3}</UniqueIdentifier>
     </Filter>
     <Filter Include="1Engine\4Component\0Component">
       <UniqueIdentifier>{6256d733-ee4b-4121-9c27-f53d3646a7c3}</UniqueIdentifier>
@@ -65,6 +59,21 @@
     </Filter>
     <Filter Include="1Engine\4Component\3Mesh\0StaticMesh">
       <UniqueIdentifier>{6c1ce063-a9fc-496b-b925-190953209633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\0Scene">
+      <UniqueIdentifier>{ba70e8a2-aa97-4256-a4a6-599298153515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\0Scene\0MenuScene">
+      <UniqueIdentifier>{9433ede7-ddda-43f8-8e5b-49a0581c9af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject">
+      <UniqueIdentifier>{165832a2-3757-465b-adcb-f47c6270322e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\2Layer">
+      <UniqueIdentifier>{fb698d80-d412-4b15-9a37-c06ea4fd058d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\0Camera">
+      <UniqueIdentifier>{57d85de6-1bd0-4ebd-a419-58ba7460bbc6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -130,41 +139,44 @@
     <ClCompile Include="ATC.cpp">
       <Filter>0Default</Filter>
     </ClCompile>
-    <ClCompile Include="Base.cpp">
+    <ClCompile Include="Client\MenuScene.cpp">
+      <Filter>2Client\0Scene\0MenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Base.cpp">
       <Filter>1Engine\0Base</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>1Engine\1Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Layer.cpp">
-      <Filter>1Engine\2Layer</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>1Engine\3GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Singleton.cpp">
-      <Filter>1Engine\5Singleton</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>1Engine\6Manager\0SceneManager</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuScene.cpp">
-      <Filter>2Client\0MenuScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
+    <ClCompile Include="Engine\Component.cpp">
       <Filter>1Engine\4Component\0Component</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>1Engine\4Component\1Transform</Filter>
+    <ClCompile Include="Engine\GameObject.cpp">
+      <Filter>1Engine\3GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Resources.cpp">
-      <Filter>1Engine\4Component\2Resources</Filter>
+    <ClCompile Include="Engine\Layer.cpp">
+      <Filter>1Engine\2Layer</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
+    <ClCompile Include="Engine\Scene.cpp">
+      <Filter>1Engine\1Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ResourceManager.cpp">
       <Filter>1Engine\6Manager\1ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="StaticMesh.cpp">
+    <ClCompile Include="Engine\Resources.cpp">
+      <Filter>1Engine\4Component\2Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\SceneManager.cpp">
+      <Filter>1Engine\6Manager\0SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Singleton.cpp">
+      <Filter>1Engine\5Singleton</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\StaticMesh.cpp">
       <Filter>1Engine\4Component\3Mesh\0StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Transform.cpp">
+      <Filter>1Engine\4Component\1Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\Camera.cpp">
+      <Filter>2Client\1GameObject\0Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -174,41 +186,44 @@
     <ResourceCompile Include="ATC.rc">
       <Filter>0Default\Resource Files</Filter>
     </ResourceCompile>
-    <ClInclude Include="Base.h">
+    <ClInclude Include="Client\MenuScene.h">
+      <Filter>2Client\0Scene\0MenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Base.h">
       <Filter>1Engine\0Base</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>1Engine\1Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Layer.h">
-      <Filter>1Engine\2Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>1Engine\3GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>1Engine\5Singleton</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>1Engine\6Manager\0SceneManager</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuScene.h">
-      <Filter>2Client\0MenuScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
+    <ClInclude Include="Engine\Component.h">
       <Filter>1Engine\4Component\0Component</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>1Engine\4Component\1Transform</Filter>
+    <ClInclude Include="Engine\GameObject.h">
+      <Filter>1Engine\3GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Resources.h">
-      <Filter>1Engine\4Component\2Resources</Filter>
+    <ClInclude Include="Engine\Layer.h">
+      <Filter>1Engine\2Layer</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
+    <ClInclude Include="Engine\Scene.h">
+      <Filter>1Engine\1Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ResourceManager.h">
       <Filter>1Engine\6Manager\1ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="StaticMesh.h">
+    <ClInclude Include="Engine\Resources.h">
+      <Filter>1Engine\4Component\2Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\SceneManager.h">
+      <Filter>1Engine\6Manager\0SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Singleton.h">
+      <Filter>1Engine\5Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\StaticMesh.h">
       <Filter>1Engine\4Component\3Mesh\0StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Transform.h">
+      <Filter>1Engine\4Component\1Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\Camera.h">
+      <Filter>2Client\1GameObject\0Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

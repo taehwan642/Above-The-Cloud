@@ -1,7 +1,7 @@
 #include "DXUT.h"
 #include "resource.h"
-#include "SceneManager.h"
-#include "MenuScene.h"
+#include "Engine/SceneManager.h"
+#include "Client/MenuScene.h"
 
 HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
                                      void* pUserContext )
