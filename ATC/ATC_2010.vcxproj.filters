@@ -78,6 +78,15 @@
     <Filter Include="2Client\1GameObject\test">
       <UniqueIdentifier>{8ec42cc9-dd16-423e-abe3-c68ca20bee62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\6Manager\2GraphicsManager">
+      <UniqueIdentifier>{8235ae9f-aed8-4c86-a49d-01e14b843787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4Component\4Shader">
+      <UniqueIdentifier>{0bdee1bc-45bb-49a6-b107-5607a8c89d7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4Component\4Shader\0Default">
+      <UniqueIdentifier>{9f19bae3-af5c-4a38-9397-67bdb4e0fd72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -184,6 +193,12 @@
     <ClCompile Include="Client\test.cpp">
       <Filter>2Client\1GameObject\test</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\GraphicsManager.cpp">
+      <Filter>1Engine\6Manager\2GraphicsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Shader.cpp">
+      <Filter>1Engine\4Component\4Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -234,7 +249,16 @@
     <ClInclude Include="Client\test.h">
       <Filter>2Client\1GameObject\test</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\GraphicsManager.h">
+      <Filter>1Engine\6Manager\2GraphicsManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Shader.h">
+      <Filter>1Engine\4Component\4Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="DefaultShader.fx">
+      <Filter>1Engine\4Component\4Shader\0Default</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

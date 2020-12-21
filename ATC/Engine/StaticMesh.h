@@ -28,9 +28,10 @@ public:
 
     HRESULT LoadMesh(wstring _filepath, wstring _filename);
 
-    void Render(void) override;
+    void Render(void) override {};
 
     void RenderMesh(void);
+    void RenderMesh(LPD3DXEFFECT& _effect);
 
     Resources* Clone(void) override;
     void Free(void) override;

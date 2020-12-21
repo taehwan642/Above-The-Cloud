@@ -3,6 +3,7 @@
 NAMESPACE(Engine)
 class StaticMesh;
 class Transform;
+class Shader;
 END
 class test final :
     public Engine::GameObject
@@ -13,6 +14,7 @@ public:
     explicit test(void);
     virtual ~test(void);
     
+    Engine::Shader* testshader   = nullptr;
     Engine::StaticMesh* testMesh = nullptr;
     Engine::Transform* transform = nullptr;
 

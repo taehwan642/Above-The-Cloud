@@ -13,7 +13,9 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 
 HRESULT CALLBACK OnResetDevice(IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc, void* pUserContext)
 {
-    Engine::SceneManager::GetInstance()->ResetDevice();
+    Engine::SceneManager::GetInstance()->ResetDevice();	
+    DEVICE->SetRenderState(D3DRS_LIGHTING, FALSE);
+    DEVICE->LightEnable(0, FALSE);
     return S_OK;
 }
 

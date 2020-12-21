@@ -9,9 +9,9 @@
 void MenuScene::Start(void)
 {
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"Item (1).x", L"test")))
-	{
 		cout << "히히메시잘불러와져땅" << endl;
-	}
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddShader(L"Resources/Shaders/DefaultShader.fx", L"shader")))
+		cout << "Shader Load Complete" << endl;
 
 	Engine::Layer* l = new Engine::Layer();
 	layergroup.emplace(L"테스트", l);

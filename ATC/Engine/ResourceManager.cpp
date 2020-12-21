@@ -1,6 +1,7 @@
 #include "DXUT.h"
 #include "Resources.h"
 #include "StaticMesh.h"
+#include "Shader.h"
 #include "ResourceManager.h"
 USING(Engine)
 HRESULT ResourceManager::AddTexture(wstring _filepath, wstring _filename, wstring _tag)
@@ -33,6 +34,15 @@ HRESULT ResourceManager::AddMesh(MeshType _meshtype, wstring _filepath, wstring 
 	{
 
 	}
+	return S_OK;
+}
+
+HRESULT ResourceManager::AddShader(wstring _filepath, wstring _tag)
+{
+	Shader* shader = new Shader();
+	if(FAILED(shader->CreateShader(_filepath)))
+		return E_FAIL;
+	resourcegroup.emplace(_tag, shader);
 	return S_OK;
 }
 

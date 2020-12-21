@@ -125,16 +125,21 @@ HRESULT StaticMesh::LoadMesh(wstring _filepath, wstring _filename)
 	return hr;
 }
 
-void StaticMesh::Render(void)
-{
-	
-}
-
 void StaticMesh::RenderMesh(void)
 {
 	for (int i = 0; i < subsetCount; ++i)
 	{
 		DEVICE->SetTexture(0, textures[i]);
+		mesh->DrawSubset(i);
+	}
+}
+
+void StaticMesh::RenderMesh(LPD3DXEFFECT& _effect)
+{
+	for (int i = 0; i < subsetCount; ++i)
+	{
+		_effect->SetTexture((D3DXHANDLE)"g_DiffuseTexture", textures[i]);
+		_effect->CommitChanges();
 		mesh->DrawSubset(i);
 	}
 }

@@ -6,6 +6,10 @@ USING(Engine)
 
 void GameObject::ResetDevice(void)
 {
+	for (auto& component : componentgroup)
+	{
+		component.second->ResetDevice();
+	}
 }
 
 void GameObject::LostDevice(void)

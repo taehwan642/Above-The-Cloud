@@ -171,6 +171,10 @@
       <Command>
       </Command>
     </PostBuildEvent>
+    <FxCompile>
+      <ShaderType>Effect</ShaderType>
+      <ShaderModel>2.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|X64'">
     <ClCompile>
@@ -390,11 +394,13 @@
     <ClCompile Include="Engine\Base.cpp" />
     <ClCompile Include="Engine\Component.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
+    <ClCompile Include="Engine\GraphicsManager.cpp" />
     <ClCompile Include="Engine\Layer.cpp" />
     <ClCompile Include="Engine\ResourceManager.cpp" />
     <ClCompile Include="Engine\Resources.cpp" />
     <ClCompile Include="Engine\Scene.cpp" />
     <ClCompile Include="Engine\SceneManager.cpp" />
+    <ClCompile Include="Engine\Shader.cpp" />
     <ClCompile Include="Engine\Singleton.cpp" />
     <ClCompile Include="Engine\StaticMesh.cpp" />
     <ClCompile Include="Engine\Transform.cpp" />
@@ -404,11 +410,13 @@
     <ClInclude Include="Engine\Base.h" />
     <ClInclude Include="Engine\Component.h" />
     <ClInclude Include="Engine\GameObject.h" />
+    <ClInclude Include="Engine\GraphicsManager.h" />
     <ClInclude Include="Engine\Layer.h" />
     <ClInclude Include="Engine\ResourceManager.h" />
     <ClInclude Include="Engine\Resources.h" />
     <ClInclude Include="Engine\Scene.h" />
     <ClInclude Include="Engine\SceneManager.h" />
+    <ClInclude Include="Engine\Shader.h" />
     <ClInclude Include="Engine\Singleton.h" />
     <ClInclude Include="Engine\StaticMesh.h" />
     <ClInclude Include="Engine\Transform.h" />
@@ -438,6 +446,7 @@
     <ClCompile Include="ATC.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="DefaultShader.fx" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />
