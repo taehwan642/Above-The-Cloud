@@ -19,5 +19,7 @@ public:
     void Update(const float& dt) override;
     void LateUpdate(void) override;
     void Render(void) override;
+
+    void Free(void) override;
 };
 

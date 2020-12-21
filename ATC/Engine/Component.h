@@ -15,5 +15,7 @@ public:
 
     virtual void Update(const FLOAT& dt) {};
     virtual void Render() {};
+
+    void Free(void) override;
 };
 END

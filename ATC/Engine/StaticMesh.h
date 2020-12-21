@@ -18,13 +18,19 @@ private:
     ULONG               numVertex       = 0;
     ULONG               stride          = 0;
     ULONG               numFaces        = 0;
+    
 protected:
 public:
     explicit StaticMesh(void);
+    explicit StaticMesh(wstring _filepath, wstring _filename);
     explicit StaticMesh(const StaticMesh& cp);
     virtual ~StaticMesh(void);
 
     HRESULT LoadMesh(wstring _filepath, wstring _filename);
+
+    void Render(void) override;
+
+    void RenderMesh(void);
 
     Resources* Clone(void) override;
     void Free(void) override;

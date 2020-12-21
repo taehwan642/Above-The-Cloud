@@ -5,6 +5,7 @@
 Camera::Camera(void)
 {
 	transformcomponent = new Engine::Transform();
+	componentgroup.emplace(L"Transform", transformcomponent);
 }
 
 Camera::~Camera(void)
@@ -13,7 +14,7 @@ Camera::~Camera(void)
 
 void Camera::Update(const float& dt)
 {
-
+	GameObject::Update(dt);
 }
 
 void Camera::LateUpdate(void)
@@ -29,10 +30,13 @@ void Camera::LateUpdate(void)
 		1, 500);
 	DEVICE->SetTransform(D3DTS_VIEW, &matView);
 	DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);
+
+	GameObject::LateUpdate();
 }
 
 void Camera::Render(void)
 {
+	GameObject::Render();
 }
 
 void Camera::Free(void)

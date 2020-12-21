@@ -3,16 +3,16 @@
 
 USING(Engine)
 Transform::Transform(void) :
-	position(D3DXVECTOR3()),
-	rotation(D3DXVECTOR3()),
-	scale(D3DXVECTOR3()),
+	position(0,0,0),
+	rotation(0, 0, 0),
+	scale(1, 1, 1),
 	worldMatrix(D3DXMATRIX())
 {}
 
 Transform::Transform(Transform* _parent) :
-	position(D3DXVECTOR3()),
-	rotation(D3DXVECTOR3()),
-	scale(D3DXVECTOR3()),
+	position(0, 0, 0),
+	rotation(0, 0, 0),
+	scale(1, 1, 1),
 	worldMatrix(D3DXMATRIX()),
 	parent(_parent)
 {
@@ -21,7 +21,8 @@ Transform::Transform(Transform* _parent) :
 
 Transform::~Transform(void)
 {
-	parent->Release();
+	if (parent)
+		parent->Release();
 }
 
 void Transform::Update(const float& dt)

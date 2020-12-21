@@ -7,6 +7,11 @@ StaticMesh::StaticMesh(void)
 
 }
 
+StaticMesh::StaticMesh(wstring _filepath, wstring _filename)
+{
+	LoadMesh(_filepath, _filename);
+}
+
 StaticMesh::StaticMesh(const StaticMesh& cp) :
 	Resources(cp),
 	adjacencyBuffer(cp.adjacencyBuffer),
@@ -47,7 +52,7 @@ HRESULT StaticMesh::LoadMesh(wstring _filepath, wstring _filename)
 	WCHAR finalpath[MAX_PATH];
 	
 	::lstrcpy(finalpath, _filepath.c_str());
-	::lstrcpy(finalpath, _filename.c_str());
+	::lstrcat(finalpath, _filename.c_str());
 
 	hr = D3DXLoadMeshFromX(finalpath, 
 						   D3DXMESH_MANAGED, 
@@ -118,6 +123,20 @@ HRESULT StaticMesh::LoadMesh(wstring _filepath, wstring _filename)
 	}
 	mesh->UnlockVertexBuffer();
 	return hr;
+}
+
+void StaticMesh::Render(void)
+{
+	
+}
+
+void StaticMesh::RenderMesh(void)
+{
+	for (int i = 0; i < subsetCount; ++i)
+	{
+		DEVICE->SetTexture(0, textures[i]);
+		mesh->DrawSubset(i);
+	}
 }
 
 Resources* StaticMesh::Clone(void)
