@@ -3,7 +3,7 @@
 
 NAMESPACE(Engine)
 class GameObject;
-class Layer : 
+class Layer final :
 	public Base
 {
 private:

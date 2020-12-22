@@ -3,7 +3,7 @@
 NAMESPACE(Engine)
 class Transform;
 END
-class Camera :
+class Camera final :
     public Engine::GameObject
 {
 private:

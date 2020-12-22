@@ -391,11 +391,14 @@
     <ClCompile Include="Client\Camera.cpp" />
     <ClCompile Include="Client\MenuScene.cpp" />
     <ClCompile Include="Client\test.cpp" />
+    <ClCompile Include="Engine\AnimationController.cpp" />
     <ClCompile Include="Engine\Base.cpp" />
     <ClCompile Include="Engine\Component.cpp" />
+    <ClCompile Include="Engine\DynamicMesh.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
     <ClCompile Include="Engine\GraphicsManager.cpp" />
     <ClCompile Include="Engine\Layer.cpp" />
+    <ClCompile Include="Engine\MeshHierarchy.cpp" />
     <ClCompile Include="Engine\ResourceManager.cpp" />
     <ClCompile Include="Engine\Resources.cpp" />
     <ClCompile Include="Engine\Scene.cpp" />
@@ -407,11 +410,14 @@
     <ClInclude Include="Client\Camera.h" />
     <ClInclude Include="Client\MenuScene.h" />
     <ClInclude Include="Client\test.h" />
+    <ClInclude Include="Engine\AnimationController.h" />
     <ClInclude Include="Engine\Base.h" />
     <ClInclude Include="Engine\Component.h" />
+    <ClInclude Include="Engine\DynamicMesh.h" />
     <ClInclude Include="Engine\GameObject.h" />
     <ClInclude Include="Engine\GraphicsManager.h" />
     <ClInclude Include="Engine\Layer.h" />
+    <ClInclude Include="Engine\MeshHierarchy.h" />
     <ClInclude Include="Engine\ResourceManager.h" />
     <ClInclude Include="Engine\Resources.h" />
     <ClInclude Include="Engine\Scene.h" />
@@ -446,7 +452,7 @@
     <ClCompile Include="ATC.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="DefaultShader.fx" />
+    <FxCompile Include="Resources\Shaders\DefaultShader.fx" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />

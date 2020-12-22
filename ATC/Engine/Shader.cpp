@@ -7,6 +7,7 @@ Shader::Shader(void)
 }
 
 Shader::Shader(const Shader& cp) :
+	Resources(cp),
 	effect(cp.effect),
 	errormsg(cp.errormsg)
 {

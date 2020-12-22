@@ -87,6 +87,15 @@
     <Filter Include="1Engine\4Component\4Shader\0Default">
       <UniqueIdentifier>{9f19bae3-af5c-4a38-9397-67bdb4e0fd72}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\4Component\3Mesh\1DynamicMesh">
+      <UniqueIdentifier>{341c3da8-fdcc-46db-97db-6cd042104687}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4Component\3Mesh\1DynamicMesh\AnimationController">
+      <UniqueIdentifier>{9dc07e0b-1295-4f0f-bf24-134f87092a4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4Component\3Mesh\1DynamicMesh\MeshHierarchy">
+      <UniqueIdentifier>{d4e73a15-67fd-422a-8d22-3f1cf7d327f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -199,6 +208,15 @@
     <ClCompile Include="Engine\Shader.cpp">
       <Filter>1Engine\4Component\4Shader</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\DynamicMesh.cpp">
+      <Filter>1Engine\4Component\3Mesh\1DynamicMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\MeshHierarchy.cpp">
+      <Filter>1Engine\4Component\3Mesh\1DynamicMesh\MeshHierarchy</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\AnimationController.cpp">
+      <Filter>1Engine\4Component\3Mesh\1DynamicMesh\AnimationController</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -255,9 +273,18 @@
     <ClInclude Include="Engine\Shader.h">
       <Filter>1Engine\4Component\4Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\DynamicMesh.h">
+      <Filter>1Engine\4Component\3Mesh\1DynamicMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\MeshHierarchy.h">
+      <Filter>1Engine\4Component\3Mesh\1DynamicMesh\MeshHierarchy</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\AnimationController.h">
+      <Filter>1Engine\4Component\3Mesh\1DynamicMesh\AnimationController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="DefaultShader.fx">
+    <FxCompile Include="Resources\Shaders\DefaultShader.fx">
       <Filter>1Engine\4Component\4Shader\0Default</Filter>
     </FxCompile>
   </ItemGroup>

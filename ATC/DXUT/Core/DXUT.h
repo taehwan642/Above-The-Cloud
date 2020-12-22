@@ -388,8 +388,21 @@ struct INDEX16
     USHORT _2;
 };
 
+struct D3DXFRAME_DERIVED :
+    public D3DXFRAME
+{
+    D3DXMATRIX combinedTransformMatrix;
+};
+
+struct D3DXMESHCONTAINER_DERIVED : 
+    public D3DXMESHCONTAINER
+{
+    LPDIRECT3DTEXTURE9* textures;
+    LPD3DXMESH originalMesh;
+    ULONG numBones;
+    D3DXMATRIX* frameOffsetMatrix;
+    D3DXMATRIX** frameCombinedMatrix;
+    D3DXMATRIX* renderingMatrix;
+};
+
 #endif
-
-
-
-

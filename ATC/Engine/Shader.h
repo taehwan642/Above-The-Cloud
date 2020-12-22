@@ -2,7 +2,7 @@
 #include "Resources.h"
 
 NAMESPACE(Engine)
-class Shader :
+class Shader final :
     public Resources
 {
 private:
