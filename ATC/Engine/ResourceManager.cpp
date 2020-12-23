@@ -1,6 +1,7 @@
 #include "DXUT.h"
 #include "Resources.h"
 #include "StaticMesh.h"
+#include "DynamicMesh.h"
 #include "Shader.h"
 #include "ResourceManager.h"
 USING(Engine)
@@ -15,7 +16,7 @@ HRESULT ResourceManager::AddMesh(MeshType _meshtype, wstring _filepath, wstring 
 	if (iter != resourcegroup.end())
 	{
 		wstring error = _tag;
-		MessageBox(DXUTGetHWND(), error.c_str(), L"중복 스태틱 메시", MB_ICONERROR | MB_OK);
+		MessageBox(DXUTGetHWND(), error.c_str(), L"중복 메시", MB_ICONERROR | MB_OK);
 		return E_FAIL;
 	}
 
@@ -30,15 +31,29 @@ HRESULT ResourceManager::AddMesh(MeshType _meshtype, wstring _filepath, wstring 
 		}
 		resourcegroup.emplace(_tag, staticmesh);
 	}
-	else
+	else if(_meshtype == MeshType::DYNAMIC)
 	{
-
+		DynamicMesh* dynamicmesh = new DynamicMesh();
+		if (FAILED(dynamicmesh->LoadMesh(_filepath, _filename)))
+		{
+			wstring error = _filepath + _filename;
+			MessageBox(DXUTGetHWND(), error.c_str(), L"다이나믹 메시 로드 FAIL", MB_ICONERROR | MB_OK);
+			return E_FAIL;
+		}
+		resourcegroup.emplace(_tag, dynamicmesh);
 	}
 	return S_OK;
 }
 
 HRESULT ResourceManager::AddShader(wstring _filepath, wstring _tag)
 {
+	auto& iter = resourcegroup.find(_tag);
+	if (iter != resourcegroup.end())
+	{
+		wstring error = _tag;
+		MessageBox(DXUTGetHWND(), error.c_str(), L"중복 셰이더", MB_ICONERROR | MB_OK);
+		return E_FAIL;
+	}
 	Shader* shader = new Shader();
 	if(FAILED(shader->CreateShader(_filepath)))
 		return E_FAIL;

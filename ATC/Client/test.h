@@ -2,6 +2,7 @@
 #include "../Engine/GameObject.h"
 NAMESPACE(Engine)
 class StaticMesh;
+class DynamicMesh;
 class Transform;
 class Shader;
 END
@@ -16,6 +17,7 @@ public:
     
     Engine::Shader* testshader   = nullptr;
     Engine::StaticMesh* testMesh = nullptr;
+    Engine::DynamicMesh* testdynamic = nullptr;
     Engine::Transform* transform = nullptr;
 
     void Update(const float& dt) override;

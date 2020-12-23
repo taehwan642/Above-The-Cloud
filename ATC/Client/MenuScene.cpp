@@ -10,6 +10,8 @@ void MenuScene::Start(void)
 {
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"Item (1).x", L"test")))
 		cout << "히히메시잘불러와져땅" << endl;
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"plane.x", L"dynamic")))
+		cout << "다이나믹메시불러와짐" << endl;
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddShader(L"Resources/Shaders/DefaultShader.fx", L"shader")))
 		cout << "Shader Load Complete" << endl;
 
@@ -24,7 +26,23 @@ void MenuScene::Start(void)
 
 void MenuScene::Update(const float& dt)
 {
-	D3DXVECTOR3 vEyePt(0.0f, 0.0f, -5.0f);
+	//if (DXUTIsKeyDown('A'))
+	//{
+	//	x -= 30 * dt;
+	//}
+	//if (DXUTIsKeyDown('D'))
+	//{
+	//	x += 30 * dt;
+	//}
+	//if (DXUTIsKeyDown('W'))
+	//{
+	//	z += 30 * dt;
+	//}
+	//if (DXUTIsKeyDown('S'))
+	//{
+	//	z -= 30 * dt;
+	//}
+	D3DXVECTOR3 vEyePt(x, 0.0f, z);
 	D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
 	D3DXMATRIXA16 matView;
@@ -34,13 +52,14 @@ void MenuScene::Update(const float& dt)
 	D3DXMATRIXA16 matProj;
 	D3DVIEWPORT9 viewPort;
 	DEVICE->GetViewport(&viewPort);
-	D3DXMatrixPerspectiveFovLH(&matProj, D3DXToRadian(60.f), viewPort.Width / (float)viewPort.Height, 0.1f, 500.f);
+	D3DXMatrixPerspectiveFovLH(&matProj, D3DXToRadian(60.f), viewPort.Width / (float)viewPort.Height, 0.1f, 1500.f);
 	DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);
 	Scene::Update(dt);
 }
 
 void MenuScene::LateUpdate(void)
 {
+	
 	Scene::LateUpdate();
 }
 

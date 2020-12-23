@@ -26,6 +26,7 @@ MeshHierarchy::~MeshHierarchy(void)
 
 STDMETHODIMP_(HRESULT __stdcall) MeshHierarchy::CreateFrame(LPCSTR Name, LPD3DXFRAME* ppNewFrame)
 {
+    cout << "?d" << endl;
     D3DXFRAME_DERIVED* frame = new D3DXFRAME_DERIVED;
     ZeroMemory(frame, sizeof(D3DXFRAME_DERIVED));
 
@@ -39,6 +40,7 @@ STDMETHODIMP_(HRESULT __stdcall) MeshHierarchy::CreateFrame(LPCSTR Name, LPD3DXF
 
 STDMETHODIMP_(HRESULT __stdcall) MeshHierarchy::CreateMeshContainer(LPCSTR Name, const D3DXMESHDATA* pMeshData, const D3DXMATERIAL* pMaterials, const D3DXEFFECTINSTANCE* pEffectInstances, DWORD NumMaterials, const DWORD* pAdjacency, LPD3DXSKININFO pSkinInfo, LPD3DXMESHCONTAINER* ppNewMeshContainer)
 {
+    cout << "?" << endl;
     D3DXMESHCONTAINER_DERIVED* meshcontainer = new D3DXMESHCONTAINER_DERIVED;
     ZeroMemory(meshcontainer, sizeof(D3DXMESHCONTAINER_DERIVED));
 
@@ -103,6 +105,11 @@ STDMETHODIMP_(HRESULT __stdcall) MeshHierarchy::CreateMeshContainer(LPCSTR Name,
         meshcontainer->textures[0] = nullptr;
     }
 
+    meshcontainer->MeshData.pMesh->CloneMeshFVF(meshcontainer->MeshData.pMesh->GetOptions(),
+        meshcontainer->MeshData.pMesh->GetFVF(),
+        DEVICE,
+        &meshcontainer->originalMesh);
+
     if (pSkinInfo == nullptr)
     {
         *ppNewMeshContainer = meshcontainer;
@@ -111,10 +118,7 @@ STDMETHODIMP_(HRESULT __stdcall) MeshHierarchy::CreateMeshContainer(LPCSTR Name,
 
     meshcontainer->pSkinInfo = pSkinInfo;
     meshcontainer->pSkinInfo->AddRef();
-    meshcontainer->MeshData.pMesh->CloneMeshFVF(meshcontainer->MeshData.pMesh->GetOptions(),
-                                                meshcontainer->MeshData.pMesh->GetFVF(),
-                                                DEVICE,
-                                                &meshcontainer->originalMesh);
+    
 
     meshcontainer->numBones = meshcontainer->pSkinInfo->GetNumBones();
     
@@ -165,4 +169,10 @@ STDMETHODIMP_(HRESULT __stdcall) MeshHierarchy::DestroyMeshContainer(LPD3DXMESHC
     Safe_Release(meshcontainer->originalMesh);
     SAFE_DELETE(meshcontainer);
     return S_OK;
+}
+
+DWORD MeshHierarchy::Release(void)
+{
+    delete this;
+    return 0;
 }
