@@ -1,10 +1,10 @@
 matrix g_matWorld, g_matView, g_matProj;
 
-texture g_DiffuseTexture;
+texture g_BaseTexture;
 
-sampler DiffuseSampler = sampler_state
+sampler BaseSampler = sampler_state
 {
-	texture = g_DiffuseTexture;
+	texture = g_BaseTexture;
 	minfilter = linear;
 	magfilter = linear;
 	mipfilter = linear;
@@ -47,7 +47,7 @@ VertexShaderOutput VS_MAIN(VertexShaderInput Input)
 
 float4 PS_MAIN(PixelShaderInput Input) : COLOR0
 {
-	float4 vColor = tex2D(DiffuseSampler, Input.vTexUV);
+	float4 vColor = tex2D(BaseSampler, Input.vTexUV);
 
 	return vColor;
 }

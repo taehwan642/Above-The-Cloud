@@ -138,7 +138,7 @@ void StaticMesh::RenderMesh(LPD3DXEFFECT& _effect)
 {
 	for (int i = 0; i < subsetCount; ++i)
 	{
-		_effect->SetTexture((D3DXHANDLE)"g_DiffuseTexture", textures[i]);
+		_effect->SetTexture((D3DXHANDLE)"g_BaseTexture", textures[i]);
 		_effect->CommitChanges();
 		mesh->DrawSubset(i);
 	}

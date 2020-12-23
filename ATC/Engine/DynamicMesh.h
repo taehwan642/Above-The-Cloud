@@ -11,9 +11,9 @@ private:
     MeshHierarchy* hierarchy;
     AnimationController* anicontroller;
     list<D3DXMESHCONTAINER_DERIVED*> meshcontainergroup;
+    D3DXMATRIX* parent;
 protected:
 public:
-    D3DXMATRIX* parent;
     explicit DynamicMesh(void);
     explicit DynamicMesh(D3DXMATRIX* _parent);
     virtual ~DynamicMesh(void);
@@ -23,14 +23,17 @@ public:
     void RenderMesh(LPD3DXEFFECT& _effect);
     void RenderMesh(void);
 
+    void RenderNoSkinnedMesh(LPD3DXEFFECT& _effect);
     void DrawFrame(LPD3DXFRAME _frame);
     void DrawMeshContainer(LPD3DXMESHCONTAINER _meshcontainer, LPD3DXFRAME _frame);
 
-    void RenderNoSkinnedMesh(LPD3DXEFFECT& _effect);
     void RenderNoSkinnedMesh(void);
+    void DrawFrameWithEffect(LPD3DXFRAME _frame, LPD3DXEFFECT& _effect);
+    void DrawMeshContainerWithEffect(LPD3DXMESHCONTAINER _meshcontainer, LPD3DXFRAME _frame, LPD3DXEFFECT& _effect);
 
     D3DXFRAME_DERIVED* FindBone(const wstring& _bonename);
 
+    void SetParent(D3DXMATRIX* _parent);
     void SetAnimationSet(UINT& _index);
     void ResetAnimation(void);
     void PlayAnimation(const FLOAT& _dt, const FLOAT& _movelimit = 0.1f);

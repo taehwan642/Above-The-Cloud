@@ -453,6 +453,7 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\DefaultShader.fx" />
+    <FxCompile Include="Resources\Shaders\DynamicMeshShader.fx" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />

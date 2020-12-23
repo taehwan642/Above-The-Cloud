@@ -6,8 +6,6 @@ class MenuScene final :
 {
 private:
 protected:
-    float x = 0;
-    float z = -5;
 public:
     void Start(void) override;
     void Update(const float& dt) override;

@@ -96,6 +96,9 @@
     <Filter Include="1Engine\4Component\3Mesh\1DynamicMesh\MeshHierarchy">
       <UniqueIdentifier>{d4e73a15-67fd-422a-8d22-3f1cf7d327f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\4Component\4Shader\1DynamicMeshShader">
+      <UniqueIdentifier>{61e650a4-9e92-4512-8b66-abeca5d1135c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -286,6 +289,9 @@
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\DefaultShader.fx">
       <Filter>1Engine\4Component\4Shader\0Default</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\DynamicMeshShader.fx">
+      <Filter>1Engine\4Component\4Shader\1DynamicMeshShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

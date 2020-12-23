@@ -132,6 +132,53 @@ void DynamicMesh::RenderMesh(void)
 	}
 }
 
+void DynamicMesh::DrawFrameWithEffect(LPD3DXFRAME _frame, LPD3DXEFFECT& _effect)
+{
+	LPD3DXMESHCONTAINER meshcontainer = _frame->pMeshContainer;
+
+	while (meshcontainer != nullptr)
+	{
+		DrawMeshContainerWithEffect(meshcontainer, _frame, _effect);
+		meshcontainer = meshcontainer->pNextMeshContainer;
+	}
+
+	if (_frame->pFrameSibling != nullptr)
+	{
+		DrawFrameWithEffect(_frame->pFrameSibling, _effect);
+	}
+
+	if (_frame->pFrameFirstChild != nullptr)
+	{
+		DrawFrameWithEffect(_frame->pFrameFirstChild, _effect);
+	}
+}
+
+void DynamicMesh::DrawMeshContainerWithEffect(LPD3DXMESHCONTAINER _meshcontainer, LPD3DXFRAME _frame, LPD3DXEFFECT& _effect)
+{
+	D3DXMESHCONTAINER_DERIVED* tempmeshcontainer = static_cast<D3DXMESHCONTAINER_DERIVED*>(_meshcontainer);
+	D3DXFRAME_DERIVED* tempframe = static_cast<D3DXFRAME_DERIVED*>(_frame);
+
+	D3DXMATRIX result = tempframe->combinedTransformMatrix;
+	result *= *parent;
+	DEVICE->SetTransform(D3DTS_WORLD, &result);
+	for (int i = 0; i < tempmeshcontainer->NumMaterials; ++i)
+	{
+		_effect->SetTexture((D3DXHANDLE)"g_BaseTexture", tempmeshcontainer->textures[i]);
+		_effect->CommitChanges();
+		tempmeshcontainer->MeshData.pMesh->DrawSubset(i);
+	}
+}
+
+void DynamicMesh::RenderNoSkinnedMesh(LPD3DXEFFECT& _effect)
+{
+	DrawFrameWithEffect(rootFrame, _effect);
+}
+
+void DynamicMesh::RenderNoSkinnedMesh(void)
+{
+	DrawFrame(rootFrame);
+}
+
 void DynamicMesh::DrawFrame(LPD3DXFRAME _frame)
 {
 	LPD3DXMESHCONTAINER meshcontainer = _frame->pMeshContainer;
@@ -169,16 +216,6 @@ void DynamicMesh::DrawMeshContainer(LPD3DXMESHCONTAINER _meshcontainer, LPD3DXFR
 	}
 }
 
-void DynamicMesh::RenderNoSkinnedMesh(LPD3DXEFFECT& _effect)
-{
-
-}
-
-void DynamicMesh::RenderNoSkinnedMesh(void)
-{
-	DrawFrame(rootFrame);
-}
-
 D3DXFRAME_DERIVED* DynamicMesh::FindBone(const wstring& _bonename)
 {
 	if (rootFrame == nullptr)
@@ -187,6 +224,11 @@ D3DXFRAME_DERIVED* DynamicMesh::FindBone(const wstring& _bonename)
 	WideCharToMultiByte(CP_ACP, 0, _bonename.c_str(), _bonename.length(), bonename, MAX_PATH, NULL, NULL);
 
 	return static_cast<D3DXFRAME_DERIVED*>(D3DXFrameFind(rootFrame, bonename));
+}
+
+void DynamicMesh::SetParent(D3DXMATRIX* _parent)
+{
+	parent = _parent;
 }
 
 void DynamicMesh::SetAnimationSet(UINT& _index)
@@ -251,6 +293,7 @@ Resources* DynamicMesh::Clone(void)
 
 void DynamicMesh::Free(void)
 {
+	parent = nullptr;
 	Safe_Release(anicontroller);
 	hierarchy->DestroyFrame(rootFrame);
 	Safe_Release(hierarchy);
