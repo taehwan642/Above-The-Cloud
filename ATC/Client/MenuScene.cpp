@@ -22,24 +22,24 @@ void MenuScene::Start(void)
 	test* t = new test();
 	Camera* c = new Camera();
 	Scene::AddGameObject(L"테스트", L"테스트", t);
-	//Scene::AddGameObject(L"테스트", L"테스트", c);
+	Scene::AddGameObject(L"테스트", L"테스트", c);
 	
 }
 
 void MenuScene::Update(const float& dt)
 {
-	D3DXVECTOR3 vEyePt(0.0f, 0.0f, -0.5f);
-	D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
-	D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
-	D3DXMATRIXA16 matView;
-	D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
-	DEVICE->SetTransform(D3DTS_VIEW, &matView);
-
-	D3DXMATRIXA16 matProj;
-	D3DVIEWPORT9 viewPort;
-	DEVICE->GetViewport(&viewPort);
-	D3DXMatrixPerspectiveFovLH(&matProj, D3DXToRadian(60.f), viewPort.Width / (float)viewPort.Height, 0.1f, 1500.f);
-	DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);
+	//D3DXVECTOR3 vEyePt(0.0f, 0.0f, -0.5f);
+	//D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
+	//D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
+	//D3DXMATRIXA16 matView;
+	//D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
+	//DEVICE->SetTransform(D3DTS_VIEW, &matView);
+	//
+	//D3DXMATRIXA16 matProj;
+	//D3DVIEWPORT9 viewPort;
+	//DEVICE->GetViewport(&viewPort);
+	//D3DXMatrixPerspectiveFovLH(&matProj, D3DXToRadian(60.f), viewPort.Width / (float)viewPort.Height, 0.1f, 1500.f);
+	//DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);
 	Scene::Update(dt);
 }
 

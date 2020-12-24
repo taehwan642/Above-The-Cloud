@@ -12,7 +12,14 @@ class test final :
 private:
 protected:
     D3DXVECTOR3 lookVector = { 0,0,-1 };
+    D3DXVECTOR3 upVector = { 0,1,0 };
+
     D3DXVECTOR3 directonVector = { 0,0,0 };
+    D3DXVECTOR3 wvector = { 0,0,0 };
+
+    float hor = 0;
+    float ver = 0;
+
 public:
     explicit test(void);
     virtual ~test(void);

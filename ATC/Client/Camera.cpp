@@ -1,5 +1,6 @@
 #include "DXUT.h"
 #include "../Engine/Transform.h"
+#include "test.h"
 #include "Camera.h"
 
 Camera::Camera(void)
