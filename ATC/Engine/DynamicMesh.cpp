@@ -160,7 +160,9 @@ void DynamicMesh::DrawMeshContainerWithEffect(LPD3DXMESHCONTAINER _meshcontainer
 
 	D3DXMATRIX result = tempframe->combinedTransformMatrix;
 	result *= *parent;
-	DEVICE->SetTransform(D3DTS_WORLD, &result);
+	//DEVICE->SetTransform(D3DTS_WORLD, &result);
+	_effect->SetValue((D3DXHANDLE)"g_matWorld", &result, sizeof(D3DXMATRIX));
+
 	for (int i = 0; i < tempmeshcontainer->NumMaterials; ++i)
 	{
 		_effect->SetTexture((D3DXHANDLE)"g_BaseTexture", tempmeshcontainer->textures[i]);
@@ -262,7 +264,7 @@ void DynamicMesh::UpdateFrameMatrices(D3DXFRAME_DERIVED* _frame, const D3DXMATRI
 		UpdateFrameMatrices(static_cast<D3DXFRAME_DERIVED*>(_frame->pFrameSibling), _parentMatrix, _movelimit);
 
 	if (_frame->pFrameFirstChild != nullptr)
-		UpdateFrameMatrices(static_cast<D3DXFRAME_DERIVED*>(_frame->pFrameFirstChild), &_frame->combinedTransformMatrix), _movelimit;
+		UpdateFrameMatrices(static_cast<D3DXFRAME_DERIVED*>(_frame->pFrameFirstChild), &_frame->combinedTransformMatrix, _movelimit);
 }
 
 void DynamicMesh::SetUpFrameMatrixPointer(D3DXFRAME_DERIVED* _frame)

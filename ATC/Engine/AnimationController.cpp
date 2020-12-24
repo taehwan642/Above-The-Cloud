@@ -38,11 +38,14 @@ void AnimationController::SetAnimationSet(const UINT& _index)
     anicontroller->GetAnimationSet(_index, &AS);
     period = AS->GetPeriod();
     anicontroller->SetTrackAnimationSet(newTrack, AS);
+
     anicontroller->UnkeyAllTrackEvents(currentTrack);
     anicontroller->UnkeyAllTrackEvents(newTrack);
+
     anicontroller->KeyTrackEnable(currentTrack, FALSE, accTime + 0.25f);
     anicontroller->KeyTrackSpeed(currentTrack, 1, accTime, 0.25, D3DXTRANSITION_LINEAR);
     anicontroller->KeyTrackWeight(currentTrack, 0.1f, accTime, 0.25, D3DXTRANSITION_LINEAR);
+
     anicontroller->SetTrackEnable(newTrack, TRUE);
     anicontroller->KeyTrackSpeed(newTrack, 1, accTime, 0.25, D3DXTRANSITION_LINEAR);
     anicontroller->KeyTrackWeight(newTrack, 0.9f, accTime, 0.25, D3DXTRANSITION_LINEAR);
