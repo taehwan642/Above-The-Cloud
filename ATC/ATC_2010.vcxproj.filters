@@ -99,6 +99,12 @@
     <Filter Include="1Engine\4Component\4Shader\1DynamicMeshShader">
       <UniqueIdentifier>{61e650a4-9e92-4512-8b66-abeca5d1135c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\1GameObject\test\plane">
+      <UniqueIdentifier>{6e9e7594-6c67-477d-862d-0c8a5d38abd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\test\child">
+      <UniqueIdentifier>{b1635ba7-bb40-4892-bd24-0ac873d07c1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -202,9 +208,6 @@
     <ClCompile Include="Client\Camera.cpp">
       <Filter>2Client\1GameObject\0Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Client\test.cpp">
-      <Filter>2Client\1GameObject\test</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\GraphicsManager.cpp">
       <Filter>1Engine\6Manager\2GraphicsManager</Filter>
     </ClCompile>
@@ -219,6 +222,12 @@
     </ClCompile>
     <ClCompile Include="Engine\AnimationController.cpp">
       <Filter>1Engine\4Component\3Mesh\1DynamicMesh\AnimationController</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\test.cpp">
+      <Filter>2Client\1GameObject\test\plane</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\testChild.cpp">
+      <Filter>2Client\1GameObject\test\child</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -267,9 +276,6 @@
     <ClInclude Include="Client\Camera.h">
       <Filter>2Client\1GameObject\0Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Client\test.h">
-      <Filter>2Client\1GameObject\test</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\GraphicsManager.h">
       <Filter>1Engine\6Manager\2GraphicsManager</Filter>
     </ClInclude>
@@ -284,6 +290,12 @@
     </ClInclude>
     <ClInclude Include="Engine\AnimationController.h">
       <Filter>1Engine\4Component\3Mesh\1DynamicMesh\AnimationController</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\test.h">
+      <Filter>2Client\1GameObject\test\plane</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\testChild.h">
+      <Filter>2Client\1GameObject\test\child</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 #include "../Engine/Shader.h"
 #include "../Engine/ResourceManager.h"
 #include "test.h"
+
 bool testfly = false;
 test::test(void)
 {
@@ -12,6 +13,7 @@ test::test(void)
 	testMesh = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"test"));
 	testdynamic = dynamic_cast<Engine::DynamicMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dynamic"));
 	componentgroup.emplace(L"shader", testshader);
+
 	transform = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transform);
 	
@@ -48,41 +50,22 @@ void test::Update(const float& dt)
 	}
 
 	if (DXUTIsKeyDown('W'))
-		hor = 1;
-	if (DXUTIsKeyDown('S'))
-		hor = -1;
-	
-	if(!DXUTIsKeyDown('W') && !DXUTIsKeyDown('S'))
-		hor = 0;
-
-	if (DXUTIsKeyDown('A'))
-		ver = -1;
-	if (DXUTIsKeyDown('D'))
-		ver = 1;
-	
-	if (!DXUTIsKeyDown('A') && !DXUTIsKeyDown('D'))
-		ver = 0;
-
-	transform->rotation += D3DXVECTOR3(hor, 0, ver) * 0.1f;
-
-	/*if (DXUTIsKeyDown('W'))
-		transform->rotation += {wvector.y, 0, 0};
+		transform->Rotate(Engine::Transform::RotType::RIGHT, -2.0f * dt);
 
 	if (DXUTIsKeyDown('S'))
-		transform->rotation -= {wvector.y, 0, 0};
+		transform->Rotate(Engine::Transform::RotType::RIGHT, 2.f * dt);
 
 	if (DXUTIsKeyDown('A'))
-		transform->rotation.z -= 2 * dt;
+		transform->Rotate(Engine::Transform::RotType::LOOK, -2.f * dt);
 	
 	if (DXUTIsKeyDown('D'))
-		transform->rotation.z += 2 * dt;*/
+		transform->Rotate(Engine::Transform::RotType::LOOK, 2.f * dt);
 	
-	transform->position += directonVector * dt * 300;
+	//transform->position += directonVector * dt * 300;
 }
 
 void test::LateUpdate(void)
 {
-	
 	GameObject::LateUpdate();
 }
 
