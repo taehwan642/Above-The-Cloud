@@ -17,8 +17,8 @@ public:
 	void AddGameObject(wstring _objecttag, GameObject* _object);
 
 	void Update(const FLOAT& dt);
-	void LateUpdate();
-	void Render();
+	void LateUpdate(const FLOAT& dt);
+	void Render(const FLOAT& dt);
 
 	void ResetDevice(void);
 	void LostDevice(void);

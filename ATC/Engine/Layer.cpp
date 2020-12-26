@@ -27,24 +27,24 @@ void Layer::Update(const FLOAT& dt)
 	}
 }
 
-void Layer::LateUpdate()
+void Layer::LateUpdate(const FLOAT& dt)
 {
 	for (auto& objectlist : gameobjectgroup)
 	{
 		for (auto& object : objectlist.second)
 		{
-			object->LateUpdate();
+			object->LateUpdate(dt);
 		}
 	}
 }
 
-void Layer::Render()
+void Layer::Render(const FLOAT& dt)
 {
 	for (auto& objectlist : gameobjectgroup)
 	{
 		for (auto& object : objectlist.second)
 		{
-			object->Render();
+			object->Render(dt);
 		}
 	}
 }

@@ -25,7 +25,7 @@ void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext 
         Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
 
     Engine::SceneManager::GetInstance()->SceneUpdate(fElapsedTime);
-    Engine::SceneManager::GetInstance()->SceneLateUpdate();
+    Engine::SceneManager::GetInstance()->SceneLateUpdate(fElapsedTime);
 }
 
 void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTime, float fElapsedTime, void* pUserContext )
@@ -36,7 +36,7 @@ void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTime, flo
 
     if( SUCCEEDED( pd3dDevice->BeginScene() ) )
     {
-        Engine::SceneManager::GetInstance()->SceneRender();
+        Engine::SceneManager::GetInstance()->SceneRender(fElapsedTime);
         V( pd3dDevice->EndScene() );
     }
 }

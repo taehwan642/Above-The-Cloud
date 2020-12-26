@@ -105,6 +105,24 @@
     <Filter Include="2Client\1GameObject\test\child">
       <UniqueIdentifier>{b1635ba7-bb40-4892-bd24-0ac873d07c1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\7Observer">
+      <UniqueIdentifier>{994536cd-3fc7-48c4-a7cd-ce824eef1383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\7Observer\0Observer">
+      <UniqueIdentifier>{bab29c86-1e36-4883-8171-c68094eb493b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\7Observer\1Subject">
+      <UniqueIdentifier>{74e179c5-8c05-4a6b-9ec6-b23bc8733f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\6Manager\3SubjectManager">
+      <UniqueIdentifier>{d4fda53c-b6bc-4b87-8f3d-c18f76c5c6c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\2Observer">
+      <UniqueIdentifier>{7baca698-fc3f-4bf3-8b8d-16f1300deeea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\2Observer\0PlayerObserver">
+      <UniqueIdentifier>{e332b8ac-7964-44d8-9139-5157837905dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -229,6 +247,18 @@
     <ClCompile Include="Client\testChild.cpp">
       <Filter>2Client\1GameObject\test\child</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Subject.cpp">
+      <Filter>1Engine\7Observer\1Subject</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Observer.cpp">
+      <Filter>1Engine\7Observer\0Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\SubjectManager.cpp">
+      <Filter>1Engine\6Manager\3SubjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\PlayerObserver.cpp">
+      <Filter>2Client\2Observer\0PlayerObserver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -296,6 +326,18 @@
     </ClInclude>
     <ClInclude Include="Client\testChild.h">
       <Filter>2Client\1GameObject\test\child</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Subject.h">
+      <Filter>1Engine\7Observer\1Subject</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Observer.h">
+      <Filter>1Engine\7Observer\0Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\SubjectManager.h">
+      <Filter>1Engine\6Manager\3SubjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\PlayerObserver.h">
+      <Filter>2Client\2Observer\0PlayerObserver</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

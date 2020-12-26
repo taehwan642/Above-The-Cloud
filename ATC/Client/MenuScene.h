@@ -9,8 +9,8 @@ protected:
 public:
     void Start(void) override;
     void Update(const float& dt) override;
-    void LateUpdate(void) override;
-    void Render(void) override;
+    void LateUpdate(const FLOAT& dt) override;
+    void Render(const FLOAT& dt) override;
     void Exit(void) override;
 
     void Free(void) override;

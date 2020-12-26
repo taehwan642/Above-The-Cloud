@@ -28,11 +28,11 @@ void GameObject::Update(const FLOAT& dt)
 	}
 }
 
-void GameObject::Render()
+void GameObject::Render(const FLOAT& dt)
 {
 	for (auto& component : componentgroup)
 	{
-		component.second->Render();
+		component.second->Render(dt);
 	}
 }
 

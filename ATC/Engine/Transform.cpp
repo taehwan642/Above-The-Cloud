@@ -33,8 +33,6 @@ void Transform::Rotate(RotType _rotType, float _angle)
 {
 	D3DXVECTOR3 axis = *reinterpret_cast<D3DXVECTOR3*>(&worldMatrix.m[_rotType][0]);
 
-	float axisScale = D3DXVec3Length(&axis);
-
 	D3DXQUATERNION rot;
 	D3DXQuaternionRotationAxis(&rot, &axis, _angle);
 	quaternion *= rot;
@@ -52,7 +50,7 @@ void Transform::Update(const float& dt)
 	D3DXMatrixRotationQuaternion(&matRot, &curQuaternion);
 
 	D3DXMatrixTranslation(&T, position.x, position.y, position.z);
-	cout << position.x << endl;
+
 	worldMatrix = S * matRot * T;
 	if (parent != nullptr)
 		worldMatrix *= parent->worldMatrix;

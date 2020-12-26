@@ -28,7 +28,7 @@ public:
 
     HRESULT LoadMesh(wstring _filepath, wstring _filename);
 
-    void Render(void) override {};
+    void Render(const FLOAT& dt) override {};
 
     void RenderMesh(void);
     void RenderMesh(LPD3DXEFFECT& _effect);

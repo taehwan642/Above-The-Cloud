@@ -405,4 +405,9 @@ struct D3DXMESHCONTAINER_DERIVED :
     D3DXMATRIX* renderingMatrix;
 };
 
+enum class PlayerInfos : UINT
+{
+    PLAYERTRANSFORM
+};
+
 #endif

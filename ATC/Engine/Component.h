@@ -14,7 +14,7 @@ public:
     virtual void LostDevice(void) {};
 
     virtual void Update(const FLOAT& dt) {};
-    virtual void Render() {};
+    virtual void Render(const FLOAT& dt) {};
 
     void Free(void) override;
 };

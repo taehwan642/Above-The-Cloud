@@ -16,8 +16,8 @@ public:
     void SetScene(wstring _name);
 
     void SceneUpdate(const float& dt);
-    void SceneLateUpdate(void);
-    void SceneRender(void);
+    void SceneLateUpdate(const FLOAT& dt);
+    void SceneRender(const FLOAT& dt);
     void LostDevice(void);
     void ResetDevice(void);
 };

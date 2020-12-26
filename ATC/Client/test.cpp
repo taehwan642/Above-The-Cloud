@@ -4,9 +4,10 @@
 #include "../Engine/DynamicMesh.h"
 #include "../Engine/Shader.h"
 #include "../Engine/ResourceManager.h"
+#include "../Engine/SubjectManager.h"
 #include "test.h"
 
-bool testfly = false;
+bool testfly = true;
 test::test(void)
 {
 	testshader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dyshader"));
@@ -16,17 +17,19 @@ test::test(void)
 
 	transform = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transform);
-	
+
+	Engine::SubjectManager::GetInstance()->AddData(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM), transform);
+
 	testdynamic->SetParent(&transform->worldMatrix);
 	
 	transform->scale = D3DXVECTOR3(0.1,0.1,0.1);
 
-	UINT aniset = 0;
+	UINT aniset = 1;
 	testdynamic->SetAnimationSet(aniset);
 
 	transform->position.z = 50;
 
-	transform->rotation.y = D3DXToRadian(-180);
+	transform->Rotate(Engine::Transform::RotType::RIGHT, D3DXToRadian(-180));
 }
 
 test::~test(void)
@@ -37,10 +40,7 @@ void test::Update(const float& dt)
 {
 	GameObject::Update(dt);
 
-	D3DXVec3TransformNormal(&directonVector, &lookVector, &transform->worldMatrix);
-	D3DXVec3TransformNormal(&wvector, &upVector, &transform->worldMatrix);
-
-	cout << wvector.x << " " << wvector.y << " " << wvector.z << endl;
+	directonVector = -(*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31));
 
 	if (DXUTWasKeyPressed('U'))
 	{
@@ -50,28 +50,28 @@ void test::Update(const float& dt)
 	}
 
 	if (DXUTIsKeyDown('W'))
-		transform->Rotate(Engine::Transform::RotType::RIGHT, -2.0f * dt);
+		transform->Rotate(Engine::Transform::RotType::RIGHT, 1.5f * dt);
 
 	if (DXUTIsKeyDown('S'))
-		transform->Rotate(Engine::Transform::RotType::RIGHT, 2.f * dt);
+		transform->Rotate(Engine::Transform::RotType::RIGHT, -1.5f * dt);
 
 	if (DXUTIsKeyDown('A'))
-		transform->Rotate(Engine::Transform::RotType::LOOK, -2.f * dt);
+		transform->Rotate(Engine::Transform::RotType::LOOK, -2.5f * dt);
 	
 	if (DXUTIsKeyDown('D'))
-		transform->Rotate(Engine::Transform::RotType::LOOK, 2.f * dt);
+		transform->Rotate(Engine::Transform::RotType::LOOK, 2.5f * dt);
 	
-	//transform->position += directonVector * dt * 300;
+	transform->position += directonVector * dt * 300;
 }
 
-void test::LateUpdate(void)
+void test::LateUpdate(const FLOAT& dt)
 {
-	GameObject::LateUpdate();
+	GameObject::LateUpdate(dt);
 }
 
-void test::Render(void)
+void test::Render(const FLOAT& dt)
 {
-	testdynamic->PlayAnimation(DXUTGetElapsedTime());
+	testdynamic->PlayAnimation(dt);
 	testshader->SetupTable();
 	UINT pass = 0;
 	LPD3DXEFFECT tempeffect = testshader->GetEffect();
@@ -80,7 +80,7 @@ void test::Render(void)
 	testdynamic->RenderNoSkinnedMesh(tempeffect);
 	tempeffect->EndPass();
 	tempeffect->End();
-	GameObject::Render();
+	GameObject::Render(dt);
 }
 
 void test::Free(void)

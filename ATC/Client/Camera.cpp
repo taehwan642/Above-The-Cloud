@@ -18,7 +18,7 @@ void Camera::Update(const float& dt)
 	GameObject::Update(dt);
 }
 
-void Camera::LateUpdate(void)
+void Camera::LateUpdate(const FLOAT& dt)
 {
 	D3DXMATRIX matView;
 	D3DXMatrixInverse(&matView, 0, &transformcomponent->worldMatrix);
@@ -32,12 +32,12 @@ void Camera::LateUpdate(void)
 	DEVICE->SetTransform(D3DTS_VIEW, &matView);
 	DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);
 
-	GameObject::LateUpdate();
+	GameObject::LateUpdate(dt);
 }
 
-void Camera::Render(void)
+void Camera::Render(const FLOAT& dt)
 {
-	GameObject::Render();
+	GameObject::Render(dt);
 }
 
 void Camera::Free(void)

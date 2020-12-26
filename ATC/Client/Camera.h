@@ -16,8 +16,8 @@ public:
     virtual ~Camera(void);
 
     void Update(const float& dt) override;
-    void LateUpdate(void) override;
-    void Render(void) override;
+    void LateUpdate(const FLOAT& dt) override;
+    void Render(const FLOAT& dt) override;
 
     void Free(void) override;
 };

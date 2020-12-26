@@ -2,6 +2,7 @@
 #include "../Engine/ResourceManager.h"
 #include "../Engine/Layer.h"
 #include "test.h"
+#include "testChild.h"
 #include "Camera.h"
 #include "MenuScene.h"
 
@@ -21,37 +22,28 @@ void MenuScene::Start(void)
 	layergroup.emplace(L"테스트", l);
 	test* t = new test();
 	Camera* c = new Camera();
+	testChild* t1 = new testChild();
 	Scene::AddGameObject(L"테스트", L"테스트", t);
 	Scene::AddGameObject(L"테스트", L"테스트", c);
+	Scene::AddGameObject(L"테스트", L"테스트", t1);
+
 	
 }
 
 void MenuScene::Update(const float& dt)
 {
-	//D3DXVECTOR3 vEyePt(0.0f, 0.0f, -0.5f);
-	//D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
-	//D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
-	//D3DXMATRIXA16 matView;
-	//D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
-	//DEVICE->SetTransform(D3DTS_VIEW, &matView);
-	//
-	//D3DXMATRIXA16 matProj;
-	//D3DVIEWPORT9 viewPort;
-	//DEVICE->GetViewport(&viewPort);
-	//D3DXMatrixPerspectiveFovLH(&matProj, D3DXToRadian(60.f), viewPort.Width / (float)viewPort.Height, 0.1f, 1500.f);
-	//DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);
 	Scene::Update(dt);
 }
 
-void MenuScene::LateUpdate(void)
+void MenuScene::LateUpdate(const FLOAT& dt)
 {
 	
-	Scene::LateUpdate();
+	Scene::LateUpdate(dt);
 }
 
-void MenuScene::Render(void)
+void MenuScene::Render(const FLOAT& dt)
 {
-	Scene::Render();
+	Scene::Render(dt);
 }
 
 void MenuScene::Exit(void)

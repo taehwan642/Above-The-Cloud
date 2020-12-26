@@ -19,19 +19,19 @@ void Scene::Update(const FLOAT& dt)
 	}
 }
 
-void Scene::LateUpdate(void)
+void Scene::LateUpdate(const FLOAT& dt)
 {
 	for (auto& layer : layergroup)
 	{
-		layer.second->LateUpdate();
+		layer.second->LateUpdate(dt);
 	}
 }
 
-void Scene::Render(void)
+void Scene::Render(const FLOAT& dt)
 {
 	for (auto& layer : layergroup)
 	{
-		layer.second->Render();
+		layer.second->Render(dt);
 	}
 }
 

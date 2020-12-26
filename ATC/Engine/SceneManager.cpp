@@ -24,16 +24,16 @@ void SceneManager::SceneUpdate(const float& dt)
 	currentScene->Update(dt);
 }
 
-void SceneManager::SceneLateUpdate(void)
+void SceneManager::SceneLateUpdate(const FLOAT& dt)
 {
 	if (currentScene)
-		currentScene->LateUpdate();
+		currentScene->LateUpdate(dt);
 }
 
-void SceneManager::SceneRender(void)
+void SceneManager::SceneRender(const FLOAT& dt)
 {
 	if (currentScene)
-		currentScene->Render();
+		currentScene->Render(dt);
 }
 
 void SceneManager::LostDevice(void)
