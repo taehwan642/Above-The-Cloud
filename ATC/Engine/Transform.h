@@ -6,11 +6,8 @@ class Transform final :
     public Component
 {
 private:
+    Transform* parent = nullptr;
 protected:
-    void RenderWithRotationZXY(void);
-    void RenderWithRotationXZY(void);
-
-
 public:
     explicit Transform(void);
     explicit Transform(Transform* _parent);
@@ -18,10 +15,6 @@ public:
 
 public:
     enum RotType : unsigned short { RIGHT, UP, LOOK };
-
-    void Rotate(RotType _rotType, float _angle);
-    
-    Transform* parent = nullptr;
 
     D3DXVECTOR3 position;
     D3DXVECTOR3 rotation;
@@ -34,6 +27,11 @@ public:
     D3DXMATRIX worldMatrix;
 
     void Update(const float& dt) override;
+
+    void SetParent(Transform* _parent);
+    void ReleaseParent(void);
+
+    void Rotate(RotType _rotType, float _angle);
 
     void Free(void) override {};
 };

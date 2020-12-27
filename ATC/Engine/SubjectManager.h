@@ -14,6 +14,8 @@ public:
     
     void* GetData(UINT _flag);
 
+    void ClearObservers(void);
+
     void Free(void) override {};
 };
 END

@@ -15,19 +15,32 @@ Transform::Transform(void) :
 Transform::Transform(Transform* _parent) :
 	position(0, 0, 0),
 	rotation(0, 0, 0),
-	scale(1, 1, 1),
-	parent(_parent)
+	scale(1, 1, 1)
 {
-	parent->AddReference();
+	SetParent(_parent);
 	D3DXMatrixIdentity(&worldMatrix);
 	D3DXQuaternionIdentity(&quaternion);
+	D3DXQuaternionIdentity(&curQuaternion);
 }
 
 Transform::~Transform(void)
 {
-	if (parent)
+	ReleaseParent();
+}
+
+void Transform::SetParent(Transform* _parent)
+{
+	ReleaseParent();
+	parent = _parent;
+	parent->AddReference();
+}
+
+void Transform::ReleaseParent(void)
+{
+	if(parent)
 		parent->Release();
 }
+
 
 void Transform::Rotate(RotType _rotType, float _angle)
 {

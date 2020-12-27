@@ -2,13 +2,11 @@
 #include "../Engine/GameObject.h"
 NAMESPACE(Engine)
 class Transform;
-class test;
 END
 class Camera final :
     public Engine::GameObject
 {
 private:
-    test* player = nullptr;
 protected:
     Engine::Transform* transformcomponent = nullptr;
 public:

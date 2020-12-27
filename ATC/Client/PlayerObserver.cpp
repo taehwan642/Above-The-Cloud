@@ -17,3 +17,8 @@ void PlayerObserver::UpdateObserver(UINT _flag)
 		break;
 	}
 }
+
+void PlayerObserver::Free(void)
+{
+
+}

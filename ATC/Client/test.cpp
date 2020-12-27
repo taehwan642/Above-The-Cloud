@@ -22,14 +22,15 @@ test::test(void)
 
 	testdynamic->SetParent(&transform->worldMatrix);
 	
-	transform->scale = D3DXVECTOR3(0.1,0.1,0.1);
+	transform->scale = D3DXVECTOR3(0.1, 0.1, 0.1);
 
 	UINT aniset = 1;
 	testdynamic->SetAnimationSet(aniset);
 
 	transform->position.z = 50;
 
-	transform->Rotate(Engine::Transform::RotType::RIGHT, D3DXToRadian(-180));
+	//transform->Rotate(Engine::Transform::RotType::LOOK, D3DXToRadian(-180));
+	//transform->Rotate(Engine::Transform::RotType::RIGHT, D3DXToRadian(-180));
 }
 
 test::~test(void)
@@ -61,7 +62,7 @@ void test::Update(const float& dt)
 	if (DXUTIsKeyDown('D'))
 		transform->Rotate(Engine::Transform::RotType::LOOK, 2.5f * dt);
 	
-	transform->position += directonVector * dt * 300;
+	//transform->position += directonVector * dt * 300;
 }
 
 void test::LateUpdate(const FLOAT& dt)
@@ -71,7 +72,7 @@ void test::LateUpdate(const FLOAT& dt)
 
 void test::Render(const FLOAT& dt)
 {
-	testdynamic->PlayAnimation(dt);
+	testdynamic->PlayAnimation(dt * 3);
 	testshader->SetupTable();
 	UINT pass = 0;
 	LPD3DXEFFECT tempeffect = testshader->GetEffect();

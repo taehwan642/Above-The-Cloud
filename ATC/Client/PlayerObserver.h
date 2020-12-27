@@ -16,5 +16,7 @@ public:
 
     Engine::Transform* GetTransform(void) { return playerTransform; };
     void UpdateObserver(UINT _flag) override;
+
+    void Free(void) override;
 };
 

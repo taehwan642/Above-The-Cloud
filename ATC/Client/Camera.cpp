@@ -1,12 +1,15 @@
 #include "DXUT.h"
 #include "../Engine/Transform.h"
-#include "test.h"
+#include "../Engine/SubjectManager.h"
+#include "PlayerObserver.h"
 #include "Camera.h"
 
 Camera::Camera(void)
 {
 	transformcomponent = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transformcomponent);
+
+	
 }
 
 Camera::~Camera(void)

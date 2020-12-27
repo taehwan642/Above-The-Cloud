@@ -4,6 +4,7 @@
 #include "test.h"
 #include "testChild.h"
 #include "Camera.h"
+#include "../Engine/SubjectManager.h"
 #include "MenuScene.h"
 
 
@@ -49,6 +50,7 @@ void MenuScene::Render(const FLOAT& dt)
 void MenuScene::Exit(void)
 {
 	cout << "¿¢½ÃÆ®" << endl;
+	Engine::SubjectManager::GetInstance()->ClearObservers();
 	Scene::Exit();
 }
 

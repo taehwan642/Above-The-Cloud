@@ -26,3 +26,8 @@ void* SubjectManager::GetData(UINT _flag)
 		return iter->second;
 	return nullptr;
 }
+
+void SubjectManager::ClearObservers(void)
+{
+	Subject::Free();
+}

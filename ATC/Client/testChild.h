@@ -4,8 +4,9 @@ NAMESPACE(Engine)
 class GameObject;
 class Transform;
 END
+
 class PlayerObserver;
-class testChild :
+class testChild final : // For Camera Position
 	public Engine::GameObject
 {
 private:
