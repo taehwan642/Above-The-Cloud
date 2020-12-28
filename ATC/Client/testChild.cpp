@@ -35,7 +35,6 @@ void testChild::Update(const float& dt)
 	if (DXUTIsKeyDown(VK_UP))
 	{
 		t->position.z += 100 * dt;
-
 	}
 	if (DXUTIsKeyDown(VK_DOWN))
 	{

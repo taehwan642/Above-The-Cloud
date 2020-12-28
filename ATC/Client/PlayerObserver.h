@@ -8,7 +8,7 @@ class PlayerObserver :
     public Engine::Observer
 {
 private:
-    Engine::Transform* playerTransform;
+    Engine::Transform* playerTransform = nullptr;
 protected:
 public:
     explicit PlayerObserver(void) {};

@@ -3,6 +3,7 @@
 #include "../Engine/Layer.h"
 #include "test.h"
 #include "testChild.h"
+#include "SkySphere.h"
 #include "Camera.h"
 #include "../Engine/SubjectManager.h"
 #include "MenuScene.h"
@@ -10,12 +11,10 @@
 
 void MenuScene::Start(void)
 {
-	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"Item (1).x", L"test")))
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"skysphere.X", L"SkySphere")))
 		cout << "히히메시잘불러와져땅" << endl;
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"testdoubleanimation.x", L"dynamic")))
 		cout << "다이나믹메시불러와짐" << endl;
-	//if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddShader(L"Resources/Shaders/DefaultShader.fx", L"shader")))
-	//	cout << "Shader Load Complete" << endl;
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddShader(L"Resources/Shaders/DynamicMeshShader.fx", L"dyshader")))
 		cout << "dyShader Load Complete" << endl;
 
@@ -23,10 +22,12 @@ void MenuScene::Start(void)
 	layergroup.emplace(L"테스트", l);
 	test* t = new test();
 	Camera* c = new Camera();
-	testChild* t1 = new testChild();
+	//testChild* t1 = new testChild();
+	SkySphere* s = new SkySphere();
 	Scene::AddGameObject(L"테스트", L"테스트", t);
 	Scene::AddGameObject(L"테스트", L"테스트", c);
-	Scene::AddGameObject(L"테스트", L"테스트", t1);
+	Scene::AddGameObject(L"테스트", L"테스트", s);
+	//Scene::AddGameObject(L"테스트", L"테스트", t1);
 
 	
 }

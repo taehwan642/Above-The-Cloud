@@ -8,8 +8,10 @@ class Camera final :
 {
 private:
 protected:
-    Engine::Transform* transformcomponent = nullptr;
+    Engine::Transform* transform = nullptr;
 public:
+    bool lookback = false; 
+    PlayerObserver* observer;
     explicit Camera(void);
     virtual ~Camera(void);
 

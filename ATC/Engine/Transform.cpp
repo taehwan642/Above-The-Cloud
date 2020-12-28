@@ -37,8 +37,11 @@ void Transform::SetParent(Transform* _parent)
 
 void Transform::ReleaseParent(void)
 {
-	if(parent)
+	if (parent != nullptr)
+	{
 		parent->Release();
+		parent = nullptr;
+	}
 }
 
 

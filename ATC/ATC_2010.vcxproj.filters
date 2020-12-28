@@ -123,6 +123,9 @@
     <Filter Include="2Client\2Observer\0PlayerObserver">
       <UniqueIdentifier>{e332b8ac-7964-44d8-9139-5157837905dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\1GameObject\1SkySphere">
+      <UniqueIdentifier>{28932865-6d57-46f8-909b-869c2c6d0988}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -259,6 +262,9 @@
     <ClCompile Include="Client\PlayerObserver.cpp">
       <Filter>2Client\2Observer\0PlayerObserver</Filter>
     </ClCompile>
+    <ClCompile Include="Client\SkySphere.cpp">
+      <Filter>2Client\1GameObject\1SkySphere</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -338,6 +344,9 @@
     </ClInclude>
     <ClInclude Include="Client\PlayerObserver.h">
       <Filter>2Client\2Observer\0PlayerObserver</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\SkySphere.h">
+      <Filter>2Client\1GameObject\1SkySphere</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

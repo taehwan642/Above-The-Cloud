@@ -22,12 +22,10 @@ test::test(void)
 
 	testdynamic->SetParent(&transform->worldMatrix);
 	
-	transform->scale = D3DXVECTOR3(0.1, 0.1, 0.1);
+	transform->scale = D3DXVECTOR3(0.01, 0.01, 0.01);
 
 	UINT aniset = 1;
 	testdynamic->SetAnimationSet(aniset);
-
-	transform->position.z = 50;
 
 	//transform->Rotate(Engine::Transform::RotType::LOOK, D3DXToRadian(-180));
 	//transform->Rotate(Engine::Transform::RotType::RIGHT, D3DXToRadian(-180));
@@ -51,18 +49,18 @@ void test::Update(const float& dt)
 	}
 
 	if (DXUTIsKeyDown('W'))
-		transform->Rotate(Engine::Transform::RotType::RIGHT, 1.5f * dt);
-
-	if (DXUTIsKeyDown('S'))
 		transform->Rotate(Engine::Transform::RotType::RIGHT, -1.5f * dt);
-
-	if (DXUTIsKeyDown('A'))
-		transform->Rotate(Engine::Transform::RotType::LOOK, -2.5f * dt);
 	
-	if (DXUTIsKeyDown('D'))
+	if (DXUTIsKeyDown('S'))
+		transform->Rotate(Engine::Transform::RotType::RIGHT, 1.5f * dt);
+	
+	if (DXUTIsKeyDown('A'))
 		transform->Rotate(Engine::Transform::RotType::LOOK, 2.5f * dt);
 	
-	//transform->position += directonVector * dt * 300;
+	if (DXUTIsKeyDown('D'))
+		transform->Rotate(Engine::Transform::RotType::LOOK, -2.5f * dt);
+	
+	transform->position += directonVector * dt * 300;
 }
 
 void test::LateUpdate(const FLOAT& dt)
