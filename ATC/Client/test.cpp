@@ -60,7 +60,7 @@ void test::Update(const float& dt)
 	if (DXUTIsKeyDown('D'))
 		transform->Rotate(Engine::Transform::RotType::LOOK, -2.5f * dt);
 	
-	transform->position += directonVector * dt * 300;
+	//transform->position += directonVector * dt * 300;
 }
 
 void test::LateUpdate(const FLOAT& dt)

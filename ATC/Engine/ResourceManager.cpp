@@ -3,10 +3,23 @@
 #include "StaticMesh.h"
 #include "DynamicMesh.h"
 #include "Shader.h"
+#include "Texture.h"
 #include "ResourceManager.h"
 USING(Engine)
-HRESULT ResourceManager::AddTexture(wstring _filepath, wstring _filename, wstring _tag)
+HRESULT ResourceManager::AddTexture(wstring _filepath, wstring _tag, const UINT& _texturecount)
 {
+	auto& iter = resourcegroup.find(_tag);
+	if (iter != resourcegroup.end())
+	{
+		wstring error = _tag;
+		MessageBox(DXUTGetHWND(), error.c_str(), L"중복 텍스쳐", MB_ICONERROR | MB_OK);
+		return E_FAIL;
+	}
+	
+	Texture* texture = new Texture();
+	texture->LoadTexture(_filepath, _texturecount);
+	
+	resourcegroup.emplace(_tag, texture);
 	return S_OK;
 }
 

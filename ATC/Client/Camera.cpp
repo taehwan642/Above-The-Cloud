@@ -27,8 +27,6 @@ void Camera::Update(const float& dt)
 		transform->position.z = -transform->position.z;
 	}
 
-	//D3DXVec3TransformCoord(&transform->position, &D3DXVECTOR3(0,282,905), &observer->GetTransform()->worldMatrix);
-	//(&transform->curQuaternion, &transform->curQuaternion, &observer->GetTransform()->curQuaternion, dt * 3);
 	GameObject::Update(dt);
 }
 
@@ -38,7 +36,13 @@ void Camera::LateUpdate(const FLOAT& dt)
 
 	//1. Temp World 하나 생성
 	//2. 그 월드를 카메라가 lerp로 천천히 따라가기
-	
+
+	// 플레이어 포지션에 할당된 그 위치를 카메라가 lerp하고
+	// quaternion은 똑같이 카메라도 slerp시키면 되나?
+
+
+
+	cout << transform->curQuaternion.x << " " << transform->curQuaternion.y << " " << transform->curQuaternion.z << " " << transform->curQuaternion.w << endl;
 	D3DXMATRIX matView;
 	if (!lookback)
 	{
@@ -46,35 +50,8 @@ void Camera::LateUpdate(const FLOAT& dt)
 		memcpy(&transform->worldMatrix._31, reverse, sizeof(D3DXVECTOR3));
 	}
 	
-	/*D3DXVECTOR3 oblook, obright, obup;
-	obright = *reinterpret_cast<D3DXVECTOR3*>(&observer->GetTransform()->worldMatrix._11);
-	obup = *reinterpret_cast<D3DXVECTOR3*>(&observer->GetTransform()->worldMatrix._21);
-	oblook = *reinterpret_cast<D3DXVECTOR3*>(&observer->GetTransform()->worldMatrix._31);
-	
-	transform->worldMatrix *= *D3DXMatrixScaling(&D3DXMATRIX(),
-		observer->GetTransform()->scale.x,
-		observer->GetTransform()->scale.y,
-		observer->GetTransform()->scale.z);
-	
-	D3DXVECTOR3 look, right, up;
-	right = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._11);
-	up = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._21);
-	look = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
-
-	D3DXVec3Lerp(&right, &right, &obright, dt * 10);
-	D3DXVec3Lerp(&up, &up, &obup, dt * 10);
-	D3DXVec3Lerp(&look, &look, &oblook, dt * 10);
-
-	memcpy(&transform->worldMatrix._11, right, sizeof(D3DXVECTOR3));
-	memcpy(&transform->worldMatrix._21, up, sizeof(D3DXVECTOR3));
-	memcpy(&transform->worldMatrix._31, look, sizeof(D3DXVECTOR3));
-
-	transform->worldMatrix *= *D3DXMatrixTranslation(&D3DXMATRIX(), 
-		observer->GetTransform()->position.x, 
-		observer->GetTransform()->position.y, 
-		observer->GetTransform()->position.z);*/
-
 	D3DXMatrixInverse(&matView, 0, &transform->worldMatrix);
+
 	D3DXMATRIX matProj;
 	D3DXMatrixPerspectiveFovLH(&matProj,
 		D3DXToRadian(70),

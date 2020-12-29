@@ -17,6 +17,9 @@ void MenuScene::Start(void)
 		cout << "다이나믹메시불러와짐" << endl;
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddShader(L"Resources/Shaders/DynamicMeshShader.fx", L"dyshader")))
 		cout << "dyShader Load Complete" << endl;
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/AimPoint.png", L"AimPoint")))
+		cout << "텍스쳐도 됐다" << endl;
+
 
 	Engine::Layer* l = new Engine::Layer();
 	layergroup.emplace(L"테스트", l);

@@ -11,7 +11,7 @@ private:
 protected:
 
 public:
-    HRESULT AddTexture(wstring _filepath, wstring _filename, wstring _tag);
+    HRESULT AddTexture(wstring _filepath, wstring _tag, const UINT& _texturecount = 1);
     HRESULT AddMesh(MeshType _meshtype, wstring _filepath, wstring _filename, wstring _tag);
     HRESULT AddShader(wstring _filepath, wstring _tag);
 
