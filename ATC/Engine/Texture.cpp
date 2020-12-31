@@ -46,10 +46,15 @@ HRESULT Texture::LoadTexture(wstring _filepath, const UINT& _texturecount)
 
 void Texture::RenderTexture(LPD3DXEFFECT& _effect, const UINT& _index)
 {
+	_effect->SetTexture((D3DXHANDLE)L"g_BaseTexture", textures[_index]);
 }
 
 void Texture::RenderTexture(const UINT& _index)
 {
+	if (textures.size() < _index)
+		return;
+
+	DEVICE->SetTexture(0, textures[_index]);
 }
 
 void Texture::Render(const FLOAT& dt)
@@ -64,7 +69,6 @@ Resources* Texture::Clone(void)
 
 void Texture::Free(void)
 {
-	//texturescount = textures.size();
 	for (int i = 0; i < texturescount; ++i)
 		textures[i]->Release();
 	textures.clear();

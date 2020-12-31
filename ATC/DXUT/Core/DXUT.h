@@ -410,4 +410,12 @@ enum class PlayerInfos : UINT
     PLAYERTRANSFORM
 };
 
+struct VTXTEX
+{
+    D3DXVECTOR3 pos;
+    D3DXVECTOR2 uv;
+};
+
+#define VTXTEX_FVF (D3DFVF_XYZ|D3DFVF_TEX1)
+
 #endif

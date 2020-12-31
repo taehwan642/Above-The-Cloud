@@ -129,6 +129,9 @@
     <Filter Include="1Engine\4Component\5Texture">
       <UniqueIdentifier>{a51dc57d-8e67-424a-853c-0c603ed6cc18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\4Component\6Trail">
+      <UniqueIdentifier>{0d47b10a-80a5-403b-9f66-67b9881e5443}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -271,6 +274,9 @@
     <ClCompile Include="Engine\Texture.cpp">
       <Filter>1Engine\4Component\5Texture</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Trail.cpp">
+      <Filter>1Engine\4Component\6Trail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -356,6 +362,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Texture.h">
       <Filter>1Engine\4Component\5Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Trail.h">
+      <Filter>1Engine\4Component\6Trail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
