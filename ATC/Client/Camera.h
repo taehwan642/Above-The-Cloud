@@ -9,6 +9,9 @@ class Camera final :
 private:
 protected:
     Engine::Transform* transform = nullptr;
+    Engine::Transform* targetTransform = nullptr;
+    float cameraDistance = 10.f;
+
 public:
     bool lookback = false; 
     PlayerObserver* observer;
@@ -18,6 +21,7 @@ public:
     void Update(const float& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
+    void KeyInput(FLOAT _dt);
 
     void Free(void) override;
 };

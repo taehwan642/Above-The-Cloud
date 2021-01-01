@@ -1,7 +1,9 @@
 #include "DXUT.h"
+#include "Texture.h"
+#include "ResourceManager.h"
 #include "Trail.h"
 USING(Engine)
-HRESULT Trail::Initalize(const D3DXMATRIX* _worldMatrix, const ULONG& _bufferSize, const ULONG& _lerpCnt, const double& _duration, const double& _alivetime, const size_t& _lerpcnt)
+HRESULT Trail::Initalize(const D3DXMATRIX* _worldMatrix, const ULONG& _bufferSize, const double& _duration, const double& _alivetime, const size_t& _lerpCnt, wstring _texturetag)
 {
 	maxvtxCnt = _bufferSize;
 	if (maxvtxCnt <= 2)
@@ -10,7 +12,9 @@ HRESULT Trail::Initalize(const D3DXMATRIX* _worldMatrix, const ULONG& _bufferSiz
 	vtxSize = sizeof(VTXTEX);
 	duration = _duration;
 	alivetime = _alivetime;
-	lerpcnt = _lerpcnt;
+	lerpcnt = _lerpCnt;
+
+	trailTexture = dynamic_cast<Texture*>(ResourceManager::GetInstance()->LoadResource(_texturetag));
 
 	if (FAILED(DEVICE->CreateVertexBuffer(maxvtxCnt * vtxSize, 0, VTXTEX_FVF, D3DPOOL_MANAGED, &vb, nullptr)))
 		return E_FAIL;
@@ -34,19 +38,16 @@ void Trail::AddNewTrail(const D3DXVECTOR3& _upposition, const D3DXVECTOR3& _down
 
 void Trail::SplineTrailPosition(VTXTEX* _vtx, const size_t& _dataindex, ULONG& _index)
 {
-	D3DXMATRIX im;
-	D3DXMatrixInverse(&im, 0, worldMatrix);
-
 	if (maxvtxCnt <= _index)
 		return;
 
-	D3DXVec3TransformCoord(&_vtx[_index].pos, &trailDatas[_dataindex].position[0], &im);
+	_vtx[_index].pos = trailDatas[_dataindex].position[0];
 	++_index;
 
 	if (maxvtxCnt <= _index)
 		return;
 
-	D3DXVec3TransformCoord(&_vtx[_index].pos, &trailDatas[_dataindex].position[1], &im);
+	_vtx[_index].pos = trailDatas[_dataindex].position[1];
 	++_index;
 
 	if (maxvtxCnt <= _index)
@@ -77,13 +78,13 @@ void Trail::SplineTrailPosition(VTXTEX* _vtx, const size_t& _dataindex, ULONG& _
 			j / float(lerpcnt));
 
 
-		D3DXVec3TransformCoord(&_vtx[_index].pos, &vLerpPos[0], &im);
+		_vtx[_index].pos = vLerpPos[0];
 		++_index;
 
 		if (maxvtxCnt <= _index)
 			return;
 
-		D3DXVec3TransformCoord(&_vtx[_index].pos, &vLerpPos[1], &im);
+		_vtx[_index].pos = vLerpPos[1];
 		++_index;
 
 		if (maxvtxCnt <= _index)
@@ -151,10 +152,21 @@ void Trail::Render(const FLOAT& dt)
 	if (trailDatas.size() <= 1)
 		return;
 
+	D3DXMATRIX matWorld;
+	D3DXMatrixIdentity(&matWorld);
+	DEVICE->SetTransform(D3DTS_WORLD, &matWorld);
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	DEVICE->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	DEVICE->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
 	DEVICE->SetStreamSource(0, vb, 0, vtxSize);
+	trailTexture->RenderTexture(0);
 	DEVICE->SetFVF(VTXTEX_FVF);
 	DEVICE->SetIndices(ib);
 	DEVICE->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, curVtxCnt, 0, curTriCnt);
+	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
 void Trail::Free(void)
@@ -163,4 +175,5 @@ void Trail::Free(void)
 	ib->Release();
 	trailDatas.clear();
 	worldMatrix = nullptr;
+	Safe_Release(trailTexture);
 }

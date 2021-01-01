@@ -19,20 +19,19 @@ void MenuScene::Start(void)
 		cout << "dyShader Load Complete" << endl;
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/AimPoint.png", L"AimPoint")))
 		cout << "텍스쳐도 됐다" << endl;
-
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/trail.dds", L"TrailTexture")))
+		cout << "트레일텍스쳐 됐다" << endl;
 
 	Engine::Layer* l = new Engine::Layer();
 	layergroup.emplace(L"테스트", l);
 	test* t = new test();
 	Camera* c = new Camera();
-	//testChild* t1 = new testChild();
 	SkySphere* s = new SkySphere();
+	//testChild* t1 = new testChild();
+	Scene::AddGameObject(L"테스트", L"테스트", s);
 	Scene::AddGameObject(L"테스트", L"테스트", t);
 	Scene::AddGameObject(L"테스트", L"테스트", c);
-	Scene::AddGameObject(L"테스트", L"테스트", s);
 	//Scene::AddGameObject(L"테스트", L"테스트", t1);
-
-	
 }
 
 void MenuScene::Update(const float& dt)

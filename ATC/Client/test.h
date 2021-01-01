@@ -5,6 +5,7 @@ class StaticMesh;
 class DynamicMesh;
 class Transform;
 class Shader;
+class Trail;
 END
 class test final :
     public Engine::GameObject
@@ -17,11 +18,15 @@ protected:
 public:
     explicit test(void);
     virtual ~test(void);
-    
+    D3DXVECTOR3 lefttrailpos[2];
+    D3DXVECTOR3 righttrailpos[2];
+
     Engine::Shader* testshader   = nullptr;
     Engine::StaticMesh* testMesh = nullptr;
     Engine::DynamicMesh* testdynamic = nullptr;
     Engine::Transform* transform = nullptr;
+    Engine::Trail* lefttrail = nullptr;
+    Engine::Trail* righttrail = nullptr;
 
     void Update(const float& dt) override;
     void LateUpdate(const FLOAT& dt) override;

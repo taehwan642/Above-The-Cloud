@@ -29,5 +29,6 @@ void* SubjectManager::GetData(UINT _flag)
 
 void SubjectManager::ClearObservers(void)
 {
+	datagroup.clear();
 	Subject::Free();
 }

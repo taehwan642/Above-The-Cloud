@@ -23,7 +23,9 @@ testChild::~testChild(void)
 
 void testChild::Update(const float& dt)
 {
-	cout << t->position.x << " " << t->position.y << " " << t->position.z << endl;
+	if (DXUTIsKeyDown('L'))
+		t->scale -= D3DXVECTOR3(0.1f, 0.1f, 0.1f) * dt;
+	//cout << t->position.x << " " << t->position.y << " " << t->position.z << endl;
 	if (DXUTIsKeyDown(VK_LEFT))
 	{
 		t->position.x -= 100 * dt;

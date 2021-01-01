@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 NAMESPACE(Engine)
+class Texture;
 class Trail :
     public Component
 {
@@ -19,7 +20,6 @@ private:
 	};
 
 private:
-	D3DXMATRIX* worldMatrix;
 	ULONG vtxSize = 0;
 	ULONG maxvtxCnt = 0;
 	ULONG maxtriCnt = 0;
@@ -35,12 +35,15 @@ private:
 	LPDIRECT3DVERTEXBUFFER9 vb = nullptr;
 	LPDIRECT3DINDEXBUFFER9  ib = nullptr;
 
+	Texture* trailTexture = nullptr;
+
 public:
 	explicit Trail() {};
 	virtual ~Trail() {};
 
 public:
-	HRESULT Initalize(const D3DXMATRIX* _worldMatrix, const ULONG& _bufferSize, const ULONG& _lerpCnt, const double& _duration, const double& _alivetime, const size_t& _lerpcnt);
+	D3DXMATRIX* worldMatrix;
+	HRESULT Initalize(const D3DXMATRIX* _worldMatrix, const ULONG& _bufferSize, const double& _duration, const double& _alivetime, const size_t& _lerpCnt, wstring _texturetag);
 	void AddNewTrail(const D3DXVECTOR3& _upposition, const D3DXVECTOR3& _downposition, const FLOAT& _dt);
 	void SplineTrailPosition(VTXTEX* _vtx, const size_t& _dataindex, ULONG& _index);
 	void Update(const FLOAT& dt) override;
