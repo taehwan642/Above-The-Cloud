@@ -22,6 +22,9 @@ void MenuScene::Start(void)
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/trail.dds", L"TrailTexture")))
 		cout << "트레일텍스쳐 됐다" << endl;
 
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"cloud.X", L"Cloud")))
+		cout << "구름나와랑" << endl;
+
 	Engine::Layer* l = new Engine::Layer();
 	layergroup.emplace(L"테스트", l);
 	test* t = new test();
@@ -32,6 +35,7 @@ void MenuScene::Start(void)
 	Scene::AddGameObject(L"테스트", L"테스트", t);
 	Scene::AddGameObject(L"테스트", L"테스트", c);
 	//Scene::AddGameObject(L"테스트", L"테스트", t1);
+	// World 행렬 꼬이는거 고치기
 }
 
 void MenuScene::Update(const float& dt)

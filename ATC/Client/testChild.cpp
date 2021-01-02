@@ -3,6 +3,7 @@
 #include "PlayerObserver.h"
 #include "../Engine/Transform.h"
 #include "../Engine/ResourceManager.h"
+#include "../Engine/StaticMesh.h"
 #include "testChild.h"
 
 testChild::testChild(void)
@@ -11,10 +12,11 @@ testChild::testChild(void)
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
-	t = new Engine::Transform(observer->GetTransform());
+	t = new Engine::Transform();
 	componentgroup.emplace(L"Transform", t);
-	
-	D3DXCreateSphere(DEVICE, 30, 18, 18, &testsphere, nullptr);
+	t->scale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
+
+	testsphere = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Cloud"));
 }
 
 testChild::~testChild(void)
@@ -24,7 +26,6 @@ testChild::~testChild(void)
 void testChild::Update(const float& dt)
 {
 	if (DXUTIsKeyDown('L'))
-		t->scale -= D3DXVECTOR3(0.1f, 0.1f, 0.1f) * dt;
 	//cout << t->position.x << " " << t->position.y << " " << t->position.z << endl;
 	if (DXUTIsKeyDown(VK_LEFT))
 	{
@@ -62,7 +63,7 @@ void testChild::LateUpdate(const FLOAT& dt)
 
 void testChild::Render(const FLOAT& dt)
 {
-	testsphere->DrawSubset(0);
+	testsphere->RenderMesh();
 	GameObject::Render(dt);
 }
 

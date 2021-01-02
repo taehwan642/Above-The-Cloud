@@ -15,7 +15,7 @@ public:
 	explicit testChild(void);
 	virtual ~testChild(void);
 
-	LPD3DXMESH testsphere;
+	Engine::StaticMesh* testsphere = nullptr;
 	PlayerObserver* observer;
 
 	Engine::Transform* t;

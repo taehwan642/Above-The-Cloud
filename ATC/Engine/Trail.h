@@ -2,7 +2,7 @@
 #include "Component.h"
 NAMESPACE(Engine)
 class Texture;
-class Trail :
+class Trail final :
     public Component
 {
 private:

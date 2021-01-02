@@ -4,7 +4,7 @@ NAMESPACE(Engine)
 class Transform;
 class StaticMesh;
 END
-class SkySphere :
+class SkySphere final :
     public Engine::GameObject
 {
 private:

@@ -415,6 +415,7 @@
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Trail.cpp" />
     <ClCompile Include="Engine\Transform.cpp" />
+    <ClCompile Include="Engine\UIBase.cpp" />
     <ClInclude Include="Client\Camera.h" />
     <ClInclude Include="Client\MenuScene.h" />
     <ClInclude Include="Client\PlayerObserver.h" />
@@ -472,6 +473,7 @@
     <FxCompile Include="Resources\Shaders\DynamicMeshShader.fx" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\UIBase.h" />
     <CLInclude Include="resource.h" />
     <ResourceCompile Include="ATC.rc" />
   </ItemGroup>

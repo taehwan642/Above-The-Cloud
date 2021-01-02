@@ -70,10 +70,10 @@ void test::Update(const float& dt)
 	}
 
 	if (DXUTIsKeyDown('W'))
-		transform->Rotate(Engine::Transform::RotType::RIGHT, -1.0f * dt);
+		transform->Rotate(Engine::Transform::RotType::RIGHT, 1.0f * dt);
 	
 	if (DXUTIsKeyDown('S'))
-		transform->Rotate(Engine::Transform::RotType::RIGHT, 1.0f * dt);
+		transform->Rotate(Engine::Transform::RotType::RIGHT, -1.0f * dt);
 	
 	if (DXUTIsKeyDown('A'))
 		transform->Rotate(Engine::Transform::RotType::LOOK, -2.5f * dt);

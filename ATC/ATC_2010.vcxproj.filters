@@ -132,6 +132,9 @@
     <Filter Include="1Engine\4Component\6Trail">
       <UniqueIdentifier>{0d47b10a-80a5-403b-9f66-67b9881e5443}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\8UIBase">
+      <UniqueIdentifier>{4ceaa78c-6dfe-4d7f-a497-439f0c5d7251}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -277,6 +280,9 @@
     <ClCompile Include="Engine\Trail.cpp">
       <Filter>1Engine\4Component\6Trail</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\UIBase.cpp">
+      <Filter>1Engine\8UIBase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -365,6 +371,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Trail.h">
       <Filter>1Engine\4Component\6Trail</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\UIBase.h">
+      <Filter>1Engine\8UIBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

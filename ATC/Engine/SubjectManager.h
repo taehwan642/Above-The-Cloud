@@ -2,7 +2,7 @@
 #include "Subject.h"
 #include "Singleton.h"
 NAMESPACE(Engine)
-class SubjectManager :
+class SubjectManager final :
     public Subject, public Singleton<SubjectManager>
 {
 private:
