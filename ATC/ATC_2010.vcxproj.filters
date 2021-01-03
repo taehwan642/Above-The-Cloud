@@ -75,9 +75,6 @@
     <Filter Include="2Client\1GameObject\0Camera">
       <UniqueIdentifier>{57d85de6-1bd0-4ebd-a419-58ba7460bbc6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Client\1GameObject\test">
-      <UniqueIdentifier>{8ec42cc9-dd16-423e-abe3-c68ca20bee62}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1Engine\6Manager\2GraphicsManager">
       <UniqueIdentifier>{8235ae9f-aed8-4c86-a49d-01e14b843787}</UniqueIdentifier>
     </Filter>
@@ -98,12 +95,6 @@
     </Filter>
     <Filter Include="1Engine\4Component\4Shader\1DynamicMeshShader">
       <UniqueIdentifier>{61e650a4-9e92-4512-8b66-abeca5d1135c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2Client\1GameObject\test\plane">
-      <UniqueIdentifier>{6e9e7594-6c67-477d-862d-0c8a5d38abd1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2Client\1GameObject\test\child">
-      <UniqueIdentifier>{b1635ba7-bb40-4892-bd24-0ac873d07c1f}</UniqueIdentifier>
     </Filter>
     <Filter Include="1Engine\7Observer">
       <UniqueIdentifier>{994536cd-3fc7-48c4-a7cd-ce824eef1383}</UniqueIdentifier>
@@ -132,8 +123,26 @@
     <Filter Include="1Engine\4Component\6Trail">
       <UniqueIdentifier>{0d47b10a-80a5-403b-9f66-67b9881e5443}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1Engine\8UIBase">
+    <Filter Include="1Engine\8UI">
       <UniqueIdentifier>{4ceaa78c-6dfe-4d7f-a497-439f0c5d7251}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\8UI\0StaticUI">
+      <UniqueIdentifier>{444bbf12-5edf-4e57-b3bb-00452de6a601}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\8UI\1DynamicUI">
+      <UniqueIdentifier>{f59b0af9-0cad-4627-8c67-d924dbf98eee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\2Player">
+      <UniqueIdentifier>{8ec42cc9-dd16-423e-abe3-c68ca20bee62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\2Player\plane">
+      <UniqueIdentifier>{6e9e7594-6c67-477d-862d-0c8a5d38abd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\2Player\child">
+      <UniqueIdentifier>{b1635ba7-bb40-4892-bd24-0ac873d07c1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\3UI">
+      <UniqueIdentifier>{39f575cc-9fe0-4496-8b9c-e3c0083bda80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -254,10 +263,10 @@
       <Filter>1Engine\4Component\3Mesh\1DynamicMesh\AnimationController</Filter>
     </ClCompile>
     <ClCompile Include="Client\test.cpp">
-      <Filter>2Client\1GameObject\test\plane</Filter>
+      <Filter>2Client\1GameObject\2Player\plane</Filter>
     </ClCompile>
     <ClCompile Include="Client\testChild.cpp">
-      <Filter>2Client\1GameObject\test\child</Filter>
+      <Filter>2Client\1GameObject\2Player\child</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Subject.cpp">
       <Filter>1Engine\7Observer\1Subject</Filter>
@@ -281,7 +290,16 @@
       <Filter>1Engine\4Component\6Trail</Filter>
     </ClCompile>
     <ClCompile Include="Engine\UIBase.cpp">
-      <Filter>1Engine\8UIBase</Filter>
+      <Filter>1Engine\8UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DynamicUI.cpp">
+      <Filter>1Engine\8UI\1DynamicUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\StaticUI.cpp">
+      <Filter>1Engine\8UI\0StaticUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\AimPoint.cpp">
+      <Filter>2Client\1GameObject\3UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -346,10 +364,10 @@
       <Filter>1Engine\4Component\3Mesh\1DynamicMesh\AnimationController</Filter>
     </ClInclude>
     <ClInclude Include="Client\test.h">
-      <Filter>2Client\1GameObject\test\plane</Filter>
+      <Filter>2Client\1GameObject\2Player\plane</Filter>
     </ClInclude>
     <ClInclude Include="Client\testChild.h">
-      <Filter>2Client\1GameObject\test\child</Filter>
+      <Filter>2Client\1GameObject\2Player\child</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Subject.h">
       <Filter>1Engine\7Observer\1Subject</Filter>
@@ -373,7 +391,16 @@
       <Filter>1Engine\4Component\6Trail</Filter>
     </ClInclude>
     <ClInclude Include="Engine\UIBase.h">
-      <Filter>1Engine\8UIBase</Filter>
+      <Filter>1Engine\8UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DynamicUI.h">
+      <Filter>1Engine\8UI\1DynamicUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\StaticUI.h">
+      <Filter>1Engine\8UI\0StaticUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\AimPoint.h">
+      <Filter>2Client\1GameObject\3UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

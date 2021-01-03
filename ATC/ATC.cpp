@@ -2,6 +2,7 @@
 #include "resource.h"
 #include "Engine/SceneManager.h"
 #include "Engine/ResourceManager.h"
+#include "Engine/GraphicsManager.h"
 #include "Client/MenuScene.h"
 
 HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
@@ -13,9 +14,8 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 
 HRESULT CALLBACK OnResetDevice(IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc, void* pUserContext)
 {
+    Engine::GraphicsManager::GetInstance()->ResetDevice();
     Engine::SceneManager::GetInstance()->ResetDevice();	
-    DEVICE->SetRenderState(D3DRS_LIGHTING, false);
-    DEVICE->LightEnable(0, false);
     return S_OK;
 }
 
@@ -43,6 +43,7 @@ void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTime, flo
 
 void CALLBACK OnD3D9LostDevice( void* pUserContext )
 {
+    Engine::GraphicsManager::GetInstance()->LostDevice();
     Engine::SceneManager::GetInstance()->LostDevice();
 }
 

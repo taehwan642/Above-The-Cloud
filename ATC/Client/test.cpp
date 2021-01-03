@@ -91,6 +91,7 @@ void test::LateUpdate(const FLOAT& dt)
 
 void test::Render(const FLOAT& dt)
 {
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	testdynamic->PlayAnimation(dt * 3);
 	testshader->SetupTable();
 	UINT pass = 0;
@@ -100,9 +101,9 @@ void test::Render(const FLOAT& dt)
 	testdynamic->RenderNoSkinnedMesh(tempeffect);
 	tempeffect->EndPass();
 	tempeffect->End();
-
-
 	GameObject::Render(dt);
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
 }
 
 void test::Free(void)

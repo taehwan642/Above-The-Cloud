@@ -6,6 +6,8 @@
 #include "SkySphere.h"
 #include "Camera.h"
 #include "../Engine/SubjectManager.h"
+#include "../Engine/GraphicsManager.h"
+#include "AimPoint.h"
 #include "MenuScene.h"
 
 
@@ -24,17 +26,21 @@ void MenuScene::Start(void)
 
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"cloud.X", L"Cloud")))
 		cout << "구름나와랑" << endl;
-
+	Engine::GraphicsManager::GetInstance()->CreateSprite();
 	Engine::Layer* l = new Engine::Layer();
 	layergroup.emplace(L"테스트", l);
 	test* t = new test();
 	Camera* c = new Camera();
 	SkySphere* s = new SkySphere();
-	//testChild* t1 = new testChild();
-	Scene::AddGameObject(L"테스트", L"테스트", s);
+
+	AimPoint* ui = new AimPoint(L"AimPoint");
+
+	testChild* t1 = new testChild();
 	Scene::AddGameObject(L"테스트", L"테스트", t);
 	Scene::AddGameObject(L"테스트", L"테스트", c);
-	//Scene::AddGameObject(L"테스트", L"테스트", t1);
+	Scene::AddGameObject(L"테스트", L"UI", ui);
+	Scene::AddGameObject(L"테스트", L"테스트", s);
+	Scene::AddGameObject(L"테스트", L"테스트", t1);
 	// World 행렬 꼬이는거 고치기
 }
 
@@ -58,6 +64,7 @@ void MenuScene::Exit(void)
 {
 	cout << "엑시트" << endl;
 	Engine::SubjectManager::GetInstance()->ClearObservers();
+	Engine::GraphicsManager::GetInstance()->DeleteSprite();
 	Scene::Exit();
 }
 

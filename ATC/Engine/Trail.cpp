@@ -166,7 +166,6 @@ void Trail::Render(const FLOAT& dt)
 	DEVICE->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, curVtxCnt, 0, curTriCnt);
 	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
 void Trail::Free(void)

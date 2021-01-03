@@ -9,10 +9,10 @@ class UIBase :
 {
 private:
 protected:
-    LPD3DXSPRITE uiSprite;
-    Transform* transform;
-    Texture* texture;
-
+    D3DXVECTOR2 pivot = { 0.5f,0.5f };
+    Transform* transform = nullptr;
+    Texture* texture = nullptr;
+    UINT currentTextureindex = 0;
 public:
     // 1. 렌더는 가장 첫번째
     // 2. front를 뽑아와서 빌보드 변환
@@ -30,18 +30,18 @@ public:
 
     // 렌더할때 memcpy로 8byte만큼만 때려넣으면 될듯 (위치).
     
-    // Aimpoint는 Billboard로 2D -> 3D 좌표 변환 시켜서 Forward방향에 띄워주면 될듯? 아마도 ㅋ
+    // Aimpoint는 Billboard로 2D -> 3D 좌표 변환 시켜서 Forward방향에 띄워주면 될듯? 아마도 
     
     explicit UIBase(void);
     explicit UIBase(wstring _texturetag);
     virtual ~UIBase(void);
-
-    void SetPosition(const D3DXVECTOR2& _position);
 
     void SetUITexture(const UINT& _index);
     
     void Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
+
+    void Free(void) override;
 };
 END

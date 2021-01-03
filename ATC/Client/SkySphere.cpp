@@ -24,12 +24,13 @@ void SkySphere::Update(const float& dt)
 
 void SkySphere::LateUpdate(const FLOAT& dt)
 {
-	DEVICE->SetTransform(D3DTS_WORLD, &transform->worldMatrix);
 	GameObject::LateUpdate(dt);
 }
 
 void SkySphere::Render(const FLOAT& dt)
 {
+	DEVICE->SetTransform(D3DTS_WORLD, &transform->worldMatrix);
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	skysphere->RenderMesh();
 	GameObject::Render(dt);
 }

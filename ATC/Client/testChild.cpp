@@ -57,12 +57,12 @@ void testChild::Update(const float& dt)
 
 void testChild::LateUpdate(const FLOAT& dt)
 {
-	DEVICE->SetTransform(D3DTS_WORLD, &t->worldMatrix);
 	GameObject::LateUpdate(dt);
 }
 
 void testChild::Render(const FLOAT& dt)
 {
+	DEVICE->SetTransform(D3DTS_WORLD, &t->worldMatrix);
 	testsphere->RenderMesh();
 	GameObject::Render(dt);
 }

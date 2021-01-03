@@ -11,7 +11,7 @@ Camera::Camera(void)
 	componentgroup.emplace(L"Transform", transform);
 	componentgroup.emplace(L"TargetTransform", targetTransform);
 
-	targetTransform->position = { 0, 150, 0 };
+	targetTransform->position = { 0, 250, 0 };
 	//targetTransform->Rotate(Engine::Transform::RotType::RIGHT, D3DXToRadian(-30.f));
 
 	observer = new PlayerObserver();

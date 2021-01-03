@@ -388,6 +388,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Client\AimPoint.cpp" />
     <ClCompile Include="Client\Camera.cpp" />
     <ClCompile Include="Client\MenuScene.cpp" />
     <ClCompile Include="Client\PlayerObserver.cpp" />
@@ -398,6 +399,7 @@
     <ClCompile Include="Engine\Base.cpp" />
     <ClCompile Include="Engine\Component.cpp" />
     <ClCompile Include="Engine\DynamicMesh.cpp" />
+    <ClCompile Include="Engine\DynamicUI.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
     <ClCompile Include="Engine\GraphicsManager.cpp" />
     <ClCompile Include="Engine\Layer.cpp" />
@@ -410,12 +412,14 @@
     <ClCompile Include="Engine\Shader.cpp" />
     <ClCompile Include="Engine\Singleton.cpp" />
     <ClCompile Include="Engine\StaticMesh.cpp" />
+    <ClCompile Include="Engine\StaticUI.cpp" />
     <ClCompile Include="Engine\Subject.cpp" />
     <ClCompile Include="Engine\SubjectManager.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\Trail.cpp" />
     <ClCompile Include="Engine\Transform.cpp" />
     <ClCompile Include="Engine\UIBase.cpp" />
+    <ClInclude Include="Client\AimPoint.h" />
     <ClInclude Include="Client\Camera.h" />
     <ClInclude Include="Client\MenuScene.h" />
     <ClInclude Include="Client\PlayerObserver.h" />
@@ -426,6 +430,7 @@
     <ClInclude Include="Engine\Base.h" />
     <ClInclude Include="Engine\Component.h" />
     <ClInclude Include="Engine\DynamicMesh.h" />
+    <ClInclude Include="Engine\DynamicUI.h" />
     <ClInclude Include="Engine\GameObject.h" />
     <ClInclude Include="Engine\GraphicsManager.h" />
     <ClInclude Include="Engine\Layer.h" />
@@ -438,6 +443,7 @@
     <ClInclude Include="Engine\Shader.h" />
     <ClInclude Include="Engine\Singleton.h" />
     <ClInclude Include="Engine\StaticMesh.h" />
+    <ClInclude Include="Engine\StaticUI.h" />
     <ClInclude Include="Engine\Subject.h" />
     <ClInclude Include="Engine\SubjectManager.h" />
     <ClInclude Include="Engine\Texture.h" />
