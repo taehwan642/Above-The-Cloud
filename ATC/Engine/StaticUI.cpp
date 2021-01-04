@@ -45,10 +45,9 @@ void StaticUI::Render(const FLOAT& dt)
 	GraphicsManager::GetInstance()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 
 	LPDIRECT3DTEXTURE9 uiTexture = texture->GetTextureByIndex(currentTextureindex);
-	LPDIRECT3DSURFACE9 desc;
-	uiTexture->GetSurfaceLevel(0, &desc);
-
-	D3DXVECTOR3 center = { 0,0,0 };//{ pivot.x * desc->Width, pivot.y * desc->Height, 0 };
+	D3DSURFACE_DESC desc;
+	uiTexture->GetLevelDesc(0, &desc);
+	D3DXVECTOR3 center = { pivot.x * desc.Width, pivot.y * desc.Height, 0 };
 	GraphicsManager::GetInstance()->GetSprite()->Draw(texture->GetTextureByIndex(currentTextureindex),
 		NULL, &center, NULL, D3DCOLOR_RGBA(255, 255, 255, 255));
 	GraphicsManager::GetInstance()->GetSprite()->End();

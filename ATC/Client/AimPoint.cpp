@@ -5,7 +5,7 @@
 #include "AimPoint.h"
 
 AimPoint::AimPoint(wstring _texturetag) :
-	Engine::DynamicUI(_texturetag)
+	Engine::StaticUI(_texturetag)
 {
 	PlayerObserver* ob = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(ob);
@@ -19,38 +19,37 @@ AimPoint::~AimPoint(void)
 
 void AimPoint::Update(const FLOAT& dt)
 {
-	Engine::DynamicUI::Update(dt);
+	Engine::StaticUI::Update(dt);
 	D3DXVECTOR3 playerLook = -(*reinterpret_cast<D3DXVECTOR3*>(&playerTransform->worldMatrix._31));
-	transform->position = playerTransform->position + playerLook * 3000;
-	/*D3DXVECTOR3 pos = playerLook + D3DXVECTOR3(0, 0, 3);
+	D3DXVECTOR3 pos = playerTransform->position + playerLook * 4000;
 
 	D3DXMATRIX			matView, matProj;
-	D3DVIEWPORT9		ViewPort;
-	D3DXVECTOR3			vScreenPos;
-	DEVICE->GetViewport(&ViewPort);
+	D3DVIEWPORT9		viewPort;
+	D3DXVECTOR3			screenPos;
+	DEVICE->GetViewport(&viewPort);
 
 	DEVICE->GetTransform(D3DTS_VIEW, &matView);
 	DEVICE->GetTransform(D3DTS_PROJECTION, &matProj);
-	D3DXVec3TransformCoord(&vScreenPos, &pos, &matView);
-	D3DXVec3TransformCoord(&vScreenPos, &vScreenPos, &matProj);
+	D3DXVec3TransformCoord(&screenPos, &pos, &matView);
+	D3DXVec3TransformCoord(&screenPos, &screenPos, &matProj);
 
-	vScreenPos.x = (vScreenPos.x + 1) * ViewPort.Width / 2;
-	vScreenPos.y = (-vScreenPos.y + 1) * ViewPort.Height / 2;
+	screenPos.x = (screenPos.x + 1) * viewPort.Width / 2;
+	screenPos.y = (-screenPos.y + 1) * viewPort.Height / 2;
 
-	transform->position = vScreenPos;*/
+	transform->position = screenPos;
 }
 
 void AimPoint::LateUpdate(const FLOAT& dt)
 {
-	Engine::DynamicUI::LateUpdate(dt);
+	Engine::StaticUI::LateUpdate(dt);
 }
 
 void AimPoint::Render(const FLOAT& dt)
 {
-	Engine::DynamicUI::Render(dt);
+	Engine::StaticUI::Render(dt);
 }
 
 void AimPoint::Free(void)
 {
-	Engine::DynamicUI::Free();
+	Engine::StaticUI::Free();
 }

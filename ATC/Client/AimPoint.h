@@ -1,11 +1,11 @@
 #pragma once
-#include "../Engine/DynamicUI.h"
+#include "../Engine/StaticUI.h"
 NAMESPACE(Engine)
 class PlayerObserver;
 class Transform;
 END
 class AimPoint final : // 이제 Static으로 Sprite로 한번 바꿔서, Screen좌표로 한번 띄워보자!
-    public Engine::DynamicUI
+    public Engine::StaticUI
 {
 private:
     Engine::Transform* playerTransform;

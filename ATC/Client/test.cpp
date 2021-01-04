@@ -22,6 +22,7 @@ test::test(void)
 	componentgroup.emplace(L"Transform", transform);
 
 	Engine::SubjectManager::GetInstance()->AddData(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM), transform);
+	Engine::SubjectManager::GetInstance()->AddData(static_cast<UINT>(PlayerInfos::PLAYERHEALTH), &healthpoint);
 
 	testdynamic->SetParent(&transform->worldMatrix);
 	
@@ -59,7 +60,6 @@ void test::Update(const float& dt)
 	lefttrail->AddNewTrail(lefttrailpos[0], lefttrailpos[1], dt);
 	righttrail->AddNewTrail(righttrailpos[0], righttrailpos[1], dt);
 
-
 	directonVector = -(*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31));
 
 	if (DXUTWasKeyPressed('U'))
@@ -80,6 +80,12 @@ void test::Update(const float& dt)
 	
 	if (DXUTIsKeyDown('D'))
 		transform->Rotate(Engine::Transform::RotType::LOOK, 2.5f * dt);
+
+	if (DXUTWasKeyPressed('J'))
+	{
+		--healthpoint;
+		Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
+	}
 	
 	transform->position += directonVector * dt * 300;
 }
@@ -103,7 +109,6 @@ void test::Render(const FLOAT& dt)
 	tempeffect->End();
 	GameObject::Render(dt);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-
 }
 
 void test::Free(void)

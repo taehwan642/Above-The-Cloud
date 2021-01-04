@@ -144,6 +144,15 @@
     <Filter Include="2Client\1GameObject\3UI">
       <UniqueIdentifier>{39f575cc-9fe0-4496-8b9c-e3c0083bda80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\1GameObject\3UI\0AimPoint">
+      <UniqueIdentifier>{feb3bac0-39be-4ec5-be4e-e31f8b0d22fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\3UI\1HealthPoint">
+      <UniqueIdentifier>{9856247a-b1d9-4f7e-8de8-3ec0f9c0f6aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\3UI\1HealthPoint\0HealthPointGroup">
+      <UniqueIdentifier>{47791393-20ae-4f71-a308-bd6bee6f910b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -299,7 +308,13 @@
       <Filter>1Engine\8UI\0StaticUI</Filter>
     </ClCompile>
     <ClCompile Include="Client\AimPoint.cpp">
-      <Filter>2Client\1GameObject\3UI</Filter>
+      <Filter>2Client\1GameObject\3UI\0AimPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\HealthPoint.cpp">
+      <Filter>2Client\1GameObject\3UI\1HealthPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\HealthPointGroup.cpp">
+      <Filter>2Client\1GameObject\3UI\1HealthPoint\0HealthPointGroup</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -400,7 +415,13 @@
       <Filter>1Engine\8UI\0StaticUI</Filter>
     </ClInclude>
     <ClInclude Include="Client\AimPoint.h">
-      <Filter>2Client\1GameObject\3UI</Filter>
+      <Filter>2Client\1GameObject\3UI\0AimPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\HealthPoint.h">
+      <Filter>2Client\1GameObject\3UI\1HealthPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\HealthPointGroup.h">
+      <Filter>2Client\1GameObject\3UI\1HealthPoint\0HealthPointGroup</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

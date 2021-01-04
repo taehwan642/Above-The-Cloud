@@ -407,7 +407,8 @@ struct D3DXMESHCONTAINER_DERIVED :
 
 enum class PlayerInfos : UINT
 {
-    PLAYERTRANSFORM
+    PLAYERTRANSFORM,
+    PLAYERHEALTH
 };
 
 struct VTXTEX

@@ -7,6 +7,7 @@ class MenuScene final :
 private:
 protected:
 public:
+
     void Start(void) override;
     void Update(const float& dt) override;
     void LateUpdate(const FLOAT& dt) override;

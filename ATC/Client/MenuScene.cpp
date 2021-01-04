@@ -8,6 +8,7 @@
 #include "../Engine/SubjectManager.h"
 #include "../Engine/GraphicsManager.h"
 #include "AimPoint.h"
+#include "HealthPointGroup.h"
 #include "MenuScene.h"
 
 
@@ -20,7 +21,9 @@ void MenuScene::Start(void)
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddShader(L"Resources/Shaders/DynamicMeshShader.fx", L"dyshader")))
 		cout << "dyShader Load Complete" << endl;
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/AimPoint.png", L"AimPoint")))
-		cout << "텍스쳐도 됐다" << endl;
+		cout << "텍스쳐도 됐다" << endl; 
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/heart.png", L"Heart")))
+		cout << "2텍스쳐도 됐다" << endl;
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/trail.dds", L"TrailTexture")))
 		cout << "트레일텍스쳐 됐다" << endl;
 
@@ -34,14 +37,16 @@ void MenuScene::Start(void)
 	SkySphere* s = new SkySphere();
 
 	AimPoint* ui = new AimPoint(L"AimPoint");
+	HealthPointGroup* h = new HealthPointGroup();
+	
 
 	testChild* t1 = new testChild();
 	Scene::AddGameObject(L"테스트", L"테스트", t);
 	Scene::AddGameObject(L"테스트", L"테스트", c);
 	Scene::AddGameObject(L"테스트", L"UI", ui);
+	Scene::AddGameObject(L"테스트", L"UI", h);
 	Scene::AddGameObject(L"테스트", L"테스트", s);
 	Scene::AddGameObject(L"테스트", L"테스트", t1);
-	// World 행렬 꼬이는거 고치기
 }
 
 void MenuScene::Update(const float& dt)

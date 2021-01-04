@@ -23,8 +23,6 @@ UIBase::~UIBase(void)
 
 }
 
-
-
 void UIBase::SetUITexture(const UINT& _index)
 {
 	currentTextureindex = _index;

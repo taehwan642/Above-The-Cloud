@@ -47,7 +47,6 @@ DynamicUI::DynamicUI(wstring _texturetag) :
 	pIndex[1]._2 = 3;
 
 	ib->Unlock();
-
 }
 
 DynamicUI::~DynamicUI(void)

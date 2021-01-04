@@ -390,6 +390,8 @@
   <ItemGroup>
     <ClCompile Include="Client\AimPoint.cpp" />
     <ClCompile Include="Client\Camera.cpp" />
+    <ClCompile Include="Client\HealthPoint.cpp" />
+    <ClCompile Include="Client\HealthPointGroup.cpp" />
     <ClCompile Include="Client\MenuScene.cpp" />
     <ClCompile Include="Client\PlayerObserver.cpp" />
     <ClCompile Include="Client\SkySphere.cpp" />
@@ -421,6 +423,8 @@
     <ClCompile Include="Engine\UIBase.cpp" />
     <ClInclude Include="Client\AimPoint.h" />
     <ClInclude Include="Client\Camera.h" />
+    <ClInclude Include="Client\HealthPoint.h" />
+    <ClInclude Include="Client\HealthPointGroup.h" />
     <ClInclude Include="Client\MenuScene.h" />
     <ClInclude Include="Client\PlayerObserver.h" />
     <ClInclude Include="Client\SkySphere.h" />

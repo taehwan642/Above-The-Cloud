@@ -13,6 +13,9 @@ void PlayerObserver::UpdateObserver(UINT _flag)
 	case PlayerInfos::PLAYERTRANSFORM:
 		playerTransform = reinterpret_cast<Engine::Transform*>(data);
 		break;
+	case PlayerInfos::PLAYERHEALTH:
+		playerHealthpoint = *reinterpret_cast<INT*>(data);
+		break;
 	default:
 		break;
 	}

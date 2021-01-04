@@ -18,6 +18,9 @@ protected:
 public:
     explicit test(void);
     virtual ~test(void);
+
+    INT healthpoint = 5;
+
     D3DXVECTOR3 lefttrailpos[2];
     D3DXVECTOR3 righttrailpos[2];
 
