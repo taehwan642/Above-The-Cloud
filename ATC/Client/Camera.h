@@ -4,17 +4,18 @@ NAMESPACE(Engine)
 class Transform;
 END
 class Camera final :
-    public Engine::GameObject
+    public Engine::Singleton<Camera>, public Engine::GameObject // Singleton으로 받아야할듯
 {
 private:
 protected:
     Engine::Transform* transform = nullptr;
     Engine::Transform* targetTransform = nullptr;
+    PlayerObserver* observer;
     float cameraDistance = 10.f;
 
 public:
-    bool lookback = false; 
-    PlayerObserver* observer;
+    bool lookback = false;
+
     explicit Camera(void);
     virtual ~Camera(void);
 

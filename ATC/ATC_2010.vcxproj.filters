@@ -153,6 +153,12 @@
     <Filter Include="2Client\1GameObject\3UI\1HealthPoint\0HealthPointGroup">
       <UniqueIdentifier>{47791393-20ae-4f71-a308-bd6bee6f910b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters">
+      <UniqueIdentifier>{617a55ae-fccc-4721-a757-201a71578e79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters\0SphereMonster">
+      <UniqueIdentifier>{dc5ff974-9b5b-4873-9719-8d5e9e347e3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -316,6 +322,12 @@
     <ClCompile Include="Client\HealthPointGroup.cpp">
       <Filter>2Client\1GameObject\3UI\1HealthPoint\0HealthPointGroup</Filter>
     </ClCompile>
+    <ClCompile Include="Client\MonsterBase.cpp">
+      <Filter>2Client\1GameObject\5Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\SphereMonster.cpp">
+      <Filter>2Client\1GameObject\5Monsters\0SphereMonster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -422,6 +434,12 @@
     </ClInclude>
     <ClInclude Include="Client\HealthPointGroup.h">
       <Filter>2Client\1GameObject\3UI\1HealthPoint\0HealthPointGroup</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\MonsterBase.h">
+      <Filter>2Client\1GameObject\5Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\SphereMonster.h">
+      <Filter>2Client\1GameObject\5Monsters\0SphereMonster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
