@@ -18,26 +18,22 @@ MonsterBase::~MonsterBase(void)
 
 void MonsterBase::GetHit(const FLOAT& _damageamount)
 {
-}
-
-void MonsterBase::Movement(void)
-{
-}
-
-void MonsterBase::Attack(void)
-{
+	Hp -= _damageamount;
 }
 
 void MonsterBase::Update(const FLOAT& dt)
 {
+	Engine::GameObject::Update(dt);
 }
 
 void MonsterBase::LateUpdate(const FLOAT& dt)
 {
+	Engine::GameObject::LateUpdate(dt);
 }
 
 void MonsterBase::Render(const FLOAT& dt)
 {
+	Engine::GameObject::Render(dt);
 }
 
 void MonsterBase::Free(void)

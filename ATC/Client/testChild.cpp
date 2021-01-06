@@ -4,6 +4,7 @@
 #include "../Engine/Transform.h"
 #include "../Engine/ResourceManager.h"
 #include "../Engine/StaticMesh.h"
+#include "../Engine/EnemyManager.h"
 #include "testChild.h"
 
 testChild::testChild(void)
@@ -15,8 +16,11 @@ testChild::testChild(void)
 	t = new Engine::Transform();
 	componentgroup.emplace(L"Transform", t);
 	t->scale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
-
+	t->position = { 5,5,50 };
 	testsphere = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Cloud"));
+
+	Engine::EnemyManager::GetInstance()->enemymesh.push_back(testsphere->GetMesh());
+	Engine::EnemyManager::GetInstance()->enemyTransform.push_back(&t->worldMatrix);
 }
 
 testChild::~testChild(void)

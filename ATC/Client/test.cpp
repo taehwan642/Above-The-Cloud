@@ -6,6 +6,8 @@
 #include "../Engine/ResourceManager.h"
 #include "../Engine/SubjectManager.h"
 #include "../Engine/Trail.h"
+#include "../Engine/RaycastManager.h"
+#include "../Engine/EnemyManager.h"
 #include "test.h"
 
 // FREE 되어야하는 컴포넌트들은 componentgroup 속에 들어있어야함.
@@ -86,12 +88,32 @@ void test::Update(const float& dt)
 		--healthpoint;
 		Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
 	}
-	
+
 	transform->position += directonVector * dt * 300;
 }
 
 void test::LateUpdate(const FLOAT& dt)
 {
+	//for (int i = 0; i < Engine::EnemyManager::GetInstance()->enemymesh.size(); ++i)
+//	{
+		float a;
+		D3DXVECTOR3 p;
+		D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+		D3DXVECTOR3 pos = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._41);
+		if (Engine::RaycastManager::GetInstance()->PickMeshWithDirection(a, p, Engine::EnemyManager::GetInstance()->enemymesh[0],
+			dir, pos, *Engine::EnemyManager::GetInstance()->enemyTransform[0]))
+		{
+			cout << "Distance : "<<a << endl<< " POSITION : " << p.x << " " << p.y << " " << p.z << endl;
+		}
+
+		//if (Engine::RaycastManager::GetInstance()->PickMeshWithMouse(a, p, Engine::EnemyManager::GetInstance()->enemymesh[0],
+		//	*Engine::EnemyManager::GetInstance()->enemyTransform[0]))
+		//{
+		//	cout << "Distance : " << a << " POSITION : " << p.x << " " << p.y << " " << p.z << endl;
+		//}
+//	}
+
+
 	GameObject::LateUpdate(dt);
 }
 

@@ -159,6 +159,12 @@
     <Filter Include="2Client\1GameObject\5Monsters\0SphereMonster">
       <UniqueIdentifier>{dc5ff974-9b5b-4873-9719-8d5e9e347e3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\6Manager\4RaycastManager">
+      <UniqueIdentifier>{0ef24db2-b9ff-4abb-8275-34716da69a20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\6Manager\5EnemyManager">
+      <UniqueIdentifier>{c53f78b0-4238-4b3c-85b7-eb5fec134cca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -328,6 +334,12 @@
     <ClCompile Include="Client\SphereMonster.cpp">
       <Filter>2Client\1GameObject\5Monsters\0SphereMonster</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\RaycastManager.cpp">
+      <Filter>1Engine\6Manager\4RaycastManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\EnemyManager.cpp">
+      <Filter>1Engine\6Manager\5EnemyManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -440,6 +452,12 @@
     </ClInclude>
     <ClInclude Include="Client\SphereMonster.h">
       <Filter>2Client\1GameObject\5Monsters\0SphereMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\RaycastManager.h">
+      <Filter>1Engine\6Manager\4RaycastManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\EnemyManager.h">
+      <Filter>1Engine\6Manager\5EnemyManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

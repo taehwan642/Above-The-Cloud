@@ -351,6 +351,7 @@ void      WINAPI DXUTDestroyState(); // Optional method to destroy DXUT's memory
 #include <map>
 #include <string>
 #include <algorithm>
+#include <functional>
 using namespace std;
 
 #define NAMESPACE(name) namespace name {
@@ -358,6 +359,9 @@ using namespace std;
 #define USING(name) using namespace name;
 
 #define DEVICE DXUTGetD3D9Device()
+
+#define out 
+#define in
 
 const int windowWidth = 1280;
 const int windowHeight = 720;
@@ -418,5 +422,13 @@ struct VTXTEX
 };
 
 #define VTXTEX_FVF (D3DFVF_XYZ|D3DFVF_TEX1)
+
+enum class EnemyPatterns
+{
+    IDLE,
+    MOVE,
+    ATTACK,
+    DIE
+};
 
 #endif

@@ -404,11 +404,13 @@
     <ClCompile Include="Engine\Component.cpp" />
     <ClCompile Include="Engine\DynamicMesh.cpp" />
     <ClCompile Include="Engine\DynamicUI.cpp" />
+    <ClCompile Include="Engine\EnemyManager.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
     <ClCompile Include="Engine\GraphicsManager.cpp" />
     <ClCompile Include="Engine\Layer.cpp" />
     <ClCompile Include="Engine\MeshHierarchy.cpp" />
     <ClCompile Include="Engine\Observer.cpp" />
+    <ClCompile Include="Engine\RaycastManager.cpp" />
     <ClCompile Include="Engine\ResourceManager.cpp" />
     <ClCompile Include="Engine\Resources.cpp" />
     <ClCompile Include="Engine\Scene.cpp" />
@@ -439,11 +441,13 @@
     <ClInclude Include="Engine\Component.h" />
     <ClInclude Include="Engine\DynamicMesh.h" />
     <ClInclude Include="Engine\DynamicUI.h" />
+    <ClInclude Include="Engine\EnemyManager.h" />
     <ClInclude Include="Engine\GameObject.h" />
     <ClInclude Include="Engine\GraphicsManager.h" />
     <ClInclude Include="Engine\Layer.h" />
     <ClInclude Include="Engine\MeshHierarchy.h" />
     <ClInclude Include="Engine\Observer.h" />
+    <ClInclude Include="Engine\RaycastManager.h" />
     <ClInclude Include="Engine\ResourceManager.h" />
     <ClInclude Include="Engine\Resources.h" />
     <ClInclude Include="Engine\Scene.h" />

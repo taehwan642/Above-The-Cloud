@@ -9,6 +9,7 @@ DynamicMesh::DynamicMesh(void) :
 	hierarchy(nullptr),
 	anicontroller(nullptr)
 {
+	parent = nullptr;
 }
 
 DynamicMesh::DynamicMesh(D3DXMATRIX* _parent) :
@@ -53,40 +54,29 @@ void DynamicMesh::RenderMesh(LPD3DXEFFECT& _effect)
 {
 	for (auto& meshcontainer : meshcontainergroup)
 	{
-		if (meshcontainer->pSkinInfo != nullptr)
+		D3DXMESHCONTAINER_DERIVED* tempMeshcontainer = meshcontainer;
+		for (ULONG i = 0; i < tempMeshcontainer->numBones; ++i)
 		{
-			D3DXMESHCONTAINER_DERIVED* tempMeshcontainer = meshcontainer;
-			for (ULONG i = 0; i < tempMeshcontainer->numBones; ++i)
-			{
-				tempMeshcontainer->renderingMatrix[i] = tempMeshcontainer->frameOffsetMatrix[i] * (*tempMeshcontainer->frameCombinedMatrix[i]);
-			}
-
-			void* srcvtx = nullptr;
-			void* destvtx = nullptr;
-
-			tempMeshcontainer->originalMesh->LockVertexBuffer(0, &srcvtx);
-			tempMeshcontainer->MeshData.pMesh->LockVertexBuffer(0, &destvtx);
-
-			tempMeshcontainer->pSkinInfo->UpdateSkinnedMesh(tempMeshcontainer->renderingMatrix, NULL, srcvtx, destvtx);
-			for (UINT i = 0; i < tempMeshcontainer->NumMaterials; ++i)
-			{
-				_effect->SetTexture((D3DXHANDLE)"g_DiffuseTexture", tempMeshcontainer->textures[i]);
-				_effect->CommitChanges();
-				tempMeshcontainer->MeshData.pMesh->DrawSubset(i);
-			}
-
-			tempMeshcontainer->originalMesh->UnlockVertexBuffer();
-			tempMeshcontainer->MeshData.pMesh->UnlockVertexBuffer();
+			tempMeshcontainer->renderingMatrix[i] = tempMeshcontainer->frameOffsetMatrix[i] * (*tempMeshcontainer->frameCombinedMatrix[i]);
 		}
-		else
+
+		void* srcvtx = nullptr;
+		void* destvtx = nullptr;
+
+		tempMeshcontainer->originalMesh->LockVertexBuffer(0, &srcvtx);
+		tempMeshcontainer->MeshData.pMesh->LockVertexBuffer(0, &destvtx);
+
+		tempMeshcontainer->pSkinInfo->UpdateSkinnedMesh(tempMeshcontainer->renderingMatrix, NULL, srcvtx, destvtx);
+		for (UINT i = 0; i < tempMeshcontainer->NumMaterials; ++i)
 		{
-			for (int i = 0; i < meshcontainer->NumMaterials; ++i)
-			{
-				_effect->SetTexture((D3DXHANDLE)"g_DiffuseTexture", meshcontainer->textures[i]);
-				_effect->CommitChanges();
-				meshcontainer->MeshData.pMesh->DrawSubset(i);
-			}
+			_effect->SetTexture((D3DXHANDLE)"g_DiffuseTexture", tempMeshcontainer->textures[i]);
+			_effect->CommitChanges();
+			tempMeshcontainer->MeshData.pMesh->DrawSubset(i);
 		}
+
+		tempMeshcontainer->originalMesh->UnlockVertexBuffer();
+		tempMeshcontainer->MeshData.pMesh->UnlockVertexBuffer();
+
 	}
 }
 
@@ -94,41 +84,28 @@ void DynamicMesh::RenderMesh(void)
 {
 	for (auto& meshcontainer : meshcontainergroup)
 	{
-		if (meshcontainer->pSkinInfo != nullptr)
+		D3DXMESHCONTAINER_DERIVED* tempMeshcontainer = meshcontainer;
+		for (ULONG i = 0; i < tempMeshcontainer->numBones; ++i)
 		{
-			D3DXMESHCONTAINER_DERIVED* tempMeshcontainer = meshcontainer;
-			for (ULONG i = 0; i < tempMeshcontainer->numBones; ++i)
-			{
-				tempMeshcontainer->renderingMatrix[i] = tempMeshcontainer->frameOffsetMatrix[i] * (*tempMeshcontainer->frameCombinedMatrix[i]);
-			}
-
-			void* srcvtx = nullptr;
-			void* destvtx = nullptr;
-
-			tempMeshcontainer->originalMesh->LockVertexBuffer(0, &srcvtx);
-			tempMeshcontainer->MeshData.pMesh->LockVertexBuffer(0, &destvtx);
-
-			tempMeshcontainer->pSkinInfo->UpdateSkinnedMesh(tempMeshcontainer->renderingMatrix, NULL, srcvtx, destvtx);
-
-			for (UINT i = 0; i < tempMeshcontainer->NumMaterials; ++i)
-			{
-				DEVICE->SetTexture(0, tempMeshcontainer->textures[i]);
-				tempMeshcontainer->MeshData.pMesh->DrawSubset(i);
-			}
-
-			tempMeshcontainer->originalMesh->UnlockVertexBuffer();
-			tempMeshcontainer->MeshData.pMesh->UnlockVertexBuffer();
+			tempMeshcontainer->renderingMatrix[i] = tempMeshcontainer->frameOffsetMatrix[i] * (*tempMeshcontainer->frameCombinedMatrix[i]);
 		}
-		else
+
+		void* srcvtx = nullptr;
+		void* destvtx = nullptr;
+
+		tempMeshcontainer->originalMesh->LockVertexBuffer(0, &srcvtx);
+		tempMeshcontainer->MeshData.pMesh->LockVertexBuffer(0, &destvtx);
+
+		tempMeshcontainer->pSkinInfo->UpdateSkinnedMesh(tempMeshcontainer->renderingMatrix, NULL, srcvtx, destvtx);
+
+		for (UINT i = 0; i < tempMeshcontainer->NumMaterials; ++i)
 		{
-			for (int i = 0; i < meshcontainer->NumMaterials; ++i)
-			{
-				DEVICE->SetMaterial(&meshcontainer->pMaterials[i].MatD3D);
-				DEVICE->SetTexture(0, meshcontainer->textures[i]);
-				meshcontainer->MeshData.pMesh->DrawSubset(i);
-				return;
-			}
+			DEVICE->SetTexture(0, tempMeshcontainer->textures[i]);
+			tempMeshcontainer->MeshData.pMesh->DrawSubset(i);
 		}
+
+		tempMeshcontainer->originalMesh->UnlockVertexBuffer();
+		tempMeshcontainer->MeshData.pMesh->UnlockVertexBuffer();
 	}
 }
 
@@ -159,8 +136,8 @@ void DynamicMesh::DrawMeshContainerWithEffect(LPD3DXMESHCONTAINER _meshcontainer
 	D3DXFRAME_DERIVED* tempframe = static_cast<D3DXFRAME_DERIVED*>(_frame);
 
 	D3DXMATRIX result = tempframe->combinedTransformMatrix;
-	result *= *parent;
-	//DEVICE->SetTransform(D3DTS_WORLD, &result);
+	if (parent)
+		result *= *parent;
 	_effect->SetValue((D3DXHANDLE)"g_matWorld", &result, sizeof(D3DXMATRIX));
 
 	for (int i = 0; i < tempmeshcontainer->NumMaterials; ++i)

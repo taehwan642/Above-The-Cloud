@@ -26,6 +26,9 @@ public:
     explicit StaticMesh(const StaticMesh& cp);
     virtual ~StaticMesh(void);
 
+    LPD3DXMESH GetMesh(void) { return mesh; }
+
+
     HRESULT LoadMesh(wstring _filepath, wstring _filename);
 
     void Render(const FLOAT& dt) override {};

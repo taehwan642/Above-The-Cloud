@@ -22,7 +22,7 @@ void AimPoint::Update(const FLOAT& dt)
 {
 	Engine::StaticUI::Update(dt);
 	D3DXVECTOR3 playerLook = -(*reinterpret_cast<D3DXVECTOR3*>(&playerTransform->worldMatrix._31));
-	D3DXVECTOR3 pos = playerTransform->position + playerLook * 4000;
+	D3DXVECTOR3 pos = playerTransform->position + playerLook * 5000;
 
 	D3DXMATRIX			matView, matProj;
 	D3DVIEWPORT9		viewPort;
@@ -47,6 +47,11 @@ void AimPoint::Update(const FLOAT& dt)
 	// 뒤에 뷰포트 / 2 를 곱하는 이유는 중간에 위치한 좌표는 0, 0 이기에 그렇게 한다.
 
 	transform->position = screenPos;
+	//POINT p;
+	//p.x = transform->position.x;
+	//p.y = transform->position.y;
+	//ClientToScreen(DXUTGetHWND(), &p);
+	//::SetCursorPos(p.x, p.y);
 }
 
 void AimPoint::LateUpdate(const FLOAT& dt)
