@@ -4,7 +4,7 @@ NAMESPACE(Engine)
 class Transform;
 END
 class Camera final :
-    public Engine::Singleton<Camera>, public Engine::GameObject // Singleton으로 받아야할듯
+    public Engine::GameObject
 {
 private:
 protected:
@@ -18,6 +18,8 @@ public:
 
     explicit Camera(void);
     virtual ~Camera(void);
+
+    void InitCamera(void);
 
     void Update(const float& dt) override;
     void LateUpdate(const FLOAT& dt) override;

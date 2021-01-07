@@ -11,6 +11,14 @@ void Scene::AddGameObject(wstring _layertag, wstring _objecttag, GameObject* _ob
 		layergroup[_layertag]->AddGameObject(_objecttag, _object);
 }
 
+Layer* Scene::GetLayer(wstring _layertag)
+{
+	auto& iter = layergroup.find(_layertag);
+	if (iter != layergroup.end())
+		return layergroup[_layertag];
+	return nullptr;
+}
+
 void Scene::Update(const FLOAT& dt)
 {
 	for (auto& layer : layergroup)

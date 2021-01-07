@@ -10,6 +10,7 @@
 #include "AimPoint.h"
 #include "HealthPointGroup.h"
 #include "SphereMonster.h"
+#include "../Engine/EnemyManager.h"
 #include "MenuScene.h"
 
 
@@ -37,7 +38,8 @@ void MenuScene::Start(void)
 	Engine::Layer* l = new Engine::Layer();
 	layergroup.emplace(L"테스트", l);
 	test* t = new test();
-	//Camera* c = new Camera();
+	//Camera::GetInstance()->InitCamera();
+	Camera* c = new Camera();
 	SkySphere* s = new SkySphere();
 
 	AimPoint* ui = new AimPoint(L"AimPoint");
@@ -48,7 +50,7 @@ void MenuScene::Start(void)
 	//SphereMonster* sp = new SphereMonster();
 
 	Scene::AddGameObject(L"테스트", L"테스트", t);
-	//Scene::AddGameObject(L"테스트", L"테스트", c);
+	Scene::AddGameObject(L"테스트", L"테스트", c);
 	Scene::AddGameObject(L"테스트", L"UI", ui);
 	Scene::AddGameObject(L"테스트", L"UI", h);
 	Scene::AddGameObject(L"테스트", L"테스트", s);
@@ -58,19 +60,19 @@ void MenuScene::Start(void)
 
 void MenuScene::Update(const float& dt)
 {
-	Camera::GetInstance()->Update(dt);
+	//Camera::GetInstance()->Update(dt);
 	Scene::Update(dt);
 }
 
 void MenuScene::LateUpdate(const FLOAT& dt)
 {
-	Camera::GetInstance()->LateUpdate(dt);
+	//Camera::GetInstance()->LateUpdate(dt);
 	Scene::LateUpdate(dt);
 }
 
 void MenuScene::Render(const FLOAT& dt)
 {
-	Camera::GetInstance()->Render(dt);
+	//Camera::GetInstance()->Render(dt);
 	Scene::Render(dt);
 }
 
@@ -79,7 +81,8 @@ void MenuScene::Exit(void)
 	cout << "엑시트" << endl;
 	Engine::SubjectManager::GetInstance()->ClearObservers();
 	Engine::GraphicsManager::GetInstance()->DeleteSprite();
-	Camera::GetInstance()->Release();
+	Engine::EnemyManager::GetInstance()->ClearVector();
+	//Camera::GetInstance()->Base::Release();
 	Scene::Exit();
 }
 

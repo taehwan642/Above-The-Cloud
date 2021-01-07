@@ -1,4 +1,5 @@
 #include "DXUT.h"
+#include "Layer.h"
 #include "Scene.h"
 #include "SceneManager.h"
 USING(Engine)
@@ -16,6 +17,13 @@ void SceneManager::SetScene(wstring _name)
 		currentScene->Exit();
 	currentScene = scenegroup[_name];
 	currentScene->Start();
+}
+
+Layer* SceneManager::GetCurrentSceneLayer(wstring _layertag)
+{
+	if (currentScene != nullptr)
+		return currentScene->GetLayer(_layertag);
+	return nullptr;
 }
 
 void SceneManager::SceneUpdate(const float& dt)

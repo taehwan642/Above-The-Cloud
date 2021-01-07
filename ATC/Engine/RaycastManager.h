@@ -23,5 +23,6 @@ public:
         in const D3DXVECTOR3& _direction,
         in const D3DXVECTOR3& _position,
         in const D3DXMATRIX& _world);
+
 };
 END

@@ -162,6 +162,9 @@
     <Filter Include="1Engine\6Manager\4RaycastManager">
       <UniqueIdentifier>{0ef24db2-b9ff-4abb-8275-34716da69a20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\6Manager\06EffectManager">
+      <UniqueIdentifier>{b8171779-4bb8-41bc-9b08-02b6daccd1dc}</UniqueIdentifier>
+    </Filter>
     <Filter Include="1Engine\6Manager\5EnemyManager">
       <UniqueIdentifier>{c53f78b0-4238-4b3c-85b7-eb5fec134cca}</UniqueIdentifier>
     </Filter>
@@ -340,6 +343,9 @@
     <ClCompile Include="Engine\EnemyManager.cpp">
       <Filter>1Engine\6Manager\5EnemyManager</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\EffectManager.cpp">
+      <Filter>1Engine\6Manager\06EffectManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -458,6 +464,9 @@
     </ClInclude>
     <ClInclude Include="Engine\EnemyManager.h">
       <Filter>1Engine\6Manager\5EnemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\EffectManager.h">
+      <Filter>1Engine\6Manager\06EffectManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

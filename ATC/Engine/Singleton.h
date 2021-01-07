@@ -1,4 +1,5 @@
 #pragma once
+#include "Base.h"
 NAMESPACE(Engine)
 template <class T>
 class Singleton

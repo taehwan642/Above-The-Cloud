@@ -7,6 +7,15 @@
 
 Camera::Camera(void)
 {
+	InitCamera();
+}
+
+Camera::~Camera(void)
+{
+}
+
+void Camera::InitCamera(void)
+{
 	transform = new Engine::Transform();
 	targetTransform = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transform);
@@ -20,10 +29,6 @@ Camera::Camera(void)
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
 	targetTransform->SetParent(observer->GetTransform());
-}
-
-Camera::~Camera(void)
-{
 }
 
 bool targetplane = true;
@@ -97,10 +102,6 @@ void Camera::LateUpdate(const FLOAT& dt)
 	}
 	DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	D3DXVECTOR3 position = *reinterpret_cast<D3DXVECTOR3*>(&targetTransform->worldMatrix._41);
-	D3DXMATRIX w;
-	w = *D3DXMatrixScaling(&D3DXMATRIX(), 0.01f, 0.01f, 0.01f);
-	w *= *D3DXMatrixTranslation(&D3DXMATRIX(), transform->position.x, transform->position.y, transform->position.z);
 	GameObject::LateUpdate(dt);
 }
 

@@ -14,7 +14,6 @@ private:
 protected:
     D3DXVECTOR3 lookVector = { 0,0,-1 };
     D3DXVECTOR3 directonVector = { 0,0,0 };
-
 public:
     explicit test(void);
     virtual ~test(void);
@@ -25,7 +24,6 @@ public:
     D3DXVECTOR3 righttrailpos[2];
 
     Engine::Shader* testshader   = nullptr;
-    Engine::StaticMesh* testMesh = nullptr;
     Engine::DynamicMesh* testdynamic = nullptr;
     Engine::Transform* transform = nullptr;
     Engine::Trail* lefttrail = nullptr;

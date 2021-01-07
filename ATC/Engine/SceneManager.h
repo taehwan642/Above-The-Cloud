@@ -3,6 +3,7 @@
 NAMESPACE(Engine)
 
 class Scene;
+class Layer;
 class SceneManager final :
     public Singleton<SceneManager>
 {
@@ -14,6 +15,8 @@ public:
     void AddScene(wstring _name, Scene* _scene);
 
     void SetScene(wstring _name);
+
+    Layer* GetCurrentSceneLayer(wstring _layertag);
 
     void SceneUpdate(const float& dt);
     void SceneLateUpdate(const FLOAT& dt);

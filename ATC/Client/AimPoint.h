@@ -5,10 +5,11 @@ class PlayerObserver;
 class Transform;
 END
 class AimPoint final :
-    public Engine::StaticUI
+    public Engine::StaticUI // dynamic으로 교체 -> 
 {
 private:
     Engine::Transform* playerTransform;
+    bool lookback = false;
 protected:
 public:
     explicit AimPoint(wstring _texturetag);

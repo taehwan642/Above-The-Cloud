@@ -7,5 +7,7 @@ class EnemyManager final :
 public:
     vector<LPD3DXMESH> enemymesh;
     vector<D3DXMATRIX*> enemyTransform;
+
+    void ClearVector(void);
 };
 END

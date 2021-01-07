@@ -19,6 +19,7 @@ public:
 	void LostDevice(void);
 
 	void AddGameObject(wstring _layertag, wstring _objecttag, GameObject* _object);
+	Layer* GetLayer(wstring _layertag);
 
 	virtual void Start(void) PURE;
 	virtual void Update(const FLOAT& dt);
