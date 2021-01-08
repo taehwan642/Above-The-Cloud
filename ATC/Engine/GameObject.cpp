@@ -1,4 +1,5 @@
 #include "DXUT.h"
+#include "Layer.h"
 #include "Component.h"
 #include "GameObject.h"
 

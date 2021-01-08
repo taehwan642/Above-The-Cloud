@@ -18,6 +18,13 @@ UIBase::UIBase(wstring _texturetag)
 	componentgroup.emplace(L"transform", transform);
 }
 
+UIBase::UIBase(wstring _texturetag, Transform* _parent)
+{
+	texture = dynamic_cast<Texture*>(ResourceManager::GetInstance()->LoadResource(_texturetag));
+	transform = new Transform(_parent);
+	componentgroup.emplace(L"transform", transform);
+}
+
 UIBase::~UIBase(void)
 {
 
@@ -45,4 +52,5 @@ void UIBase::Render(const FLOAT& dt)
 
 void UIBase::Free(void)
 {
+	GameObject::Free();
 }

@@ -1,6 +1,7 @@
 #include "DXUT.h"
 #include "Layer.h"
 #include "Scene.h"
+#include "GameObject.h"
 #include "SceneManager.h"
 USING(Engine)
 
@@ -24,6 +25,12 @@ Layer* SceneManager::GetCurrentSceneLayer(wstring _layertag)
 	if (currentScene != nullptr)
 		return currentScene->GetLayer(_layertag);
 	return nullptr;
+}
+
+void SceneManager::AddGameObject(wstring _layername, wstring _objectname, GameObject* _gameObject)
+{
+	if(currentScene != nullptr)
+		currentScene->AddGameObject(_layername, _objectname, _gameObject);
 }
 
 void SceneManager::SceneUpdate(const float& dt)

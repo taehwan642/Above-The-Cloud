@@ -423,6 +423,7 @@
     <ClCompile Include="Engine\Subject.cpp" />
     <ClCompile Include="Engine\SubjectManager.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
+    <ClCompile Include="Engine\TextureEffect.cpp" />
     <ClCompile Include="Engine\Trail.cpp" />
     <ClCompile Include="Engine\Transform.cpp" />
     <ClCompile Include="Engine\UIBase.cpp" />
@@ -461,6 +462,7 @@
     <ClInclude Include="Engine\Subject.h" />
     <ClInclude Include="Engine\SubjectManager.h" />
     <ClInclude Include="Engine\Texture.h" />
+    <ClInclude Include="Engine\TextureEffect.h" />
     <ClInclude Include="Engine\Trail.h" />
     <ClInclude Include="Engine\Transform.h" />
     <None Include="DXUT\Optional\directx.ico" />

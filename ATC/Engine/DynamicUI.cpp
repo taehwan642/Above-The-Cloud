@@ -3,8 +3,7 @@
 #include "Texture.h"
 #include "DynamicUI.h"
 USING(Engine)
-DynamicUI::DynamicUI(wstring _texturetag) :
-	UIBase(_texturetag)
+void DynamicUI::CreateBuffer(void)
 {
 	vtxsize = sizeof(VTXTEX);
 	vtxcnt = 4;
@@ -12,7 +11,7 @@ DynamicUI::DynamicUI(wstring _texturetag) :
 	tricnt = 2;
 	idxsize = sizeof(INDEX16);
 	idxfmt = D3DFMT_INDEX16;
-	
+
 	DEVICE->CreateVertexBuffer(vtxsize * vtxcnt, 0, vtxFVF, D3DPOOL::D3DPOOL_MANAGED, &vb, 0);
 	DEVICE->CreateIndexBuffer(idxsize * tricnt, 0, idxfmt, D3DPOOL::D3DPOOL_MANAGED, &ib, 0);
 
@@ -48,6 +47,19 @@ DynamicUI::DynamicUI(wstring _texturetag) :
 
 	ib->Unlock();
 }
+DynamicUI::DynamicUI(wstring _texturetag, bool _billboardenable) :
+	UIBase(_texturetag),
+	isbillboard(_billboardenable)
+{
+	CreateBuffer();
+}
+
+DynamicUI::DynamicUI(wstring _texturetag, Transform* _parent, bool _billboardenable) :
+	UIBase(_texturetag, _parent),
+	isbillboard(_billboardenable)
+{
+	CreateBuffer();
+}
 
 DynamicUI::~DynamicUI(void)
 {
@@ -55,27 +67,33 @@ DynamicUI::~DynamicUI(void)
 
 void DynamicUI::Update(const FLOAT& dt)
 {
-	GameObject::Update(dt);
+	UIBase::Update(dt);
 }
 
 void DynamicUI::LateUpdate(const FLOAT& dt)
 {
-	GameObject::LateUpdate(dt);
+	UIBase::LateUpdate(dt);
 }
 
 void DynamicUI::Render(const FLOAT& dt)
 {
-	D3DXMATRIX matBill;
-	D3DXMATRIX matView;
-	DEVICE->GetTransform(D3DTS_VIEW, &matView);
-	D3DXMatrixIdentity(&matBill);
+	if (isbillboard)
+	{
+		D3DXMATRIX matBill;
+		D3DXMATRIX matView;
+		DEVICE->GetTransform(D3DTS_VIEW, &matView);
+		D3DXMatrixIdentity(&matBill);
 
-	memcpy(&matBill, &matView, sizeof(D3DXVECTOR4) * 4);
+		memcpy(&matBill, &matView, sizeof(D3DXVECTOR4) * 4);
 
-	D3DXMatrixInverse(&matBill, NULL, &matBill);
-	memcpy(&matBill._41, &transform->worldMatrix._41, sizeof(D3DXVECTOR3));
+		D3DXMatrixInverse(&matBill, NULL, &matBill);
+		memcpy(&matBill._41, &transform->worldMatrix._41, sizeof(D3DXVECTOR3));
 
-	DEVICE->SetTransform(D3DTS_WORLD, &matBill);
+		DEVICE->SetTransform(D3DTS_WORLD, &matBill);
+	}
+	else
+		DEVICE->SetTransform(D3DTS_WORLD, &transform->worldMatrix);
+	
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
 	DEVICE->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
@@ -88,11 +106,12 @@ void DynamicUI::Render(const FLOAT& dt)
 	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	GameObject::Render(dt);
+	UIBase::Render(dt);
 }
 
 void DynamicUI::Free(void)
 {
 	vb->Release();
 	ib->Release();
+	UIBase::Free();
 }

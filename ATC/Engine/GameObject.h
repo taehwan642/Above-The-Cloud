@@ -2,13 +2,17 @@
 #include "Base.h"
 
 NAMESPACE(Engine)
+class Layer;
 class Component;
 class GameObject :
 	public Base
 {
 private:
 protected:
+	friend class Layer;
+
 	map<wstring, Component*> componentgroup;
+	bool isActive = true;
 public:
 	explicit GameObject(void) {};
 	virtual ~GameObject(void) {};

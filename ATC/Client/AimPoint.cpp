@@ -47,11 +47,11 @@ void AimPoint::Update(const FLOAT& dt)
 	// 뒤에 뷰포트 / 2 를 곱하는 이유는 중간에 위치한 좌표는 0, 0 이기에 그렇게 한다.
 
 	transform->position = screenPos;
-	POINT p;
-	p.x = transform->position.x;
-	p.y = transform->position.y;
-	ClientToScreen(DXUTGetHWND(), &p);
-	::SetCursorPos(p.x, p.y);
+	//POINT p;
+	//p.x = transform->position.x;
+	//p.y = transform->position.y;
+	//ClientToScreen(DXUTGetHWND(), &p);
+	//::SetCursorPos(p.x, p.y);
 }
 
 void AimPoint::LateUpdate(const FLOAT& dt)

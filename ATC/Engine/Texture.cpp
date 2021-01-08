@@ -51,7 +51,7 @@ void Texture::RenderTexture(LPD3DXEFFECT& _effect, const UINT& _index)
 
 void Texture::RenderTexture(const UINT& _index)
 {
-	if (textures.size() < _index)
+	if (textures.size() <= _index)
 		return;
 
 	DEVICE->SetTexture(0, textures[_index]);

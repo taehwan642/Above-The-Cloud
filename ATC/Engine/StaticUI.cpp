@@ -14,6 +14,11 @@ StaticUI::StaticUI(wstring _texturetag) :
 {
 }
 
+StaticUI::StaticUI(wstring _texturetag, Transform* _parent) :
+	UIBase(_texturetag, _parent)
+{
+}
+
 StaticUI::~StaticUI(void)
 {
 }

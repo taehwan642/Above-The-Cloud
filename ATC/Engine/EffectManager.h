@@ -8,7 +8,7 @@ private:
 protected:
 public:
     void SpawnTextureEffect(const D3DXVECTOR3& _position,
-                            const D3DXMATRIX& _world,
+                            Transform* _transform,
                             const FLOAT& _alivetime,
                             const wstring& _texturetag,
                             const wstring& _layertag = L"Effect");

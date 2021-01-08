@@ -13,9 +13,12 @@ private:
     DWORD tricnt = 0;
     DWORD idxsize = 0;
     D3DFORMAT idxfmt;
+    bool isbillboard = true;
+    void CreateBuffer(void);
 protected:
 public:
-    explicit DynamicUI(wstring _texturetag);
+    explicit DynamicUI(wstring _texturetag, bool _billboardenable = true);
+    explicit DynamicUI(wstring _texturetag, Transform* _parent, bool _billboardenable = true);
     virtual ~DynamicUI(void);
 
     void Update(const FLOAT& dt) override;

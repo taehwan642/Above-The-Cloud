@@ -34,11 +34,17 @@ void MenuScene::Start(void)
 
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"cloud.X", L"Cloud")))
 		cout << "구름나와랑" << endl;
+	
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/muzzleflash.png", L"muzzleFlash", 1)))
+		cout << "머즐플래시 ON" << endl;
+	
+	
 	Engine::GraphicsManager::GetInstance()->CreateSprite();
 	Engine::Layer* l = new Engine::Layer();
+	Engine::Layer* effect = new Engine::Layer();
 	layergroup.emplace(L"테스트", l);
+	layergroup.emplace(L"Effect", effect);
 	test* t = new test();
-	//Camera::GetInstance()->InitCamera();
 	Camera* c = new Camera();
 	SkySphere* s = new SkySphere();
 
@@ -60,19 +66,16 @@ void MenuScene::Start(void)
 
 void MenuScene::Update(const float& dt)
 {
-	//Camera::GetInstance()->Update(dt);
 	Scene::Update(dt);
 }
 
 void MenuScene::LateUpdate(const FLOAT& dt)
 {
-	//Camera::GetInstance()->LateUpdate(dt);
 	Scene::LateUpdate(dt);
 }
 
 void MenuScene::Render(const FLOAT& dt)
 {
-	//Camera::GetInstance()->Render(dt);
 	Scene::Render(dt);
 }
 
@@ -82,7 +85,6 @@ void MenuScene::Exit(void)
 	Engine::SubjectManager::GetInstance()->ClearObservers();
 	Engine::GraphicsManager::GetInstance()->DeleteSprite();
 	Engine::EnemyManager::GetInstance()->ClearVector();
-	//Camera::GetInstance()->Base::Release();
 	Scene::Exit();
 }
 

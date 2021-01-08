@@ -13,7 +13,7 @@ testChild::testChild(void)
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
-	t = new Engine::Transform();
+	t = new Engine::Transform(/*observer->GetTransform()*/);
 	componentgroup.emplace(L"Transform", t);
 	t->scale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
 	t->position = { 5,5,50 };
@@ -29,23 +29,23 @@ testChild::~testChild(void)
 
 void testChild::Update(const float& dt)
 {
-	if (DXUTIsKeyDown('L'))
+	//if (DXUTIsKeyDown('L'))
 	//cout << t->position.x << " " << t->position.y << " " << t->position.z << endl;
 	if (DXUTIsKeyDown(VK_LEFT))
 	{
-		t->position.x -= 100 * dt;
+		t->position.x += 100 * dt;
 	}
 	if (DXUTIsKeyDown(VK_RIGHT))
 	{
-		t->position.x += 100 * dt;
+		t->position.x -= 100 * dt;
 	}
 	if (DXUTIsKeyDown(VK_UP))
 	{
-		t->position.z += 100 * dt;
+		t->position.z -= 100 * dt;
 	}
 	if (DXUTIsKeyDown(VK_DOWN))
 	{
-		t->position.z -= 100 * dt;
+		t->position.z += 100 * dt;
 	}
 	if (DXUTIsKeyDown('N'))
 	{

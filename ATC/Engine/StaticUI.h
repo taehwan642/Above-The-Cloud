@@ -9,6 +9,7 @@ protected:
 public:
     explicit StaticUI(void);
     explicit StaticUI(wstring _texturetag);
+    explicit StaticUI(wstring _texturetag, Transform* _parent);
     virtual ~StaticUI(void);
 
     void SetPosition(const D3DXVECTOR2& _position);
