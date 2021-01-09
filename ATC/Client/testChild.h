@@ -3,6 +3,7 @@
 NAMESPACE(Engine)
 class GameObject;
 class Transform;
+class StaticMesh;
 END
 
 class PlayerObserver;

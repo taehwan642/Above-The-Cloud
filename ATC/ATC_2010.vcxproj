@@ -401,6 +401,9 @@
     <ClCompile Include="Client\testChild.cpp" />
     <ClCompile Include="Engine\AnimationController.cpp" />
     <ClCompile Include="Engine\Base.cpp" />
+    <ClCompile Include="Engine\Collider.cpp" />
+    <ClCompile Include="Engine\CollisionManager.cpp" />
+    <ClCompile Include="Engine\CollisionSphere.cpp" />
     <ClCompile Include="Engine\Component.cpp" />
     <ClCompile Include="Engine\DynamicMesh.cpp" />
     <ClCompile Include="Engine\DynamicUI.cpp" />
@@ -440,6 +443,9 @@
     <ClInclude Include="Client\testChild.h" />
     <ClInclude Include="Engine\AnimationController.h" />
     <ClInclude Include="Engine\Base.h" />
+    <ClInclude Include="Engine\Collider.h" />
+    <ClInclude Include="Engine\CollisionManager.h" />
+    <ClInclude Include="Engine\CollisionSphere.h" />
     <ClInclude Include="Engine\Component.h" />
     <ClInclude Include="Engine\DynamicMesh.h" />
     <ClInclude Include="Engine\DynamicUI.h" />

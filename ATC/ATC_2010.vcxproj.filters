@@ -171,6 +171,15 @@
     <Filter Include="1Engine\9TextureEffect">
       <UniqueIdentifier>{4353569a-9624-4fb1-ab50-e689cd7fba06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\4Component\7Collider">
+      <UniqueIdentifier>{08011c9c-b8fd-4d86-b362-38411b746984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\6Manager\07CollisionManager">
+      <UniqueIdentifier>{bb45b7e9-cfe5-479f-9667-287cb5b0e934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4Component\7Collider\0CollisionSphere">
+      <UniqueIdentifier>{f13798a2-f961-47b6-82fb-5c2437552f2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -352,6 +361,15 @@
     <ClCompile Include="Engine\TextureEffect.cpp">
       <Filter>1Engine\9TextureEffect</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\CollisionSphere.cpp">
+      <Filter>1Engine\4Component\7Collider\0CollisionSphere</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Collider.cpp">
+      <Filter>1Engine\4Component\7Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CollisionManager.cpp">
+      <Filter>1Engine\6Manager\07CollisionManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -476,6 +494,15 @@
     </ClInclude>
     <ClInclude Include="Engine\TextureEffect.h">
       <Filter>1Engine\9TextureEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSphere.h">
+      <Filter>1Engine\4Component\7Collider\0CollisionSphere</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Collider.h">
+      <Filter>1Engine\4Component\7Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionManager.h">
+      <Filter>1Engine\6Manager\07CollisionManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

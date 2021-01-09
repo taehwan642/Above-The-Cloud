@@ -1,12 +1,12 @@
 #pragma once
 #include "../Engine/GameObject.h"
 NAMESPACE(Engine)
-class StaticMesh;
 class DynamicMesh;
 class Transform;
 class Shader;
 class Trail;
 class TextureEffect;
+class Collider;
 END
 class test final :
     public Engine::GameObject
@@ -30,6 +30,7 @@ public:
     Engine::Transform* transform = nullptr;
     Engine::Trail* lefttrail = nullptr;
     Engine::Trail* righttrail = nullptr;
+    Engine::Collider* collider = nullptr;
 
     void Update(const float& dt) override;
     void LateUpdate(const FLOAT& dt) override;

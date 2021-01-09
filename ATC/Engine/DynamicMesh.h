@@ -12,6 +12,9 @@ private:
     AnimationController* anicontroller;
     list<D3DXMESHCONTAINER_DERIVED*> meshcontainergroup;
     D3DXMATRIX* parent;
+
+    D3DXVECTOR3* vertexposition;
+    ULONG vertexcount;
 protected:
 public:
     explicit DynamicMesh(void);
@@ -39,6 +42,10 @@ public:
     void PlayAnimation(const FLOAT& _dt, const FLOAT& _movelimit = 0.1f);
     void UpdateFrameMatrices(D3DXFRAME_DERIVED* _frame, const D3DXMATRIX* _parentMatrix, const float& _movelimit = 0.1f);
     void SetUpFrameMatrixPointer(D3DXFRAME_DERIVED* _frame);
+    void ComputeVertexPosition(void);
+
+    LPD3DXVECTOR3 GetVertexposition(void) { return vertexposition; }
+    ULONG GetVertexcount(void) { return vertexcount; }
 
     Resources* Clone(void) override;
     void Free(void) override;

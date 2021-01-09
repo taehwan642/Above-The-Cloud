@@ -47,6 +47,7 @@ HRESULT DynamicMesh::LoadMesh(wstring _filepath, wstring _filename)
 	D3DXMATRIX tempMatrix;
 	UpdateFrameMatrices(static_cast<D3DXFRAME_DERIVED*>(rootFrame), D3DXMatrixIdentity(&tempMatrix));
 	SetUpFrameMatrixPointer(static_cast<D3DXFRAME_DERIVED*>(rootFrame));
+	ComputeVertexPosition();
 	return S_OK;
 }
 
@@ -263,6 +264,60 @@ void DynamicMesh::SetUpFrameMatrixPointer(D3DXFRAME_DERIVED* _frame)
 
 	if (_frame->pFrameFirstChild != nullptr)
 		SetUpFrameMatrixPointer(static_cast<D3DXFRAME_DERIVED*>(_frame->pFrameFirstChild));
+}
+
+void DynamicMesh::ComputeVertexPosition(void)
+{
+	void* vertex = nullptr;
+
+	vertexcount = 0;
+
+	for (auto& pMeshContainer : meshcontainergroup)
+		vertexcount += pMeshContainer->originalMesh->GetNumVertices();
+
+	vertexposition = new D3DXVECTOR3[vertexcount];
+
+	LPD3DXMESH mesh = nullptr;
+
+	ULONG currentIndex = 0;
+
+	for (auto& pMeshContainer : meshcontainergroup)
+	{
+		mesh = pMeshContainer->originalMesh;
+
+		mesh->LockVertexBuffer(0, (void**)&vertex);
+
+		// 정점의 특성을 담는 변수
+		// MAX_FVF_DECL_SIZE : 한 정점이 가지고 있을 수 있는 최대 FVF 개수
+		D3DVERTEXELEMENT9 declare[MAX_FVF_DECL_SIZE];
+		::ZeroMemory(declare, sizeof(D3DVERTEXELEMENT9) * MAX_FVF_DECL_SIZE);
+
+		// 정점의 특성을 가져온다.
+		mesh->GetDeclaration(declare);
+		ULONG FVF = mesh->GetFVF();
+		ULONG ULvertexcount = mesh->GetNumVertices();
+
+		UCHAR offset = 0;
+
+		// 위치에 해당하는 시맨틱 정보가 존재하는지 찾는다.
+		for (ULONG i = 0; i < MAX_FVF_DECL_SIZE; ++i)
+		{
+			// 시맨틱정보가 위치 정보일 경우
+			if (D3DDECLUSAGE_POSITION == declare[i].Usage)
+			{
+				offset = (UCHAR)declare[i].Offset;
+				break;
+			}
+		}
+
+		// 현재 메쉬의 정점 크기를 저장한다.
+		ULONG stride = D3DXGetFVFVertexSize(FVF);
+
+		// 포인터 연산을 통해 해당 메쉬의 정점 좌표를 저장한다.
+		for (ULONG i = 0; i < ULvertexcount; ++i)
+			vertexposition[currentIndex++] = *(reinterpret_cast<D3DXVECTOR3*>((static_cast<UCHAR*>(vertex) + (i * stride + offset))));
+		mesh->UnlockVertexBuffer();
+	}
 }
 
 Resources* DynamicMesh::Clone(void)

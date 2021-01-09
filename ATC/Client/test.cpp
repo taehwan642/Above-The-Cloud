@@ -10,6 +10,7 @@
 #include "../Engine/EnemyManager.h"
 #include "../Engine/EffectManager.h"
 #include "../Engine/TextureEffect.h"
+#include "../Engine/Collider.h"
 #include "test.h"
 
 // FREE 되어야하는 컴포넌트들은 componentgroup 속에 들어있어야함.
@@ -47,14 +48,12 @@ test::test(void)
 	righttrailpos[0] = { 0,0,0 };
 	righttrailpos[1] = { 0,0,0 };
 
-	// -190 (-20 ~ -10) -300
-	// -125
-	//  125
-	//  190
 	effectpos[0] = { -190 , -15, -300 };
 	effectpos[1] = { -125 , -15, -300 };
 	effectpos[2] = { 125 , -15, -300 };
 	effectpos[3] = { 190 , -15, -300 };
+
+	collider = new Engine::Collider(100);
 }
 
 test::~test(void)
@@ -99,7 +98,7 @@ void test::Update(const float& dt)
 		Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
 	}
 	//texturetemp->Update(dt);
-	//transform->position += directonVector * dt * 300;
+	transform->position += directonVector * dt * 300;
 }
 
 void test::LateUpdate(const FLOAT& dt)
@@ -150,6 +149,8 @@ void test::Render(const FLOAT& dt)
 	testdynamic->RenderNoSkinnedMesh(tempeffect);
 	tempeffect->EndPass();
 	tempeffect->End();
+
+	collider->RenderCollider(transform->worldMatrix);
 
 	//texturetemp->Render(dt);
 	GameObject::Render(dt);
