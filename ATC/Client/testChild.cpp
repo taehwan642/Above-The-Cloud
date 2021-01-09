@@ -5,6 +5,8 @@
 #include "../Engine/ResourceManager.h"
 #include "../Engine/StaticMesh.h"
 #include "../Engine/EnemyManager.h"
+#include "../Engine/Collider.h"
+#include "../Engine/CollisionManager.h"
 #include "testChild.h"
 
 testChild::testChild(void)
@@ -21,6 +23,9 @@ testChild::testChild(void)
 
 	Engine::EnemyManager::GetInstance()->enemymesh.push_back(testsphere->GetMesh());
 	Engine::EnemyManager::GetInstance()->enemyTransform.push_back(&t->worldMatrix);
+
+	collider = new Engine::Collider(2, &t->position, ObjectTag::MONSTER);
+	Engine::CollisionManager::GetInstance()->PushData(collider);
 }
 
 testChild::~testChild(void)
@@ -68,6 +73,7 @@ void testChild::Render(const FLOAT& dt)
 {
 	DEVICE->SetTransform(D3DTS_WORLD, &t->worldMatrix);
 	testsphere->RenderMesh();
+	collider->RenderCollider();
 	GameObject::Render(dt);
 }
 

@@ -20,6 +20,7 @@ public:
 	PlayerObserver* observer;
 
 	Engine::Transform* t;
+	Engine::Collider* collider;
 
 	void Update(const float& dt) override;
 	void LateUpdate(const FLOAT& dt) override;

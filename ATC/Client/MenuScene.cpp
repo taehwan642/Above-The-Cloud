@@ -11,6 +11,7 @@
 #include "HealthPointGroup.h"
 #include "SphereMonster.h"
 #include "../Engine/EnemyManager.h"
+#include "../Engine/CollisionManager.h"
 #include "MenuScene.h"
 
 
@@ -71,6 +72,7 @@ void MenuScene::Update(const float& dt)
 
 void MenuScene::LateUpdate(const FLOAT& dt)
 {
+	Engine::CollisionManager::GetInstance()->UpdateData();
 	Scene::LateUpdate(dt);
 }
 

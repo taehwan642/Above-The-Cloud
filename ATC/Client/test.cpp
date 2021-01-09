@@ -11,10 +11,10 @@
 #include "../Engine/EffectManager.h"
 #include "../Engine/TextureEffect.h"
 #include "../Engine/Collider.h"
+#include "../Engine/CollisionManager.h"
 #include "test.h"
 
 // FREE 되어야하는 컴포넌트들은 componentgroup 속에 들어있어야함.
-
 bool testfly = true;
 test::test(void)
 {
@@ -53,7 +53,8 @@ test::test(void)
 	effectpos[2] = { 125 , -15, -300 };
 	effectpos[3] = { 190 , -15, -300 };
 
-	collider = new Engine::Collider(100);
+	collider = new Engine::Collider(1, &transform->position, ObjectTag::PLAYER);
+	Engine::CollisionManager::GetInstance()->PushData(collider);
 }
 
 test::~test(void)
@@ -124,7 +125,7 @@ void test::LateUpdate(const FLOAT& dt)
 			for (int i = 0; i < 4; ++i)
 			{
 				Engine::EffectManager::GetInstance()->
-					SpawnTextureEffect(effectpos[i], transform, 15, L"muzzleFlash");
+					SpawnTextureEffect(effectpos[i], transform, 0.3f, L"muzzleFlash");
 			}
 		}
 
@@ -150,7 +151,7 @@ void test::Render(const FLOAT& dt)
 	tempeffect->EndPass();
 	tempeffect->End();
 
-	collider->RenderCollider(transform->worldMatrix);
+	collider->RenderCollider();
 
 	//texturetemp->Render(dt);
 	GameObject::Render(dt);
