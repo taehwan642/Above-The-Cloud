@@ -84,6 +84,7 @@ void MenuScene::Render(const FLOAT& dt)
 void MenuScene::Exit(void)
 {
 	cout << "¿¢½ÃÆ®" << endl;
+	Engine::CollisionManager::GetInstance()->ClearData();
 	Engine::SubjectManager::GetInstance()->ClearObservers();
 	Engine::GraphicsManager::GetInstance()->DeleteSprite();
 	Engine::EnemyManager::GetInstance()->ClearVector();

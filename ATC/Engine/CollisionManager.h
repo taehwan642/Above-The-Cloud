@@ -13,5 +13,7 @@ public:
     void CheckSphereCollision(Collider* _col1, Collider* _col2);
 
     void UpdateData(void);
+
+    void ClearData(void);
 };
 END

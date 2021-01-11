@@ -12,6 +12,7 @@ class test final :
     public Engine::GameObject
 {
 private:
+    FLOAT invincibletime = 0.3f;
 protected:
     D3DXVECTOR3 lookVector = { 0,0,-1 };
     D3DXVECTOR3 directonVector = { 0,0,0 };

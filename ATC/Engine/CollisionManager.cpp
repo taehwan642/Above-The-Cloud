@@ -21,7 +21,7 @@ void CollisionManager::CheckSphereCollision(Collider* _col1, Collider* _col2)
 	D3DXVec3Normalize(&direction, &direction);
 	if (length <= (radius1 + radius2))
 	{
-		if (_col1->GetTag() == _col2->GetTag())
+		if (_col1->GetTag() != _col2->GetTag())
 		{
 			_col1->ishit = true;
 			_col1->collisiontag = _col2->GetTag();
@@ -55,4 +55,9 @@ void CollisionManager::UpdateData(void)
 			CheckSphereCollision(*iter, *iter2);
 		}
 	}
+}
+
+void CollisionManager::ClearData(void)
+{
+	collisiondatas.clear();
 }

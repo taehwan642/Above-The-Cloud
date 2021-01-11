@@ -98,8 +98,24 @@ void test::Update(const float& dt)
 		--healthpoint;
 		Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
 	}
-	//texturetemp->Update(dt);
-	transform->position += directonVector * dt * 300;
+
+	if (invincibletime <= 0)
+	{
+		if (collider->ishit == true)
+		{
+			collider->ishit = false;
+			--healthpoint;
+			Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
+			invincibletime = 1.f;
+		}
+	}
+	else
+	{
+		invincibletime -= dt;
+		collider->ishit = false;
+	}
+	
+	transform->position += directonVector * dt * 1000;
 }
 
 void test::LateUpdate(const FLOAT& dt)
