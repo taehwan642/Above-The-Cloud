@@ -393,6 +393,7 @@
     <ClCompile Include="Client\HealthPoint.cpp" />
     <ClCompile Include="Client\HealthPointGroup.cpp" />
     <ClCompile Include="Client\MenuScene.cpp" />
+    <ClCompile Include="Client\Missile.cpp" />
     <ClCompile Include="Client\MonsterBase.cpp" />
     <ClCompile Include="Client\PlayerObserver.cpp" />
     <ClCompile Include="Client\SkySphere.cpp" />
@@ -435,6 +436,7 @@
     <ClInclude Include="Client\HealthPoint.h" />
     <ClInclude Include="Client\HealthPointGroup.h" />
     <ClInclude Include="Client\MenuScene.h" />
+    <ClInclude Include="Client\Missile.h" />
     <ClInclude Include="Client\MonsterBase.h" />
     <ClInclude Include="Client\PlayerObserver.h" />
     <ClInclude Include="Client\SkySphere.h" />

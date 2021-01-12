@@ -180,6 +180,9 @@
     <Filter Include="1Engine\4Component\7Collider\0CollisionSphere">
       <UniqueIdentifier>{f13798a2-f961-47b6-82fb-5c2437552f2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\1GameObject\6Missile">
+      <UniqueIdentifier>{85c75591-99ba-4cdf-a2bf-1a4fbed60c6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -370,6 +373,9 @@
     <ClCompile Include="Engine\CollisionManager.cpp">
       <Filter>1Engine\6Manager\07CollisionManager</Filter>
     </ClCompile>
+    <ClCompile Include="Client\Missile.cpp">
+      <Filter>2Client\1GameObject\6Missile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -503,6 +509,9 @@
     </ClInclude>
     <ClInclude Include="Engine\CollisionManager.h">
       <Filter>1Engine\6Manager\07CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\Missile.h">
+      <Filter>2Client\1GameObject\6Missile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

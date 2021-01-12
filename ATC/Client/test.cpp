@@ -55,6 +55,7 @@ test::test(void)
 
 	collider = new Engine::Collider(1, &transform->position, ObjectTag::PLAYER);
 	Engine::CollisionManager::GetInstance()->PushData(collider);
+	componentgroup.emplace(L"collider", collider);
 }
 
 test::~test(void)
@@ -145,17 +146,11 @@ void test::LateUpdate(const FLOAT& dt)
 			}
 		}
 
-
-
 	GameObject::LateUpdate(dt);
 }
 
 void test::Render(const FLOAT& dt)
 {
-	// 여기서 test 출려개홉고
-	// 그 다음에 addgameobject 해보고
-	// 그 다음에 key입력같은거로 따로 해보고
-	// 그 다음에 이제 출력해보기
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	testdynamic->PlayAnimation(dt * 3);
 	testshader->SetupTable();
@@ -169,13 +164,11 @@ void test::Render(const FLOAT& dt)
 
 	collider->RenderCollider();
 
-	//texturetemp->Render(dt);
 	GameObject::Render(dt);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
 void test::Free(void)
 {
-	//texturetemp->Free();
 	GameObject::Free();
 }
