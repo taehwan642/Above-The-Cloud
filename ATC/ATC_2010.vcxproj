@@ -409,7 +409,7 @@
     <ClCompile Include="Engine\DynamicMesh.cpp" />
     <ClCompile Include="Engine\DynamicUI.cpp" />
     <ClCompile Include="Engine\EffectManager.cpp" />
-    <ClCompile Include="Engine\EnemyManager.cpp" />
+    <ClCompile Include="Engine\ObjectManager.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
     <ClCompile Include="Engine\GraphicsManager.cpp" />
     <ClCompile Include="Engine\Layer.cpp" />
@@ -452,7 +452,7 @@
     <ClInclude Include="Engine\DynamicMesh.h" />
     <ClInclude Include="Engine\DynamicUI.h" />
     <ClInclude Include="Engine\EffectManager.h" />
-    <ClInclude Include="Engine\EnemyManager.h" />
+    <ClInclude Include="Engine\ObjectManager.h" />
     <ClInclude Include="Engine\GameObject.h" />
     <ClInclude Include="Engine\GraphicsManager.h" />
     <ClInclude Include="Engine\Layer.h" />

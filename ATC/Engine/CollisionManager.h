@@ -1,6 +1,7 @@
 #pragma once
 #include "Singleton.h"
 NAMESPACE(Engine)
+class Collider;
 class CollisionManager :
     public Singleton<CollisionManager>
 {

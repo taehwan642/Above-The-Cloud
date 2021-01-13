@@ -9,6 +9,13 @@ void Scene::AddGameObject(wstring _layertag, wstring _objecttag, GameObject* _ob
 	auto& iter = layergroup.find(_layertag);
 	if (iter != layergroup.end())
 		layergroup[_layertag]->AddGameObject(_objecttag, _object);
+	else
+	{
+		Layer* l = new Layer();
+		layergroup.emplace(_layertag, l);
+		l->AddGameObject(_objecttag, _object);
+		l = nullptr;
+	}
 }
 
 Layer* Scene::GetLayer(wstring _layertag)

@@ -11,10 +11,11 @@ Missile::Missile(void)
 {
 	transform = new Engine::Transform();
 	componentgroup.emplace(L"transform", transform);
-	mesh = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Missile"));
+	//mesh = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Missile"));
 	collider = new Engine::Collider(1, &transform->position, ObjectTag::PLAYER);
 	Engine::CollisionManager::GetInstance()->PushData(collider);
 	componentgroup.emplace(L"collider", collider);
+	D3DXCreateSphere(DEVICE, 5, 20, 20, &test, nullptr);
 }
 
 Missile::~Missile(void)
@@ -36,7 +37,8 @@ void Missile::LateUpdate(const FLOAT& dt)
 void Missile::Render(const FLOAT& dt)
 {
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	mesh->RenderMesh();
+	DEVICE->SetTransform(D3DTS_WORLD, &transform->worldMatrix);
+	test->DrawSubset(0);
 	collider->RenderCollider();
 	GameObject::Render(dt);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);

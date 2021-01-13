@@ -4,7 +4,7 @@
 #include "../Engine/Transform.h"
 #include "../Engine/ResourceManager.h"
 #include "../Engine/StaticMesh.h"
-#include "../Engine/EnemyManager.h"
+#include "../Engine/ObjectManager.h"
 #include "../Engine/Collider.h"
 #include "../Engine/CollisionManager.h"
 #include "testChild.h"

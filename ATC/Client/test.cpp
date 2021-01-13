@@ -7,7 +7,7 @@
 #include "../Engine/SubjectManager.h"
 #include "../Engine/Trail.h"
 #include "../Engine/RaycastManager.h"
-#include "../Engine/EnemyManager.h"
+#include "../Engine/ObjectManager.h"
 #include "../Engine/EffectManager.h"
 #include "../Engine/TextureEffect.h"
 #include "../Engine/Collider.h"

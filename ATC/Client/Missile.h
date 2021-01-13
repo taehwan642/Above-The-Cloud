@@ -14,6 +14,7 @@ private:
     Engine::StaticMesh* mesh;
     Engine::Collider* collider;
     Engine::Trail* trail;
+    LPD3DXMESH test;
 protected:
 public:
     explicit Missile(void);

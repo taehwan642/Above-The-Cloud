@@ -165,9 +165,6 @@
     <Filter Include="1Engine\6Manager\06EffectManager">
       <UniqueIdentifier>{b8171779-4bb8-41bc-9b08-02b6daccd1dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1Engine\6Manager\5EnemyManager">
-      <UniqueIdentifier>{c53f78b0-4238-4b3c-85b7-eb5fec134cca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1Engine\9TextureEffect">
       <UniqueIdentifier>{4353569a-9624-4fb1-ab50-e689cd7fba06}</UniqueIdentifier>
     </Filter>
@@ -182,6 +179,9 @@
     </Filter>
     <Filter Include="2Client\1GameObject\6Missile">
       <UniqueIdentifier>{85c75591-99ba-4cdf-a2bf-1a4fbed60c6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\6Manager\5ObjectManager">
+      <UniqueIdentifier>{c53f78b0-4238-4b3c-85b7-eb5fec134cca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -355,9 +355,6 @@
     <ClCompile Include="Engine\RaycastManager.cpp">
       <Filter>1Engine\6Manager\4RaycastManager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\EnemyManager.cpp">
-      <Filter>1Engine\6Manager\5EnemyManager</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\EffectManager.cpp">
       <Filter>1Engine\6Manager\06EffectManager</Filter>
     </ClCompile>
@@ -375,6 +372,9 @@
     </ClCompile>
     <ClCompile Include="Client\Missile.cpp">
       <Filter>2Client\1GameObject\6Missile</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ObjectManager.cpp">
+      <Filter>1Engine\6Manager\5ObjectManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -492,9 +492,6 @@
     <ClInclude Include="Engine\RaycastManager.h">
       <Filter>1Engine\6Manager\4RaycastManager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\EnemyManager.h">
-      <Filter>1Engine\6Manager\5EnemyManager</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\EffectManager.h">
       <Filter>1Engine\6Manager\06EffectManager</Filter>
     </ClInclude>
@@ -512,6 +509,9 @@
     </ClInclude>
     <ClInclude Include="Client\Missile.h">
       <Filter>2Client\1GameObject\6Missile</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ObjectManager.h">
+      <Filter>1Engine\6Manager\5ObjectManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

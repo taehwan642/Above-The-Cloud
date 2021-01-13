@@ -10,7 +10,7 @@
 #include "AimPoint.h"
 #include "HealthPointGroup.h"
 #include "SphereMonster.h"
-#include "../Engine/EnemyManager.h"
+#include "../Engine/ObjectManager.h"
 #include "../Engine/CollisionManager.h"
 #include "MenuScene.h"
 
@@ -45,18 +45,19 @@ void MenuScene::Start(void)
 	Engine::Layer* effect = new Engine::Layer();
 	layergroup.emplace(L"테스트", l);
 	layergroup.emplace(L"Effect", effect);
-	test* t = new test();
-	Camera* c = new Camera();
+	//test* t = new test();
 	SkySphere* s = new SkySphere();
 
-	AimPoint* ui = new AimPoint(L"AimPoint");
 	HealthPointGroup* h = new HealthPointGroup();
 	
 	testChild* t1 = new testChild();
 
 	//SphereMonster* sp = new SphereMonster();
 
-	Scene::AddGameObject(L"테스트", L"테스트", t);
+	//Scene::AddGameObject(L"테스트", L"테스트", t);
+	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<test>(L"테스트", L"테스트");
+	Camera* c = new Camera();
+	AimPoint* ui = new AimPoint(L"AimPoint");
 	Scene::AddGameObject(L"테스트", L"테스트", c);
 	Scene::AddGameObject(L"테스트", L"UI", ui);
 	Scene::AddGameObject(L"테스트", L"UI", h);
