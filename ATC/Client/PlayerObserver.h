@@ -3,6 +3,7 @@
 NAMESPACE(Engine)
 class Observer;
 class Transform;
+class GameObject;
 END
 class PlayerObserver :
     public Engine::Observer
@@ -10,6 +11,7 @@ class PlayerObserver :
 private:
     Engine::Transform* playerTransform = nullptr;
     INT playerHealthpoint = 0;
+    Engine::GameObject* missileLock = nullptr;
 protected:
 public:
     explicit PlayerObserver(void) {};

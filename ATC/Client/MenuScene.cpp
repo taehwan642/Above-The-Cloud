@@ -69,11 +69,11 @@ void MenuScene::Start(void)
 void MenuScene::Update(const float& dt)
 {
 	Scene::Update(dt);
+	Engine::CollisionManager::GetInstance()->UpdateData();
 }
 
 void MenuScene::LateUpdate(const FLOAT& dt)
 {
-	Engine::CollisionManager::GetInstance()->UpdateData();
 	Scene::LateUpdate(dt);
 }
 

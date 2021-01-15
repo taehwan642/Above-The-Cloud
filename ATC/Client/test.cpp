@@ -12,6 +12,8 @@
 #include "../Engine/TextureEffect.h"
 #include "../Engine/Collider.h"
 #include "../Engine/CollisionManager.h"
+#include "../Engine/ObjectManager.h"
+#include "Missile.h"
 #include "test.h"
 
 // FREE 되어야하는 컴포넌트들은 componentgroup 속에 들어있어야함.
@@ -145,6 +147,9 @@ void test::LateUpdate(const FLOAT& dt)
 					SpawnTextureEffect(effectpos[i], transform, 0.3f, L"muzzleFlash");
 			}
 		}
+
+	if (DXUTWasKeyPressed(VK_SPACE))
+		Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Missile>(L"테스트", L"테스트");
 
 	GameObject::LateUpdate(dt);
 }

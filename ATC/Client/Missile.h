@@ -6,6 +6,7 @@ class Collider;
 class Transform;
 class StaticMesh;
 END
+class PlayerObserver;
 class Missile :
     public Engine::GameObject
 {
@@ -14,6 +15,9 @@ private:
     Engine::StaticMesh* mesh;
     Engine::Collider* collider;
     Engine::Trail* trail;
+
+    PlayerObserver* ob = nullptr;
+
     LPD3DXMESH test;
 protected:
 public:

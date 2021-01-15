@@ -20,9 +20,18 @@ void Layer::Update(const FLOAT& dt)
 {
 	for (auto& objectlist : gameobjectgroup)
 	{
-		for (auto& object : objectlist.second)
+		auto& iter = objectlist.second.begin();
+		auto& iter_end = objectlist.second.end();
+		for (; iter != iter_end;)
 		{
-			object->Update(dt);
+			(*iter)->Update(dt);
+			if ((*iter)->isActive == false)
+			{
+				Safe_Release(*iter);
+				iter = objectlist.second.erase(iter);
+			}
+			else
+				++iter;
 		}
 	}
 }
@@ -31,18 +40,9 @@ void Layer::LateUpdate(const FLOAT& dt)
 {
 	for (auto& objectlist : gameobjectgroup)
 	{
-		auto& iter = objectlist.second.begin();
-		auto& iter_end = objectlist.second.end();
-		for (; iter != iter_end;)
+		for (auto& object : objectlist.second)
 		{
-			(*iter)->LateUpdate(dt);
-			if ((*iter)->isActive == false)
-			{
-				Safe_Release(*iter);
-				iter = objectlist.second.erase(iter);
-			}
-			else
-				++iter;
+			object->LateUpdate(dt);
 		}
 	}
 }
