@@ -58,3 +58,5 @@
  + 2021 1 12 기본 프레임워크 제작 - 14 (ObjectManager 구현 완료, 미사일 제작 & 다이나믹 메시 오류 확인 필요)
  
  + 2021 1 14 플레이어 구현 - 8 (미사일 제작중)
+ 
+ + 2021 1 23 기본 프레임워크 제작 - 15 (CollisionManager 변경 중, Raycast를 CollisionManager 속에 붙이기, DynamicUI Release되기 직전에 텍스쳐 Alpha 오류 확인 필요)
