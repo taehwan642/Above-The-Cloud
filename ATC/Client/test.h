@@ -33,6 +33,8 @@ public:
     Engine::Trail* righttrail = nullptr;
     Engine::Collider* collider = nullptr;
 
+    void CollisionEvent(const wstring& _objectTag, GameObject* _gameObject);
+
     void Update(const float& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;

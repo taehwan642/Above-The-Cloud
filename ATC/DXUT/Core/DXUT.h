@@ -432,17 +432,19 @@ enum class EnemyPatterns
     DIE
 };
 
-enum class ObjectTag
+enum ObjectTag
 {
     PLAYER, // 플레이어쪽의 태그 (플레이어 & 플레이어 총알 또는 미사일)
-    MONSTER // 적쪽의 태그 (적 & 적 총알 또는 미사일)
+    MISSILE,
+    MONSTER, // 적쪽의 태그 (적 & 적 총알 또는 미사일)
+    OBJEND
 };
 
-struct CollisionData
+struct ColliderData
 {
-    ObjectTag tag;
+    wstring tag;
     FLOAT radius;
-    D3DXVECTOR3 center;
+    D3DXVECTOR3* center;
     BOOL ishit;
 };
 #endif

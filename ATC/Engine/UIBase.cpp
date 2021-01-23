@@ -21,13 +21,13 @@ UIBase::UIBase(wstring _texturetag)
 UIBase::UIBase(wstring _texturetag, Transform* _parent)
 {
 	texture = dynamic_cast<Texture*>(ResourceManager::GetInstance()->LoadResource(_texturetag));
+	componentgroup.emplace(L"texture", texture);
 	transform = new Transform(_parent);
 	componentgroup.emplace(L"transform", transform);
 }
 
 UIBase::~UIBase(void)
 {
-
 }
 
 void UIBase::SetUITexture(const UINT& _index)
@@ -47,7 +47,7 @@ void UIBase::LateUpdate(const FLOAT& dt)
 
 void UIBase::Render(const FLOAT& dt)
 {
-	
+	GameObject::Render(dt);
 }
 
 void UIBase::Free(void)

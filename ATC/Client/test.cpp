@@ -56,12 +56,21 @@ test::test(void)
 	effectpos[3] = { 190 , -15, -300 };
 
 	collider = new Engine::Collider(1, &transform->position, ObjectTag::PLAYER);
-	Engine::CollisionManager::GetInstance()->PushData(collider);
+	Engine::CollisionManager::GetInstance()->PushData(PLAYER, this);
 	componentgroup.emplace(L"collider", collider);
+	colliderdata.center = &transform->position;
+	colliderdata.radius = 1;
+	colliderdata.tag = L"player";
+	colliderdata.ishit = false;
 }
 
 test::~test(void)
 {
+}
+
+void test::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
+{
+	cout << "??!?!?!" << endl;
 }
 
 void test::Update(const float& dt)
@@ -123,6 +132,12 @@ void test::Update(const float& dt)
 
 void test::LateUpdate(const FLOAT& dt)
 {
+	if (DXUTWasKeyPressed(VK_SPACE))
+	{
+		for(int i = 0; i < 4; ++i)
+		Engine::EffectManager::GetInstance()->
+			SpawnTextureEffect(effectpos[i], transform, 0.3f, L"muzzleFlash");
+	}
 	float a;
 	D3DXVECTOR3 p;
 	D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
@@ -143,12 +158,11 @@ void test::LateUpdate(const FLOAT& dt)
 
 			for (int i = 0; i < 4; ++i)
 			{
-				Engine::EffectManager::GetInstance()->
-					SpawnTextureEffect(effectpos[i], transform, 0.3f, L"muzzleFlash");
+				
 			}
 		}
 
-	if (DXUTWasKeyPressed(VK_SPACE))
+	if (DXUTWasKeyPressed(VK_LSHIFT))
 		Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Missile>(L"테스트", L"테스트");
 
 	GameObject::LateUpdate(dt);

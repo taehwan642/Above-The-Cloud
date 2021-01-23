@@ -74,6 +74,7 @@ void MenuScene::Update(const float& dt)
 
 void MenuScene::LateUpdate(const FLOAT& dt)
 {
+	Engine::CollisionManager::GetInstance()->CheckCollision(PLAYER, MONSTER);
 	Scene::LateUpdate(dt);
 }
 

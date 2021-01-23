@@ -25,7 +25,12 @@ testChild::testChild(void)
 	Engine::EnemyManager::GetInstance()->enemyTransform.push_back(&t->worldMatrix);
 
 	collider = new Engine::Collider(2, &t->position, ObjectTag::MONSTER);
-	Engine::CollisionManager::GetInstance()->PushData(collider);
+	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
+
+	colliderdata.center = &t->position;
+	colliderdata.radius = 1;
+	colliderdata.tag = L"player";
+	colliderdata.ishit = false;
 }
 
 testChild::~testChild(void)

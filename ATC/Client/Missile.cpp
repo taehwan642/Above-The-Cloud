@@ -15,7 +15,7 @@ Missile::Missile(void)
 	componentgroup.emplace(L"transform", transform);
 	//mesh = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Missile"));
 	collider = new Engine::Collider(1, &transform->position, ObjectTag::PLAYER);
-	Engine::CollisionManager::GetInstance()->PushData(collider);
+	Engine::CollisionManager::GetInstance()->PushData(MISSILE, this);
 	componentgroup.emplace(L"collider", collider);
 	D3DXCreateSphere(DEVICE, 5, 20, 20, &test, nullptr);
 
