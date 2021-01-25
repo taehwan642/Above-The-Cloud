@@ -162,7 +162,7 @@ void test::LateUpdate(const FLOAT& dt)
 			}
 		}
 
-	if (DXUTWasKeyPressed(VK_LSHIFT))
+	if (DXUTWasKeyPressed('E'))
 		Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Missile>(L"테스트", L"테스트");
 
 	GameObject::LateUpdate(dt);

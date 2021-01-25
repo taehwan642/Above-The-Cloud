@@ -29,14 +29,15 @@ void TextureEffect::Update(const FLOAT& dt)
 		alivetime = 0;
 		++currentTextureIndex;
 	}
+
+	size_t texturesize = texture->GetTexturesCount();
+	if (texturesize <= currentTextureIndex)
+		isActive = false;
 	DynamicUI::Update(dt);
 }
 
 void TextureEffect::LateUpdate(const FLOAT& dt)
 {
-	size_t texturesize = texture->GetTexturesCount();
-	if (texturesize <= currentTextureIndex)
-		isActive = false;
 	DynamicUI::LateUpdate(dt);
 }
 

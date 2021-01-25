@@ -7,7 +7,7 @@
 SkySphere::SkySphere(void)
 {
 	transform = new Engine::Transform();
-	transform->scale = { 0.7,0.7,0.7 };
+	transform->scale = { 1.7,1.7,1.7 };
 	componentgroup.emplace(L"Transform", transform);
 	skysphere = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"SkySphere"));
 	

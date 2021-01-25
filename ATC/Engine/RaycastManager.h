@@ -14,8 +14,8 @@ public:
     POINT GetMousePoint(void);
     BOOL PickMeshWithMouse(out float& _distanceOut,
                   out D3DXVECTOR3& _targetposition,
-                  in const LPD3DXMESH& _mesh, 
-                  in const D3DXMATRIX& _world);
+                  in const LPD3DXMESH& _mesh,      
+                  in const D3DXMATRIX& _world);    
 
     BOOL PickMeshWithDirection(out float& _distanceOut,
         out D3DXVECTOR3& _targetposition,
