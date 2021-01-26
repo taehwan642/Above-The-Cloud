@@ -27,10 +27,17 @@ Missile::Missile(void)
 	
 	memcpy(&transform->worldMatrix._11, &ob->GetTransform()->worldMatrix._11, sizeof(D3DXVECTOR3));
 	memcpy(&transform->worldMatrix._21, &ob->GetTransform()->worldMatrix._21, sizeof(D3DXVECTOR3));
-	memcpy(&transform->worldMatrix._31, &ob->GetTransform()->worldMatrix._31, sizeof(D3DXVECTOR3));
+	
+	D3DXVECTOR3 vec = *reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._31);
+	vec *= -1.f;
 
-	transform->quaternion = ob->GetTransform()->quaternion;
-	transform->curQuaternion = ob->GetTransform()->curQuaternion;
+	memcpy(&transform->worldMatrix._31, &vec, sizeof(D3DXVECTOR3));
+
+	// 1. forward로 간다
+	// 2. 시간이 되면 유도 시작
+
+	//transform->quaternion = -ob->GetTransform()->quaternion;
+	//transform->curQuaternion = -ob->GetTransform()->curQuaternion;
 }
 
 Missile::~Missile(void)
