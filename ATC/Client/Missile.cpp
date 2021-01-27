@@ -13,11 +13,19 @@ Missile::Missile(void)
 {
 	transform = new Engine::Transform();
 	componentgroup.emplace(L"transform", transform);
-	//mesh = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Missile"));
+	mesh = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Missile"));
+	
 	collider = new Engine::Collider(1, &transform->position, ObjectTag::PLAYER);
+	colliderdata.center = &transform->position;
+	colliderdata.ishit = false;
+	colliderdata.radius = 1;
+	colliderdata.tag = L"Missile";
+
+
 	Engine::CollisionManager::GetInstance()->PushData(MISSILE, this);
 	componentgroup.emplace(L"collider", collider);
-	D3DXCreateSphere(DEVICE, 5, 20, 20, &test, nullptr);
+
+	transform->scale = { 0.02f, 0.02f, 0.02f };
 
 	ob = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(ob);
@@ -25,19 +33,26 @@ Missile::Missile(void)
 
 	transform->position = ob->GetTransform()->position;
 	
-	memcpy(&transform->worldMatrix._11, &ob->GetTransform()->worldMatrix._11, sizeof(D3DXVECTOR3));
-	memcpy(&transform->worldMatrix._21, &ob->GetTransform()->worldMatrix._21, sizeof(D3DXVECTOR3));
 	
-	D3DXVECTOR3 vec = *reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._31);
+	D3DXVECTOR3 vec;
+	vec = *reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._11);
 	vec *= -1.f;
-
+	memcpy(&transform->worldMatrix._11, &vec, sizeof(D3DXVECTOR3));
+	vec = *reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._21);
+	vec *= -1.f;
+	memcpy(&transform->worldMatrix._21, &vec, sizeof(D3DXVECTOR3));
+	vec = *reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._31);
+	vec *= -1.f;
 	memcpy(&transform->worldMatrix._31, &vec, sizeof(D3DXVECTOR3));
 
-	// 1. forward로 간다
-	// 2. 시간이 되면 유도 시작
+	// 1. Player의 forward로 간다
+	//transform->quaternion = ob->GetTransform()->quaternion;
+	//transform->curQuaternion = ob->GetTransform()->curQuaternion;
 
-	//transform->quaternion = -ob->GetTransform()->quaternion;
-	//transform->curQuaternion = -ob->GetTransform()->curQuaternion;
+	transform->Rotate(Engine::Transform::UP, D3DXToRadian(180));
+	// 근데 씨바 ㄹ왜 반대로 갈까?
+	// 반대로 가는 이유 1. player (ob)의 dir은 원래 반대여야만 한다.
+	// 2. 시간이 되면 유도 시작
 }
 
 Missile::~Missile(void)
@@ -47,35 +62,45 @@ Missile::~Missile(void)
 
 void Missile::Update(const FLOAT& dt)
 {
-	ob->GetTransform();
+	if (homingtime <= 0)
+	{
+		ob->GetTransform();
+		// 나와 플레이어의 방향을 구한다.
+		// 내 forward와 내적한다.
+		D3DXVECTOR3 look = D3DXVECTOR3(5, 5, 50) - transform->position;
+		D3DXVec3Normalize(&look, &look);
+		//look *= -1.f;
 
-	// 나와 플레이어의 방향을 구한다.
-	// 내 forward와 내적한다.
-	D3DXVECTOR3 look = D3DXVECTOR3(5, 5, 50) - transform->position;
-	D3DXVec3Normalize(&look, &look);
-	//look *= -1.f;
+		//  up과 look외적 => right
+		D3DXVECTOR3 right;
+		D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
+		D3DXVec3Normalize(&right, &right);
 
-	//  up과 look외적 => right
-	D3DXVECTOR3 right;
-	D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
-	D3DXVec3Normalize(&right, &right);
+		//right *= -1.f;
 
-	//right *= -1.f;
+		// look과 right 외적 => up
+		D3DXVECTOR3 up;
+		D3DXVec3Cross(&up, &look, &right);
+		D3DXVec3Normalize(&up, &up);
 
-	// look과 right 외적 => up
-	D3DXVECTOR3 up;
-	D3DXVec3Cross(&up, &look, &right);
-	D3DXVec3Normalize(&up, &up);
-
-	D3DXMATRIX matRot;
-	D3DXMatrixIdentity(&matRot);
-	memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
-	memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
-	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
-	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
-
-	D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
-	transform->position += dir  * 20 * dt;
+		D3DXMATRIX matRot;
+		D3DXMatrixIdentity(&matRot);
+		memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
+		memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
+		memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
+		D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
+		D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+		D3DXVec3Normalize(&dir, &dir);
+		transform->position += dir * 40 * dt;
+	}
+	else
+	{
+		homingtime -= dt;
+		D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+		D3DXVec3Normalize(&dir, &dir);
+		transform->position += dir * 20 * dt;
+	}
+	
 	GameObject::Update(dt);
 }
 
@@ -106,8 +131,8 @@ void Missile::Render(const FLOAT& dt)
 {
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	DEVICE->SetTransform(D3DTS_WORLD, &transform->worldMatrix);
-	test->DrawSubset(0);
-	collider->RenderCollider();
+	mesh->RenderMesh();
+	//collider->RenderCollider();
 	GameObject::Render(dt);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }

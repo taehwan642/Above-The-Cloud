@@ -445,6 +445,6 @@ struct ColliderData
     wstring tag;
     FLOAT radius;
     D3DXVECTOR3* center;
-    BOOL ishit;
+    bool ishit;
 };
 #endif

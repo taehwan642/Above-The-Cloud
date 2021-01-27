@@ -11,14 +11,14 @@ class Missile :
     public Engine::GameObject
 {
 private:
+    float homingtime = 1.5f;
+
     Engine::Transform* transform;
     Engine::StaticMesh* mesh;
     Engine::Collider* collider;
     Engine::Trail* trail;
 
     PlayerObserver* ob = nullptr;
-
-    LPD3DXMESH test;
 protected:
 public:
     explicit Missile(void);

@@ -36,6 +36,9 @@ void MenuScene::Start(void)
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"cloud.X", L"Cloud")))
 		cout << "구름나와랑" << endl;
 	
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"missilepivottest.X", L"Missile")))
+		cout << "missileON" << endl;
+
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/muzzleflash.png", L"muzzleFlash", 1)))
 		cout << "머즐플래시 ON" << endl;
 	
@@ -56,6 +59,7 @@ void MenuScene::Start(void)
 
 	//Scene::AddGameObject(L"테스트", L"테스트", t);
 	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<test>(L"테스트", L"테스트");
+	
 	Camera* c = new Camera();
 	AimPoint* ui = new AimPoint(L"AimPoint");
 	Scene::AddGameObject(L"테스트", L"테스트", c);
@@ -89,7 +93,6 @@ void MenuScene::Exit(void)
 	Engine::CollisionManager::GetInstance()->ClearData();
 	Engine::SubjectManager::GetInstance()->ClearObservers();
 	Engine::GraphicsManager::GetInstance()->DeleteSprite();
-	Engine::EnemyManager::GetInstance()->ClearVector();
 	Scene::Exit();
 }
 

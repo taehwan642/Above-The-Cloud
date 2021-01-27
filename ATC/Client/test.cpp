@@ -126,41 +126,36 @@ void test::Update(const float& dt)
 		invincibletime -= dt;
 		collider->ishit = false;
 	}
-	
+
 	transform->position += directonVector * dt * 1000;
 }
 
 void test::LateUpdate(const FLOAT& dt)
 {
-	if (DXUTWasKeyPressed(VK_SPACE))
-	{
-		for(int i = 0; i < 4; ++i)
-		Engine::EffectManager::GetInstance()->
-			SpawnTextureEffect(effectpos[i], transform, 0.3f, L"muzzleFlash");
-	}
 	float a;
 	D3DXVECTOR3 p;
 	D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 	D3DXVECTOR3 pos = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._41);
-	D3DXMATRIX m = *Engine::EnemyManager::GetInstance()->enemyTransform[0];
+	//D3DXMATRIX m = *Engine::EnemyManager::GetInstance()->enemyTransform[0];
 
 	float angle = 0;
-	D3DXVECTOR3 enpos = *reinterpret_cast<D3DXVECTOR3*>(&m._41);
-	D3DXVECTOR3 direc = pos - enpos;
-	D3DXVec3Normalize(&direc, &direc);
-	D3DXVec3Normalize(&dir, &dir);
-	angle = D3DXVec3Dot(&dir, &direc);
-	if (angle < 0.91f)
-		if (Engine::RaycastManager::GetInstance()->PickMeshWithMouse(a, p, Engine::EnemyManager::GetInstance()->enemymesh[0],
-			*Engine::EnemyManager::GetInstance()->enemyTransform[0]))
-		{
-			cout << "D : " << a << " P : " << p.x << " " << p.y << " " << p.z << endl;
+	//D3DXVECTOR3 enpos = *reinterpret_cast<D3DXVECTOR3*>(&m._41);
+	//D3DXVECTOR3 direc = pos - enpos;
+	//D3DXVec3Normalize(&direc, &direc);
+	//D3DXVec3Normalize(&dir, &dir);
+	//angle = D3DXVec3Dot(&dir, &direc);
 
-			for (int i = 0; i < 4; ++i)
+	if (DXUTIsKeyDown(VK_SPACE))
+	{
+		for (int i = 0; i < 4; ++i)
+			Engine::EffectManager::GetInstance()->
+			SpawnTextureEffect(effectpos[i], transform, 0.3f, L"muzzleFlash");
+		//if (angle < 0.91f)
+			if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, p, MONSTER))
 			{
-				
+				cout << "D : " << a << " P : " << p.x << " " << p.y << " " << p.z << endl;
 			}
-		}
+	}
 
 	if (DXUTWasKeyPressed('E'))
 		Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Missile>(L"테스트", L"테스트");

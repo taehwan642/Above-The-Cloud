@@ -4,8 +4,3 @@
 #include "ObjectManager.h"
 USING(Engine)
 
-void EnemyManager::ClearVector(void)
-{
-	enemymesh.clear();
-	enemyTransform.clear();
-}

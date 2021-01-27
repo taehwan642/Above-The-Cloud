@@ -21,9 +21,6 @@ testChild::testChild(void)
 	t->position = { 5,5,50 };
 	testsphere = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Cloud"));
 
-	Engine::EnemyManager::GetInstance()->enemymesh.push_back(testsphere->GetMesh());
-	Engine::EnemyManager::GetInstance()->enemyTransform.push_back(&t->worldMatrix);
-
 	collider = new Engine::Collider(2, &t->position, ObjectTag::MONSTER);
 	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
 
