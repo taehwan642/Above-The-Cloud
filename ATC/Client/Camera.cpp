@@ -102,6 +102,9 @@ void Camera::LateUpdate(const FLOAT& dt)
 	}
 	DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+	worldCameraPosition = D3DXVECTOR4(transform->position, 1);
+
 	GameObject::LateUpdate(dt);
 }
 

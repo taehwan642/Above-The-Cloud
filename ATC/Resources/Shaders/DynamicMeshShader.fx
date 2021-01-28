@@ -4,6 +4,9 @@ matrix  g_matProj;
 
 texture	g_BaseTexture;
 
+float4 lightposition;
+float4 cameraposition;
+
 sampler BaseSampler = sampler_state
 {
 	texture = g_BaseTexture;
@@ -25,18 +28,26 @@ struct VS_OUT
 	float4			vPosition: POSITION;
 	float4			vNormal : NORMAL;
 	float2		 	vTexUV : TEXCOORD0;
+	float3			vDiffuse : TEXCOORD1;
+	float3			vViewDir : TEXCOORD2;
+	float3			vReflect : TEXCOORD3;
 };
 
 VS_OUT VS_MAIN(VS_IN In)
 {
 	VS_OUT		Out = (VS_OUT)0;
 
-	matrix		matWV, matWVP;
+	Out.vPosition = mul(vector(In.vPosition, 1.f), g_matWorld);
 
-	matWV = mul(g_matWorld, g_matView);
-	matWVP = mul(matWV, g_matProj);
+	float3 lightDir = Out.vPosition.xyz - lightposition.xyz;
+	lightDir = normalize(lightDir);
 
-	Out.vPosition = mul(vector(In.vPosition, 1.f), matWVP);
+	float3 viewDir = normalize(Out.vPosition.xyz - cameraposition.xyz);
+	Out.vViewDir = viewDir;
+
+	Out.vPosition = mul(Out.vPosition, g_matView);
+	Out.vPosition = mul(Out.vPosition, g_matProj);
+
 	Out.vNormal = normalize(mul(vector(In.vNormal, 0.f), g_matWorld));
 	Out.vTexUV = In.vTexUV;
 
@@ -44,14 +55,15 @@ VS_OUT VS_MAIN(VS_IN In)
 }
 
 // w나누기 연산 (2차원 투영변환)
-// 뷰포트 변환 (API시연회때 사용한 좌표계)
 // 래스터라이즈 (둘러쌓여진 정점세개의 정보를 선형보간하여 픽셀의 정보를 생성한다.) 
 
 struct PS_IN
 {
-	float4			vPosition: POSITION;
 	float4			vNormal : NORMAL;
 	float2		 	vTexUV : TEXCOORD0;
+	float3			vDiffuse : TEXCOORD1;
+	float3			vViewDir : TEXCOORD2;
+	float3			vReflect : TEXCOORD3;
 };
 
 struct PS_OUT
@@ -65,44 +77,65 @@ PS_OUT PS_MAIN(PS_IN In)
 {
 	PS_OUT		Out = (PS_OUT)0;
 
-	Out.vDiffuse = tex2D(BaseSampler, In.vTexUV);
-	Out.vDiffuse.a = 1.f;
+	//Out.vDiffuse = tex2D(BaseSampler, In.vTexUV);
+	//Out.vDiffuse.a = 1.f;
 	// -1 => 0
 	//  1 => 1
 	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
-
+	//
+	//float4 albedo = tex2D(BaseSampler, In.vTexUV);
+	////float3 diffuse = albedo.rgb * saturate(In.vDiffuse);
+	//
+	//float3 reflection = normalize(In.vReflect);
+	//float3 viewDir = normalize(In.vViewDir);
+	//float3 specular = 0;
+	////if (diffuse.x > 0)
+	////{
+	//	specular = saturate(dot(reflection, -viewDir));
+	//	specular = pow(specular, 20.0f);
+	//
+	//	float4 specularIntensity = tex2D(BaseSampler, In.vTexUV);
+	//	specular *= specularIntensity.rgb;
+	////}
+	//
+	//
+	//float3 ambient = float3(0.1f, 0.1f, 0.1f) * albedo;
+	//Out.vDiffuse = (ambient + specular, 1);
+	Out.vDiffuse = tex2D(BaseSampler, In.vTexUV);
+	Out.vDiffuse.a = 1.f;
+	//return float4(ambient + diffuse + specular, 1);
 	return Out;
 }
 
 technique Default_Technique
 {
-	pass Default_Rendering
-	{
-		AlphaTestEnable = true;
-		Alpharef = 0;
-		AlphaFunc = Greater;
+	//pass Default_Rendering
+	//{
+	//	AlphaTestEnable = true;
+	//	Alpharef = 0;
+	//	AlphaFunc = Greater;
 
-		VertexShader = compile vs_3_0 VS_MAIN();
-		PixelShader = compile ps_3_0 PS_MAIN();
-	}
-	pass Default_Rendering
-	{
-		AlphaTestEnable = true;
-		Alpharef = 0;
-		AlphaFunc = Greater;
+	//	VertexShader = compile vs_3_0 VS_MAIN();
+	//	PixelShader = compile ps_3_0 PS_MAIN();
+	//}
+	//pass Default_Rendering
+	//{
+	//	AlphaTestEnable = true;
+	//	Alpharef = 0;
+	//	AlphaFunc = Greater;
 
-		VertexShader = compile vs_3_0 VS_MAIN();
-		PixelShader = compile ps_3_0 PS_MAIN();
-	}
-	pass Default_Rendering
-	{
-		AlphaTestEnable = true;
-		Alpharef = 0;
-		AlphaFunc = Greater;
+	//	VertexShader = compile vs_3_0 VS_MAIN();
+	//	PixelShader = compile ps_3_0 PS_MAIN();
+	//}
+	//pass Default_Rendering
+	//{
+	//	AlphaTestEnable = true;
+	//	Alpharef = 0;
+	//	AlphaFunc = Greater;
 
-		VertexShader = compile vs_3_0 VS_MAIN();
-		PixelShader = compile ps_3_0 PS_MAIN();
-	}
+	//	VertexShader = compile vs_3_0 VS_MAIN();
+	//	PixelShader = compile ps_3_0 PS_MAIN();
+	//}
 	pass Alpha
 	{
 		//AlphaTestEnable = true;

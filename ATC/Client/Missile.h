@@ -13,10 +13,11 @@ class Missile :
 private:
     float homingtime = 1.5f;
 
-    Engine::Transform* transform;
+    Engine::Shader* shader = nullptr; 
     Engine::StaticMesh* mesh;
     Engine::Collider* collider;
     Engine::Trail* trail;
+    Engine::Transform* transform;
 
     PlayerObserver* ob = nullptr;
 protected:

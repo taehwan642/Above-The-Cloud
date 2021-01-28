@@ -447,4 +447,8 @@ struct ColliderData
     D3DXVECTOR3* center;
     bool ishit;
 };
+
+static D3DXVECTOR4 worldLightPosition = { 500, 500, -500, 1 };
+static D3DXVECTOR4 worldCameraPosition = { 0, 0, 0, 1 };
+
 #endif

@@ -59,7 +59,6 @@ void MenuScene::Start(void)
 
 	//Scene::AddGameObject(L"테스트", L"테스트", t);
 	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<test>(L"테스트", L"테스트");
-	
 	Camera* c = new Camera();
 	AimPoint* ui = new AimPoint(L"AimPoint");
 	Scene::AddGameObject(L"테스트", L"테스트", c);

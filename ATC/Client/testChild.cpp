@@ -7,6 +7,7 @@
 #include "../Engine/ObjectManager.h"
 #include "../Engine/Collider.h"
 #include "../Engine/CollisionManager.h"
+#include "../Engine/Shader.h"
 #include "testChild.h"
 
 testChild::testChild(void)
@@ -14,7 +15,9 @@ testChild::testChild(void)
 	observer = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
-
+	
+	testshader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dyshader"));
+	
 	t = new Engine::Transform(/*observer->GetTransform()*/);
 	componentgroup.emplace(L"Transform", t);
 	t->scale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
@@ -32,6 +35,14 @@ testChild::testChild(void)
 
 testChild::~testChild(void)
 {
+}
+
+void testChild::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
+{
+	if (_objectTag == L"PlayerShoot")
+	{
+		cout << "마우스로 처맞음" << endl;
+	}
 }
 
 void testChild::Update(const float& dt)
@@ -74,7 +85,17 @@ void testChild::LateUpdate(const FLOAT& dt)
 void testChild::Render(const FLOAT& dt)
 {
 	DEVICE->SetTransform(D3DTS_WORLD, &t->worldMatrix);
-	testsphere->RenderMesh();
+	testshader->SetupTable();
+
+	UINT pass = 0;
+	LPD3DXEFFECT tempeffect = testshader->GetEffect();
+	tempeffect->Begin(&pass, 0);
+	tempeffect->BeginPass(0);
+	testsphere->RenderMesh(tempeffect);
+	tempeffect->EndPass();
+	tempeffect->End();
+
+
 	collider->RenderCollider();
 	GameObject::Render(dt);
 }

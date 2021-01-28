@@ -27,12 +27,12 @@ public:
 
     void CheckCollision(ObjectTag _src, ObjectTag _dst);
 
-    bool MouseRaySphereInteresection(out float& _distanceOut,
+    bool MouseRaySphereInteresection(
+        out float& _distanceOut,
         out D3DXVECTOR3& _targetposition,
         in ObjectTag _dsttag);
-    // 1. Ray와 Object(Tag)가 충돌하면, bool 리턴 -> 가상함수 호출
-    // 2. 
-    
+
+    GameObject* dstObject = nullptr; // MouseRaySphere Intersection을 했을 때, 맞은 Object를 여기에 넣어준다.
 
     void UpdateData(void);
 

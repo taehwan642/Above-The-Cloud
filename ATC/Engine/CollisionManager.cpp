@@ -48,6 +48,7 @@ void CollisionManager::GetWorldMouse(void)
 
 	D3DXVECTOR3		mousePosition;
 
+	// 정규좌표에서 스크린좌표 변환
 	D3DVIEWPORT9		ViewPort;
 	ZeroMemory(&ViewPort, sizeof(D3DVIEWPORT9));
 	DEVICE->GetViewport(&ViewPort);
@@ -56,6 +57,7 @@ void CollisionManager::GetWorldMouse(void)
 	mousePosition.y = pt.y / (ViewPort.Height * -0.5f) + 1.f;
 	mousePosition.z = 0.f;
 
+	// 스크린좌표에서 뷰로 변환
 	D3DXMATRIX matProj;
 	DEVICE->GetTransform(D3DTS_PROJECTION, &matProj);
 	D3DXMatrixInverse(&matProj, NULL, &matProj);
@@ -64,6 +66,7 @@ void CollisionManager::GetWorldMouse(void)
 	rayPos = D3DXVECTOR3(0.f, 0.f, 0.f);
 	rayDir = mousePosition - rayPos;
 
+	// 뷰에서 월드로 변환
 	D3DXMATRIX matView;
 	DEVICE->GetTransform(D3DTS_VIEW, &matView);
 	D3DXMatrixInverse(&matView, NULL, &matView);
@@ -121,6 +124,8 @@ bool CollisionManager::MouseRaySphereInteresection(out float& _distanceOut, out 
 		if (orthogonallengthsqare <= radiusquare)
 		{
 			_distanceOut = dot - sqrtf(radiusquare - orthogonallengthsqare);
+			_targetposition = dynamic_cast<Transform*>(dst->GetComponent(L"Transform"))->position;
+			dstObject = dst;
 			return true;
 		}
 	}

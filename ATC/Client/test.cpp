@@ -134,27 +134,32 @@ void test::LateUpdate(const FLOAT& dt)
 {
 	float a;
 	D3DXVECTOR3 p;
-	D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
-	D3DXVECTOR3 pos = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._41);
-	//D3DXMATRIX m = *Engine::EnemyManager::GetInstance()->enemyTransform[0];
-
-	float angle = 0;
-	//D3DXVECTOR3 enpos = *reinterpret_cast<D3DXVECTOR3*>(&m._41);
-	//D3DXVECTOR3 direc = pos - enpos;
-	//D3DXVec3Normalize(&direc, &direc);
-	//D3DXVec3Normalize(&dir, &dir);
-	//angle = D3DXVec3Dot(&dir, &direc);
 
 	if (DXUTIsKeyDown(VK_SPACE))
 	{
 		for (int i = 0; i < 4; ++i)
 			Engine::EffectManager::GetInstance()->
 			SpawnTextureEffect(effectpos[i], transform, 0.3f, L"muzzleFlash");
-		//if (angle < 0.91f)
-			if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, p, MONSTER))
+		if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, p, MONSTER))
+		{
+			//cout << "D : " << a << " P : " << p.x << " " << p.y << " " << p.z << endl;
+			D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+			D3DXVECTOR3 pos = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._41);
+
+			float angle = 0;
+			D3DXVECTOR3 direc = pos - p;
+			D3DXVec3Normalize(&direc, &direc);
+			D3DXVec3Normalize(&dir, &dir);
+			angle = D3DXVec3Dot(&dir, &direc);
+			cout << angle << endl;
+			if (angle < -0.31f)
 			{
-				cout << "D : " << a << " P : " << p.x << " " << p.y << " " << p.z << endl;
+				//damage аж╠Б
+				GameObject* g = Engine::CollisionManager::GetInstance()->dstObject;
+				g->CollisionEvent(L"PlayerShoot", this);
 			}
+
+		}
 	}
 
 	if (DXUTWasKeyPressed('E'))
@@ -170,6 +175,8 @@ void test::Render(const FLOAT& dt)
 	testshader->SetupTable();
 	UINT pass = 0;
 	LPD3DXEFFECT tempeffect = testshader->GetEffect();
+	//tempeffect->SetVector((D3DXHANDLE)L"lightposition", &worldLightPosition);
+	//tempeffect->SetVector((D3DXHANDLE)L"cameraposition", &worldCameraPosition);
 	tempeffect->Begin(&pass, 0);
 	tempeffect->BeginPass(0);
 	testdynamic->RenderNoSkinnedMesh(tempeffect);

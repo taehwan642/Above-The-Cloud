@@ -6,21 +6,23 @@
 #include "../Engine/Collider.h"
 #include "../Engine/Trail.h"
 #include "../Engine/SubjectManager.h"
+#include "../Engine/Shader.h"
 #include "PlayerObserver.h"
 #include "Missile.h"
 
 Missile::Missile(void)
 {
 	transform = new Engine::Transform();
-	componentgroup.emplace(L"transform", transform);
+	componentgroup.emplace(L"Transform", transform);
 	mesh = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Missile"));
 	
+	shader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dyshader"));
+
 	collider = new Engine::Collider(1, &transform->position, ObjectTag::PLAYER);
 	colliderdata.center = &transform->position;
 	colliderdata.ishit = false;
 	colliderdata.radius = 1;
 	colliderdata.tag = L"Missile";
-
 
 	Engine::CollisionManager::GetInstance()->PushData(MISSILE, this);
 	componentgroup.emplace(L"collider", collider);
@@ -33,7 +35,6 @@ Missile::Missile(void)
 
 	transform->position = ob->GetTransform()->position;
 	
-	
 	D3DXVECTOR3 vec;
 	vec = *reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._11);
 	vec *= -1.f;
@@ -44,12 +45,16 @@ Missile::Missile(void)
 	vec = *reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._31);
 	vec *= -1.f;
 	memcpy(&transform->worldMatrix._31, &vec, sizeof(D3DXVECTOR3));
-
+	
 	// 1. Player의 forward로 간다
-	//transform->quaternion = ob->GetTransform()->quaternion;
-	//transform->curQuaternion = ob->GetTransform()->curQuaternion;
+	transform->quaternion = ob->GetTransform()->quaternion;
+	transform->curQuaternion = ob->GetTransform()->curQuaternion;
 
 	transform->Rotate(Engine::Transform::UP, D3DXToRadian(180));
+
+	trail = new Engine::Trail();
+	trail->Initalize(&transform->worldMatrix, 1024, 0.03f, 4, 3, L"TrailTexture");
+	componentgroup.emplace(L"Trail", trail);
 	// 근데 씨바 ㄹ왜 반대로 갈까?
 	// 반대로 가는 이유 1. player (ob)의 dir은 원래 반대여야만 한다.
 	// 2. 시간이 되면 유도 시작
@@ -62,6 +67,13 @@ Missile::~Missile(void)
 
 void Missile::Update(const FLOAT& dt)
 {
+	//-36
+	D3DXVECTOR3 trailpos[2];
+	D3DXVec3TransformCoord(&trailpos[0], &D3DXVECTOR3(-2, 0, -36), &transform->worldMatrix);
+	D3DXVec3TransformCoord(&trailpos[1], &D3DXVECTOR3(2, 0, -36), &transform->worldMatrix);
+
+	trail->AddNewTrail(trailpos[0], trailpos[1], dt);
+
 	if (homingtime <= 0)
 	{
 		ob->GetTransform();
@@ -70,19 +82,19 @@ void Missile::Update(const FLOAT& dt)
 		D3DXVECTOR3 look = D3DXVECTOR3(5, 5, 50) - transform->position;
 		D3DXVec3Normalize(&look, &look);
 		//look *= -1.f;
-
+	
 		//  up과 look외적 => right
 		D3DXVECTOR3 right;
 		D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
 		D3DXVec3Normalize(&right, &right);
-
+	
 		//right *= -1.f;
-
+	
 		// look과 right 외적 => up
 		D3DXVECTOR3 up;
 		D3DXVec3Cross(&up, &look, &right);
 		D3DXVec3Normalize(&up, &up);
-
+	
 		D3DXMATRIX matRot;
 		D3DXMatrixIdentity(&matRot);
 		memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
@@ -106,24 +118,6 @@ void Missile::Update(const FLOAT& dt)
 
 void Missile::LateUpdate(const FLOAT& dt)
 {
-	// ob에서 받아온 그 록 몬스터의 포인터를 받아옴
-	// 그 몬스터의 위치에 pos에 받아서
-	// x = z,y
-	// y = x,z
-	// z = y,x
-	// rotate look z, up y, right x
-	// RAY & SPHERE
-	// 다른 모든 적들은 어떻게 불러오나?
-	// 그냥 하나의 플레이어의 forward를 받아서 하는게 낫겠다.
-	// 그럼 모든 적들이 플레이어의 obesrver를 가지면 되고,
-	// 따로 또 Observer 만들어서 UI데이터 넣어줄 수 있게 만들면 끝나겠네
-	// 플레이어와 다른 모든 적들과 내적해서, 플레이어의 forward와 가장 가까운 적에게 lock를 건다.
-	// 그러려면, 일단 move를 lock시키고 최소한의 내적 범위를 알아내야함. (화면 밖에있는것들은 lock잡으면 안되니까)
-	
-	
-	
-
-	
 	GameObject::LateUpdate(dt);
 }
 
@@ -131,8 +125,16 @@ void Missile::Render(const FLOAT& dt)
 {
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	DEVICE->SetTransform(D3DTS_WORLD, &transform->worldMatrix);
-	mesh->RenderMesh();
+	shader->SetupTable();
+	UINT pass = 0;
+	LPD3DXEFFECT tempeffect = shader->GetEffect();
+	tempeffect->Begin(&pass, 0);
+	tempeffect->BeginPass(0);
+	mesh->RenderMesh(tempeffect);
+	tempeffect->EndPass();
+	tempeffect->End();
 	//collider->RenderCollider();
+	
 	GameObject::Render(dt);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }

@@ -5,7 +5,7 @@ USING(Engine)
 
 ULONG Base::AddReference(void)
 {
-	cout << refCount << endl;
+	//cout << refCount << endl;
 	return refCount++;
 }
 

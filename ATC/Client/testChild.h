@@ -4,6 +4,7 @@ NAMESPACE(Engine)
 class GameObject;
 class Transform;
 class StaticMesh;
+class Shader;
 END
 
 class PlayerObserver;
@@ -16,11 +17,14 @@ public:
 	explicit testChild(void);
 	virtual ~testChild(void);
 
+	Engine::Shader* testshader = nullptr;
 	Engine::StaticMesh* testsphere = nullptr;
 	PlayerObserver* observer;
 
 	Engine::Transform* t;
 	Engine::Collider* collider;
+
+	void CollisionEvent(const wstring& _objectTag, GameObject* _gameObject) override;
 
 	void Update(const float& dt) override;
 	void LateUpdate(const FLOAT& dt) override;
