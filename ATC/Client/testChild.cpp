@@ -24,7 +24,7 @@ testChild::testChild(void)
 	t->position = { 5,5,50 };
 	testsphere = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Cloud"));
 
-	collider = new Engine::Collider(2, &t->position, ObjectTag::MONSTER);
+	collider = new Engine::Collider(2, &t->position);
 	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
 
 	colliderdata.center = &t->position;
@@ -49,30 +49,30 @@ void testChild::Update(const float& dt)
 {
 	//if (DXUTIsKeyDown('L'))
 	//cout << t->position.x << " " << t->position.y << " " << t->position.z << endl;
-	if (DXUTIsKeyDown(VK_LEFT))
-	{
-		t->position.x += 100 * dt;
-	}
-	if (DXUTIsKeyDown(VK_RIGHT))
-	{
-		t->position.x -= 100 * dt;
-	}
-	if (DXUTIsKeyDown(VK_UP))
-	{
-		t->position.z -= 100 * dt;
-	}
-	if (DXUTIsKeyDown(VK_DOWN))
-	{
-		t->position.z += 100 * dt;
-	}
-	if (DXUTIsKeyDown('N'))
-	{
-		t->position.y += 100 * dt;
-	}
-	if (DXUTIsKeyDown('M'))
-	{
-		t->position.y -= 100 * dt;
-	}
+	//if (DXUTIsKeyDown(VK_LEFT))
+	//{
+	//	t->position.x += 100 * dt;
+	//}
+	//if (DXUTIsKeyDown(VK_RIGHT))
+	//{
+	//	t->position.x -= 100 * dt;
+	//}
+	//if (DXUTIsKeyDown(VK_UP))
+	//{
+	//	t->position.z -= 100 * dt;
+	//}
+	//if (DXUTIsKeyDown(VK_DOWN))
+	//{
+	//	t->position.z += 100 * dt;
+	//}
+	//if (DXUTIsKeyDown('N'))
+	//{
+	//	t->position.y += 100 * dt;
+	//}
+	//if (DXUTIsKeyDown('M'))
+	//{
+	//	t->position.y -= 100 * dt;
+	//}
 
 	GameObject::Update(dt);
 }
@@ -84,8 +84,8 @@ void testChild::LateUpdate(const FLOAT& dt)
 
 void testChild::Render(const FLOAT& dt)
 {
-	DEVICE->SetTransform(D3DTS_WORLD, &t->worldMatrix);
-	testshader->SetupTable();
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	testshader->SetupTable(t->worldMatrix);
 
 	UINT pass = 0;
 	LPD3DXEFFECT tempeffect = testshader->GetEffect();
@@ -95,9 +95,9 @@ void testChild::Render(const FLOAT& dt)
 	tempeffect->EndPass();
 	tempeffect->End();
 
-
 	collider->RenderCollider();
 	GameObject::Render(dt);
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
 void testChild::Free(void)

@@ -18,7 +18,7 @@ Missile::Missile(void)
 	
 	shader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dyshader"));
 
-	collider = new Engine::Collider(1, &transform->position, ObjectTag::PLAYER);
+	collider = new Engine::Collider(1, &transform->position);
 	colliderdata.center = &transform->position;
 	colliderdata.ishit = false;
 	colliderdata.radius = 1;
@@ -124,8 +124,7 @@ void Missile::LateUpdate(const FLOAT& dt)
 void Missile::Render(const FLOAT& dt)
 {
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	DEVICE->SetTransform(D3DTS_WORLD, &transform->worldMatrix);
-	shader->SetupTable();
+	shader->SetupTable(transform->worldMatrix);
 	UINT pass = 0;
 	LPD3DXEFFECT tempeffect = shader->GetEffect();
 	tempeffect->Begin(&pass, 0);

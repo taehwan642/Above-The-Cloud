@@ -5,6 +5,8 @@
 #include "../Engine/SubjectManager.h"
 #include "../Engine/Shader.h"
 #include "../Engine/Trail.h"
+#include "../Engine/CollisionManager.h"
+#include "../Engine/Collider.h"
 #include "PlayerObserver.h"
 #include "MonsterBase.h"
 
@@ -38,4 +40,5 @@ void MonsterBase::Render(const FLOAT& dt)
 
 void MonsterBase::Free(void)
 {
+	Engine::GameObject::Free();
 }

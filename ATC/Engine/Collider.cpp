@@ -3,12 +3,11 @@
 #include "Collider.h"
 USING(Engine)
 
-Collider::Collider(const FLOAT& _radius, D3DXVECTOR3* _center, ObjectTag _tag)
+Collider::Collider(const FLOAT& _radius, D3DXVECTOR3* _center)
 {
 	sphere = new CollisionSphere(_radius);
 	radius = _radius;
 	center = _center;
-	tag = _tag;
 }
 
 Collider::~Collider(void)

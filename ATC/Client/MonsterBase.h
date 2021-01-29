@@ -5,6 +5,7 @@ class Transform;
 class DynamicMesh;
 class Trail;
 class Shader;
+class Collider;
 END
 class PlayerObserver;
 
@@ -18,6 +19,7 @@ protected:
     Engine::Shader* shader;
     Engine::Trail* trail;
     Engine::DynamicMesh* mesh;
+    Engine::Collider* collider;
     PlayerObserver* observer;
 
 public:

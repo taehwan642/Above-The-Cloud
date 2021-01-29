@@ -21,7 +21,7 @@ public:
 
     LPD3DXEFFECT GetEffect(void) { return effect; };
     
-    HRESULT SetupTable(void);
+    HRESULT SetupTable(const D3DXMATRIX& _world);
 
     Resources* Clone(void) override;
 

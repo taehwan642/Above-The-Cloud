@@ -30,7 +30,7 @@ void MenuScene::Start(void)
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/trail.dds", L"TrailTexture")))
 		cout << "트레일텍스쳐 됐다" << endl;
 
-	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"m1test.X", L"Monster1")))
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"Monster1.X", L"Monster1")))
 		cout << "다이나믹메시불러와짐" << endl;
 
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"cloud.X", L"Cloud")))
@@ -55,7 +55,7 @@ void MenuScene::Start(void)
 	
 	testChild* t1 = new testChild();
 
-	//SphereMonster* sp = new SphereMonster();
+	SphereMonster* sp = new SphereMonster();
 
 	//Scene::AddGameObject(L"테스트", L"테스트", t);
 	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<test>(L"테스트", L"테스트");
@@ -66,7 +66,7 @@ void MenuScene::Start(void)
 	Scene::AddGameObject(L"테스트", L"UI", h);
 	Scene::AddGameObject(L"테스트", L"테스트", s);
 	Scene::AddGameObject(L"테스트", L"테스트", t1);
-	//Scene::AddGameObject(L"테스트", L"테스트", sp);
+	Scene::AddGameObject(L"테스트", L"테스트", sp);
 }
 
 void MenuScene::Update(const float& dt)

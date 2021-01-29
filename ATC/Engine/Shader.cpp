@@ -44,14 +44,13 @@ HRESULT Shader::CreateShader(wstring _filepath)
 	return hr;
 }
 
-HRESULT Shader::SetupTable()
+HRESULT Shader::SetupTable(const D3DXMATRIX& _world)
 {
-	D3DXMATRIX matWorld, matView, matProj;
-	DEVICE->GetTransform(D3DTS_WORLD, &matWorld);
+	D3DXMATRIX matView, matProj;
 	DEVICE->GetTransform(D3DTS_VIEW, &matView);
 	DEVICE->GetTransform(D3DTS_PROJECTION, &matProj);
 
-	effect->SetValue((D3DXHANDLE)"g_matWorld", &matWorld, sizeof(D3DXMATRIX));
+	effect->SetValue((D3DXHANDLE)"g_matWorld", &_world, sizeof(D3DXMATRIX));
 	effect->SetValue((D3DXHANDLE)"g_matView", &matView, sizeof(D3DXMATRIX));
 	effect->SetValue((D3DXHANDLE)"g_matProj", &matProj, sizeof(D3DXMATRIX));
 	return S_OK;

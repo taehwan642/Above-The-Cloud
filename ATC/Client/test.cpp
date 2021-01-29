@@ -55,7 +55,7 @@ test::test(void)
 	effectpos[2] = { 125 , -15, -300 };
 	effectpos[3] = { 190 , -15, -300 };
 
-	collider = new Engine::Collider(1, &transform->position, ObjectTag::PLAYER);
+	collider = new Engine::Collider(1, &transform->position);
 	Engine::CollisionManager::GetInstance()->PushData(PLAYER, this);
 	componentgroup.emplace(L"collider", collider);
 	colliderdata.center = &transform->position;
@@ -111,22 +111,6 @@ void test::Update(const float& dt)
 		Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
 	}
 
-	if (invincibletime <= 0)
-	{
-		if (collider->ishit == true)
-		{
-			collider->ishit = false;
-			--healthpoint;
-			Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
-			invincibletime = 1.f;
-		}
-	}
-	else
-	{
-		invincibletime -= dt;
-		collider->ishit = false;
-	}
-
 	transform->position += directonVector * dt * 1000;
 }
 
@@ -172,7 +156,7 @@ void test::Render(const FLOAT& dt)
 {
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	testdynamic->PlayAnimation(dt * 3);
-	testshader->SetupTable();
+	testshader->SetupTable(transform->worldMatrix);
 	UINT pass = 0;
 	LPD3DXEFFECT tempeffect = testshader->GetEffect();
 	//tempeffect->SetVector((D3DXHANDLE)L"lightposition", &worldLightPosition);

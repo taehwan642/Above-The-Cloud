@@ -70,14 +70,12 @@ void DynamicMesh::RenderMesh(LPD3DXEFFECT& _effect)
 		tempMeshcontainer->pSkinInfo->UpdateSkinnedMesh(tempMeshcontainer->renderingMatrix, NULL, srcvtx, destvtx);
 		for (UINT i = 0; i < tempMeshcontainer->NumMaterials; ++i)
 		{
-			_effect->SetTexture((D3DXHANDLE)"g_DiffuseTexture", tempMeshcontainer->textures[i]);
+			_effect->SetTexture((D3DXHANDLE)"g_BaseTexture", tempMeshcontainer->textures[i]);
 			_effect->CommitChanges();
 			tempMeshcontainer->MeshData.pMesh->DrawSubset(i);
 		}
-
 		tempMeshcontainer->originalMesh->UnlockVertexBuffer();
 		tempMeshcontainer->MeshData.pMesh->UnlockVertexBuffer();
-
 	}
 }
 

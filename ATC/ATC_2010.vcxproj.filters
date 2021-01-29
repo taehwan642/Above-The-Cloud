@@ -156,9 +156,6 @@
     <Filter Include="2Client\1GameObject\5Monsters">
       <UniqueIdentifier>{617a55ae-fccc-4721-a757-201a71578e79}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Client\1GameObject\5Monsters\0SphereMonster">
-      <UniqueIdentifier>{dc5ff974-9b5b-4873-9719-8d5e9e347e3b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1Engine\6Manager\4RaycastManager">
       <UniqueIdentifier>{0ef24db2-b9ff-4abb-8275-34716da69a20}</UniqueIdentifier>
     </Filter>
@@ -182,6 +179,15 @@
     </Filter>
     <Filter Include="1Engine\6Manager\5ObjectManager">
       <UniqueIdentifier>{c53f78b0-4238-4b3c-85b7-eb5fec134cca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters\0Monster">
+      <UniqueIdentifier>{ac56ee2e-7cc4-4099-aad8-48545ad655bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters\0Monster\0SphereMonster">
+      <UniqueIdentifier>{dc5ff974-9b5b-4873-9719-8d5e9e347e3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters\1MonsterBullets">
+      <UniqueIdentifier>{1792dfb5-a384-46ad-87a1-7f84b4227ca8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -346,11 +352,8 @@
     <ClCompile Include="Client\HealthPointGroup.cpp">
       <Filter>2Client\1GameObject\3UI\1HealthPoint\0HealthPointGroup</Filter>
     </ClCompile>
-    <ClCompile Include="Client\MonsterBase.cpp">
-      <Filter>2Client\1GameObject\5Monsters</Filter>
-    </ClCompile>
     <ClCompile Include="Client\SphereMonster.cpp">
-      <Filter>2Client\1GameObject\5Monsters\0SphereMonster</Filter>
+      <Filter>2Client\1GameObject\5Monsters\0Monster\0SphereMonster</Filter>
     </ClCompile>
     <ClCompile Include="Engine\RaycastManager.cpp">
       <Filter>1Engine\6Manager\4RaycastManager</Filter>
@@ -375,6 +378,9 @@
     </ClCompile>
     <ClCompile Include="Engine\ObjectManager.cpp">
       <Filter>1Engine\6Manager\5ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\MonsterBase.cpp">
+      <Filter>2Client\1GameObject\5Monsters\0Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -483,11 +489,8 @@
     <ClInclude Include="Client\HealthPointGroup.h">
       <Filter>2Client\1GameObject\3UI\1HealthPoint\0HealthPointGroup</Filter>
     </ClInclude>
-    <ClInclude Include="Client\MonsterBase.h">
-      <Filter>2Client\1GameObject\5Monsters</Filter>
-    </ClInclude>
     <ClInclude Include="Client\SphereMonster.h">
-      <Filter>2Client\1GameObject\5Monsters\0SphereMonster</Filter>
+      <Filter>2Client\1GameObject\5Monsters\0Monster\0SphereMonster</Filter>
     </ClInclude>
     <ClInclude Include="Engine\RaycastManager.h">
       <Filter>1Engine\6Manager\4RaycastManager</Filter>
@@ -512,6 +515,9 @@
     </ClInclude>
     <ClInclude Include="Engine\ObjectManager.h">
       <Filter>1Engine\6Manager\5ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\MonsterBase.h">
+      <Filter>2Client\1GameObject\5Monsters\0Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
