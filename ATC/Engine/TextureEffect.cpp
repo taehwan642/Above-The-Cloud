@@ -12,13 +12,15 @@ TextureEffect::TextureEffect(const wstring& _texturetag, const D3DXVECTOR3& _pos
 	transform->position = _position;
 }
 
-TextureEffect::~TextureEffect(void)
+TextureEffect::TextureEffect(const wstring& _texturetag, const D3DXVECTOR3& _position, const FLOAT& _alivetime) :
+	DynamicUI(_texturetag),
+	textureChangedelta(_alivetime)
 {
+	transform->position = _position;
 }
 
-void TextureEffect::CreateTextureEffect(const wstring& _texturetag, const D3DXVECTOR3& _position, Transform* _parent)
+TextureEffect::~TextureEffect(void)
 {
-	
 }
 
 void TextureEffect::Update(const FLOAT& dt)

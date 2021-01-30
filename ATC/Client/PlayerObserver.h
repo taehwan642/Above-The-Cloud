@@ -5,7 +5,7 @@ class Observer;
 class Transform;
 class GameObject;
 END
-class PlayerObserver :
+class PlayerObserver final :
     public Engine::Observer
 {
 private:

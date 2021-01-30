@@ -7,7 +7,7 @@ class Transform;
 class StaticMesh;
 END
 class PlayerObserver;
-class Missile :
+class Missile final :
     public Engine::GameObject
 {
 private:

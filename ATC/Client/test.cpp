@@ -117,6 +117,7 @@ void test::Update(const float& dt)
 void test::LateUpdate(const FLOAT& dt)
 {
 	float a;
+	D3DXVECTOR3 h;
 	D3DXVECTOR3 p;
 
 	if (DXUTIsKeyDown(VK_SPACE))
@@ -124,7 +125,7 @@ void test::LateUpdate(const FLOAT& dt)
 		for (int i = 0; i < 4; ++i)
 			Engine::EffectManager::GetInstance()->
 			SpawnTextureEffect(effectpos[i], transform, 0.3f, L"muzzleFlash");
-		if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, p, MONSTER))
+		if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, h, p, MONSTER))
 		{
 			//cout << "D : " << a << " P : " << p.x << " " << p.y << " " << p.z << endl;
 			D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
@@ -135,9 +136,13 @@ void test::LateUpdate(const FLOAT& dt)
 			D3DXVec3Normalize(&direc, &direc);
 			D3DXVec3Normalize(&dir, &dir);
 			angle = D3DXVec3Dot(&dir, &direc);
-			cout << angle << endl;
+			//cout << angle << endl;
 			if (angle < -0.31f)
 			{
+				cout << h.x << " " << h.y << " " << h.z << endl;
+				D3DXVec3TransformCoord(&h, &h,
+					&dynamic_cast<Engine::Transform*>(Engine::CollisionManager::GetInstance()->dstObject->GetComponent(L"Transform"))->worldMatrix);
+				Engine::EffectManager::GetInstance()->SpawnTextureEffect(h, nullptr, 10.3f, L"muzzleFlash");
 				//damage аж╠Б
 				GameObject* g = Engine::CollisionManager::GetInstance()->dstObject;
 				g->CollisionEvent(L"PlayerShoot", this);

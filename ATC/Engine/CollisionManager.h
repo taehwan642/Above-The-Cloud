@@ -29,6 +29,7 @@ public:
 
     bool MouseRaySphereInteresection(
         out float& _distanceOut,
+        out D3DXVECTOR3& _hitposition,
         out D3DXVECTOR3& _targetposition,
         in ObjectTag _dsttag);
 
