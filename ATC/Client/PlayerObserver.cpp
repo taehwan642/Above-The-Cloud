@@ -27,5 +27,5 @@ void PlayerObserver::UpdateObserver(UINT _flag)
 
 void PlayerObserver::Free(void)
 {
-
+	Observer::Free();
 }

@@ -44,7 +44,7 @@ void StaticUI::Render(const FLOAT& dt)
 	D3DXMATRIX m;
 	D3DXMatrixTransformation2D(&m, nullptr, 0,
 		&D3DXVECTOR2(transform->scale.x, transform->scale.y),
-		nullptr, 0,
+		nullptr, transform->rotation.z,
 		&D3DXVECTOR2(transform->position.x, transform->position.y));
 	GraphicsManager::GetInstance()->GetSprite()->SetTransform(&m);
 	GraphicsManager::GetInstance()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);

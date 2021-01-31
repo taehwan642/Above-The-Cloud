@@ -19,6 +19,7 @@ protected:
 public:
     explicit DynamicMesh(void);
     explicit DynamicMesh(D3DXMATRIX* _parent);
+    explicit DynamicMesh(const DynamicMesh& rhs);
     virtual ~DynamicMesh(void);
 
     HRESULT LoadMesh(wstring _filepath, wstring _filename);

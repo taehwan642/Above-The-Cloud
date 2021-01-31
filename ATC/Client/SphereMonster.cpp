@@ -100,4 +100,5 @@ void SphereMonster::Render(const FLOAT& dt)
 
 void SphereMonster::Free(void)
 {
+	MonsterBase::Free();
 }

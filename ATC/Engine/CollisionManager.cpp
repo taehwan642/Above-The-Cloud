@@ -107,7 +107,7 @@ void CollisionManager::CheckCollision(ObjectTag _src, ObjectTag _dst)
 	}
 }
 
-bool CollisionManager::MouseRaySphereInteresection(out float& _distanceOut, out D3DXVECTOR3& _hitposition, out D3DXVECTOR3& _targetposition, in ObjectTag _dsttag)
+bool CollisionManager::MouseRaySphereInteresection(out float& _distanceOut, out D3DXVECTOR3& _targetposition, in ObjectTag _dsttag)
 {
 	GetWorldMouse();
 	for (auto& dst : colliderdatas[_dsttag])
@@ -126,18 +126,21 @@ bool CollisionManager::MouseRaySphereInteresection(out float& _distanceOut, out 
 			_distanceOut = dot - sqrtf(radiusquare - orthogonallengthsqare);
 			_targetposition = dynamic_cast<Transform*>(dst->GetComponent(L"Transform"))->position;
 			dstObject = dst;
-			
-			//float orthogonallengthpow2 = powf(orthogonallengthsqare, 2);
-			float x = sqrtf(dot * dot - orthogonallengthsqare);
-			
-			D3DXVECTOR3 t1 = rayPos + rayDir * (dot - x);
-
-			_hitposition = t1;
-
 			return true;
 		}
 	}
 	return false;
+}
+
+GameObject* CollisionManager::GetClosestObject(in ObjectTag _dsttag, in D3DXVECTOR3& _srcpos, in D3DXVECTOR3& _srcdir, in float& _angle)
+{
+	GameObject* result = nullptr;
+	for (auto& it : colliderdatas[_dsttag])
+	{
+
+		result = it;
+	}
+	return result;
 }
 
 void CollisionManager::UpdateData(void)

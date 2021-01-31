@@ -47,33 +47,6 @@ void testChild::CollisionEvent(const wstring& _objectTag, GameObject* _gameObjec
 
 void testChild::Update(const float& dt)
 {
-	//if (DXUTIsKeyDown('L'))
-	//cout << t->position.x << " " << t->position.y << " " << t->position.z << endl;
-	//if (DXUTIsKeyDown(VK_LEFT))
-	//{
-	//	t->position.x += 100 * dt;
-	//}
-	//if (DXUTIsKeyDown(VK_RIGHT))
-	//{
-	//	t->position.x -= 100 * dt;
-	//}
-	//if (DXUTIsKeyDown(VK_UP))
-	//{
-	//	t->position.z -= 100 * dt;
-	//}
-	//if (DXUTIsKeyDown(VK_DOWN))
-	//{
-	//	t->position.z += 100 * dt;
-	//}
-	//if (DXUTIsKeyDown('N'))
-	//{
-	//	t->position.y += 100 * dt;
-	//}
-	//if (DXUTIsKeyDown('M'))
-	//{
-	//	t->position.y -= 100 * dt;
-	//}
-
 	GameObject::Update(dt);
 }
 

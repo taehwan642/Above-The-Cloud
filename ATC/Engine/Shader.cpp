@@ -12,6 +12,8 @@ Shader::Shader(const Shader& cp) :
 	errormsg(cp.errormsg)
 {
 	effect->AddRef();
+	if(errormsg != nullptr)
+		errormsg->AddRef();
 }
 
 Shader::~Shader(void)
@@ -59,6 +61,7 @@ HRESULT Shader::SetupTable(const D3DXMATRIX& _world)
 void Shader::Free(void)
 {
 	Safe_Release(effect);
+	errormsg->Release();
 }
 
 Resources* Shader::Clone(void)

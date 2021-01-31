@@ -10,6 +10,7 @@ class AimPoint final :
 private:
     Engine::Transform* playerTransform;
     bool lookback = false;
+    bool pointlock = true;
 protected:
 public:
     explicit AimPoint(wstring _texturetag);

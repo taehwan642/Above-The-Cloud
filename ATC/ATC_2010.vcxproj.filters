@@ -189,6 +189,9 @@
     <Filter Include="2Client\1GameObject\5Monsters\1MonsterBullets">
       <UniqueIdentifier>{1792dfb5-a384-46ad-87a1-7f84b4227ca8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\1GameObject\3UI\2LockPoint">
+      <UniqueIdentifier>{d0373f5c-7d0e-47fd-8f2e-6aa24a0e73d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -382,6 +385,9 @@
     <ClCompile Include="Client\MonsterBase.cpp">
       <Filter>2Client\1GameObject\5Monsters\0Monster</Filter>
     </ClCompile>
+    <ClCompile Include="Client\LockPoint.cpp">
+      <Filter>2Client\1GameObject\3UI\2LockPoint</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -518,6 +524,9 @@
     </ClInclude>
     <ClInclude Include="Client\MonsterBase.h">
       <Filter>2Client\1GameObject\5Monsters\0Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\LockPoint.h">
+      <Filter>2Client\1GameObject\3UI\2LockPoint</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

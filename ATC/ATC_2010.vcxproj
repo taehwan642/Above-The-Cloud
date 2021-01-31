@@ -392,6 +392,7 @@
     <ClCompile Include="Client\Camera.cpp" />
     <ClCompile Include="Client\HealthPoint.cpp" />
     <ClCompile Include="Client\HealthPointGroup.cpp" />
+    <ClCompile Include="Client\LockPoint.cpp" />
     <ClCompile Include="Client\MenuScene.cpp" />
     <ClCompile Include="Client\Missile.cpp" />
     <ClCompile Include="Client\MonsterBase.cpp" />
@@ -435,6 +436,7 @@
     <ClInclude Include="Client\Camera.h" />
     <ClInclude Include="Client\HealthPoint.h" />
     <ClInclude Include="Client\HealthPointGroup.h" />
+    <ClInclude Include="Client\LockPoint.h" />
     <ClInclude Include="Client\MenuScene.h" />
     <ClInclude Include="Client\Missile.h" />
     <ClInclude Include="Client\MonsterBase.h" />

@@ -20,6 +20,17 @@ DynamicMesh::DynamicMesh(D3DXMATRIX* _parent) :
 	parent = _parent;
 }
 
+DynamicMesh::DynamicMesh(const DynamicMesh& rhs) :
+	Resources(rhs),
+	rootFrame(rhs.rootFrame),
+	hierarchy(rhs.hierarchy),
+	anicontroller(rhs.anicontroller),
+	meshcontainergroup(rhs.meshcontainergroup),
+	parent(rhs.parent),
+	vertexposition(rhs.vertexposition)
+{
+}
+
 DynamicMesh::~DynamicMesh(void)
 {
 }
@@ -330,4 +341,8 @@ void DynamicMesh::Free(void)
 	hierarchy->DestroyFrame(rootFrame);
 	Safe_Release(hierarchy);
 	meshcontainergroup.clear();
+	if (!isCloned)
+	{
+		SAFE_DELETE_ARRAY(vertexposition);
+	}
 }

@@ -12,6 +12,7 @@
 #include "SphereMonster.h"
 #include "../Engine/ObjectManager.h"
 #include "../Engine/CollisionManager.h"
+#include "LockPoint.h"
 #include "MenuScene.h"
 
 
@@ -41,7 +42,8 @@ void MenuScene::Start(void)
 
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/muzzleflash.png", L"muzzleFlash", 1)))
 		cout << "머즐플래시 ON" << endl;
-	
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/Lock.png", L"LockPoint", 1)))
+		cout << "LOCKPOINT ON" << endl;
 	
 	Engine::GraphicsManager::GetInstance()->CreateSprite();
 	Engine::Layer* l = new Engine::Layer();
@@ -61,8 +63,10 @@ void MenuScene::Start(void)
 	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<test>(L"테스트", L"테스트");
 	Camera* c = new Camera();
 	AimPoint* ui = new AimPoint(L"AimPoint");
+	LockPoint* ui2 = new LockPoint();
 	Scene::AddGameObject(L"테스트", L"테스트", c);
 	Scene::AddGameObject(L"테스트", L"UI", ui);
+	Scene::AddGameObject(L"테스트", L"UI", ui2);
 	Scene::AddGameObject(L"테스트", L"UI", h);
 	Scene::AddGameObject(L"테스트", L"테스트", s);
 	Scene::AddGameObject(L"테스트", L"테스트", t1);
