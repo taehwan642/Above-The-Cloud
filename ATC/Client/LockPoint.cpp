@@ -10,11 +10,12 @@ LockPoint::LockPoint(void) :
 	ob = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(ob);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT));
-	transform->position = { windowWidth / 2, windowHeight / 2 ,0 };
+	transform->position = { windowWidth / 2, windowHeight / 2, 0 };
 }
 
 LockPoint::~LockPoint(void)
 {
+
 }
 
 void LockPoint::Update(const FLOAT& dt)
@@ -25,6 +26,14 @@ void LockPoint::Update(const FLOAT& dt)
 
 void LockPoint::LateUpdate(const FLOAT& dt)
 {
+	if (dstTransform == nullptr)
+		transform->position = { 9999,9999,999 };
+	else
+	{
+		//ob->GetMissileLock()->position;
+		// Need 3D to 2D Convert
+	}
+
 	Engine::StaticUI::LateUpdate(dt);
 }
 

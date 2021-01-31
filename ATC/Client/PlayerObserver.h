@@ -11,7 +11,7 @@ class PlayerObserver final :
 private:
     Engine::Transform* playerTransform = nullptr;
     INT playerHealthpoint = 0;
-    Engine::GameObject* missileLock = nullptr;
+    Engine::Transform* missileLock = nullptr;
 protected:
 public:
     explicit PlayerObserver(void) {};
@@ -19,6 +19,8 @@ public:
 
     Engine::Transform* GetTransform(void) { return playerTransform; };
     INT GetHealthPoint(void) { return playerHealthpoint; }
+    Engine::Transform* GetMissileLock(void) { return missileLock; }
+
     void UpdateObserver(UINT _flag) override;
 
     void Free(void) override;

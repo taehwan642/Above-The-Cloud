@@ -1,6 +1,7 @@
 #pragma once
 #include "../Engine/StaticUI.h"
 NAMESPACE(Engine)
+class Transform;
 END
 class PlayerObserver;
 class LockPoint final :
@@ -8,7 +9,7 @@ class LockPoint final :
 {
 private:
     PlayerObserver* ob = nullptr;
-
+    Engine::Transform* dstTransform = nullptr;
 protected:
 public:
     explicit LockPoint(void);
