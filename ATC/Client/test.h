@@ -13,9 +13,11 @@ class test final :
 {
 private:
     FLOAT invincibletime = 0.3f;
+    Engine::GameObject* dstObject = nullptr;
+
 protected:
     D3DXVECTOR3 lookVector = { 0,0,-1 };
-    D3DXVECTOR3 directonVector = { 0,0,0 };
+    D3DXVECTOR3 directionVector = { 0,0,0 };
     D3DXVECTOR3 lefttrailpos[2];
     D3DXVECTOR3 righttrailpos[2];
     D3DXVECTOR3 effectpos[4];

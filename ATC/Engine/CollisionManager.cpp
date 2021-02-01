@@ -132,10 +132,9 @@ bool CollisionManager::MouseRaySphereInteresection(out float& _distanceOut, out 
 	return false;
 }
 
-GameObject* CollisionManager::GetClosestObject(in ObjectTag _dsttag, in D3DXVECTOR3& _srcpos, in D3DXVECTOR3& _srcdir, in float& _angle)
+GameObject* CollisionManager::GetClosestObject(in ObjectTag _dsttag, in const D3DXVECTOR3& _srcpos, in const D3DXVECTOR3& _srcdir, in const float _angle)
 {
 	GameObject* result = nullptr;
-	D3DXVec3Normalize(&_srcdir, &_srcdir);
 	float distance = 99999.f;
 	for (auto& dst : colliderdatas[_dsttag])
 	{

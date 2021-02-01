@@ -25,6 +25,8 @@ void MonsterBase::GetHit(const FLOAT& _damageamount)
 
 void MonsterBase::Update(const FLOAT& dt)
 {
+	if (Hp <= 0)
+		isActive = false;
 	Engine::GameObject::Update(dt);
 }
 

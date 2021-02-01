@@ -32,6 +32,7 @@ Missile::Missile(void)
 	ob = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(ob);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
+	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT));
 
 	transform->position = ob->GetTransform()->position;
 	
@@ -74,12 +75,14 @@ void Missile::Update(const FLOAT& dt)
 
 	trail->AddNewTrail(trailpos[0], trailpos[1], dt);
 
-	if (homingtime <= 0)
+	if (ob->GetMissileLock() != nullptr && homingtime <= 0)
 	{
-		ob->GetTransform();
+		D3DXVECTOR3 dstPos = 
+			dynamic_cast<Engine::Transform*>
+			(ob->GetMissileLock()->GetComponent(L"Transform"))->position;
 		// 나와 플레이어의 방향을 구한다.
 		// 내 forward와 내적한다.
-		D3DXVECTOR3 look = D3DXVECTOR3(5, 5, 50) - transform->position;
+		D3DXVECTOR3 look = dstPos - transform->position;
 		D3DXVec3Normalize(&look, &look);
 		//look *= -1.f;
 	
@@ -118,6 +121,7 @@ void Missile::Update(const FLOAT& dt)
 
 void Missile::LateUpdate(const FLOAT& dt)
 {
+	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT));
 	GameObject::LateUpdate(dt);
 }
 

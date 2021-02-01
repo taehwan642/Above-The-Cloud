@@ -29,6 +29,7 @@ test::test(void)
 
 	Engine::SubjectManager::GetInstance()->AddData(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM), transform);
 	Engine::SubjectManager::GetInstance()->AddData(static_cast<UINT>(PlayerInfos::PLAYERHEALTH), &healthpoint);
+	Engine::SubjectManager::GetInstance()->AddData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);
 
 	testdynamic->SetParent(&transform->worldMatrix);
 
@@ -84,7 +85,7 @@ void test::Update(const float& dt)
 	lefttrail->AddNewTrail(lefttrailpos[0], lefttrailpos[1], dt);
 	righttrail->AddNewTrail(righttrailpos[0], righttrailpos[1], dt);
 
-	directonVector = -(*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31));
+	directionVector = -(*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31));
 
 	if (DXUTWasKeyPressed('U'))
 	{
@@ -111,7 +112,13 @@ void test::Update(const float& dt)
 		Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
 	}
 
-	transform->position += directonVector * dt * 1000;
+	transform->position += directionVector * dt * 1000;
+
+	D3DXVec3Normalize(&directionVector, &directionVector);
+	
+	dstObject = Engine::CollisionManager::GetInstance()->GetClosestObject(MONSTER, transform->position,
+		directionVector, -0.61f);
+	Engine::SubjectManager::GetInstance()->SetData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);
 }
 
 void test::LateUpdate(const FLOAT& dt)
@@ -135,7 +142,7 @@ void test::LateUpdate(const FLOAT& dt)
 			D3DXVec3Normalize(&direc, &direc);
 			D3DXVec3Normalize(&dir, &dir);
 			angle = D3DXVec3Dot(&dir, &direc);
-			//cout << angle << endl;
+			cout << angle << endl;
 			if (angle < -0.31f)
 			{
 				//damage аж╠Б

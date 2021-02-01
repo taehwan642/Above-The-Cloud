@@ -12,6 +12,11 @@ void SubjectManager::AddData(UINT _flag, void* _data)
 	}
 }
 
+void SubjectManager::SetData(UINT _flag, void* _data)
+{
+	datagroup[_flag] = _data;
+}
+
 void SubjectManager::DeleteData(UINT _flag)
 {
 	auto iter = datagroup.find(_flag);

@@ -9,7 +9,6 @@ class LockPoint final :
 {
 private:
     PlayerObserver* ob = nullptr;
-    Engine::Transform* dstTransform = nullptr;
 protected:
 public:
     explicit LockPoint(void);

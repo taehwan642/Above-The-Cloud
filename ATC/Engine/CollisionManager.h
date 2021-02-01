@@ -32,7 +32,7 @@ public:
         out D3DXVECTOR3& _targetposition,
         in ObjectTag _dsttag);
 
-    GameObject* GetClosestObject(in ObjectTag _dsttag, in D3DXVECTOR3& _srcpos, in D3DXVECTOR3& _srcdir, in float& _angle);
+    GameObject* GetClosestObject(in ObjectTag _dsttag, in const D3DXVECTOR3& _srcpos, in const D3DXVECTOR3& _srcdir, in const float _angle);
 
     GameObject* dstObject = nullptr; // MouseRaySphere Intersection을 했을 때, 맞은 Object를 여기에 넣어준다.
 

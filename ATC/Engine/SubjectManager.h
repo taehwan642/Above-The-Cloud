@@ -10,6 +10,7 @@ private:
 protected:
 public:
     void AddData(UINT _flag, void* _data);
+    void SetData(UINT _flag, void* _data);
     void DeleteData(UINT _flag);
     
     void* GetData(UINT _flag);
