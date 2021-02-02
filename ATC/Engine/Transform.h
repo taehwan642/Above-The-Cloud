@@ -33,6 +33,16 @@ public:
 
     void Rotate(RotType _rotType, float _angle);
 
+    bool Vec3Lerp(D3DXVECTOR3& _position, const D3DXVECTOR3& _destination, const FLOAT& _dt)
+    {
+        D3DXVec3Lerp(&_position, &_position, &_destination, _dt);
+        if (D3DXVec3Length(&D3DXVECTOR3(_position - _destination)) < 0.5f)
+        {
+            return true;
+        }
+        return false;
+    }
+
     void Free(void) override {};
 };
 END

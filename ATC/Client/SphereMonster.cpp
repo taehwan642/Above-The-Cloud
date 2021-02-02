@@ -81,11 +81,24 @@ void SphereMonster::Update(const FLOAT& dt)
 
 	if (!testcase)
 	{
-		movementqueue.emplace([=]() ->bool {
-			transform->position = { 30,30,30 };
-			return true; });
+		movementqueue.emplace([=]()-> bool
+			{
+				cout << transform->position.x << " " << transform->position.y << " " << transform->position.z << endl;
+				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(50, 50, 50), dt / 20);
+			});
+		movementqueue.emplace([=]()-> bool
+			{
+				cout << transform->position.x << " " << transform->position.y << " " << transform->position.z << endl;
+				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(-50, -50, 50), dt / 20);
+			});
+		movementqueue.emplace([=]()-> bool
+			{
+				cout << transform->position.x << " " << transform->position.y << " " << transform->position.z << endl;
+				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(50, 50, 50), dt / 20);
+			});
 		testcase = true;
 	}
+
 	MonsterBase::Update(dt);
 }
 
@@ -105,7 +118,7 @@ void SphereMonster::Render(const FLOAT& dt)
 	tempeffect->BeginPass(0);
 	mesh->RenderMesh(tempeffect);
 	tempeffect->EndPass();
-	tempeffect->End(); 
+	tempeffect->End();
 
 	collider->RenderCollider();
 
