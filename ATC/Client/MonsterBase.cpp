@@ -27,6 +27,16 @@ void MonsterBase::Update(const FLOAT& dt)
 {
 	if (Hp <= 0)
 		isActive = false;
+
+	if (!movementqueue.empty())
+	{
+		if (movementqueue.front())
+		{
+			cout << "야시발 이거 됐다 ㅋㅋ" << endl;
+			movementqueue.pop();
+		}
+	}
+
 	Engine::GameObject::Update(dt);
 }
 

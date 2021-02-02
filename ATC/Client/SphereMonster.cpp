@@ -10,6 +10,8 @@
 #include "PlayerObserver.h"
 #include "SphereMonster.h"
 
+bool testcase = false;
+
 SphereMonster::SphereMonster(void)
 {
 	shader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dyshader"));
@@ -43,6 +45,11 @@ SphereMonster::~SphereMonster(void)
 
 void SphereMonster::Movement(void)
 {
+	// 1. Rand
+	// 2. SEt
+	// 3. Play
+
+	//transform->position = 
 }
 
 void SphereMonster::Update(const FLOAT& dt)
@@ -71,6 +78,14 @@ void SphereMonster::Update(const FLOAT& dt)
 	memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
 	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
 	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
+
+	if (!testcase)
+	{
+		movementqueue.emplace([=]() ->bool {
+			transform->position = { 30,30,30 };
+			return true; });
+		testcase = true;
+	}
 	MonsterBase::Update(dt);
 }
 

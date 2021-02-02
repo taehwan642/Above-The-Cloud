@@ -352,6 +352,7 @@ void      WINAPI DXUTDestroyState(); // Optional method to destroy DXUT's memory
 #include <string>
 #include <algorithm>
 #include <functional>
+#include <queue>
 using namespace std;
 
 #define NAMESPACE(name) namespace name {

@@ -29,7 +29,7 @@ public:
     void GetHit(const FLOAT& _damageamount);
 
     virtual void Movement(void) {};
-    function<void(void)> Attack; // 다중 Attack을 위한 Function
+    queue<function<bool(void)>> movementqueue; // queue로, bool lambda를 담아서 움직임 또는 공격이 끝났다면 r true로 pop시킨ㄷㅏㅏㅏ.
 
     void Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
