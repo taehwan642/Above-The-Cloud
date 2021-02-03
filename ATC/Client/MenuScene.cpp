@@ -75,13 +75,14 @@ void MenuScene::Start(void)
 
 void MenuScene::Update(const float& dt)
 {
-	Scene::Update(dt);
-	Engine::CollisionManager::GetInstance()->UpdateData();
+	Engine::CollisionManager::GetInstance()->UpdateData(); // Active가 false인 애들을 먼저 지우고
+	Scene::Update(dt); // 씬 내에서 Release를 해준다.
 }
 
 void MenuScene::LateUpdate(const FLOAT& dt)
 {
 	Engine::CollisionManager::GetInstance()->CheckCollision(PLAYER, MONSTER);
+	Engine::CollisionManager::GetInstance()->CheckCollision(MISSILE, MONSTER);
 	Scene::LateUpdate(dt);
 }
 

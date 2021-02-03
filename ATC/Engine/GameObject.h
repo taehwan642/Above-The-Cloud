@@ -10,6 +10,7 @@ class GameObject :
 private:
 protected:
 	friend class Layer;
+	friend class CollisionManager;
 
 	map<wstring, Component*> componentgroup;
 	list<Component*> compo;
@@ -37,6 +38,8 @@ public:
 	virtual void Update(const FLOAT& dt);
 	virtual void LateUpdate(const FLOAT& dt) {};
 	virtual void Render(const FLOAT& dt);
+
+	void SetActive(bool _active) { isActive = _active; };
 
 	void Free(void) override;
 };

@@ -23,6 +23,14 @@ void MonsterBase::GetHit(const FLOAT& _damageamount)
 	Hp -= _damageamount;
 }
 
+void MonsterBase::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
+{
+	if (_objectTag == L"Missile")
+	{
+		_gameObject->SetActive(false);
+	}
+}
+
 void MonsterBase::Update(const FLOAT& dt)
 {
 	if (Hp <= 0)

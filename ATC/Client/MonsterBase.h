@@ -31,6 +31,8 @@ public:
     virtual void Movement(void) {};
     queue<function<bool(void)>> movementqueue; // queue로, bool lambda를 담아서 움직임 또는 공격이 끝났다면 r true로 pop시킨ㄷㅏㅏㅏ.
 
+    void CollisionEvent(const wstring& _objectTag, GameObject* _gameObject) override;
+    
     void Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;

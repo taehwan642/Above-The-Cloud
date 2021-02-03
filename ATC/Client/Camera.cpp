@@ -120,5 +120,7 @@ void Camera::KeyInput(FLOAT _dt)
 
 void Camera::Free(void)
 {
+	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
+	observer->Release();
 	GameObject::Free();
 }

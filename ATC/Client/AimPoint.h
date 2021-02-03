@@ -8,7 +8,7 @@ class AimPoint final :
     public Engine::StaticUI // dynamic으로 교체 -> 
 {
 private:
-    Engine::Transform* playerTransform;
+    PlayerObserver* ob = nullptr;
     bool lookback = false;
     bool pointlock = true;
 protected:

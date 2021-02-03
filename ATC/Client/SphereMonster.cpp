@@ -83,17 +83,14 @@ void SphereMonster::Update(const FLOAT& dt)
 	{
 		movementqueue.emplace([=]()-> bool
 			{
-				cout << transform->position.x << " " << transform->position.y << " " << transform->position.z << endl;
 				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(50, 50, 50), dt / 20);
 			});
 		movementqueue.emplace([=]()-> bool
 			{
-				cout << transform->position.x << " " << transform->position.y << " " << transform->position.z << endl;
 				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(-50, -50, 50), dt / 20);
 			});
 		movementqueue.emplace([=]()-> bool
 			{
-				cout << transform->position.x << " " << transform->position.y << " " << transform->position.z << endl;
 				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(50, 50, 50), dt / 20);
 			});
 		testcase = true;
@@ -128,5 +125,7 @@ void SphereMonster::Render(const FLOAT& dt)
 
 void SphereMonster::Free(void)
 {
+	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
+	observer->Release();
 	MonsterBase::Free();
 }

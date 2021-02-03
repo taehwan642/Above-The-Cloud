@@ -15,8 +15,10 @@ Missile::Missile(void)
 	transform = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transform);
 	mesh = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Missile"));
-	
+	componentgroup.emplace(L"StaticMesh", mesh);
+
 	shader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dyshader"));
+	componentgroup.emplace(L"Shader", shader);
 
 	collider = new Engine::Collider(1, &transform->position);
 	colliderdata.center = &transform->position;
@@ -66,8 +68,19 @@ Missile::~Missile(void)
 
 }
 
+void Missile::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
+{
+	
+}
+
 void Missile::Update(const FLOAT& dt)
 {
+	GameObject::Update(dt);
+}
+
+void Missile::LateUpdate(const FLOAT& dt)
+{
+	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT));
 	//-36
 	D3DXVECTOR3 trailpos[2];
 	D3DXVec3TransformCoord(&trailpos[0], &D3DXVECTOR3(-2, 0, -36), &transform->worldMatrix);
@@ -77,7 +90,7 @@ void Missile::Update(const FLOAT& dt)
 
 	if (ob->GetMissileLock() != nullptr && homingtime <= 0)
 	{
-		D3DXVECTOR3 dstPos = 
+		D3DXVECTOR3 dstPos =
 			dynamic_cast<Engine::Transform*>
 			(ob->GetMissileLock()->GetComponent(L"Transform"))->position;
 		// 나와 플레이어의 방향을 구한다.
@@ -85,19 +98,19 @@ void Missile::Update(const FLOAT& dt)
 		D3DXVECTOR3 look = dstPos - transform->position;
 		D3DXVec3Normalize(&look, &look);
 		//look *= -1.f;
-	
+
 		//  up과 look외적 => right
 		D3DXVECTOR3 right;
 		D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
 		D3DXVec3Normalize(&right, &right);
-	
+
 		//right *= -1.f;
-	
+
 		// look과 right 외적 => up
 		D3DXVECTOR3 up;
 		D3DXVec3Cross(&up, &look, &right);
 		D3DXVec3Normalize(&up, &up);
-	
+
 		D3DXMATRIX matRot;
 		D3DXMatrixIdentity(&matRot);
 		memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
@@ -116,12 +129,6 @@ void Missile::Update(const FLOAT& dt)
 		transform->position += dir * 20 * dt;
 	}
 	
-	GameObject::Update(dt);
-}
-
-void Missile::LateUpdate(const FLOAT& dt)
-{
-	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT));
 	GameObject::LateUpdate(dt);
 }
 
@@ -144,5 +151,7 @@ void Missile::Render(const FLOAT& dt)
 
 void Missile::Free(void)
 {
+	Engine::SubjectManager::GetInstance()->UnSubscribe(ob);
+	ob->Release();
 	GameObject::Free();
 }

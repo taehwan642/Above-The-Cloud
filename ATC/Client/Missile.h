@@ -24,6 +24,8 @@ protected:
 public:
     explicit Missile(void);
     virtual ~Missile(void);
+    
+    void CollisionEvent(const wstring& _objectTag, GameObject* _gameObject) override;
 
     void Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;

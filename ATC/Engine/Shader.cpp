@@ -61,7 +61,8 @@ HRESULT Shader::SetupTable(const D3DXMATRIX& _world)
 void Shader::Free(void)
 {
 	Safe_Release(effect);
-	errormsg->Release();
+	if(errormsg != nullptr)
+		errormsg->Release();
 }
 
 Resources* Shader::Clone(void)

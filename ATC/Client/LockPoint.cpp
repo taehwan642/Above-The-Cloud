@@ -69,5 +69,7 @@ void LockPoint::Render(const FLOAT& dt)
 
 void LockPoint::Free(void)
 {
+	Engine::SubjectManager::GetInstance()->UnSubscribe(ob);
+	ob->Release();
 	Engine::StaticUI::Free();
 }

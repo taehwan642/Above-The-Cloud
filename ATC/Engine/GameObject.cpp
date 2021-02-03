@@ -1,6 +1,7 @@
 #include "DXUT.h"
 #include "Layer.h"
 #include "Component.h"
+#include "CollisionManager.h"
 #include "GameObject.h"
 
 USING(Engine)

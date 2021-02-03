@@ -8,10 +8,9 @@
 AimPoint::AimPoint(wstring _texturetag) :
 	Engine::StaticUI(_texturetag)
 {
-	PlayerObserver* ob = new PlayerObserver();
+	ob = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(ob);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
-	playerTransform = ob->GetTransform();
 }
 
 AimPoint::~AimPoint(void)
@@ -21,8 +20,8 @@ AimPoint::~AimPoint(void)
 void AimPoint::Update(const FLOAT& dt)
 {
 	Engine::StaticUI::Update(dt);
-	D3DXVECTOR3 playerLook = -(*reinterpret_cast<D3DXVECTOR3*>(&playerTransform->worldMatrix._31));
-	D3DXVECTOR3 pos = playerTransform->position + playerLook * 5000;
+	D3DXVECTOR3 playerLook = -(*reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._31));
+	D3DXVECTOR3 pos = ob->GetTransform()->position + playerLook * 5000;
 
 	D3DXMATRIX			matView, matProj;
 	D3DVIEWPORT9		viewPort;
@@ -75,5 +74,7 @@ void AimPoint::Render(const FLOAT& dt)
 
 void AimPoint::Free(void)
 {
+	Engine::SubjectManager::GetInstance()->UnSubscribe(ob);
+	ob->Release();
 	Engine::StaticUI::Free();
 }

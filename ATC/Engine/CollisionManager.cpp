@@ -99,7 +99,8 @@ void CollisionManager::CheckCollision(ObjectTag _src, ObjectTag _dst)
 			if (CheckSphereCollision(*srcdata->center, srcdata->radius, *dstdata->center, dstdata->radius))
 			{
 				srcobj->CollisionEvent(dstdata->tag, dstobj);
-				dstobj->CollisionEvent(srcdata->tag, dstobj);
+				dstobj->CollisionEvent(srcdata->tag, srcobj);
+				
 				srcdata->ishit = true;
 				dstdata->ishit = true;
 			}
@@ -166,7 +167,7 @@ void CollisionManager::UpdateData(void)
 
 		for (; iter != iter_end;)
 		{
-			if ((*iter) == nullptr)
+			if ((*iter)->isActive == false)
 				iter = colliderdatas[i].erase(iter);
 			else
 				++iter;

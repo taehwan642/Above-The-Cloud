@@ -23,6 +23,7 @@ test::test(void)
 	testshader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dyshader"));
 	testdynamic = dynamic_cast<Engine::DynamicMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dynamic"));
 	componentgroup.emplace(L"shader", testshader);
+	componentgroup.emplace(L"DynamicMesh", testdynamic);
 
 	transform = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transform);

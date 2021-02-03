@@ -75,5 +75,6 @@ void testChild::Render(const FLOAT& dt)
 
 void testChild::Free(void)
 {
+	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
 	observer->Release();
 }

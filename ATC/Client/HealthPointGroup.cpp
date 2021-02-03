@@ -39,4 +39,6 @@ void HealthPointGroup::Free(void)
 {
 	for (int i = 0; i < 5; ++i)
 		hp[i]->Release();
+	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
+	observer->Release();
 }
