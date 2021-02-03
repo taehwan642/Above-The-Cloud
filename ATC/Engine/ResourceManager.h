@@ -16,5 +16,7 @@ public:
     HRESULT AddShader(wstring _filepath, wstring _tag);
 
     Resources* LoadResource(wstring _tag);
+
+    void ReleaseResources(void);
 };
 END

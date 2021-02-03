@@ -61,4 +61,5 @@ void StaticUI::Render(const FLOAT& dt)
 
 void StaticUI::Free(void)
 {
+	UIBase::Free();
 }

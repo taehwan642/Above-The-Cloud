@@ -20,11 +20,13 @@ testChild::testChild(void)
 	
 	t = new Engine::Transform(/*observer->GetTransform()*/);
 	componentgroup.emplace(L"Transform", t);
+	componentgroup.emplace(L"Shader", testshader);
 	t->scale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
 	t->position = { 5,5,50 };
 	testsphere = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Cloud"));
-
+	componentgroup.emplace(L"StaticMesh", testsphere);
 	collider = new Engine::Collider(2, &t->position);
+	componentgroup.emplace(L"collider", collider);
 	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
 
 	colliderdata.center = &t->position;
@@ -77,4 +79,5 @@ void testChild::Free(void)
 {
 	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
 	observer->Release();
+	GameObject::Free();
 }

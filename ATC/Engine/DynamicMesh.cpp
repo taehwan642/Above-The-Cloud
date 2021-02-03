@@ -29,6 +29,7 @@ DynamicMesh::DynamicMesh(const DynamicMesh& rhs) :
 	parent(rhs.parent),
 	vertexposition(rhs.vertexposition)
 {
+
 }
 
 DynamicMesh::~DynamicMesh(void)
@@ -338,11 +339,11 @@ void DynamicMesh::Free(void)
 {
 	parent = nullptr;
 	Safe_Release(anicontroller);
-	hierarchy->DestroyFrame(rootFrame);
-	Safe_Release(hierarchy);
-	meshcontainergroup.clear();
 	if (!isCloned)
 	{
-		SAFE_DELETE_ARRAY(vertexposition);
+		Safe_Release(hierarchy);
+		hierarchy->DestroyFrame(rootFrame);
+		Safe_Delete_Array(vertexposition);
 	}
+	meshcontainergroup.clear();
 }

@@ -380,6 +380,26 @@ DWORD Safe_Release(T& t)
     return refCount;
 }
 
+template <typename T>
+void Safe_Delete(T& _pointer)
+{
+    if (_pointer != NULL)
+    {
+        delete _pointer;
+        _pointer = NULL;
+    }
+}
+
+template <typename T>
+void Safe_Delete_Array(T& _pointer)
+{
+    if (_pointer != NULL) 
+    {
+        delete[] _pointer;
+        _pointer = NULL;
+    }
+}
+
 enum class MeshType
 {
     STATIC,

@@ -81,3 +81,12 @@ Resources* ResourceManager::LoadResource(wstring _tag)
 		return resourcegroup[_tag]->Clone();
 	return nullptr;
 }
+
+void ResourceManager::ReleaseResources(void)
+{
+	for (auto& iter : resourcegroup)
+	{
+		iter.second->Release();
+	}
+	resourcegroup.clear();
+}

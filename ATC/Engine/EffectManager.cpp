@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include "SceneManager.h"
 #include "TextureEffect.h"
+#include "Transform.h"
 #include "EffectManager.h"
 USING(Engine)
 

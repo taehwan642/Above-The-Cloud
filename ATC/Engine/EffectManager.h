@@ -1,6 +1,7 @@
 #pragma once
 #include "Singleton.h"
 NAMESPACE(Engine)
+class Transform;
 class EffectManager :
     public Singleton<EffectManager>
 {

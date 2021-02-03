@@ -26,5 +26,7 @@ public:
     void SceneRender(const FLOAT& dt);
     void LostDevice(void);
     void ResetDevice(void);
+
+    void ReleaseScenes(void);
 };
 END

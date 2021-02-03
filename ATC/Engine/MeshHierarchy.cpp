@@ -6,7 +6,7 @@ void MeshHierarchy::AllocateName(char** destination, const char* name)
     if (name != nullptr)
     {
         UINT length = strlen(name);
-        *destination = new char[length];
+        *destination = new char[length + 1];
         strcpy_s(*destination, length + 1, name);
     }
 }
@@ -141,14 +141,14 @@ STDMETHODIMP_(HRESULT __stdcall) MeshHierarchy::CreateMeshContainer(LPCSTR Name,
 
 STDMETHODIMP_(HRESULT __stdcall) MeshHierarchy::DestroyFrame(LPD3DXFRAME pFrameToFree)
 {
-    SAFE_DELETE_ARRAY(pFrameToFree->Name);
+    Safe_Delete_Array(pFrameToFree->Name);
     if (pFrameToFree->pMeshContainer != nullptr)
         DestroyMeshContainer(pFrameToFree->pMeshContainer);
     if (pFrameToFree->pFrameSibling != nullptr)
         DestroyFrame(pFrameToFree->pFrameSibling);
     if (pFrameToFree->pFrameFirstChild != nullptr)
         DestroyFrame(pFrameToFree->pFrameFirstChild);
-    SAFE_DELETE(pFrameToFree);
+    Safe_Delete(pFrameToFree);
     return S_OK;
 }
 
@@ -157,17 +157,17 @@ STDMETHODIMP_(HRESULT __stdcall) MeshHierarchy::DestroyMeshContainer(LPD3DXMESHC
     D3DXMESHCONTAINER_DERIVED* meshcontainer = static_cast<D3DXMESHCONTAINER_DERIVED*>(pMeshContainerToFree);
     for (ULONG i = 0; i < meshcontainer->NumMaterials; ++i)
         Safe_Release(meshcontainer->textures[i]);
-    SAFE_DELETE_ARRAY(meshcontainer->pAdjacency);
-    SAFE_DELETE_ARRAY(meshcontainer->pMaterials);
-    SAFE_DELETE_ARRAY(meshcontainer->Name);
-    SAFE_DELETE_ARRAY(meshcontainer->textures);
-    SAFE_DELETE_ARRAY(meshcontainer->frameOffsetMatrix);
-    SAFE_DELETE_ARRAY(meshcontainer->frameCombinedMatrix);
-    SAFE_DELETE_ARRAY(meshcontainer->renderingMatrix);
+    Safe_Delete_Array(meshcontainer->pAdjacency);
+    Safe_Delete_Array(meshcontainer->pMaterials);
+    Safe_Delete_Array(meshcontainer->Name);
+    Safe_Delete_Array(meshcontainer->textures);
+    Safe_Delete_Array(meshcontainer->frameOffsetMatrix);
+    Safe_Delete_Array(meshcontainer->frameCombinedMatrix);
+    Safe_Delete_Array(meshcontainer->renderingMatrix);
     Safe_Release(meshcontainer->MeshData.pMesh);
     Safe_Release(meshcontainer->pSkinInfo);
     Safe_Release(meshcontainer->originalMesh);
-    SAFE_DELETE(meshcontainer);
+    Safe_Delete(meshcontainer);
     return S_OK;
 }
 

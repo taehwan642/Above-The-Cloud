@@ -14,6 +14,11 @@ public:
 			instance = new T();
 		return instance;
 	}
+
+	static void DestroyInstance(void)
+	{
+		delete instance;
+	}
 };
 
 template <class T> T* Singleton<T>::instance = nullptr;

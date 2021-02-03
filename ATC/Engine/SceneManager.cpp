@@ -62,3 +62,12 @@ void SceneManager::ResetDevice(void)
 	if (currentScene)
 		currentScene->ResetDevice();
 }
+
+void SceneManager::ReleaseScenes(void)
+{
+	for (auto& iter : scenegroup)
+	{
+		iter.second->Release();
+	}
+	scenegroup.clear();
+}

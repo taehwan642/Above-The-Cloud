@@ -14,8 +14,9 @@ UIBase::UIBase(void)
 UIBase::UIBase(wstring _texturetag)
 {
 	texture = dynamic_cast<Texture*>(ResourceManager::GetInstance()->LoadResource(_texturetag));
+	componentgroup.emplace(L"Texture", texture);
 	transform = new Transform();
-	componentgroup.emplace(L"transform", transform);
+	componentgroup.emplace(L"Transform", transform);
 }
 
 UIBase::UIBase(wstring _texturetag, Transform* _parent)

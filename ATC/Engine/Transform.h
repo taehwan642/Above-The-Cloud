@@ -43,6 +43,6 @@ public:
         return false;
     }
 
-    void Free(void) override {};
+    void Free(void) override;
 };
 END

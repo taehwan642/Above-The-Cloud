@@ -25,7 +25,6 @@ Transform::Transform(Transform* _parent) :
 
 Transform::~Transform(void)
 {
-	ReleaseParent();
 }
 
 void Transform::SetParent(Transform* _parent)
@@ -70,4 +69,9 @@ void Transform::Update(const float& dt)
 	worldMatrix = S * matRot * T;
 	if (parent != nullptr)
 		worldMatrix *= parent->worldMatrix;
+}
+
+void Transform::Free(void)
+{
+	ReleaseParent();
 }
