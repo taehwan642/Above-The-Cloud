@@ -8,6 +8,8 @@
 #include "../Engine/CollisionManager.h"
 #include "../Engine/Collider.h"
 #include "PlayerObserver.h"
+#include "MonsterBullet.h"
+#include "../Engine/ObjectManager.h"
 #include "SphereMonster.h"
 
 bool testcase = false;

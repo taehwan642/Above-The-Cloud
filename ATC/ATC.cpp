@@ -9,6 +9,9 @@
 #include "Engine/ObjectManager.h"
 #include "Client/MenuScene.h"
 
+
+
+
 HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
                                      void* pUserContext )
 {
@@ -84,7 +87,7 @@ int main(void)
     _CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 #endif
 
-    //_CrtSetBreakAlloc(652);
+    //_CrtSetBreakAlloc(252);
 
     DXUTSetCallbackD3D9DeviceCreated( OnD3D9CreateDevice );
     DXUTSetCallbackD3D9DeviceReset( OnResetDevice );
@@ -107,3 +110,8 @@ int main(void)
 }
 
 
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#define new DEBUG_NEW
+#endif // _DEBUG

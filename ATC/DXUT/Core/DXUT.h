@@ -353,6 +353,7 @@ void      WINAPI DXUTDestroyState(); // Optional method to destroy DXUT's memory
 #include <algorithm>
 #include <functional>
 #include <queue>
+#include <vld.h>
 using namespace std;
 
 #define NAMESPACE(name) namespace name {
@@ -469,7 +470,7 @@ struct ColliderData
     bool ishit;
 };
 
-static D3DXVECTOR4 worldLightPosition = { 500, 500, -500, 1 };
+static D3DXVECTOR4 worldLightPosition = { 0, 50000, -0, 1 };
 static D3DXVECTOR4 worldCameraPosition = { 0, 0, 0, 1 };
 
 #endif

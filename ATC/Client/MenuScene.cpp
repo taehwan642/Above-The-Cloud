@@ -44,6 +44,9 @@ void MenuScene::Start(void)
 		cout << "¸ÓÁñÇÃ·¡½Ã ON" << endl;
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/Lock.png", L"LockPoint", 1)))
 		cout << "LOCKPOINT ON" << endl;
+
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"MonsterBullet.X", L"MonsterBullet")))
+		cout << "MB OK" << endl;
 	
 	Engine::GraphicsManager::GetInstance()->CreateSprite();
 	Engine::Layer* l = new Engine::Layer();
@@ -93,7 +96,6 @@ void MenuScene::Render(const FLOAT& dt)
 
 void MenuScene::Exit(void)
 {
-	cout << "¿¢½ÃÆ®" << endl;
 	Engine::CollisionManager::GetInstance()->ClearData();
 	Engine::SubjectManager::GetInstance()->ClearObservers();
 	Engine::GraphicsManager::GetInstance()->DeleteSprite();

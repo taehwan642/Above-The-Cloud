@@ -92,8 +92,8 @@
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>true</GenerateManifest>
     <ExecutablePath>$(DXSDK_DIR)Utilities\bin\x86;$(ExecutablePath)</ExecutablePath>
-    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)Include;C:\Program Files (x86)\Visual Leak Detector\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;C:\Program Files (x86)\Visual Leak Detector\lib\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|X64'">
     <LinkIncremental>true</LinkIncremental>
@@ -396,6 +396,7 @@
     <ClCompile Include="Client\MenuScene.cpp" />
     <ClCompile Include="Client\Missile.cpp" />
     <ClCompile Include="Client\MonsterBase.cpp" />
+    <ClCompile Include="Client\MonsterBullet.cpp" />
     <ClCompile Include="Client\PlayerObserver.cpp" />
     <ClCompile Include="Client\SkySphere.cpp" />
     <ClCompile Include="Client\SphereMonster.cpp" />
@@ -440,6 +441,7 @@
     <ClInclude Include="Client\MenuScene.h" />
     <ClInclude Include="Client\Missile.h" />
     <ClInclude Include="Client\MonsterBase.h" />
+    <ClInclude Include="Client\MonsterBullet.h" />
     <ClInclude Include="Client\PlayerObserver.h" />
     <ClInclude Include="Client\SkySphere.h" />
     <ClInclude Include="Client\SphereMonster.h" />

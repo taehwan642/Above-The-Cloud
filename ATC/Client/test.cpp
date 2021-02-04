@@ -167,8 +167,8 @@ void test::Render(const FLOAT& dt)
 	testshader->SetupTable(transform->worldMatrix);
 	UINT pass = 0;
 	LPD3DXEFFECT tempeffect = testshader->GetEffect();
-	//tempeffect->SetVector((D3DXHANDLE)L"lightposition", &worldLightPosition);
-	//tempeffect->SetVector((D3DXHANDLE)L"cameraposition", &worldCameraPosition);
+	tempeffect->SetVector((D3DXHANDLE)L"lightposition", &worldLightPosition);
+	tempeffect->SetVector((D3DXHANDLE)L"cameraposition", &worldCameraPosition);
 	tempeffect->Begin(&pass, 0);
 	tempeffect->BeginPass(0);
 	testdynamic->RenderNoSkinnedMesh(tempeffect);

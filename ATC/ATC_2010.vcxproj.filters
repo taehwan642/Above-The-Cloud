@@ -135,12 +135,6 @@
     <Filter Include="2Client\1GameObject\2Player">
       <UniqueIdentifier>{8ec42cc9-dd16-423e-abe3-c68ca20bee62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Client\1GameObject\2Player\plane">
-      <UniqueIdentifier>{6e9e7594-6c67-477d-862d-0c8a5d38abd1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2Client\1GameObject\2Player\child">
-      <UniqueIdentifier>{b1635ba7-bb40-4892-bd24-0ac873d07c1f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2Client\1GameObject\3UI">
       <UniqueIdentifier>{39f575cc-9fe0-4496-8b9c-e3c0083bda80}</UniqueIdentifier>
     </Filter>
@@ -191,6 +185,9 @@
     </Filter>
     <Filter Include="2Client\1GameObject\3UI\2LockPoint">
       <UniqueIdentifier>{d0373f5c-7d0e-47fd-8f2e-6aa24a0e73d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\7Cloud">
+      <UniqueIdentifier>{b1635ba7-bb40-4892-bd24-0ac873d07c1f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -310,11 +307,8 @@
     <ClCompile Include="Engine\AnimationController.cpp">
       <Filter>1Engine\4Component\3Mesh\1DynamicMesh\AnimationController</Filter>
     </ClCompile>
-    <ClCompile Include="Client\test.cpp">
-      <Filter>2Client\1GameObject\2Player\plane</Filter>
-    </ClCompile>
     <ClCompile Include="Client\testChild.cpp">
-      <Filter>2Client\1GameObject\2Player\child</Filter>
+      <Filter>2Client\1GameObject\7Cloud</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Subject.cpp">
       <Filter>1Engine\7Observer\1Subject</Filter>
@@ -388,6 +382,12 @@
     <ClCompile Include="Client\LockPoint.cpp">
       <Filter>2Client\1GameObject\3UI\2LockPoint</Filter>
     </ClCompile>
+    <ClCompile Include="Client\test.cpp">
+      <Filter>2Client\1GameObject\2Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\MonsterBullet.cpp">
+      <Filter>2Client\1GameObject\5Monsters\1MonsterBullets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -450,11 +450,8 @@
     <ClInclude Include="Engine\AnimationController.h">
       <Filter>1Engine\4Component\3Mesh\1DynamicMesh\AnimationController</Filter>
     </ClInclude>
-    <ClInclude Include="Client\test.h">
-      <Filter>2Client\1GameObject\2Player\plane</Filter>
-    </ClInclude>
     <ClInclude Include="Client\testChild.h">
-      <Filter>2Client\1GameObject\2Player\child</Filter>
+      <Filter>2Client\1GameObject\7Cloud</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Subject.h">
       <Filter>1Engine\7Observer\1Subject</Filter>
@@ -527,6 +524,12 @@
     </ClInclude>
     <ClInclude Include="Client\LockPoint.h">
       <Filter>2Client\1GameObject\3UI\2LockPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\test.h">
+      <Filter>2Client\1GameObject\2Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\MonsterBullet.h">
+      <Filter>2Client\1GameObject\5Monsters\1MonsterBullets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
