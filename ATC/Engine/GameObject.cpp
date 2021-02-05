@@ -2,6 +2,7 @@
 #include "Layer.h"
 #include "Component.h"
 #include "CollisionManager.h"
+#include "ObjectManager.h"
 #include "GameObject.h"
 
 USING(Engine)
@@ -22,12 +23,13 @@ void GameObject::LostDevice(void)
 	}
 }
 
-void GameObject::Update(const FLOAT& dt)
+INT GameObject::Update(const FLOAT& dt)
 {
 	for (auto& component : componentgroup)
 	{
 		component.second->Update(dt);
 	}
+	return OBJALIVE;
 }
 
 void GameObject::Render(const FLOAT& dt)

@@ -11,6 +11,19 @@ class ObjectManager final :
 {
 public:
     template<class T>
+    T* GetActiveFalsedObject(const wstring& _layertag, const wstring& _objecttag)
+    {
+        Layer* l = SceneManager::GetInstance()->GetCurrentSceneLayer(_layertag);
+        for (auto& iter : l->gameobjectgroup[_objecttag])
+        {
+            if (iter->isActive == false)
+                return dynamic_cast<T*>(iter);
+        }
+        return nullptr;
+    }
+
+
+    template<class T>
     T* AddObjectAtLayer(const wstring& _layertag, const wstring& _objecttag)
     {
         T* object = new T();
@@ -19,6 +32,4 @@ public:
         return object;
     }
 };
-
 END
-

@@ -29,9 +29,10 @@ void StaticUI::SetPosition(const D3DXVECTOR2& _position)
 	transform->position.y = _position.y;
 }
 
-void StaticUI::Update(const FLOAT& dt)
+INT StaticUI::Update(const FLOAT& dt)
 {
 	GameObject::Update(dt);
+	return OBJALIVE;
 }
 
 void StaticUI::LateUpdate(const FLOAT& dt)

@@ -75,7 +75,7 @@ void test::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
 	cout << "??!?!?!" << endl;
 }
 
-void test::Update(const float& dt)
+INT test::Update(const float& dt)
 {
 	GameObject::Update(dt);
 	D3DXVec3TransformCoord(&lefttrailpos[0], &D3DXVECTOR3(509, -22, -189), &transform->worldMatrix);
@@ -120,6 +120,7 @@ void test::Update(const float& dt)
 	dstObject = Engine::CollisionManager::GetInstance()->GetClosestObject(MONSTER, transform->position,
 		directionVector, -0.61f);
 	Engine::SubjectManager::GetInstance()->SetData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);
+	return OBJALIVE;
 }
 
 void test::LateUpdate(const FLOAT& dt)
@@ -155,7 +156,17 @@ void test::LateUpdate(const FLOAT& dt)
 	}
 
 	if (DXUTWasKeyPressed('E'))
-		Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Missile>(L"테스트", L"테스트");
+	{
+		Missile* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Missile>(L"테스트", L"BULLET");
+
+		if (m == nullptr)
+			Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Missile>(L"테스트", L"BULLET");
+		else
+		{
+			m->SetActive(true);
+			m->Initalize();
+		}
+	}
 
 	GameObject::LateUpdate(dt);
 }

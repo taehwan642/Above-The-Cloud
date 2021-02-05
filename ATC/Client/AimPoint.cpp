@@ -17,7 +17,7 @@ AimPoint::~AimPoint(void)
 {
 }
 
-void AimPoint::Update(const FLOAT& dt)
+INT AimPoint::Update(const FLOAT& dt)
 {
 	Engine::StaticUI::Update(dt);
 	D3DXVECTOR3 playerLook = -(*reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._31));
@@ -54,7 +54,7 @@ void AimPoint::Update(const FLOAT& dt)
 		ClientToScreen(DXUTGetHWND(), &p);
 		::SetCursorPos(p.x, p.y);
 	}
-	
+	return OBJALIVE;
 }
 
 void AimPoint::LateUpdate(const FLOAT& dt)

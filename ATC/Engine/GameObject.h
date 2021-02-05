@@ -11,6 +11,7 @@ private:
 protected:
 	friend class Layer;
 	friend class CollisionManager;
+	friend class ObjectManager;
 
 	map<wstring, Component*> componentgroup;
 	list<Component*> compo;
@@ -35,7 +36,7 @@ public:
 		return nullptr;
 	};
 
-	virtual void Update(const FLOAT& dt);
+	virtual INT Update(const FLOAT& dt);
 	virtual void LateUpdate(const FLOAT& dt) {};
 	virtual void Render(const FLOAT& dt);
 

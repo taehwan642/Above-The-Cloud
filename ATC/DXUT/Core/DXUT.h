@@ -473,4 +473,11 @@ struct ColliderData
 static D3DXVECTOR4 worldLightPosition = { 0, 50000, -0, 1 };
 static D3DXVECTOR4 worldCameraPosition = { 0, 0, 0, 1 };
 
+enum ObjectState
+{
+    OBJALIVE,
+    OBJDEAD
+};
+
+
 #endif

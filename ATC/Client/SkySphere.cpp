@@ -17,9 +17,10 @@ SkySphere::~SkySphere(void)
 {
 }
 
-void SkySphere::Update(const float& dt)
+INT SkySphere::Update(const float& dt)
 {
 	GameObject::Update(dt);
+	return OBJALIVE;
 }
 
 void SkySphere::LateUpdate(const FLOAT& dt)

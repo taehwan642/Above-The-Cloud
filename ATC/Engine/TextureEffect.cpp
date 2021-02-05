@@ -23,7 +23,7 @@ TextureEffect::~TextureEffect(void)
 {
 }
 
-void TextureEffect::Update(const FLOAT& dt)
+INT TextureEffect::Update(const FLOAT& dt)
 {
 	alivetime += dt;
 	if (alivetime > textureChangedelta)
@@ -36,6 +36,7 @@ void TextureEffect::Update(const FLOAT& dt)
 	if (texturesize <= currentTextureIndex)
 		isActive = false;
 	DynamicUI::Update(dt);
+	return OBJALIVE;
 }
 
 void TextureEffect::LateUpdate(const FLOAT& dt)

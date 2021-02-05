@@ -18,10 +18,11 @@ LockPoint::~LockPoint(void)
 
 }
 
-void LockPoint::Update(const FLOAT& dt)
+INT LockPoint::Update(const FLOAT& dt)
 {
 	transform->rotation.z += 1.f * dt;
 	Engine::StaticUI::Update(dt);
+	return OBJALIVE;
 }
 
 void LockPoint::LateUpdate(const FLOAT& dt)

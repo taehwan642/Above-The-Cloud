@@ -65,9 +65,10 @@ DynamicUI::~DynamicUI(void)
 {
 }
 
-void DynamicUI::Update(const FLOAT& dt)
+INT DynamicUI::Update(const FLOAT& dt)
 {
 	UIBase::Update(dt);
+	return OBJALIVE;
 }
 
 void DynamicUI::LateUpdate(const FLOAT& dt)

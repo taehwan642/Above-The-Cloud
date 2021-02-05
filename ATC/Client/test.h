@@ -37,7 +37,7 @@ public:
 
     void CollisionEvent(const wstring& _objectTag, GameObject* _gameObject) override;
 
-    void Update(const float& dt) override;
+    INT Update(const float& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
 

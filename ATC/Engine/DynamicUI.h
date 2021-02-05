@@ -21,7 +21,7 @@ public:
     explicit DynamicUI(wstring _texturetag, Transform* _parent, bool _billboardenable = true);
     virtual ~DynamicUI(void);
 
-    void Update(const FLOAT& dt) override;
+    INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
 

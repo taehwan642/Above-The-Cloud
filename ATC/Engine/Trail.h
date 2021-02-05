@@ -49,6 +49,8 @@ public:
 	void Update(const FLOAT& dt) override;
 	void Render(const FLOAT& dt) override;
 
+	void ClearData(void);
+
 	void Free(void) override;
 };
 END

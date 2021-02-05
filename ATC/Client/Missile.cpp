@@ -26,7 +26,6 @@ Missile::Missile(void)
 	colliderdata.radius = 1;
 	colliderdata.tag = L"Missile";
 
-	Engine::CollisionManager::GetInstance()->PushData(MISSILE, this);
 	componentgroup.emplace(L"collider", collider);
 
 	transform->scale = { 0.02f, 0.02f, 0.02f };
@@ -36,8 +35,22 @@ Missile::Missile(void)
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT));
 
+	trail = new Engine::Trail();
+	trail->Initalize(&transform->worldMatrix, 1024, 0.03f, 4, 3, L"TrailTexture");
+	componentgroup.emplace(L"Trail", trail);
+
+	Initalize();
+}
+
+Missile::~Missile(void)
+{
+
+}
+
+void Missile::Initalize(void)
+{
 	transform->position = ob->GetTransform()->position;
-	
+
 	D3DXVECTOR3 vec;
 	vec = *reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._11);
 	vec *= -1.f;
@@ -48,24 +61,15 @@ Missile::Missile(void)
 	vec = *reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._31);
 	vec *= -1.f;
 	memcpy(&transform->worldMatrix._31, &vec, sizeof(D3DXVECTOR3));
-	
+
 	// 1. Player의 forward로 간다
 	transform->quaternion = ob->GetTransform()->quaternion;
 	transform->curQuaternion = ob->GetTransform()->curQuaternion;
 
 	transform->Rotate(Engine::Transform::UP, D3DXToRadian(180));
+	Engine::CollisionManager::GetInstance()->PushData(MISSILE, this);
 
-	trail = new Engine::Trail();
-	trail->Initalize(&transform->worldMatrix, 1024, 0.03f, 4, 3, L"TrailTexture");
-	componentgroup.emplace(L"Trail", trail);
-	// 근데 씨바 ㄹ왜 반대로 갈까?
-	// 반대로 가는 이유 1. player (ob)의 dir은 원래 반대여야만 한다.
-	// 2. 시간이 되면 유도 시작
-}
-
-Missile::~Missile(void)
-{
-
+	trail->ClearData();
 }
 
 void Missile::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
@@ -73,9 +77,10 @@ void Missile::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
 	
 }
 
-void Missile::Update(const FLOAT& dt)
+INT Missile::Update(const FLOAT& dt)
 {
 	GameObject::Update(dt);
+	return OBJALIVE;
 }
 
 void Missile::LateUpdate(const FLOAT& dt)
@@ -134,6 +139,8 @@ void Missile::LateUpdate(const FLOAT& dt)
 
 void Missile::Render(const FLOAT& dt)
 {
+	if (isActive == false)
+		return;
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	shader->SetupTable(transform->worldMatrix);
 	UINT pass = 0;

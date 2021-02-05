@@ -168,6 +168,11 @@ void Trail::Render(const FLOAT& dt)
 	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 }
 
+void Trail::ClearData(void)
+{
+	trailDatas.clear();
+}
+
 void Trail::Free(void)
 {
 	vb->Release();

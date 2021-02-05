@@ -24,8 +24,8 @@ void Layer::Update(const FLOAT& dt)
 		auto& iter_end = objectlist.second.end();
 		for (; iter != iter_end;)
 		{
-			(*iter)->Update(dt);
-			if ((*iter)->isActive == false)
+			
+			if ((*iter)->Update(dt) == OBJDEAD)
 			{
 				Safe_Release(*iter);
 				iter = objectlist.second.erase(iter);

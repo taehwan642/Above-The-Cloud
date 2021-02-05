@@ -54,7 +54,7 @@ void SphereMonster::Movement(void)
 	//transform->position = 
 }
 
-void SphereMonster::Update(const FLOAT& dt)
+INT SphereMonster::Update(const FLOAT& dt)
 {
 	// 나와 플레이어의 방향을 구한다.
 	// 내 forward와 내적한다.
@@ -97,8 +97,8 @@ void SphereMonster::Update(const FLOAT& dt)
 			});
 		testcase = true;
 	}
-
-	MonsterBase::Update(dt);
+	ObjectState state = static_cast<ObjectState>(MonsterBase::Update(dt));
+	return state;
 }
 
 void SphereMonster::LateUpdate(const FLOAT& dt)

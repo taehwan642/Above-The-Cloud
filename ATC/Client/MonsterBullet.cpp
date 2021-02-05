@@ -32,9 +32,10 @@ MonsterBullet::~MonsterBullet(void)
 {
 }
 
-void MonsterBullet::Update(const FLOAT& dt)
+INT MonsterBullet::Update(const FLOAT& dt)
 {
 	GameObject::Update(dt);
+	return OBJALIVE;
 }
 
 void MonsterBullet::LateUpdate(const FLOAT& dt)

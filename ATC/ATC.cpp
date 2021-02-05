@@ -9,9 +9,6 @@
 #include "Engine/ObjectManager.h"
 #include "Client/MenuScene.h"
 
-
-
-
 HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
                                      void* pUserContext )
 {
@@ -76,7 +73,6 @@ void CALLBACK OnD3D9DestroyDevice( void* pUserContext )
     Engine::SubjectManager::GetInstance()->DestroyInstance();
 
     cout << "ALL DELETED" << endl;
-    exit(1);
 }
 
 

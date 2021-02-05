@@ -19,7 +19,7 @@ public:
     explicit MonsterBullet(void);
     virtual ~MonsterBullet(void);
 
-    void Update(const FLOAT& dt) override;
+    INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
 

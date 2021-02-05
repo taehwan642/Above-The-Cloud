@@ -20,9 +20,9 @@ HealthPointGroup::~HealthPointGroup(void)
 {
 }
 
-void HealthPointGroup::Update(const FLOAT& dt)
+INT HealthPointGroup::Update(const FLOAT& dt)
 {
-
+	return OBJALIVE;
 }
 
 void HealthPointGroup::LateUpdate(const FLOAT& dt)

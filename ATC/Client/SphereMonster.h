@@ -11,7 +11,7 @@ public:
 
     void Movement(void) override;
 
-    void Update(const FLOAT& dt) override;
+    INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
 

@@ -14,9 +14,10 @@ HealthPoint::~HealthPoint(void)
 {
 }
 
-void HealthPoint::Update(const FLOAT& dt)
+INT HealthPoint::Update(const FLOAT& dt)
 {
 	Engine::StaticUI::Update(dt);
+	return OBJALIVE;
 }
 
 void HealthPoint::LateUpdate(const FLOAT& dt)

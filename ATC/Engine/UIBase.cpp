@@ -36,9 +36,10 @@ void UIBase::SetUITexture(const UINT& _index)
 	currentTextureindex = _index;
 }
 
-void UIBase::Update(const FLOAT& dt)
+INT UIBase::Update(const FLOAT& dt)
 {
 	GameObject::Update(dt);
+	return OBJALIVE;
 }
 
 void UIBase::LateUpdate(const FLOAT& dt)

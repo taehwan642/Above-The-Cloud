@@ -33,7 +33,7 @@ void Camera::InitCamera(void)
 
 bool targetplane = true;
 
-void Camera::Update(const float& dt)
+INT Camera::Update(const float& dt)
 {
 	if (DXUTWasKeyPressed('C'))
 	{
@@ -71,6 +71,7 @@ void Camera::Update(const float& dt)
 	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
 
 	GameObject::Update(dt);
+	return OBJALIVE;
 }
 
 void Camera::LateUpdate(const FLOAT& dt)

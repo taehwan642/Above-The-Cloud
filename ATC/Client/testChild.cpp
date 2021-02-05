@@ -47,9 +47,10 @@ void testChild::CollisionEvent(const wstring& _objectTag, GameObject* _gameObjec
 	}
 }
 
-void testChild::Update(const float& dt)
+INT testChild::Update(const float& dt)
 {
 	GameObject::Update(dt);
+	return OBJALIVE;
 }
 
 void testChild::LateUpdate(const FLOAT& dt)

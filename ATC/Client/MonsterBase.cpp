@@ -31,10 +31,10 @@ void MonsterBase::CollisionEvent(const wstring& _objectTag, GameObject* _gameObj
 	}
 }
 
-void MonsterBase::Update(const FLOAT& dt)
+INT MonsterBase::Update(const FLOAT& dt)
 {
 	if (Hp <= 0)
-		isActive = false;
+		return OBJDEAD;
 
 	if (!movementqueue.empty())
 	{
@@ -43,8 +43,8 @@ void MonsterBase::Update(const FLOAT& dt)
 			movementqueue.pop();
 		}
 	}
-
 	Engine::GameObject::Update(dt);
+	return OBJALIVE;
 }
 
 void MonsterBase::LateUpdate(const FLOAT& dt)
