@@ -24,12 +24,11 @@ DynamicMesh::DynamicMesh(const DynamicMesh& rhs) :
 	Resources(rhs),
 	rootFrame(rhs.rootFrame),
 	hierarchy(rhs.hierarchy),
-	anicontroller(rhs.anicontroller),
 	meshcontainergroup(rhs.meshcontainergroup),
 	parent(rhs.parent),
 	vertexposition(rhs.vertexposition)
 {
-
+	anicontroller = rhs.anicontroller->Clone();
 }
 
 DynamicMesh::~DynamicMesh(void)

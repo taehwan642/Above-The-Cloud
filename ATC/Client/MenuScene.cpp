@@ -24,6 +24,8 @@ void MenuScene::Start(void)
 		cout << "다이나믹메시불러와짐" << endl;
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddShader(L"Resources/Shaders/DynamicMeshShader.fx", L"dyshader")))
 		cout << "dyShader Load Complete" << endl;
+	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddShader(L"Resources/Shaders/DefaultShader.fx", L"defaultShader")))
+		cout << "defaultShader Load Complete" << endl;
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/AimPoint.png", L"AimPoint")))
 		cout << "텍스쳐도 됐다" << endl; 
 	if (SUCCEEDED(Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/heart.png", L"Heart")))
@@ -82,7 +84,7 @@ void MenuScene::Update(const float& dt)
 	Scene::Update(dt); // 씬 내에서 Release를 해준다.
 
 	Engine::Layer* l = Scene::GetLayer(L"테스트");
-	cout << l->gameobjectgroup[L"BULLET"].size() << endl;
+	//cout << l->gameobjectgroup[L"BULLET"].size() << endl;
 }
 
 void MenuScene::LateUpdate(const FLOAT& dt)

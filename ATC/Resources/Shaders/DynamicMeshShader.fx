@@ -28,7 +28,7 @@ struct VS_OUT
 	float4			vPosition: POSITION;
 	float4			vNormal : NORMAL;
 	float2		 	vTexUV : TEXCOORD0;
-	float3			vLightDir : TEXCOORD1;
+	float3			vDiffuse : TEXCOORD1;
 	float3			vViewDir : TEXCOORD2;
 	float3			vReflect : TEXCOORD3;
 };
@@ -41,7 +41,7 @@ VS_OUT VS_MAIN(VS_IN In)
 
 	// ºû ¹æÇâ º¤ÅÍ
 	float3 lightDir = Out.vPosition.xyz - lightposition.xyz;
-	Out.vLightDir = normalize(lightDir);
+	lightDir = normalize(lightDir);
 
 	// Ä«¸Þ¶ó ¹æÇâ º¤ÅÍ
 	float3 viewDir = normalize(Out.vPosition.xyz - cameraposition.xyz);
@@ -53,6 +53,7 @@ VS_OUT VS_MAIN(VS_IN In)
 	Out.vNormal = normalize(mul(vector(In.vNormal, 0.f), g_matWorld));
 	Out.vTexUV = In.vTexUV;
 
+	Out.vDiffuse = dot(-lightDir, Out.vNormal);
 	Out.vReflect = reflect(lightDir, Out.vNormal);
 	return Out;
 }
@@ -64,7 +65,7 @@ struct PS_IN
 {
 	float4			vNormal : NORMAL;
 	float2		 	vTexUV : TEXCOORD0;
-	float3			vLightDir : TEXCOORD1;
+	float3			vDiffuse : TEXCOORD1;
 	float3			vViewDir : TEXCOORD2;
 	float3			vReflect : TEXCOORD3;
 };
@@ -79,34 +80,19 @@ struct PS_OUT
 PS_OUT PS_MAIN(PS_IN In)
 {
 	PS_OUT		Out = (PS_OUT)0;
-
-	//Out.vDiffuse = tex2D(BaseSampler, In.vTexUV);
-	//Out.vDiffuse.a = 1.f;
-	// -1 => 0
-	//  1 => 1
-	//Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
 	
 	float4 albedo = tex2D(BaseSampler, In.vTexUV);
-	//float3 diffuse = albedo.rgb * saturate(In.vDiffuse);
-	
+	float3 diffuse = saturate(In.vDiffuse);
 	float3 reflection = normalize(In.vReflect);
 	float3 viewDir = normalize(In.vViewDir);
-	float3 specular = pow(saturate(dot(In.vViewDir * -1.f, In.vReflect)), 10.f);
-	//if (diffuse.x > 0)
-	//{
-	float3 diffuse = saturate(dot(normalize(In.vLightDir) * -1.f, In.vNormal));
-		//specular = pow(specular, 20.0f);
-	
-		//float4 specularIntensity = tex2D(BaseSampler, In.vTexUV);
-		//specular *= specularIntensity.rgb;
-	//}
-	
-	
+	float3 specular = 0;
+	if (diffuse.x > 0)
+	{
+		specular = saturate(dot(reflection, -viewDir));
+		specular = pow(specular, 20.0f);
+	}
 	float3 ambient = float3(0.2f, 0.2f, 0.2f);
 	Out.vDiffuse = float4(albedo * diffuse + ambient + specular, 1);
-	//Out.vDiffuse = tex2D(BaseSampler, In.vTexUV);
-	//Out.vDiffuse.a = 1.f;
-	//return float4(ambient + diffuse + specular, 1);
 	return Out;
 }
 

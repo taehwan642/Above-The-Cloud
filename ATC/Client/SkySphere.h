@@ -3,6 +3,7 @@
 NAMESPACE(Engine)
 class Transform;
 class StaticMesh;
+class Shader;
 END
 class SkySphere final :
     public Engine::GameObject
@@ -15,6 +16,7 @@ public:
 
     Engine::StaticMesh* skysphere = nullptr;
     Engine::Transform* transform = nullptr;
+    Engine::Shader* shader = nullptr;
 
     INT Update(const float& dt) override;
     void LateUpdate(const FLOAT& dt) override;

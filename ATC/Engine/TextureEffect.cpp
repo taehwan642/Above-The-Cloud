@@ -34,7 +34,7 @@ INT TextureEffect::Update(const FLOAT& dt)
 
 	size_t texturesize = texture->GetTexturesCount();
 	if (texturesize <= currentTextureIndex)
-		isActive = false;
+		return OBJDEAD;
 	DynamicUI::Update(dt);
 	return OBJALIVE;
 }

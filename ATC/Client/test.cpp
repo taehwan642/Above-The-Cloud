@@ -120,6 +120,7 @@ INT test::Update(const float& dt)
 	dstObject = Engine::CollisionManager::GetInstance()->GetClosestObject(MONSTER, transform->position,
 		directionVector, -0.61f);
 	Engine::SubjectManager::GetInstance()->SetData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);
+	
 	return OBJALIVE;
 }
 

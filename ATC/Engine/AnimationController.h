@@ -28,6 +28,11 @@ public:
 	void PlayAnimation(const FLOAT& _dt);
 	bool IsAnimationEnd(void);
 
+	AnimationController* Clone(void)
+	{
+		return new AnimationController(*this);
+	}
+
 	void Free(void) override;
 };
 END
