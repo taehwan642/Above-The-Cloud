@@ -35,7 +35,6 @@ SphereMonster::SphereMonster(void)
 	colliderdata.center = &transform->position;
 	colliderdata.radius = 3;
 	colliderdata.tag = L"monster1";
-	colliderdata.ishit = false;
 
 	UINT temp = 1;
 	mesh->SetAnimationSet(temp);
@@ -45,13 +44,38 @@ SphereMonster::~SphereMonster(void)
 {
 }
 
-void SphereMonster::Movement(void)
+void SphereMonster::Movement(const FLOAT& dt)
 {
-	// 1. Rand
-	// 2. SEt
-	// 3. Play
+	// 랜덤으로 총알 발사, 움직이기
+	// 총알 발사 어떻게할건지 구상하고 구현하기
+	movementspeed = 2.f;
 
-	//transform->position = 
+	int s = rand() % 2;
+	if (s == 0)
+	{
+		MonsterBullet* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<MonsterBullet>(L"테스트", L"MONSTERBULLET");
+		D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+		if (m == nullptr)
+		{
+			m = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<MonsterBullet>(L"테스트", L"MONSTERBULLET");
+			m->SetInformation(transform->position, dir);
+		}
+		else
+		{
+			m->SetActive(true);
+			m->SetInformation(transform->position, dir);
+		}
+	}
+	else if (s == 1)
+	{
+		float x = (rand() % 100) - (rand() % 50);
+		float y = (rand() % 100) - (rand() % 50);
+		float z = (rand() % 100) - (rand() % 50);
+		movementqueue.emplace([=]()-> bool
+			{
+				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(x, y, z), dt, 10);
+			});
+	}
 }
 
 INT SphereMonster::Update(const FLOAT& dt)
@@ -67,8 +91,6 @@ INT SphereMonster::Update(const FLOAT& dt)
 	D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
 	D3DXVec3Normalize(&right, &right);
 
-	//right *= -1.f;
-
 	// look과 right 외적 => up
 	D3DXVECTOR3 up;
 	D3DXVec3Cross(&up, &look, &right);
@@ -81,24 +103,10 @@ INT SphereMonster::Update(const FLOAT& dt)
 	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
 	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
 
-	if (!testcase)
-	{
-		movementqueue.emplace([=]()-> bool
-			{
-				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(50, 50, 50), dt / 20);
-			});
-		movementqueue.emplace([=]()-> bool
-			{
-				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(-50, -50, 50), dt / 20);
-			});
-		movementqueue.emplace([=]()-> bool
-			{
-				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(50, 50, 50), dt / 20);
-			});
-		testcase = true;
-	}
 	ObjectState state = static_cast<ObjectState>(MonsterBase::Update(dt));
-	return state;
+	
+	//state = colliderdata.isinsidemanager ? OBJALIVE : OBJDEAD;
+	return OBJALIVE;
 }
 
 void SphereMonster::LateUpdate(const FLOAT& dt)
@@ -119,7 +127,7 @@ void SphereMonster::Render(const FLOAT& dt)
 	tempeffect->EndPass();
 	tempeffect->End();
 
-	collider->RenderCollider();
+	//collider->RenderCollider();
 
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	MonsterBase::Render(dt);

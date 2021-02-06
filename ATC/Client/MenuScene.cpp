@@ -82,9 +82,6 @@ void MenuScene::Update(const float& dt)
 {
 	Engine::CollisionManager::GetInstance()->UpdateData(); // Active가 false인 애들을 먼저 지우고
 	Scene::Update(dt); // 씬 내에서 Release를 해준다.
-
-	Engine::Layer* l = Scene::GetLayer(L"테스트");
-	//cout << l->gameobjectgroup[L"BULLET"].size() << endl;
 }
 
 void MenuScene::LateUpdate(const FLOAT& dt)

@@ -29,7 +29,7 @@ public:
         T* object = new T();
         Layer* l = SceneManager::GetInstance()->GetCurrentSceneLayer(_layertag);
         l->AddGameObject(_objecttag, object);
-        return object;
+        return dynamic_cast<T*>(object);
     }
 };
 END

@@ -14,7 +14,6 @@ protected:
 	friend class ObjectManager;
 
 	map<wstring, Component*> componentgroup;
-	list<Component*> compo;
 	bool isActive = true;
 	ColliderData colliderdata;
 public:

@@ -32,7 +32,6 @@ testChild::testChild(void)
 	colliderdata.center = &t->position;
 	colliderdata.radius = 1;
 	colliderdata.tag = L"player";
-	colliderdata.ishit = false;
 }
 
 testChild::~testChild(void)
@@ -71,7 +70,7 @@ void testChild::Render(const FLOAT& dt)
 	tempeffect->EndPass();
 	tempeffect->End();
 
-	collider->RenderCollider();
+	//collider->RenderCollider();
 	GameObject::Render(dt);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }

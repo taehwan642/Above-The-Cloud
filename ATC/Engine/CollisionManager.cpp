@@ -7,6 +7,7 @@ USING(Engine)
 void CollisionManager::PushData(ObjectTag _tag, GameObject* _data)
 {
 	colliderdatas[_tag].push_back(_data);
+	_data->colliderdata.isinsidemanager = true;
 }
 
 void CollisionManager::GetRay(D3DXMATRIX _world)
@@ -100,9 +101,6 @@ void CollisionManager::CheckCollision(ObjectTag _src, ObjectTag _dst)
 			{
 				srcobj->CollisionEvent(dstdata->tag, dstobj);
 				dstobj->CollisionEvent(srcdata->tag, srcobj);
-				
-				srcdata->ishit = true;
-				dstdata->ishit = true;
 			}
 		}
 	}
@@ -168,7 +166,10 @@ void CollisionManager::UpdateData(void)
 		for (; iter != iter_end;)
 		{
 			if ((*iter)->isActive == false)
+			{
+				(*iter)->colliderdata.isinsidemanager = false;
 				iter = colliderdatas[i].erase(iter);
+			}
 			else
 				++iter;
 		}

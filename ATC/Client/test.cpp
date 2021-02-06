@@ -63,7 +63,6 @@ test::test(void)
 	colliderdata.center = &transform->position;
 	colliderdata.radius = 1;
 	colliderdata.tag = L"player";
-	colliderdata.ishit = false;
 }
 
 test::~test(void)
@@ -117,10 +116,6 @@ INT test::Update(const float& dt)
 
 	D3DXVec3Normalize(&directionVector, &directionVector);
 	
-	dstObject = Engine::CollisionManager::GetInstance()->GetClosestObject(MONSTER, transform->position,
-		directionVector, -0.61f);
-	Engine::SubjectManager::GetInstance()->SetData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);
-	
 	return OBJALIVE;
 }
 
@@ -168,6 +163,11 @@ void test::LateUpdate(const FLOAT& dt)
 			m->Initalize();
 		}
 	}
+
+	dstObject = Engine::CollisionManager::GetInstance()->GetClosestObject(MONSTER, transform->position,
+		directionVector, -0.61f);
+	Engine::SubjectManager::GetInstance()->SetData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);
+	
 
 	GameObject::LateUpdate(dt);
 }

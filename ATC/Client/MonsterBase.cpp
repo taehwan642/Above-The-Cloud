@@ -27,14 +27,15 @@ void MonsterBase::CollisionEvent(const wstring& _objectTag, GameObject* _gameObj
 {
 	if (_objectTag == L"Missile")
 	{
+		--Hp;
 		_gameObject->SetActive(false);
 	}
 }
 
 INT MonsterBase::Update(const FLOAT& dt)
 {
-	if (Hp <= 0)
-		return OBJDEAD;
+	//if (Hp <= 0)
+		//return OBJDEAD;
 
 	if (!movementqueue.empty())
 	{
@@ -49,6 +50,10 @@ INT MonsterBase::Update(const FLOAT& dt)
 
 void MonsterBase::LateUpdate(const FLOAT& dt)
 {
+	if (movementspeed < 0)
+		Movement(dt);
+	else
+		movementspeed -= dt;
 	Engine::GameObject::LateUpdate(dt);
 }
 

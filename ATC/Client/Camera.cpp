@@ -22,7 +22,6 @@ void Camera::InitCamera(void)
 	componentgroup.emplace(L"TargetTransform", targetTransform);
 
 	targetTransform->position = { 0, 250, 0 };
-	//targetTransform->Rotate(Engine::Transform::RotType::RIGHT, D3DXToRadian(-30.f));
 
 	observer = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
@@ -112,11 +111,6 @@ void Camera::LateUpdate(const FLOAT& dt)
 void Camera::Render(const FLOAT& dt)
 {
 	GameObject::Render(dt);
-}
-
-void Camera::KeyInput(FLOAT _dt)
-{
-
 }
 
 void Camera::Free(void)

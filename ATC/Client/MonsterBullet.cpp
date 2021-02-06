@@ -7,7 +7,8 @@
 #include "../Engine/CollisionManager.h"
 #include "MonsterBullet.h"
 
-MonsterBullet::MonsterBullet(void)
+MonsterBullet::MonsterBullet(void) :
+	direction(0,0,0)
 {
 	transform = new Engine::Transform();
 	transform->scale = { 1.7,1.7,1.7 };
@@ -18,7 +19,6 @@ MonsterBullet::MonsterBullet(void)
 	componentgroup.emplace(L"Shader", shader);
 	collider = new Engine::Collider(1.1f, &transform->position);
 	colliderdata.center = &transform->position;
-	colliderdata.ishit = false;
 	colliderdata.radius = 1.1f;
 	colliderdata.tag = L"MonsterBullet";
 
@@ -30,6 +30,12 @@ MonsterBullet::MonsterBullet(void)
 
 MonsterBullet::~MonsterBullet(void)
 {
+}
+
+void MonsterBullet::SetInformation(const D3DXVECTOR3& _position, const D3DXVECTOR3& _direction)
+{
+	transform->position = _position;
+	direction = _direction;
 }
 
 INT MonsterBullet::Update(const FLOAT& dt)

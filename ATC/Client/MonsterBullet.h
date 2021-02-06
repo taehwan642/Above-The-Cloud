@@ -10,6 +10,7 @@ class MonsterBullet final :
     public Engine::GameObject
 {
 private:
+    D3DXVECTOR3 direction;
     Engine::Transform* transform = nullptr;
     Engine::StaticMesh* mesh = nullptr;
     Engine::Shader* shader = nullptr;
@@ -18,6 +19,8 @@ protected:
 public:
     explicit MonsterBullet(void);
     virtual ~MonsterBullet(void);
+
+    void SetInformation(const D3DXVECTOR3& position, const D3DXVECTOR3& _direction);
 
     INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;

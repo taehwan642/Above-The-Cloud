@@ -353,6 +353,7 @@ void      WINAPI DXUTDestroyState(); // Optional method to destroy DXUT's memory
 #include <algorithm>
 #include <functional>
 #include <queue>
+#include <time.h>
 #include <vld.h>
 using namespace std;
 
@@ -459,6 +460,7 @@ enum ObjectTag
     PLAYER, // 플레이어쪽의 태그 (플레이어 & 플레이어 총알 또는 미사일)
     MISSILE,
     MONSTER, // 적쪽의 태그 (적 & 적 총알 또는 미사일)
+    MONSTERMISSILE,
     OBJEND
 };
 
@@ -467,7 +469,7 @@ struct ColliderData
     wstring tag;
     FLOAT radius;
     D3DXVECTOR3* center;
-    bool ishit;
+    bool isinsidemanager = false;
 };
 
 static D3DXVECTOR4 worldLightPosition = { 0, 50000, -0, 1 };

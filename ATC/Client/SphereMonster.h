@@ -9,7 +9,7 @@ public:
     explicit SphereMonster(void);
     virtual ~SphereMonster(void);
 
-    void Movement(void) override;
+    void Movement(const FLOAT& dt) override;
 
     INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
@@ -17,4 +17,3 @@ public:
 
     void Free(void) override;
 };
-

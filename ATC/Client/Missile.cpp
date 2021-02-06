@@ -22,7 +22,6 @@ Missile::Missile(void)
 
 	collider = new Engine::Collider(1, &transform->position);
 	colliderdata.center = &transform->position;
-	colliderdata.ishit = false;
 	colliderdata.radius = 1;
 	colliderdata.tag = L"Missile";
 
