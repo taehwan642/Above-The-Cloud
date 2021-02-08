@@ -4,6 +4,7 @@ NAMESPACE(Engine)
 class PlayerObserver;
 class Transform;
 END
+class PlayerObserver;
 class AimPoint final :
     public Engine::StaticUI // dynamic으로 교체 -> 
 {

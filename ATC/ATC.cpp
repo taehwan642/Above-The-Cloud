@@ -7,7 +7,7 @@
 #include "Engine/EffectManager.h"
 #include "Engine/SubjectManager.h"
 #include "Engine/ObjectManager.h"
-#include "Client/MenuScene.h"
+#include "Client/GameScene.h"
 
 HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
                                      void* pUserContext )
@@ -98,7 +98,7 @@ int main(void)
     DXUTCreateWindow( L"ATC" );
     DXUTCreateDevice( true, windowWidth, windowHeight );
 
-    Engine::SceneManager::GetInstance()->AddScene(L"메뉴", new MenuScene);
+    Engine::SceneManager::GetInstance()->AddScene(L"메뉴", new GameScene);
     Engine::SceneManager::GetInstance()->SetScene(L"메뉴");
 
     DXUTMainLoop();

@@ -329,6 +329,11 @@ void DynamicMesh::ComputeVertexPosition(void)
 	}
 }
 
+bool DynamicMesh::GetIsAnimationEnd(void) const
+{
+	return anicontroller->IsAnimationEnd();
+}
+
 Resources* DynamicMesh::Clone(void)
 {
 	return new DynamicMesh(*this);

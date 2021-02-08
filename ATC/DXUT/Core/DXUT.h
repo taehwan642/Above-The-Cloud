@@ -461,6 +461,7 @@ enum ObjectTag
     MISSILE,
     MONSTER, // 적쪽의 태그 (적 & 적 총알 또는 미사일)
     MONSTERMISSILE,
+    INTERACTIVEOBJ, // 구름같은 부딪혔을때 효과를 주는 OBJ
     OBJEND
 };
 
@@ -472,7 +473,7 @@ struct ColliderData
     bool isinsidemanager = false;
 };
 
-static D3DXVECTOR4 worldLightPosition = { 0, 50000, -0, 1 };
+static D3DXVECTOR4 worldLightPosition = { 0, 50000, 0, 1 };
 static D3DXVECTOR4 worldCameraPosition = { 0, 0, 0, 1 };
 
 enum ObjectState

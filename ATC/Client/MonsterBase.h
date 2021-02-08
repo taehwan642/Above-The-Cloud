@@ -14,6 +14,7 @@ class MonsterBase :
 {
 private:
 protected:
+    UINT animationkey = 0;
     INT Hp = 5;
     FLOAT movementspeed = 1.0f;
     Engine::Transform* transform;

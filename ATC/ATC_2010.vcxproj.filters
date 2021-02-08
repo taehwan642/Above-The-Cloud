@@ -63,9 +63,6 @@
     <Filter Include="2Client\0Scene">
       <UniqueIdentifier>{ba70e8a2-aa97-4256-a4a6-599298153515}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Client\0Scene\0MenuScene">
-      <UniqueIdentifier>{9433ede7-ddda-43f8-8e5b-49a0581c9af3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2Client\1GameObject">
       <UniqueIdentifier>{165832a2-3757-465b-adcb-f47c6270322e}</UniqueIdentifier>
     </Filter>
@@ -132,9 +129,6 @@
     <Filter Include="1Engine\8UI\1DynamicUI">
       <UniqueIdentifier>{f59b0af9-0cad-4627-8c67-d924dbf98eee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Client\1GameObject\2Player">
-      <UniqueIdentifier>{8ec42cc9-dd16-423e-abe3-c68ca20bee62}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2Client\1GameObject\3UI">
       <UniqueIdentifier>{39f575cc-9fe0-4496-8b9c-e3c0083bda80}</UniqueIdentifier>
     </Filter>
@@ -177,9 +171,6 @@
     <Filter Include="2Client\1GameObject\5Monsters\0Monster">
       <UniqueIdentifier>{ac56ee2e-7cc4-4099-aad8-48545ad655bf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Client\1GameObject\5Monsters\0Monster\0SphereMonster">
-      <UniqueIdentifier>{dc5ff974-9b5b-4873-9719-8d5e9e347e3b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2Client\1GameObject\5Monsters\1MonsterBullets">
       <UniqueIdentifier>{1792dfb5-a384-46ad-87a1-7f84b4227ca8}</UniqueIdentifier>
     </Filter>
@@ -188,6 +179,24 @@
     </Filter>
     <Filter Include="2Client\1GameObject\7Cloud">
       <UniqueIdentifier>{b1635ba7-bb40-4892-bd24-0ac873d07c1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\2Plane">
+      <UniqueIdentifier>{8ec42cc9-dd16-423e-abe3-c68ca20bee62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters\0Monster\0Monster1">
+      <UniqueIdentifier>{dc5ff974-9b5b-4873-9719-8d5e9e347e3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters\0Monster\1Monster2">
+      <UniqueIdentifier>{12ccf4c7-58f3-4836-aa7e-bcb2a42352e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters\0Monster\2Boss">
+      <UniqueIdentifier>{67b2d1f2-da84-446d-a82e-d4c3881e3885}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\0Scene\0GameScene">
+      <UniqueIdentifier>{9433ede7-ddda-43f8-8e5b-49a0581c9af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\0Scene\1MenuScene">
+      <UniqueIdentifier>{461719bc-3b9c-4329-bd2e-35680db51436}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -253,9 +262,6 @@
     <ClCompile Include="ATC.cpp">
       <Filter>0Default</Filter>
     </ClCompile>
-    <ClCompile Include="Client\MenuScene.cpp">
-      <Filter>2Client\0Scene\0MenuScene</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Base.cpp">
       <Filter>1Engine\0Base</Filter>
     </ClCompile>
@@ -307,9 +313,6 @@
     <ClCompile Include="Engine\AnimationController.cpp">
       <Filter>1Engine\4Component\3Mesh\1DynamicMesh\AnimationController</Filter>
     </ClCompile>
-    <ClCompile Include="Client\testChild.cpp">
-      <Filter>2Client\1GameObject\7Cloud</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Subject.cpp">
       <Filter>1Engine\7Observer\1Subject</Filter>
     </ClCompile>
@@ -349,9 +352,6 @@
     <ClCompile Include="Client\HealthPointGroup.cpp">
       <Filter>2Client\1GameObject\3UI\1HealthPoint\0HealthPointGroup</Filter>
     </ClCompile>
-    <ClCompile Include="Client\SphereMonster.cpp">
-      <Filter>2Client\1GameObject\5Monsters\0Monster\0SphereMonster</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\RaycastManager.cpp">
       <Filter>1Engine\6Manager\4RaycastManager</Filter>
     </ClCompile>
@@ -382,11 +382,26 @@
     <ClCompile Include="Client\LockPoint.cpp">
       <Filter>2Client\1GameObject\3UI\2LockPoint</Filter>
     </ClCompile>
-    <ClCompile Include="Client\test.cpp">
-      <Filter>2Client\1GameObject\2Player</Filter>
-    </ClCompile>
     <ClCompile Include="Client\MonsterBullet.cpp">
       <Filter>2Client\1GameObject\5Monsters\1MonsterBullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\Plane.cpp">
+      <Filter>2Client\1GameObject\2Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\Cloud.cpp">
+      <Filter>2Client\1GameObject\7Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\Monster1.cpp">
+      <Filter>2Client\1GameObject\5Monsters\0Monster\0Monster1</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\Monster2.cpp">
+      <Filter>2Client\1GameObject\5Monsters\0Monster\1Monster2</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\GameScene.cpp">
+      <Filter>2Client\0Scene\0GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\MenuScene.cpp">
+      <Filter>2Client\0Scene\1MenuScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -396,9 +411,6 @@
     <ResourceCompile Include="ATC.rc">
       <Filter>0Default\Resource Files</Filter>
     </ResourceCompile>
-    <ClInclude Include="Client\MenuScene.h">
-      <Filter>2Client\0Scene\0MenuScene</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Base.h">
       <Filter>1Engine\0Base</Filter>
     </ClInclude>
@@ -450,9 +462,6 @@
     <ClInclude Include="Engine\AnimationController.h">
       <Filter>1Engine\4Component\3Mesh\1DynamicMesh\AnimationController</Filter>
     </ClInclude>
-    <ClInclude Include="Client\testChild.h">
-      <Filter>2Client\1GameObject\7Cloud</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Subject.h">
       <Filter>1Engine\7Observer\1Subject</Filter>
     </ClInclude>
@@ -492,9 +501,6 @@
     <ClInclude Include="Client\HealthPointGroup.h">
       <Filter>2Client\1GameObject\3UI\1HealthPoint\0HealthPointGroup</Filter>
     </ClInclude>
-    <ClInclude Include="Client\SphereMonster.h">
-      <Filter>2Client\1GameObject\5Monsters\0Monster\0SphereMonster</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\RaycastManager.h">
       <Filter>1Engine\6Manager\4RaycastManager</Filter>
     </ClInclude>
@@ -525,11 +531,26 @@
     <ClInclude Include="Client\LockPoint.h">
       <Filter>2Client\1GameObject\3UI\2LockPoint</Filter>
     </ClInclude>
-    <ClInclude Include="Client\test.h">
-      <Filter>2Client\1GameObject\2Player</Filter>
-    </ClInclude>
     <ClInclude Include="Client\MonsterBullet.h">
       <Filter>2Client\1GameObject\5Monsters\1MonsterBullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\Plane.h">
+      <Filter>2Client\1GameObject\2Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\Cloud.h">
+      <Filter>2Client\1GameObject\7Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\Monster1.h">
+      <Filter>2Client\1GameObject\5Monsters\0Monster\0Monster1</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\Monster2.h">
+      <Filter>2Client\1GameObject\5Monsters\0Monster\1Monster2</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\GameScene.h">
+      <Filter>2Client\0Scene\0GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\MenuScene.h">
+      <Filter>2Client\0Scene\1MenuScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

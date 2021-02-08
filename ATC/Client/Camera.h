@@ -3,6 +3,7 @@
 NAMESPACE(Engine)
 class Transform;
 END
+class PlayerObserver;
 class Camera final :
     public Engine::GameObject
 {
