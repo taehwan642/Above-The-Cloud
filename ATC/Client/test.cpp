@@ -72,11 +72,23 @@ test::~test(void)
 void test::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
 {
 	cout << "??!?!?!" << endl;
+	if (_objectTag == L"MonsterBullet" || _objectTag == L"Monster")
+	{
+		if (invincibletime <= 0)
+		{
+			--healthpoint;
+			Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
+			invincibletime = 1.f;
+		}
+	}
 }
 
-INT test::Update(const float& dt)
+INT test::Update(const FLOAT& dt)
 {
 	GameObject::Update(dt);
+
+	invincibletime -= dt;
+
 	D3DXVec3TransformCoord(&lefttrailpos[0], &D3DXVECTOR3(509, -22, -189), &transform->worldMatrix);
 	D3DXVec3TransformCoord(&lefttrailpos[1], &D3DXVECTOR3(490, -15, -189), &transform->worldMatrix);
 	D3DXVec3TransformCoord(&righttrailpos[0], &D3DXVECTOR3(-509, -22, -189), &transform->worldMatrix);
@@ -106,15 +118,8 @@ INT test::Update(const float& dt)
 	if (DXUTIsKeyDown('D'))
 		transform->Rotate(Engine::Transform::RotType::LOOK, 2.5f * dt);
 
-	if (DXUTWasKeyPressed('J'))
-	{
-		--healthpoint;
-		Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
-	}
-
 	transform->position += directionVector * dt * 1000;
 
-	D3DXVec3Normalize(&directionVector, &directionVector);
 	
 	return OBJALIVE;
 }
@@ -164,6 +169,7 @@ void test::LateUpdate(const FLOAT& dt)
 		}
 	}
 
+	D3DXVec3Normalize(&directionVector, &directionVector);
 	dstObject = Engine::CollisionManager::GetInstance()->GetClosestObject(MONSTER, transform->position,
 		directionVector, -0.61f);
 	Engine::SubjectManager::GetInstance()->SetData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);

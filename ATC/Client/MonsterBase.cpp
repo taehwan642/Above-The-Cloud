@@ -37,6 +37,11 @@ INT MonsterBase::Update(const FLOAT& dt)
 	//if (Hp <= 0)
 		//return OBJDEAD;
 
+	if (movementspeed < 0)
+		Movement(dt);
+	else
+		movementspeed -= dt;
+
 	if (!movementqueue.empty())
 	{
 		if (movementqueue.front()())
@@ -50,10 +55,7 @@ INT MonsterBase::Update(const FLOAT& dt)
 
 void MonsterBase::LateUpdate(const FLOAT& dt)
 {
-	if (movementspeed < 0)
-		Movement(dt);
-	else
-		movementspeed -= dt;
+	
 	Engine::GameObject::LateUpdate(dt);
 }
 

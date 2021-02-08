@@ -23,7 +23,7 @@ SphereMonster::SphereMonster(void)
 	transform = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transform);
 	transform->scale = { 0.1f, 0.1f, 0.1f };
-	transform->position = { 10,10,10 };
+	transform->position = { 10, 10, 10 };
 
 	observer = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
@@ -34,7 +34,7 @@ SphereMonster::SphereMonster(void)
 	componentgroup.emplace(L"collider", collider);
 	colliderdata.center = &transform->position;
 	colliderdata.radius = 3;
-	colliderdata.tag = L"monster1";
+	colliderdata.tag = L"Monster";
 
 	UINT temp = 1;
 	mesh->SetAnimationSet(temp);
@@ -46,15 +46,13 @@ SphereMonster::~SphereMonster(void)
 
 void SphereMonster::Movement(const FLOAT& dt)
 {
-	// 랜덤으로 총알 발사, 움직이기
-	// 총알 발사 어떻게할건지 구상하고 구현하기
 	movementspeed = 2.f;
 
 	int s = rand() % 2;
 	if (s == 0)
 	{
 		MonsterBullet* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<MonsterBullet>(L"테스트", L"MONSTERBULLET");
-		D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+		D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 		if (m == nullptr)
 		{
 			m = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<MonsterBullet>(L"테스트", L"MONSTERBULLET");

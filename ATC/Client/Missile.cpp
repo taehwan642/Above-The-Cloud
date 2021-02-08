@@ -35,7 +35,7 @@ Missile::Missile(void)
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT));
 
 	trail = new Engine::Trail();
-	trail->Initalize(&transform->worldMatrix, 1024, 0.03f, 4, 3, L"TrailTexture");
+	trail->Initalize(&transform->worldMatrix, 1024, 0.03f, 1, 3, L"TrailTexture");
 	componentgroup.emplace(L"Trail", trail);
 
 	Initalize();

@@ -10,6 +10,8 @@
 MonsterBullet::MonsterBullet(void) :
 	direction(0,0,0)
 {
+	// NEED TRAIL
+
 	transform = new Engine::Transform();
 	transform->scale = { 1.7,1.7,1.7 };
 	componentgroup.emplace(L"Transform", transform);
@@ -22,10 +24,13 @@ MonsterBullet::MonsterBullet(void) :
 	colliderdata.radius = 1.1f;
 	colliderdata.tag = L"MonsterBullet";
 
-	Engine::CollisionManager::GetInstance()->PushData(MISSILE, this);
+	transform->position = { 99999,99999,99999 };
+
 	componentgroup.emplace(L"collider", collider);
 
 	transform->scale = { 0.05f, 0.05f, 0.05f };
+
+	memcpy(&transform->worldMatrix._41, transform->position, sizeof(D3DXVECTOR3));
 }
 
 MonsterBullet::~MonsterBullet(void)
@@ -36,10 +41,26 @@ void MonsterBullet::SetInformation(const D3DXVECTOR3& _position, const D3DXVECTO
 {
 	transform->position = _position;
 	direction = _direction;
+	alivetime = 3.f;
+	Engine::CollisionManager::GetInstance()->PushData(MONSTERMISSILE, this);
+}
+
+void MonsterBullet::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
+{
+	if (_objectTag == L"player")
+	{
+		transform->position = { 99999,99999,99999 };
+		isActive = false;
+	}
 }
 
 INT MonsterBullet::Update(const FLOAT& dt)
 {
+	transform->position += direction * 500 * dt;
+	if (alivetime <= 0)
+		isActive = false;
+	else
+		alivetime -= dt;
 	GameObject::Update(dt);
 	return OBJALIVE;
 }
@@ -51,6 +72,8 @@ void MonsterBullet::LateUpdate(const FLOAT& dt)
 
 void MonsterBullet::Render(const FLOAT& dt)
 {
+	if (isActive == false)
+		return;
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	shader->SetupTable(transform->worldMatrix);
 	UINT pass = 0;
@@ -60,7 +83,7 @@ void MonsterBullet::Render(const FLOAT& dt)
 	mesh->RenderMesh(tempeffect);
 	tempeffect->EndPass();
 	tempeffect->End();
-	collider->RenderCollider();
+	//collider->RenderCollider();
 
 	GameObject::Render(dt);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);

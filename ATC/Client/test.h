@@ -12,7 +12,7 @@ class test final :
     public Engine::GameObject
 {
 private:
-    FLOAT invincibletime = 0.3f;
+    FLOAT invincibletime = 1.f;
     Engine::GameObject* dstObject = nullptr;
 
 protected:
@@ -37,7 +37,7 @@ public:
 
     void CollisionEvent(const wstring& _objectTag, GameObject* _gameObject) override;
 
-    INT Update(const float& dt) override;
+    INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
 
