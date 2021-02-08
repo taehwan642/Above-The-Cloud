@@ -7,7 +7,7 @@ HealthPoint::HealthPoint(wstring _texturetag) :
 {
 	transform->position.x = 30;
 	transform->position.y = 30;
-	transform->scale = { 2,2,2 };
+	transform->scale = { 0.2f, 0.2f, 0.2f };
 }
 
 HealthPoint::~HealthPoint(void)

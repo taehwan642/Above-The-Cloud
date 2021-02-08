@@ -11,7 +11,7 @@ public:
     virtual ~GameScene(void) {};
 
     void Start(void) override;
-    void Update(const float& dt) override;
+    void Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
     void Exit(void) override;

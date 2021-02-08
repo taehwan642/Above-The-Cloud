@@ -23,5 +23,6 @@ void GraphicsManager::LostDevice(void)
 
 void GraphicsManager::DeleteSprite(void)
 {
-	sprite->Release();
+	if (sprite != nullptr)
+		sprite->Release();
 }

@@ -392,6 +392,7 @@
     <ClCompile Include="Client\Camera.cpp" />
     <ClCompile Include="Client\HealthPoint.cpp" />
     <ClCompile Include="Client\HealthPointGroup.cpp" />
+    <ClCompile Include="Client\LoadScene.cpp" />
     <ClCompile Include="Client\LockPoint.cpp" />
     <ClCompile Include="Client\GameScene.cpp" />
     <ClCompile Include="Client\MenuScene.cpp" />
@@ -406,6 +407,7 @@
     <ClCompile Include="Client\Cloud.cpp" />
     <ClCompile Include="Engine\AnimationController.cpp" />
     <ClCompile Include="Engine\Base.cpp" />
+    <ClCompile Include="Engine\Button.cpp" />
     <ClCompile Include="Engine\Collider.cpp" />
     <ClCompile Include="Engine\CollisionManager.cpp" />
     <ClCompile Include="Engine\CollisionSphere.cpp" />
@@ -439,6 +441,7 @@
     <ClInclude Include="Client\Camera.h" />
     <ClInclude Include="Client\HealthPoint.h" />
     <ClInclude Include="Client\HealthPointGroup.h" />
+    <ClInclude Include="Client\LoadScene.h" />
     <ClInclude Include="Client\LockPoint.h" />
     <ClInclude Include="Client\GameScene.h" />
     <ClInclude Include="Client\MenuScene.h" />
@@ -453,6 +456,7 @@
     <ClInclude Include="Client\Cloud.h" />
     <ClInclude Include="Engine\AnimationController.h" />
     <ClInclude Include="Engine\Base.h" />
+    <ClInclude Include="Engine\Button.h" />
     <ClInclude Include="Engine\Collider.h" />
     <ClInclude Include="Engine\CollisionManager.h" />
     <ClInclude Include="Engine\CollisionSphere.h" />

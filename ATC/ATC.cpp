@@ -8,6 +8,8 @@
 #include "Engine/SubjectManager.h"
 #include "Engine/ObjectManager.h"
 #include "Client/GameScene.h"
+#include "Client/MenuScene.h"
+#include "Client/LoadScene.h"
 
 HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
                                      void* pUserContext )
@@ -98,16 +100,11 @@ int main(void)
     DXUTCreateWindow( L"ATC" );
     DXUTCreateDevice( true, windowWidth, windowHeight );
 
-    Engine::SceneManager::GetInstance()->AddScene(L"메뉴", new GameScene);
-    Engine::SceneManager::GetInstance()->SetScene(L"메뉴");
+    Engine::SceneManager::GetInstance()->AddScene(L"게임", new GameScene);
+    Engine::SceneManager::GetInstance()->AddScene(L"로드", new LoadScene);
+    Engine::SceneManager::GetInstance()->AddScene(L"메뉴", new MenuScene);
+    Engine::SceneManager::GetInstance()->SetScene(L"로드");
 
     DXUTMainLoop();
     return DXUTGetExitCode();
 }
-
-
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#define new DEBUG_NEW
-#endif // _DEBUG

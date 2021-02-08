@@ -195,8 +195,14 @@
     <Filter Include="2Client\0Scene\0GameScene">
       <UniqueIdentifier>{9433ede7-ddda-43f8-8e5b-49a0581c9af3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Client\0Scene\1MenuScene">
+    <Filter Include="2Client\0Scene\1LoadScene">
+      <UniqueIdentifier>{eaf923df-ac0c-427c-b99b-5539bbde7f21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\0Scene\2MenuScene">
       <UniqueIdentifier>{461719bc-3b9c-4329-bd2e-35680db51436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\10Button">
+      <UniqueIdentifier>{0b04f80c-9093-4657-81c9-2e63ae566f95}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -401,7 +407,13 @@
       <Filter>2Client\0Scene\0GameScene</Filter>
     </ClCompile>
     <ClCompile Include="Client\MenuScene.cpp">
-      <Filter>2Client\0Scene\1MenuScene</Filter>
+      <Filter>2Client\0Scene\2MenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\LoadScene.cpp">
+      <Filter>2Client\0Scene\1LoadScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Button.cpp">
+      <Filter>1Engine\10Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -550,7 +562,13 @@
       <Filter>2Client\0Scene\0GameScene</Filter>
     </ClInclude>
     <ClInclude Include="Client\MenuScene.h">
-      <Filter>2Client\0Scene\1MenuScene</Filter>
+      <Filter>2Client\0Scene\2MenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\LoadScene.h">
+      <Filter>2Client\0Scene\1LoadScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Button.h">
+      <Filter>1Engine\10Button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
