@@ -6,6 +6,42 @@ Button::Button(void) :
 {
 }
 
+Button::Button(const wstring& _texturetag) :
+	DynamicUI(_texturetag)
+{
+
+}
+
 Button::~Button(void)
 {
+}
+
+INT Button::Update(const FLOAT& dt)
+{
+	return DynamicUI::Update(dt);
+}
+
+void Button::LateUpdate(const FLOAT& dt)
+{
+	DynamicUI::LateUpdate(dt);
+}
+
+void Button::Render(const FLOAT& dt)
+{
+	DynamicUI::Render(dt);
+}
+
+void Button::SetButtonFunction(function<void(void)> _function)
+{
+	buttonFunction = _function;
+}
+
+function<void(void)> Button::GetButtonFunction(void) const
+{
+	return buttonFunction;
+}
+
+void Button::Free(void)
+{
+	DynamicUI::Free();
 }
