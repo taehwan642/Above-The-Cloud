@@ -8,7 +8,7 @@ class CollisionManager :
 private:
     D3DXVECTOR3 rayDir = { 0,0,0 };
     D3DXVECTOR3 rayPos = { 0,0,0 };
-    list<GameObject*> colliderdatas[OBJEND];
+    std::list<GameObject*> colliderdatas[OBJEND];
     
     void GetRay(D3DXMATRIX _world);
 

@@ -5,14 +5,14 @@
 #include "TextureEffect.h"
 USING(Engine)
 
-TextureEffect::TextureEffect(const wstring& _texturetag, const D3DXVECTOR3& _position, Transform* _parent, const FLOAT& _alivetime) :
+TextureEffect::TextureEffect(const std::wstring& _texturetag, const D3DXVECTOR3& _position, Transform* _parent, const FLOAT& _alivetime) :
 	DynamicUI(_texturetag, _parent),
 	textureChangedelta(_alivetime)
 {
 	transform->position = _position;
 }
 
-TextureEffect::TextureEffect(const wstring& _texturetag, const D3DXVECTOR3& _position, const FLOAT& _alivetime) :
+TextureEffect::TextureEffect(const std::wstring& _texturetag, const D3DXVECTOR3& _position, const FLOAT& _alivetime) :
 	DynamicUI(_texturetag),
 	textureChangedelta(_alivetime)
 {
@@ -44,10 +44,8 @@ void TextureEffect::LateUpdate(const FLOAT& dt)
 	DynamicUI::LateUpdate(dt);
 }
 
-// Effect를 사용한 Render 추가해야함
 void TextureEffect::Render(const FLOAT& dt)
 {
-	//DEVICE->SetTransform(D3DTS_WORLD, &transform->worldMatrix);
 	DynamicUI::Update(dt);
 	DynamicUI::currentTextureindex = currentTextureIndex;
 	DynamicUI::Render(dt);

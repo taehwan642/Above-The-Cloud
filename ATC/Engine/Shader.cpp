@@ -30,7 +30,7 @@ void Shader::LostDevice(void)
 	effect->OnLostDevice();
 }
 
-HRESULT Shader::CreateShader(wstring _filepath)
+HRESULT Shader::CreateShader(std::wstring _filepath)
 {
 	HRESULT hr = S_OK;
 	hr = D3DXCreateEffectFromFile(DEVICE, _filepath.c_str(), NULL, NULL, D3DXSHADER_DEBUG, NULL, &effect, &errormsg);

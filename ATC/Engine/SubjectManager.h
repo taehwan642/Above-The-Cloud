@@ -6,7 +6,7 @@ class SubjectManager final :
     public Subject, public Singleton<SubjectManager>
 {
 private:
-    map<UINT, void*> datagroup;
+    std::map<UINT, void*> datagroup;
 protected:
 public:
     void AddData(UINT _flag, void* _data);

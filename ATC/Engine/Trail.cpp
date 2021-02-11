@@ -3,7 +3,7 @@
 #include "ResourceManager.h"
 #include "Trail.h"
 USING(Engine)
-HRESULT Trail::Initalize(const D3DXMATRIX* _worldMatrix, const ULONG& _bufferSize, const double& _duration, const double& _alivetime, const size_t& _lerpCnt, wstring _texturetag)
+HRESULT Trail::Initalize(const D3DXMATRIX* _worldMatrix, const ULONG& _bufferSize, const double& _duration, const double& _alivetime, const size_t& _lerpCnt, std::wstring _texturetag)
 {
 	maxvtxCnt = _bufferSize;
 	if (maxvtxCnt <= 2)

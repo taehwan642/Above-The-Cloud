@@ -5,7 +5,7 @@ class Texture final :
     public Resources
 {
 private:
-    vector<LPDIRECT3DTEXTURE9> textures;
+    std::vector<LPDIRECT3DTEXTURE9> textures;
     size_t texturescount = 0;
 protected:
 public:
@@ -16,7 +16,7 @@ public:
     size_t GetTexturesCount(void) { return texturescount; }
     LPDIRECT3DTEXTURE9 GetTextureByIndex(const UINT& _textureindex) { return textures[_textureindex]; }
 
-    HRESULT LoadTexture(wstring _filepath, const UINT& _texturecount = 1);
+    HRESULT LoadTexture(std::wstring _filepath, const UINT& _texturecount = 1);
 
     void RenderTexture(LPD3DXEFFECT& _effect, const UINT& _index = 0);
     void RenderTexture(const UINT& _index = 0);

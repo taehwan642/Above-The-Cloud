@@ -23,7 +23,7 @@ void MonsterBase::GetHit(const FLOAT& _damageamount)
 	Hp -= _damageamount;
 }
 
-void MonsterBase::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
+void MonsterBase::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)
 {
 	if (_objectTag == L"Missile")
 	{
@@ -34,9 +34,6 @@ void MonsterBase::CollisionEvent(const wstring& _objectTag, GameObject* _gameObj
 
 INT MonsterBase::Update(const FLOAT& dt)
 {
-	//if (Hp <= 0)
-		//return OBJDEAD;
-
 	if (movementspeed < 0)
 		Movement(dt);
 	else

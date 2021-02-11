@@ -7,7 +7,7 @@ StaticMesh::StaticMesh(void)
 
 }
 
-StaticMesh::StaticMesh(wstring _filepath, wstring _filename)
+StaticMesh::StaticMesh(std::wstring _filepath, std::wstring _filename)
 {
 	LoadMesh(_filepath, _filename);
 }
@@ -45,7 +45,7 @@ StaticMesh::~StaticMesh(void)
 
 }
 
-HRESULT StaticMesh::LoadMesh(wstring _filepath, wstring _filename)
+HRESULT StaticMesh::LoadMesh(std::wstring _filepath, std::wstring _filename)
 {
 
 	HRESULT hr;

@@ -10,7 +10,7 @@ class Scene :
 {
 private:
 protected:
-	map<wstring, Layer*> layergroup;
+	std::map<std::wstring, Layer*> layergroup;
 public:
 	explicit Scene(void) {};
 	virtual ~Scene(void) {};
@@ -18,8 +18,8 @@ public:
 	void ResetDevice(void);
 	void LostDevice(void);
 
-	void AddGameObject(wstring _layertag, wstring _objecttag, GameObject* _object);
-	Layer* GetLayer(wstring _layertag);
+	void AddGameObject(std::wstring _layertag, std::wstring _objecttag, GameObject* _object);
+	Layer* GetLayer(std::wstring _layertag);
 
 	virtual void Start(void) PURE;
 	virtual void Update(const FLOAT& dt);

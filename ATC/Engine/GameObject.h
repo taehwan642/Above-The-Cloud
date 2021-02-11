@@ -13,7 +13,7 @@ protected:
 	friend class CollisionManager;
 	friend class ObjectManager;
 
-	map<wstring, Component*> componentgroup;
+	std::map<std::wstring, Component*> componentgroup;
 	bool isActive = true;
 	ColliderData colliderdata;
 public:
@@ -24,10 +24,10 @@ public:
 	void ResetDevice(void);
 	void LostDevice(void);
 
-	virtual void CollisionEvent(const wstring& _objectTag, GameObject* _gameObject) {};
+	virtual void CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject) {};
 	ColliderData* GetColliderData(void) { return &colliderdata; };
 
-	Component* GetComponent(const wstring& componenttag)
+	Component* GetComponent(const std::wstring& componenttag)
 	{
 		auto iter = componentgroup.find(componenttag);
 		if (iter != componentgroup.end())

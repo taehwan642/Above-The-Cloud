@@ -35,7 +35,7 @@ DynamicMesh::~DynamicMesh(void)
 {
 }
 
-HRESULT DynamicMesh::LoadMesh(wstring _filepath, wstring _filename)
+HRESULT DynamicMesh::LoadMesh(std::wstring _filepath, std::wstring _filename)
 {
 	TCHAR fullpath[MAX_PATH] = L"";
 	lstrcpy(fullpath, _filepath.c_str());
@@ -205,7 +205,7 @@ void DynamicMesh::DrawMeshContainer(LPD3DXMESHCONTAINER _meshcontainer, LPD3DXFR
 	}
 }
 
-D3DXFRAME_DERIVED* DynamicMesh::FindBone(const wstring& _bonename)
+D3DXFRAME_DERIVED* DynamicMesh::FindBone(const std::wstring& _bonename)
 {
 	if (rootFrame == nullptr)
 		return nullptr;

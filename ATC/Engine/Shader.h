@@ -17,7 +17,7 @@ public:
     void ResetDevice(void) override;
     void LostDevice(void) override;
 
-    HRESULT CreateShader(wstring _filepath);
+    HRESULT CreateShader(std::wstring _filepath);
 
     LPD3DXEFFECT GetEffect(void) { return effect; };
     

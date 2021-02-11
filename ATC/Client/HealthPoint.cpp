@@ -2,7 +2,7 @@
 #include "../Engine/Transform.h"
 #include "HealthPoint.h"
 
-HealthPoint::HealthPoint(wstring _texturetag) :
+HealthPoint::HealthPoint(std::wstring _texturetag) :
 	Engine::StaticUI(_texturetag)
 {
 	transform->position.x = 30;

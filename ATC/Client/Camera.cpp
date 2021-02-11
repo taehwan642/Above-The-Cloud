@@ -51,13 +51,11 @@ INT Camera::Update(const float& dt)
 
 	look *= -1.f;
 
-	//  up과 look외적 => right
 	D3DXVECTOR3 right;
 	D3DXVec3Normalize(&right, reinterpret_cast<D3DXVECTOR3*>(&observer->GetTransform()->worldMatrix._11));
 
 	right *= -1.f;
 
-	// look과 right 외적 => up
 	D3DXVECTOR3 up;
 	D3DXVec3Cross(&up, &look, &right);
 	D3DXVec3Normalize(&up, &up);
@@ -75,8 +73,6 @@ INT Camera::Update(const float& dt)
 
 void Camera::LateUpdate(const FLOAT& dt)
 {
-	//DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-
 	D3DXMATRIX matView;
 	if (lookback)
 	{

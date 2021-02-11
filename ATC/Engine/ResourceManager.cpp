@@ -6,12 +6,12 @@
 #include "Texture.h"
 #include "ResourceManager.h"
 USING(Engine)
-HRESULT ResourceManager::AddTexture(wstring _filepath, wstring _tag, const UINT& _texturecount)
+HRESULT ResourceManager::AddTexture(std::wstring _filepath, std::wstring _tag, const UINT& _texturecount)
 {
 	auto& iter = resourcegroup.find(_tag);
 	if (iter != resourcegroup.end())
 	{
-		wstring error = _tag;
+		std::wstring error = _tag;
 		MessageBox(DXUTGetHWND(), error.c_str(), L"중복 텍스쳐", MB_ICONERROR | MB_OK);
 		return E_FAIL;
 	}
@@ -23,12 +23,12 @@ HRESULT ResourceManager::AddTexture(wstring _filepath, wstring _tag, const UINT&
 	return S_OK;
 }
 
-HRESULT ResourceManager::AddMesh(MeshType _meshtype, wstring _filepath, wstring _filename, wstring _tag)
+HRESULT ResourceManager::AddMesh(MeshType _meshtype, std::wstring _filepath, std::wstring _filename, std::wstring _tag)
 {
 	auto& iter = resourcegroup.find(_tag);
 	if (iter != resourcegroup.end())
 	{
-		wstring error = _tag;
+		std::wstring error = _tag;
 		MessageBox(DXUTGetHWND(), error.c_str(), L"중복 메시", MB_ICONERROR | MB_OK);
 		return E_FAIL;
 	}
@@ -38,7 +38,7 @@ HRESULT ResourceManager::AddMesh(MeshType _meshtype, wstring _filepath, wstring 
 		StaticMesh* staticmesh = new StaticMesh();
 		if (FAILED(staticmesh->LoadMesh(_filepath, _filename)))
 		{
-			wstring error = _filepath + _filename;
+			std::wstring error = _filepath + _filename;
 			MessageBox(DXUTGetHWND(), error.c_str(), L"스태틱 메시 로드 FAIL", MB_ICONERROR | MB_OK);
 			return E_FAIL;
 		}
@@ -49,7 +49,7 @@ HRESULT ResourceManager::AddMesh(MeshType _meshtype, wstring _filepath, wstring 
 		DynamicMesh* dynamicmesh = new DynamicMesh();
 		if (FAILED(dynamicmesh->LoadMesh(_filepath, _filename)))
 		{
-			wstring error = _filepath + _filename;
+			std::wstring error = _filepath + _filename;
 			MessageBox(DXUTGetHWND(), error.c_str(), L"다이나믹 메시 로드 FAIL", MB_ICONERROR | MB_OK);
 			return E_FAIL;
 		}
@@ -58,12 +58,12 @@ HRESULT ResourceManager::AddMesh(MeshType _meshtype, wstring _filepath, wstring 
 	return S_OK;
 }
 
-HRESULT ResourceManager::AddShader(wstring _filepath, wstring _tag)
+HRESULT ResourceManager::AddShader(std::wstring _filepath, std::wstring _tag)
 {
 	auto& iter = resourcegroup.find(_tag);
 	if (iter != resourcegroup.end())
 	{
-		wstring error = _tag;
+		std::wstring error = _tag;
 		MessageBox(DXUTGetHWND(), error.c_str(), L"중복 셰이더", MB_ICONERROR | MB_OK);
 		return E_FAIL;
 	}
@@ -74,7 +74,7 @@ HRESULT ResourceManager::AddShader(wstring _filepath, wstring _tag)
 	return S_OK;
 }
 
-Resources* ResourceManager::LoadResource(wstring _tag)
+Resources* ResourceManager::LoadResource(std::wstring _tag)
 {
 	auto& iter = resourcegroup.find(_tag);
 	if (iter != resourcegroup.end())

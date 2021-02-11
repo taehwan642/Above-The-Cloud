@@ -6,7 +6,7 @@ class Transform;
 class StaticMesh;
 class Shader;
 END
-class Cloud final : // For Camera Position
+class Cloud final :
 	public Engine::GameObject
 {
 private:
@@ -20,7 +20,7 @@ public:
 	Engine::Transform* transform;
 	Engine::Collider* collider;
 
-	void CollisionEvent(const wstring& _objectTag, GameObject* _gameObject) override;
+	void CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject) override;
 
 	INT Update(const float& dt) override;
 	void LateUpdate(const FLOAT& dt) override;

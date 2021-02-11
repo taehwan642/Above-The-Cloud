@@ -43,7 +43,7 @@ public:
 
 public:
 	D3DXMATRIX* worldMatrix;
-	HRESULT Initalize(const D3DXMATRIX* _worldMatrix, const ULONG& _bufferSize, const double& _duration, const double& _alivetime, const size_t& _lerpCnt, wstring _texturetag);
+	HRESULT Initalize(const D3DXMATRIX* _worldMatrix, const ULONG& _bufferSize, const double& _duration, const double& _alivetime, const size_t& _lerpCnt, std::wstring _texturetag);
 	void AddNewTrail(const D3DXVECTOR3& _upposition, const D3DXVECTOR3& _downposition, const FLOAT& _dt);
 	void SplineTrailPosition(VTXTEX* _vtx, const size_t& _dataindex, ULONG& _index);
 	void Update(const FLOAT& dt) override;

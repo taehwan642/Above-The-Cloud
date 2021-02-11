@@ -10,16 +10,16 @@ class SceneManager final :
 {
 private:
     Scene* currentScene = nullptr;
-    map<wstring, Scene*> scenegroup;
+    std::map<std::wstring, Scene*> scenegroup;
 protected:
 public:
-    void AddScene(wstring _name, Scene* _scene);
+    void AddScene(std::wstring _name, Scene* _scene);
 
-    void SetScene(wstring _name);
+    void SetScene(std::wstring _name);
 
-    Layer* GetCurrentSceneLayer(wstring _layertag);
+    Layer* GetCurrentSceneLayer(std::wstring _layertag);
     
-    void AddGameObject(wstring _layername, wstring _objectname, GameObject* _gameObject);
+    void AddGameObject(std::wstring _layername, std::wstring _objectname, GameObject* _gameObject);
 
     void SceneUpdate(const float& dt);
     void SceneLateUpdate(const FLOAT& dt);

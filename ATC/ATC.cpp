@@ -73,8 +73,6 @@ void CALLBACK OnD3D9DestroyDevice( void* pUserContext )
 
     Engine::SubjectManager::GetInstance()->ClearObservers();
     Engine::SubjectManager::GetInstance()->DestroyInstance();
-
-    cout << "ALL DELETED" << endl;
 }
 
 

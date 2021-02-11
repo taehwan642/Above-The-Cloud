@@ -7,7 +7,7 @@
 #include "EffectManager.h"
 USING(Engine)
 
-void EffectManager::SpawnTextureEffect(const D3DXVECTOR3& _position, Transform* _transform, const FLOAT& _alivetime, const wstring& _texturetag, const wstring& _layertag)
+void EffectManager::SpawnTextureEffect(const D3DXVECTOR3& _position, Transform* _transform, const FLOAT& _alivetime, const std::wstring& _texturetag, const std::wstring& _layertag)
 {
 	
 	TextureEffect* texeffect;

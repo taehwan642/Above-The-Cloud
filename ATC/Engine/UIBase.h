@@ -15,8 +15,8 @@ protected:
     UINT currentTextureindex = 0;
 public:
     explicit UIBase(void);
-    explicit UIBase(wstring _texturetag);
-    explicit UIBase(wstring _texturetag, Transform* _parent);
+    explicit UIBase(std::wstring _texturetag);
+    explicit UIBase(std::wstring _texturetag, Transform* _parent);
     virtual ~UIBase(void);
 
     void SetUITexture(const UINT& _index);

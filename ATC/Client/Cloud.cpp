@@ -31,11 +31,11 @@ Cloud::~Cloud(void)
 {
 }
 
-void Cloud::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
+void Cloud::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)
 {
 	if (_objectTag == L"PlayerShoot")
 	{
-		cout << "마우스로 처맞음" << endl;
+		
 	}
 }
 

@@ -16,7 +16,6 @@
 #include "Missile.h"
 #include "Plane.h"
 
-// FREE 되어야하는 컴포넌트들은 componentgroup 속에 들어있어야함.
 bool testfly = true;
 Plane::Plane(void)
 {
@@ -69,9 +68,8 @@ Plane::~Plane(void)
 {
 }
 
-void Plane::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
+void Plane::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)
 {
-	cout << "??!?!?!" << endl;
 	if (_objectTag == L"MonsterBullet" || _objectTag == L"Monster")
 	{
 		if (invincibletime <= 0)
@@ -136,7 +134,6 @@ void Plane::LateUpdate(const FLOAT& dt)
 			SpawnTextureEffect(effectpos[i], transform, 0.3f, L"muzzleFlash");
 		if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, p, MONSTER))
 		{
-			//cout << "D : " << a << " P : " << p.x << " " << p.y << " " << p.z << endl;
 			D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 			D3DXVECTOR3 pos = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._41);
 
@@ -145,10 +142,8 @@ void Plane::LateUpdate(const FLOAT& dt)
 			D3DXVec3Normalize(&direc, &direc);
 			D3DXVec3Normalize(&dir, &dir);
 			angle = D3DXVec3Dot(&dir, &direc);
-			cout << angle << endl;
 			if (angle < -0.31f)
 			{
-				//damage 주기
 				GameObject* g = Engine::CollisionManager::GetInstance()->dstObject;
 				g->CollisionEvent(L"PlayerShoot", this);
 			}

@@ -11,7 +11,7 @@ UIBase::UIBase(void)
 
 }
 
-UIBase::UIBase(wstring _texturetag)
+UIBase::UIBase(std::wstring _texturetag)
 {
 	texture = dynamic_cast<Texture*>(ResourceManager::GetInstance()->LoadResource(_texturetag));
 	componentgroup.emplace(L"Texture", texture);
@@ -19,7 +19,7 @@ UIBase::UIBase(wstring _texturetag)
 	componentgroup.emplace(L"Transform", transform);
 }
 
-UIBase::UIBase(wstring _texturetag, Transform* _parent)
+UIBase::UIBase(std::wstring _texturetag, Transform* _parent)
 {
 	texture = dynamic_cast<Texture*>(ResourceManager::GetInstance()->LoadResource(_texturetag));
 	componentgroup.emplace(L"texture", texture);

@@ -10,7 +10,7 @@ private:
     D3DXFRAME* rootFrame;
     MeshHierarchy* hierarchy;
     AnimationController* anicontroller;
-    list<D3DXMESHCONTAINER_DERIVED*> meshcontainergroup;
+    std::list<D3DXMESHCONTAINER_DERIVED*> meshcontainergroup;
     D3DXMATRIX* parent;
 
     D3DXVECTOR3* vertexposition;
@@ -22,7 +22,7 @@ public:
     explicit DynamicMesh(const DynamicMesh& rhs);
     virtual ~DynamicMesh(void);
 
-    HRESULT LoadMesh(wstring _filepath, wstring _filename);
+    HRESULT LoadMesh(std::wstring _filepath, std::wstring _filename);
    
     void RenderMesh(LPD3DXEFFECT& _effect);
     void RenderMesh(void);
@@ -35,7 +35,7 @@ public:
     void DrawFrameWithEffect(LPD3DXFRAME _frame, LPD3DXEFFECT& _effect);
     void DrawMeshContainerWithEffect(LPD3DXMESHCONTAINER _meshcontainer, LPD3DXFRAME _frame, LPD3DXEFFECT& _effect);
 
-    D3DXFRAME_DERIVED* FindBone(const wstring& _bonename);
+    D3DXFRAME_DERIVED* FindBone(const std::wstring& _bonename);
 
     void SetParent(D3DXMATRIX* _parent);
     void SetAnimationSet(UINT& _index);

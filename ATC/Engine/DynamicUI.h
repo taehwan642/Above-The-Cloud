@@ -17,8 +17,8 @@ private:
     void CreateBuffer(void);
 protected:
 public:
-    explicit DynamicUI(wstring _texturetag, bool _billboardenable = true);
-    explicit DynamicUI(wstring _texturetag, Transform* _parent, bool _billboardenable = true);
+    explicit DynamicUI(std::wstring _texturetag, bool _billboardenable = true);
+    explicit DynamicUI(std::wstring _texturetag, Transform* _parent, bool _billboardenable = true);
     virtual ~DynamicUI(void);
 
     INT Update(const FLOAT& dt) override;

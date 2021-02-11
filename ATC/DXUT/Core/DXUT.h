@@ -355,7 +355,6 @@ void      WINAPI DXUTDestroyState(); // Optional method to destroy DXUT's memory
 #include <queue>
 #include <time.h>
 #include <vld.h>
-using namespace std;
 
 #define NAMESPACE(name) namespace name {
 #define END }
@@ -467,7 +466,7 @@ enum ObjectTag
 
 struct ColliderData
 {
-    wstring tag;
+    std::wstring tag;
     FLOAT radius;
     D3DXVECTOR3* center;
     bool isinsidemanager = false;

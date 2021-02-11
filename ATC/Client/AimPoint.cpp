@@ -5,7 +5,7 @@
 #include "../Engine/Transform.h"
 #include "AimPoint.h"
 
-AimPoint::AimPoint(wstring _texturetag) :
+AimPoint::AimPoint(std::wstring _texturetag) :
 	Engine::StaticUI(_texturetag)
 {
 	ob = new PlayerObserver();

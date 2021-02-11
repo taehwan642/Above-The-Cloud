@@ -6,7 +6,7 @@ Button::Button(void) :
 {
 }
 
-Button::Button(const wstring& _texturetag) :
+Button::Button(const std::wstring& _texturetag) :
 	DynamicUI(_texturetag)
 {
 
@@ -31,12 +31,12 @@ void Button::Render(const FLOAT& dt)
 	DynamicUI::Render(dt);
 }
 
-void Button::SetButtonFunction(function<void(void)> _function)
+void Button::SetButtonFunction(std::function<void(void)> _function)
 {
 	buttonFunction = _function;
 }
 
-function<void(void)> Button::GetButtonFunction(void) const
+std::function<void(void)> Button::GetButtonFunction(void) const
 {
 	return buttonFunction;
 }

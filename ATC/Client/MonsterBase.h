@@ -31,9 +31,9 @@ public:
     void GetHit(const FLOAT& _damageamount);
 
     virtual void Movement(const FLOAT& dt) {};
-    queue<function<bool(void)>> movementqueue; // queue로, bool lambda를 담아서 움직임 또는 공격이 끝났다면 r true로 pop시킨ㄷㅏㅏㅏ.
+    std::queue<std::function<bool(void)>> movementqueue;
 
-    void CollisionEvent(const wstring& _objectTag, GameObject* _gameObject) override;
+    void CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject) override;
     
     INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;

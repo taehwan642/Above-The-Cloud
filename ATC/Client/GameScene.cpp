@@ -23,7 +23,6 @@ void GameScene::Start(void)
 	Engine::Layer* effect = new Engine::Layer();
 	layergroup.emplace(L"테스트", l);
 	layergroup.emplace(L"Effect", effect);
-	//test* t = new test();
 	SkySphere* s = new SkySphere();
 
 	HealthPointGroup* h = new HealthPointGroup();
@@ -32,7 +31,6 @@ void GameScene::Start(void)
 
 	Monster1* sp = new Monster1();
 
-	//Scene::AddGameObject(L"테스트", L"테스트", t);
 	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Plane>(L"테스트", L"테스트");
 	Camera* c = new Camera();
 	AimPoint* ui = new AimPoint(L"AimPoint");
@@ -48,8 +46,8 @@ void GameScene::Start(void)
 
 void GameScene::Update(const FLOAT& dt)
 {
-	Engine::CollisionManager::GetInstance()->UpdateData(); // Active가 false인 애들을 먼저 지우고
-	Scene::Update(dt); // 씬 내에서 Release를 해준다.
+	Engine::CollisionManager::GetInstance()->UpdateData();
+	Scene::Update(dt);
 }
 
 void GameScene::LateUpdate(const FLOAT& dt)

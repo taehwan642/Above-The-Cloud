@@ -77,18 +77,14 @@ void Monster1::Movement(const FLOAT& dt)
 
 INT Monster1::Update(const FLOAT& dt)
 {
-	// 나와 플레이어의 방향을 구한다.
-	// 내 forward와 내적한다.
 	D3DXVECTOR3 look = observer->GetTransform()->position - transform->position;
 	D3DXVec3Normalize(&look, &look);
 	look *= -1.f;
 
-	//  up과 look외적 => right
 	D3DXVECTOR3 right;
 	D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
 	D3DXVec3Normalize(&right, &right);
 
-	// look과 right 외적 => up
 	D3DXVECTOR3 up;
 	D3DXVec3Cross(&up, &look, &right);
 	D3DXVec3Normalize(&up, &up);
@@ -102,7 +98,6 @@ INT Monster1::Update(const FLOAT& dt)
 
 	ObjectState state = static_cast<ObjectState>(MonsterBase::Update(dt));
 	
-	//state = colliderdata.isinsidemanager ? OBJALIVE : OBJDEAD;
 	return OBJALIVE;
 }
 

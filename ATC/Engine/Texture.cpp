@@ -18,7 +18,7 @@ Texture::~Texture(void)
 {
 }
 
-HRESULT Texture::LoadTexture(wstring _filepath, const UINT& _texturecount)
+HRESULT Texture::LoadTexture(std::wstring _filepath, const UINT& _texturecount)
 {
 	LPDIRECT3DTEXTURE9 texture;
 	texturescount = _texturecount;

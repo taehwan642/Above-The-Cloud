@@ -4,13 +4,13 @@ class MeshHierarchy final :
 	public ID3DXAllocateHierarchy
 {
 private:
-    wstring filepath = L"";
+    std::wstring filepath = L"";
 
     void AllocateName(char** destination, const char* name);
 protected:
 public:
     explicit MeshHierarchy(void);
-    explicit MeshHierarchy(wstring _path);
+    explicit MeshHierarchy(std::wstring _path);
     virtual  ~MeshHierarchy(void);
 
     STDMETHOD(CreateFrame)(THIS_ LPCSTR Name,

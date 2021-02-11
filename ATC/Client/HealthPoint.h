@@ -6,7 +6,7 @@ class HealthPoint final :
 private:
 protected:
 public:
-    explicit HealthPoint(wstring _texturetag);
+    explicit HealthPoint(std::wstring _texturetag);
     virtual ~HealthPoint(void);
 
     INT Update(const FLOAT& dt) override;

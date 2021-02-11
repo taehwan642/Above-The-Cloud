@@ -9,12 +9,12 @@ StaticUI::StaticUI(void)
 {
 }
 
-StaticUI::StaticUI(wstring _texturetag) :
+StaticUI::StaticUI(std::wstring _texturetag) :
 	UIBase(_texturetag)
 {
 }
 
-StaticUI::StaticUI(wstring _texturetag, Transform* _parent) :
+StaticUI::StaticUI(std::wstring _texturetag, Transform* _parent) :
 	UIBase(_texturetag, _parent)
 {
 }

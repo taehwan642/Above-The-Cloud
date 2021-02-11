@@ -15,7 +15,7 @@ MeshHierarchy::MeshHierarchy(void)
 {
 }
 
-MeshHierarchy::MeshHierarchy(wstring _path) :
+MeshHierarchy::MeshHierarchy(std::wstring _path) :
     filepath(_path)
 {
 }
@@ -26,7 +26,6 @@ MeshHierarchy::~MeshHierarchy(void)
 
 STDMETHODIMP_(HRESULT __stdcall) MeshHierarchy::CreateFrame(LPCSTR Name, LPD3DXFRAME* ppNewFrame)
 {
-    cout << "?d" << endl;
     D3DXFRAME_DERIVED* frame = new D3DXFRAME_DERIVED;
     ZeroMemory(frame, sizeof(D3DXFRAME_DERIVED));
 
@@ -40,7 +39,6 @@ STDMETHODIMP_(HRESULT __stdcall) MeshHierarchy::CreateFrame(LPCSTR Name, LPD3DXF
 
 STDMETHODIMP_(HRESULT __stdcall) MeshHierarchy::CreateMeshContainer(LPCSTR Name, const D3DXMESHDATA* pMeshData, const D3DXMATERIAL* pMaterials, const D3DXEFFECTINSTANCE* pEffectInstances, DWORD NumMaterials, const DWORD* pAdjacency, LPD3DXSKININFO pSkinInfo, LPD3DXMESHCONTAINER* ppNewMeshContainer)
 {
-    cout << "?" << endl;
     D3DXMESHCONTAINER_DERIVED* meshcontainer = new D3DXMESHCONTAINER_DERIVED;
     ZeroMemory(meshcontainer, sizeof(D3DXMESHCONTAINER_DERIVED));
 

@@ -61,7 +61,6 @@ void Missile::Initalize(void)
 	vec *= -1.f;
 	memcpy(&transform->worldMatrix._31, &vec, sizeof(D3DXVECTOR3));
 
-	// 1. Player의 forward로 간다
 	transform->quaternion = ob->GetTransform()->quaternion;
 	transform->curQuaternion = ob->GetTransform()->curQuaternion;
 
@@ -71,7 +70,7 @@ void Missile::Initalize(void)
 	trail->ClearData();
 }
 
-void Missile::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
+void Missile::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)
 {
 	
 }
@@ -85,7 +84,6 @@ INT Missile::Update(const FLOAT& dt)
 void Missile::LateUpdate(const FLOAT& dt)
 {
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT));
-	//-36
 	D3DXVECTOR3 trailpos[2];
 	D3DXVec3TransformCoord(&trailpos[0], &D3DXVECTOR3(-2, 0, -36), &transform->worldMatrix);
 	D3DXVec3TransformCoord(&trailpos[1], &D3DXVECTOR3(2, 0, -36), &transform->worldMatrix);
@@ -97,20 +95,13 @@ void Missile::LateUpdate(const FLOAT& dt)
 		D3DXVECTOR3 dstPos =
 			dynamic_cast<Engine::Transform*>
 			(ob->GetMissileLock()->GetComponent(L"Transform"))->position;
-		// 나와 플레이어의 방향을 구한다.
-		// 내 forward와 내적한다.
 		D3DXVECTOR3 look = dstPos - transform->position;
 		D3DXVec3Normalize(&look, &look);
-		//look *= -1.f;
-
-		//  up과 look외적 => right
+		
 		D3DXVECTOR3 right;
 		D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
 		D3DXVec3Normalize(&right, &right);
 
-		//right *= -1.f;
-
-		// look과 right 외적 => up
 		D3DXVECTOR3 up;
 		D3DXVec3Cross(&up, &look, &right);
 		D3DXVec3Normalize(&up, &up);

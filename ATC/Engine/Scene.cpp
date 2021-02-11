@@ -4,7 +4,7 @@
 
 USING(Engine)
 
-void Scene::AddGameObject(wstring _layertag, wstring _objecttag, GameObject* _object)
+void Scene::AddGameObject(std::wstring _layertag, std::wstring _objecttag, GameObject* _object)
 {
 	auto& iter = layergroup.find(_layertag);
 	if (iter != layergroup.end())
@@ -18,7 +18,7 @@ void Scene::AddGameObject(wstring _layertag, wstring _objecttag, GameObject* _ob
 	}
 }
 
-Layer* Scene::GetLayer(wstring _layertag)
+Layer* Scene::GetLayer(std::wstring _layertag)
 {
 	auto& iter = layergroup.find(_layertag);
 	if (iter != layergroup.end())

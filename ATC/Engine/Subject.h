@@ -8,7 +8,7 @@ class Subject :
 {
 private:
 protected:
-    list<Observer*> observergroup;
+    std::list<Observer*> observergroup;
 public:
     explicit Subject(void) {};
     virtual ~Subject(void) {};

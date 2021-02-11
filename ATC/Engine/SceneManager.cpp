@@ -5,14 +5,14 @@
 #include "SceneManager.h"
 USING(Engine)
 
-void SceneManager::AddScene(wstring _name, Scene* _scene)
+void SceneManager::AddScene(std::wstring _name, Scene* _scene)
 {
 	auto iter = scenegroup.find(_name);
 	if (iter == scenegroup.end())
 		scenegroup.emplace(_name, _scene);
 }
 
-void SceneManager::SetScene(wstring _name)
+void SceneManager::SetScene(std::wstring _name)
 {
 	if (currentScene != nullptr)
 		currentScene->Exit();
@@ -20,14 +20,14 @@ void SceneManager::SetScene(wstring _name)
 	currentScene->Start();
 }
 
-Layer* SceneManager::GetCurrentSceneLayer(wstring _layertag)
+Layer* SceneManager::GetCurrentSceneLayer(std::wstring _layertag)
 {
 	if (currentScene != nullptr)
 		return currentScene->GetLayer(_layertag);
 	return nullptr;
 }
 
-void SceneManager::AddGameObject(wstring _layername, wstring _objectname, GameObject* _gameObject)
+void SceneManager::AddGameObject(std::wstring _layername, std::wstring _objectname, GameObject* _gameObject)
 {
 	if(currentScene != nullptr)
 		currentScene->AddGameObject(_layername, _objectname, _gameObject);

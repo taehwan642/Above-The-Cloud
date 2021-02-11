@@ -4,14 +4,14 @@
 
 USING(Engine)
 
-void Layer::AddGameObject(wstring _objecttag, GameObject* _object)
+void Layer::AddGameObject(std::wstring _objecttag, GameObject* _object)
 {
 	if (_object == nullptr)
 		return;
 	
 	auto& iter = gameobjectgroup.find(_objecttag);
 	if (iter == gameobjectgroup.end())
-		gameobjectgroup[_objecttag] = list<GameObject*>();
+		gameobjectgroup[_objecttag] = std::list<GameObject*>();
 
 	gameobjectgroup[_objecttag].push_back(_object);
 }

@@ -10,8 +10,6 @@
 MonsterBullet::MonsterBullet(void) :
 	direction(0,0,0)
 {
-	// NEED TRAIL
-
 	transform = new Engine::Transform();
 	transform->scale = { 1.7,1.7,1.7 };
 	componentgroup.emplace(L"Transform", transform);
@@ -45,7 +43,7 @@ void MonsterBullet::SetInformation(const D3DXVECTOR3& _position, const D3DXVECTO
 	Engine::CollisionManager::GetInstance()->PushData(MONSTERMISSILE, this);
 }
 
-void MonsterBullet::CollisionEvent(const wstring& _objectTag, GameObject* _gameObject)
+void MonsterBullet::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)
 {
 	if (_objectTag == L"player")
 	{

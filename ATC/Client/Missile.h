@@ -27,7 +27,7 @@ public:
 
     void Initalize(void);
     
-    void CollisionEvent(const wstring& _objectTag, GameObject* _gameObject) override;
+    void CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject) override;
 
     INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;

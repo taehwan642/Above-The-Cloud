@@ -22,14 +22,14 @@ private:
 protected:
 public:
     explicit StaticMesh(void);
-    explicit StaticMesh(wstring _filepath, wstring _filename);
+    explicit StaticMesh(std::wstring _filepath, std::wstring _filename);
     explicit StaticMesh(const StaticMesh& cp);
     virtual ~StaticMesh(void);
 
     LPD3DXMESH GetMesh(void) { return mesh; }
 
 
-    HRESULT LoadMesh(wstring _filepath, wstring _filename);
+    HRESULT LoadMesh(std::wstring _filepath, std::wstring _filename);
 
     void Render(const FLOAT& dt) override {};
 

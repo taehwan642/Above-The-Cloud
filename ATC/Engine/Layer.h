@@ -12,9 +12,9 @@ public:
 	explicit Layer(void) {};
 	virtual ~Layer(void) {};
 
-	map<wstring, list<GameObject*>> gameobjectgroup; // 일반 GameObject* 로 변경 필요
+	std::map<std::wstring, std::list<GameObject*>> gameobjectgroup; // 일반 GameObject* 로 변경 필요
 
-	void AddGameObject(wstring _objecttag, GameObject* _object);
+	void AddGameObject(std::wstring _objecttag, GameObject* _object);
 
 	void Update(const FLOAT& dt);
 	void LateUpdate(const FLOAT& dt);

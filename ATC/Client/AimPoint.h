@@ -6,7 +6,7 @@ class Transform;
 END
 class PlayerObserver;
 class AimPoint final :
-    public Engine::StaticUI // dynamic으로 교체 -> 
+    public Engine::StaticUI
 {
 private:
     PlayerObserver* ob = nullptr;
@@ -14,7 +14,7 @@ private:
     bool pointlock = true;
 protected:
 public:
-    explicit AimPoint(wstring _texturetag);
+    explicit AimPoint(std::wstring _texturetag);
     virtual ~AimPoint(void);
 
     INT Update(const FLOAT& dt) override;
