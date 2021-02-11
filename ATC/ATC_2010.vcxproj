@@ -389,7 +389,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Client\AimPoint.cpp" />
-    <ClCompile Include="Client\Camera.cpp" />
+    <ClCompile Include="Client\MenuCamera.cpp" />
+    <ClCompile Include="Client\PlaneCamera.cpp" />
     <ClCompile Include="Client\HealthPoint.cpp" />
     <ClCompile Include="Client\HealthPointGroup.cpp" />
     <ClCompile Include="Client\LoadScene.cpp" />
@@ -438,7 +439,8 @@
     <ClCompile Include="Engine\Transform.cpp" />
     <ClCompile Include="Engine\UIBase.cpp" />
     <ClInclude Include="Client\AimPoint.h" />
-    <ClInclude Include="Client\Camera.h" />
+    <ClInclude Include="Client\MenuCamera.h" />
+    <ClInclude Include="Client\PlaneCamera.h" />
     <ClInclude Include="Client\HealthPoint.h" />
     <ClInclude Include="Client\HealthPointGroup.h" />
     <ClInclude Include="Client\LoadScene.h" />

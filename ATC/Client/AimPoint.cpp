@@ -1,7 +1,6 @@
 #include "DXUT.h"
 #include "../Engine/SubjectManager.h"
 #include "PlayerObserver.h"
-#include "Camera.h"
 #include "../Engine/Transform.h"
 #include "AimPoint.h"
 

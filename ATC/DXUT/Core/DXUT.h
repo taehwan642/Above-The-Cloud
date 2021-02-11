@@ -354,7 +354,7 @@ void      WINAPI DXUTDestroyState(); // Optional method to destroy DXUT's memory
 #include <functional>
 #include <queue>
 #include <time.h>
-#include <vld.h>
+//#include <vld.h>
 
 #define NAMESPACE(name) namespace name {
 #define END }

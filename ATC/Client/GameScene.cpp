@@ -4,7 +4,7 @@
 #include "Plane.h"
 #include "Cloud.h"
 #include "SkySphere.h"
-#include "Camera.h"
+#include "PlaneCamera.h"
 #include "../Engine/SubjectManager.h"
 #include "../Engine/GraphicsManager.h"
 #include "AimPoint.h"
@@ -32,7 +32,7 @@ void GameScene::Start(void)
 	Monster1* sp = new Monster1();
 
 	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Plane>(L"테스트", L"테스트");
-	Camera* c = new Camera();
+	PlaneCamera* c = new PlaneCamera();
 	AimPoint* ui = new AimPoint(L"AimPoint");
 	LockPoint* ui2 = new LockPoint();
 	Scene::AddGameObject(L"테스트", L"테스트", c);

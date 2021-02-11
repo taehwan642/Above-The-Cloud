@@ -22,7 +22,7 @@ UIBase::UIBase(std::wstring _texturetag)
 UIBase::UIBase(std::wstring _texturetag, Transform* _parent)
 {
 	texture = dynamic_cast<Texture*>(ResourceManager::GetInstance()->LoadResource(_texturetag));
-	componentgroup.emplace(L"texture", texture);
+	componentgroup.emplace(L"Texture", texture);
 	transform = new Transform(_parent);
 	componentgroup.emplace(L"Transform", transform);
 }

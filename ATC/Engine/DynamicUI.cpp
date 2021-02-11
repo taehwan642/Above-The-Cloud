@@ -17,7 +17,7 @@ void DynamicUI::CreateBuffer(void)
 
 	VTXTEX* pVtxTex = NULL;
 
-	vb->Lock(0, 0, (void**)&pVtxTex, 0);
+	vb->Lock(0, 0, reinterpret_cast<void**>(&pVtxTex), 0);
 
 	pVtxTex[0].pos = D3DXVECTOR3(-1.f, 1.f, 0.f);
 	pVtxTex[0].uv = D3DXVECTOR2(0.f, 0.f);
@@ -35,7 +35,7 @@ void DynamicUI::CreateBuffer(void)
 
 	INDEX16* pIndex = NULL;
 
-	ib->Lock(0, 0, (void**)&pIndex, 0);
+	ib->Lock(0, 0, reinterpret_cast<void**>(&pIndex), 0);
 
 	pIndex[0]._0 = 0;
 	pIndex[0]._1 = 1;

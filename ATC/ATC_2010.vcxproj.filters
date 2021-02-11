@@ -204,6 +204,12 @@
     <Filter Include="1Engine\10Button">
       <UniqueIdentifier>{0b04f80c-9093-4657-81c9-2e63ae566f95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\1GameObject\0Camera\0PlaneCamera">
+      <UniqueIdentifier>{a242a7a2-0d21-4ae5-8434-010fb4524513}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\0Camera\1MenuCamera">
+      <UniqueIdentifier>{ef7b9004-8e29-41d0-b233-054982343049}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -300,9 +306,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Transform.cpp">
       <Filter>1Engine\4Component\1Transform</Filter>
-    </ClCompile>
-    <ClCompile Include="Client\Camera.cpp">
-      <Filter>2Client\1GameObject\0Camera</Filter>
     </ClCompile>
     <ClCompile Include="Engine\GraphicsManager.cpp">
       <Filter>1Engine\6Manager\2GraphicsManager</Filter>
@@ -415,6 +418,12 @@
     <ClCompile Include="Engine\Button.cpp">
       <Filter>1Engine\10Button</Filter>
     </ClCompile>
+    <ClCompile Include="Client\PlaneCamera.cpp">
+      <Filter>2Client\1GameObject\0Camera\0PlaneCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\MenuCamera.cpp">
+      <Filter>2Client\1GameObject\0Camera\1MenuCamera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -455,9 +464,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Transform.h">
       <Filter>1Engine\4Component\1Transform</Filter>
-    </ClInclude>
-    <ClInclude Include="Client\Camera.h">
-      <Filter>2Client\1GameObject\0Camera</Filter>
     </ClInclude>
     <ClInclude Include="Engine\GraphicsManager.h">
       <Filter>1Engine\6Manager\2GraphicsManager</Filter>
@@ -569,6 +575,12 @@
     </ClInclude>
     <ClInclude Include="Engine\Button.h">
       <Filter>1Engine\10Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\PlaneCamera.h">
+      <Filter>2Client\1GameObject\0Camera\0PlaneCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\MenuCamera.h">
+      <Filter>2Client\1GameObject\0Camera\1MenuCamera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

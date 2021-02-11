@@ -1,9 +1,13 @@
 #pragma once
 #include "../Engine/Scene.h"
+NAMESPACE(Engine)
+class Button;
+END
 class MenuScene final :
     public Engine::Scene
 {
 private:
+    Engine::Button* b;
 protected:
 public:
     explicit MenuScene(void);

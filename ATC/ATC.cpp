@@ -7,6 +7,7 @@
 #include "Engine/EffectManager.h"
 #include "Engine/SubjectManager.h"
 #include "Engine/ObjectManager.h"
+#include "Engine/RaycastManager.h"
 #include "Client/GameScene.h"
 #include "Client/MenuScene.h"
 #include "Client/LoadScene.h"
@@ -73,6 +74,8 @@ void CALLBACK OnD3D9DestroyDevice( void* pUserContext )
 
     Engine::SubjectManager::GetInstance()->ClearObservers();
     Engine::SubjectManager::GetInstance()->DestroyInstance();
+
+    Engine::RaycastManager::GetInstance()->DestroyInstance();
 }
 
 
@@ -83,7 +86,7 @@ int main(void)
     _CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 #endif
 
-    //_CrtSetBreakAlloc(252);
+    //_CrtSetBreakAlloc(615);
 
     DXUTSetCallbackD3D9DeviceCreated( OnD3D9CreateDevice );
     DXUTSetCallbackD3D9DeviceReset( OnResetDevice );

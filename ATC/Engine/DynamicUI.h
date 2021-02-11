@@ -5,17 +5,17 @@ class DynamicUI : // Buffer 사용한 Billboard. Enemy Lock & AimPoint같은 동적 UI�
     public UIBase
 {
 private:
+    bool isbillboard = true;
+    void CreateBuffer(void);
+protected:
     LPDIRECT3DVERTEXBUFFER9 vb;
-    LPDIRECT3DINDEXBUFFER9 ib;
+    LPDIRECT3DINDEXBUFFER9 ib; 
     DWORD vtxsize = 0;
     DWORD vtxcnt = 0;
     DWORD vtxFVF = 0;
     DWORD tricnt = 0;
     DWORD idxsize = 0;
     D3DFORMAT idxfmt;
-    bool isbillboard = true;
-    void CreateBuffer(void);
-protected:
 public:
     explicit DynamicUI(std::wstring _texturetag, bool _billboardenable = true);
     explicit DynamicUI(std::wstring _texturetag, Transform* _parent, bool _billboardenable = true);
