@@ -13,9 +13,9 @@ protected:
 public:
     POINT GetMousePoint(void);
     bool PickMeshWithMouse(out float& _distanceOut,
-                          out D3DXVECTOR3& _targetposition,
-                          in const LPD3DXMESH& _mesh,      
-                          in const D3DXMATRIX& _world);
+                           out D3DXVECTOR3& _targetposition,
+                           in const LPD3DXMESH& _mesh,      
+                           in const D3DXMATRIX& _world);
 
     bool PickTriWithMouse(out FLOAT& _distanceOut,
                           out D3DXVECTOR3& _triposition,

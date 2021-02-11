@@ -25,7 +25,7 @@ public:
     explicit Missile(void);
     virtual ~Missile(void);
 
-    void Initalize(void);
+    void SetInformation(void);
     
     void CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject) override;
 

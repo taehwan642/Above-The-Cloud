@@ -156,11 +156,13 @@ void Plane::LateUpdate(const FLOAT& dt)
 		Missile* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Missile>(L"테스트", L"BULLET");
 
 		if (m == nullptr)
-			Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Missile>(L"테스트", L"BULLET");
+		{
+			m = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Missile>(L"테스트", L"BULLET");
+			m->SetInformation();
+		}
 		else
 		{
-			m->SetActive(true);
-			m->Initalize();
+			m->SetInformation();
 		}
 	}
 

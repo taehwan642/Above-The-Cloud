@@ -10,7 +10,7 @@ public:
     explicit MenuCamera(void);
     virtual ~MenuCamera(void);
 
-    INT Update(const float& dt) override;
+    INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
 

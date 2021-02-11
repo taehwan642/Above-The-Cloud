@@ -147,17 +147,11 @@
     <Filter Include="1Engine\6Manager\4RaycastManager">
       <UniqueIdentifier>{0ef24db2-b9ff-4abb-8275-34716da69a20}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1Engine\6Manager\06EffectManager">
-      <UniqueIdentifier>{b8171779-4bb8-41bc-9b08-02b6daccd1dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1Engine\9TextureEffect">
       <UniqueIdentifier>{4353569a-9624-4fb1-ab50-e689cd7fba06}</UniqueIdentifier>
     </Filter>
     <Filter Include="1Engine\4Component\7Collider">
       <UniqueIdentifier>{08011c9c-b8fd-4d86-b362-38411b746984}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1Engine\6Manager\07CollisionManager">
-      <UniqueIdentifier>{bb45b7e9-cfe5-479f-9667-287cb5b0e934}</UniqueIdentifier>
     </Filter>
     <Filter Include="1Engine\4Component\7Collider\0CollisionSphere">
       <UniqueIdentifier>{f13798a2-f961-47b6-82fb-5c2437552f2d}</UniqueIdentifier>
@@ -209,6 +203,18 @@
     </Filter>
     <Filter Include="2Client\1GameObject\0Camera\1MenuCamera">
       <UniqueIdentifier>{ef7b9004-8e29-41d0-b233-054982343049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\6Manager\7CollisionManager">
+      <UniqueIdentifier>{bb45b7e9-cfe5-479f-9667-287cb5b0e934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\6Manager\6EffectManager">
+      <UniqueIdentifier>{b8171779-4bb8-41bc-9b08-02b6daccd1dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\3Manager">
+      <UniqueIdentifier>{29b55aa0-5609-4e2a-818e-d4824efcc995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\3Manager\0MonsterSpawnManager">
+      <UniqueIdentifier>{f1a73837-ef53-4df6-a55a-dbbdb905b0c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -365,7 +371,7 @@
       <Filter>1Engine\6Manager\4RaycastManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\EffectManager.cpp">
-      <Filter>1Engine\6Manager\06EffectManager</Filter>
+      <Filter>1Engine\6Manager\6EffectManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\TextureEffect.cpp">
       <Filter>1Engine\9TextureEffect</Filter>
@@ -377,7 +383,7 @@
       <Filter>1Engine\4Component\7Collider</Filter>
     </ClCompile>
     <ClCompile Include="Engine\CollisionManager.cpp">
-      <Filter>1Engine\6Manager\07CollisionManager</Filter>
+      <Filter>1Engine\6Manager\7CollisionManager</Filter>
     </ClCompile>
     <ClCompile Include="Client\Missile.cpp">
       <Filter>2Client\1GameObject\6Missile</Filter>
@@ -423,6 +429,9 @@
     </ClCompile>
     <ClCompile Include="Client\MenuCamera.cpp">
       <Filter>2Client\1GameObject\0Camera\1MenuCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\MonsterSpawnManager.cpp">
+      <Filter>2Client\3Manager\0MonsterSpawnManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -523,7 +532,7 @@
       <Filter>1Engine\6Manager\4RaycastManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\EffectManager.h">
-      <Filter>1Engine\6Manager\06EffectManager</Filter>
+      <Filter>1Engine\6Manager\6EffectManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\TextureEffect.h">
       <Filter>1Engine\9TextureEffect</Filter>
@@ -535,7 +544,7 @@
       <Filter>1Engine\4Component\7Collider</Filter>
     </ClInclude>
     <ClInclude Include="Engine\CollisionManager.h">
-      <Filter>1Engine\6Manager\07CollisionManager</Filter>
+      <Filter>1Engine\6Manager\7CollisionManager</Filter>
     </ClInclude>
     <ClInclude Include="Client\Missile.h">
       <Filter>2Client\1GameObject\6Missile</Filter>
@@ -581,6 +590,9 @@
     </ClInclude>
     <ClInclude Include="Client\MenuCamera.h">
       <Filter>2Client\1GameObject\0Camera\1MenuCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\MonsterSpawnManager.h">
+      <Filter>2Client\3Manager\0MonsterSpawnManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

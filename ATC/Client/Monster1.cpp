@@ -59,7 +59,6 @@ void Monster1::Movement(const FLOAT& dt)
 		}
 		else
 		{
-			m->SetActive(true);
 			m->SetInformation(transform->position, dir);
 		}
 	}

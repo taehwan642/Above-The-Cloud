@@ -1,6 +1,7 @@
 #include "DXUT.h"
 #include "../Engine/Layer.h"
 #include "../Engine/Button.h"
+#include "../Engine/SceneManager.h"
 #include "MenuCamera.h"
 #include "MenuScene.h"
 
@@ -17,19 +18,25 @@ void MenuScene::Start(void)
 {
 	Engine::Layer* l = new Engine::Layer();
 	layergroup.emplace(L"Layer", l);
-	b = new Engine::Button(L"Start", { 0, 0, 5 });
-	//b->SetButtonFunction([]() {});
-	l->AddGameObject(L"Objects", b);
+
+	startButton = new Engine::Button(L"Start", { 0, 0, 5 });
+	startButton->SetButtonFunction([]() {Engine::SceneManager::GetInstance()->SetScene(L"°ÔÀÓ"); });
+	l->AddGameObject(L"Objects", startButton);
+
 	MenuCamera* cam = new MenuCamera();
 	l->AddGameObject(L"Objects", cam);
 }
 
 void MenuScene::Update(const FLOAT& dt)
 {
-	if (b->IsClicked())
-		std::cout << "WOW" << std::endl;
-	else
-		std::cout << "NO" << std::endl;
+	if (DXUTIsMouseButtonDown(VK_LBUTTON))
+	{
+		if (startButton->IsMouseOn())
+		{
+			startButton->GetButtonFunction()();
+		}
+	}
+		
 	Scene::Update(dt);
 }
 

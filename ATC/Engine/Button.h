@@ -15,7 +15,7 @@ public:
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
 
-    bool IsClicked(void);
+    bool IsMouseOn(void);
 
     void SetButtonFunction(std::function<void(void)> _function);
     std::function<void(void)> GetButtonFunction(void) const;

@@ -481,5 +481,24 @@ enum ObjectState
     OBJDEAD
 };
 
+enum MonsterType
+{
+    MONSTER1,
+    MONSTER2,
+    BOSS
+};
+
+struct MonsterSpawnData
+{
+    MonsterType type;
+    D3DXVECTOR3 position;
+};
+
+enum Stage
+{
+    STAGE1,
+    STAGE2,
+    STAGE3
+};
 
 #endif

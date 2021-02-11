@@ -47,6 +47,8 @@ void GameScene::Start(void)
 void GameScene::Update(const FLOAT& dt)
 {
 	Engine::CollisionManager::GetInstance()->UpdateData();
+	if (DXUTWasKeyPressed('P'))
+		Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
 	Scene::Update(dt);
 }
 

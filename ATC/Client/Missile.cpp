@@ -28,6 +28,7 @@ Missile::Missile(void)
 	componentgroup.emplace(L"collider", collider);
 
 	transform->scale = { 0.02f, 0.02f, 0.02f };
+	memcpy(&transform->worldMatrix._41, &D3DXVECTOR3(99999, 99999, 99999), sizeof(D3DXVECTOR3));
 
 	ob = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(ob);
@@ -37,8 +38,6 @@ Missile::Missile(void)
 	trail = new Engine::Trail();
 	trail->Initalize(&transform->worldMatrix, 1024, 0.03f, 1, 3, L"TrailTexture");
 	componentgroup.emplace(L"Trail", trail);
-
-	Initalize();
 }
 
 Missile::~Missile(void)
@@ -46,7 +45,7 @@ Missile::~Missile(void)
 
 }
 
-void Missile::Initalize(void)
+void Missile::SetInformation(void)
 {
 	transform->position = ob->GetTransform()->position;
 
@@ -68,6 +67,8 @@ void Missile::Initalize(void)
 	Engine::CollisionManager::GetInstance()->PushData(MISSILE, this);
 
 	trail->ClearData();
+
+	isActive = true;
 }
 
 void Missile::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)

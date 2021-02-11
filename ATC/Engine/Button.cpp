@@ -29,10 +29,8 @@ void Button::Render(const FLOAT& dt)
 	DynamicUI::Render(dt);
 }
 
-bool Button::IsClicked(void)
+bool Button::IsMouseOn(void)
 {
-	// lock 후 정점 3개씩 받아옴
-	// 그 뒤 그걸 raycast매니저 속 picktri속에넣어줌
 	bool isPicked = false;
 	INDEX16* index = nullptr;
 	VTXTEX* vertex = nullptr;

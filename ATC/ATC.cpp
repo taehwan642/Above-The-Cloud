@@ -48,6 +48,11 @@ void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTime, flo
     }
 }
 
+LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, bool* pbNoFurtherProcessing, void* pUserContext)
+{
+    return 0;
+}
+
 void CALLBACK OnD3D9LostDevice( void* pUserContext )
 {
     Engine::GraphicsManager::GetInstance()->LostDevice();
@@ -90,10 +95,11 @@ int main(void)
 
     DXUTSetCallbackD3D9DeviceCreated( OnD3D9CreateDevice );
     DXUTSetCallbackD3D9DeviceReset( OnResetDevice );
+    DXUTSetCallbackFrameMove( OnFrameMove );
     DXUTSetCallbackD3D9FrameRender( OnD3D9FrameRender );
+    DXUTSetCallbackMsgProc( MsgProc );
     DXUTSetCallbackD3D9DeviceLost( OnD3D9LostDevice );
     DXUTSetCallbackD3D9DeviceDestroyed( OnD3D9DestroyDevice );
-    DXUTSetCallbackFrameMove( OnFrameMove );
 
     DXUTInit( true, true ); 
     DXUTSetHotkeyHandling( true, true, true ); 

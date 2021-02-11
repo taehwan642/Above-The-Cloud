@@ -40,6 +40,7 @@ void MonsterBullet::SetInformation(const D3DXVECTOR3& _position, const D3DXVECTO
 	transform->position = _position;
 	direction = _direction;
 	alivetime = 3.f;
+	isActive = true;
 	Engine::CollisionManager::GetInstance()->PushData(MONSTERMISSILE, this);
 }
 

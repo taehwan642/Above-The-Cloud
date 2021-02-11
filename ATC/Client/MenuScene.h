@@ -7,7 +7,7 @@ class MenuScene final :
     public Engine::Scene
 {
 private:
-    Engine::Button* b;
+    Engine::Button* startButton;
 protected:
 public:
     explicit MenuScene(void);

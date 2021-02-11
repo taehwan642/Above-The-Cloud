@@ -416,6 +416,7 @@
     <ClCompile Include="Engine\DynamicMesh.cpp" />
     <ClCompile Include="Engine\DynamicUI.cpp" />
     <ClCompile Include="Engine\EffectManager.cpp" />
+    <ClCompile Include="Client\MonsterSpawnManager.cpp" />
     <ClCompile Include="Engine\ObjectManager.cpp" />
     <ClCompile Include="Engine\GameObject.cpp" />
     <ClCompile Include="Engine\GraphicsManager.cpp" />
@@ -440,6 +441,7 @@
     <ClCompile Include="Engine\UIBase.cpp" />
     <ClInclude Include="Client\AimPoint.h" />
     <ClInclude Include="Client\MenuCamera.h" />
+    <ClInclude Include="Client\MonsterSpawnManager.h" />
     <ClInclude Include="Client\PlaneCamera.h" />
     <ClInclude Include="Client\HealthPoint.h" />
     <ClInclude Include="Client\HealthPointGroup.h" />

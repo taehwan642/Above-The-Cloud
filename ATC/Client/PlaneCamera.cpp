@@ -28,11 +28,13 @@ void PlaneCamera::InitCamera(void)
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
 	targetTransform->SetParent(observer->GetTransform());
+
+	transform->curQuaternion = D3DXQUATERNION(0, 1, 0, 0);
 }
 
 bool targetplane = true;
 
-INT PlaneCamera::Update(const float& dt)
+INT PlaneCamera::Update(const FLOAT& dt)
 {
 	if (DXUTWasKeyPressed('C'))
 	{

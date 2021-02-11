@@ -12,7 +12,7 @@ MenuCamera::~MenuCamera(void)
 {
 }
 
-INT MenuCamera::Update(const float& dt)
+INT MenuCamera::Update(const FLOAT& dt)
 {
 	return GameObject::Update(dt);
 }

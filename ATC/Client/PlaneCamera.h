@@ -22,7 +22,7 @@ public:
 
     void InitCamera(void);
 
-    INT Update(const float& dt) override;
+    INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
 

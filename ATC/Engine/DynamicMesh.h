@@ -47,7 +47,7 @@ public:
 
     LPD3DXVECTOR3 GetVertexposition(void) { return vertexposition; }
     ULONG GetVertexcount(void) { return vertexcount; }
-    bool GetIsAnimationEnd(void) const;// { return anicontroller->IsAnimationEnd(); }
+    bool GetIsAnimationEnd(void) const;
 
     Resources* Clone(void) override;
     void Free(void) override;
