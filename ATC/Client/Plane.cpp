@@ -118,7 +118,6 @@ INT Plane::Update(const FLOAT& dt)
 
 	transform->position += directionVector * dt * 1000;
 
-	
 	return OBJALIVE;
 }
 

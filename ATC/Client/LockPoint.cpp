@@ -28,14 +28,12 @@ INT LockPoint::Update(const FLOAT& dt)
 void LockPoint::LateUpdate(const FLOAT& dt)
 {
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT));
-	if (ob->GetMissileLock() == nullptr)
+	if (ob->GetMissileLock() == nullptr || ob->GetMissileLock()->GetActive() == false)
 	{
 		transform->position = { 9999,9999,999 };
 	}
 	else
 	{
-		//ob->GetMissileLock()->position;
-		// Need 3D to 2D Convert
 		D3DXVECTOR3 screenpos = 
 			dynamic_cast<Engine::Transform*>
 			(ob->GetMissileLock()->GetComponent(L"Transform"))->position;

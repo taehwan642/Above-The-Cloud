@@ -107,6 +107,9 @@ void Monster1::LateUpdate(const FLOAT& dt)
 
 void Monster1::Render(const FLOAT& dt)
 {
+	if (isActive == false)
+		return;
+
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	mesh->PlayAnimation(dt);
 	shader->SetupTable(transform->worldMatrix);

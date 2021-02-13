@@ -26,6 +26,7 @@ public:
 
 	virtual void CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject) {};
 	ColliderData* GetColliderData(void) { return &colliderdata; };
+	bool GetActive(void) const;
 
 	Component* GetComponent(const std::wstring& componenttag)
 	{

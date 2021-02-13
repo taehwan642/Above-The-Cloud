@@ -91,7 +91,8 @@ void Missile::LateUpdate(const FLOAT& dt)
 
 	trail->AddNewTrail(trailpos[0], trailpos[1], dt);
 
-	if (ob->GetMissileLock() != nullptr && homingtime <= 0)
+	if ((ob->GetMissileLock() != nullptr && ob->GetMissileLock()->GetActive() != false) 
+		&& homingtime <= 0)
 	{
 		D3DXVECTOR3 dstPos =
 			dynamic_cast<Engine::Transform*>

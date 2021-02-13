@@ -13,8 +13,23 @@
 #include "../Engine/ObjectManager.h"
 #include "../Engine/CollisionManager.h"
 #include "LockPoint.h"
+#include "MonsterSpawnManager.h"
 #include "GameScene.h"
 
+void GameScene::AddStage1Data(void)
+{
+	MonsterSpawnManager::GetInstance()->AddSpawnData(STAGE1, MONSTER1, 3);
+}
+
+void GameScene::AddStage2Data(void)
+{
+
+}
+
+void GameScene::AddStage3Data(void)
+{
+
+}
 
 void GameScene::Start(void)
 {
@@ -42,6 +57,12 @@ void GameScene::Start(void)
 	Scene::AddGameObject(L"테스트", L"테스트", s);
 	Scene::AddGameObject(L"테스트", L"테스트", t1);
 	Scene::AddGameObject(L"테스트", L"테스트", sp);
+	
+	AddStage1Data();
+	AddStage2Data();
+	AddStage3Data();
+
+	MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
 }
 
 void GameScene::Update(const FLOAT& dt)

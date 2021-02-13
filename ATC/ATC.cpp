@@ -8,6 +8,7 @@
 #include "Engine/SubjectManager.h"
 #include "Engine/ObjectManager.h"
 #include "Engine/RaycastManager.h"
+#include "Client/MonsterSpawnManager.h"
 #include "Client/GameScene.h"
 #include "Client/MenuScene.h"
 #include "Client/LoadScene.h"
@@ -76,6 +77,9 @@ void CALLBACK OnD3D9DestroyDevice( void* pUserContext )
     Engine::CollisionManager::GetInstance()->DestroyInstance();
     
     Engine::EffectManager::GetInstance()->DestroyInstance();
+
+    MonsterSpawnManager::GetInstance()->DeleteDatas();
+    MonsterSpawnManager::GetInstance()->DestroyInstance();
 
     Engine::SubjectManager::GetInstance()->ClearObservers();
     Engine::SubjectManager::GetInstance()->DestroyInstance();

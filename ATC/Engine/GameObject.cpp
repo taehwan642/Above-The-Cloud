@@ -23,6 +23,11 @@ void GameObject::LostDevice(void)
 	}
 }
 
+bool GameObject::GetActive(void) const
+{
+	return isActive;
+}
+
 INT GameObject::Update(const FLOAT& dt)
 {
 	for (auto& component : componentgroup)
