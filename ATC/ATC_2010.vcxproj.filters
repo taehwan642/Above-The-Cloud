@@ -216,6 +216,9 @@
     <Filter Include="2Client\3Manager\0MonsterSpawnManager">
       <UniqueIdentifier>{f1a73837-ef53-4df6-a55a-dbbdb905b0c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\6Manager\8RendererManager">
+      <UniqueIdentifier>{104b434d-9683-463d-b6bf-801854c3e450}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -433,6 +436,9 @@
     <ClCompile Include="Client\MonsterSpawnManager.cpp">
       <Filter>2Client\3Manager\0MonsterSpawnManager</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\RenderManager.cpp">
+      <Filter>1Engine\6Manager\8RendererManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -593,6 +599,9 @@
     </ClInclude>
     <ClInclude Include="Client\MonsterSpawnManager.h">
       <Filter>2Client\3Manager\0MonsterSpawnManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\RenderManager.h">
+      <Filter>1Engine\6Manager\8RendererManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

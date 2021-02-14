@@ -2,6 +2,7 @@
 #include "../Engine/SubjectManager.h"
 #include "PlayerObserver.h"
 #include "HealthPoint.h"
+#include "../Engine/RenderManager.h"
 #include "HealthPointGroup.h"
 
 HealthPointGroup::HealthPointGroup(void)
@@ -22,6 +23,8 @@ HealthPointGroup::~HealthPointGroup(void)
 
 INT HealthPointGroup::Update(const FLOAT& dt)
 {
+	for (int i = 0; i < observer->GetHealthPoint(); ++i)
+		Engine::RenderManager::GetInstance()->AddRenderObject(ID_UI, hp[i]);
 	return OBJALIVE;
 }
 
@@ -31,8 +34,7 @@ void HealthPointGroup::LateUpdate(const FLOAT& dt)
 
 void HealthPointGroup::Render(const FLOAT& dt)
 {
-	for (int i = 0; i < observer->GetHealthPoint(); ++i)
-		hp[i]->Render(dt);
+	
 }
 
 void HealthPointGroup::Free(void)

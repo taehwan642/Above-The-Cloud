@@ -8,6 +8,7 @@
 #include "../Engine/CollisionManager.h"
 #include "../Engine/Collider.h"
 #include "PlayerObserver.h"
+#include "../Engine/RenderManager.h"
 #include "MonsterBase.h"
 
 MonsterBase::MonsterBase(void)
@@ -38,6 +39,7 @@ INT MonsterBase::Update(const FLOAT& dt)
 		isActive = false;
 	
 	Engine::GameObject::Update(dt);
+	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
 	return OBJALIVE;
 }
 

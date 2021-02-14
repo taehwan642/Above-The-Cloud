@@ -8,6 +8,7 @@
 #include "Engine/SubjectManager.h"
 #include "Engine/ObjectManager.h"
 #include "Engine/RaycastManager.h"
+#include "Engine/RenderManager.h"
 #include "Client/MonsterSpawnManager.h"
 #include "Client/GameScene.h"
 #include "Client/MenuScene.h"
@@ -44,9 +45,11 @@ void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTime, flo
 
     if( SUCCEEDED( pd3dDevice->BeginScene() ) )
     {
-        Engine::SceneManager::GetInstance()->SceneRender(fElapsedTime);
+        //Engine::SceneManager::GetInstance()->SceneRender(fElapsedTime);
+        Engine::RenderManager::GetInstance()->RenderObject(fElapsedTime);
         V( pd3dDevice->EndScene() );
     }
+    Engine::RenderManager::GetInstance()->ReleaseAllObjects();
 }
 
 LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, bool* pbNoFurtherProcessing, void* pUserContext)
@@ -80,6 +83,9 @@ void CALLBACK OnD3D9DestroyDevice( void* pUserContext )
 
     MonsterSpawnManager::GetInstance()->DeleteDatas();
     MonsterSpawnManager::GetInstance()->DestroyInstance();
+
+    Engine::RenderManager::GetInstance()->ReleaseAllObjects();
+    Engine::RenderManager::GetInstance()->DestroyInstance();
 
     Engine::SubjectManager::GetInstance()->ClearObservers();
     Engine::SubjectManager::GetInstance()->DestroyInstance();

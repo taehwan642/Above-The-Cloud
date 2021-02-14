@@ -424,6 +424,7 @@
     <ClCompile Include="Engine\MeshHierarchy.cpp" />
     <ClCompile Include="Engine\Observer.cpp" />
     <ClCompile Include="Engine\RaycastManager.cpp" />
+    <ClCompile Include="Engine\RenderManager.cpp" />
     <ClCompile Include="Engine\ResourceManager.cpp" />
     <ClCompile Include="Engine\Resources.cpp" />
     <ClCompile Include="Engine\Scene.cpp" />
@@ -475,6 +476,7 @@
     <ClInclude Include="Engine\MeshHierarchy.h" />
     <ClInclude Include="Engine\Observer.h" />
     <ClInclude Include="Engine\RaycastManager.h" />
+    <ClInclude Include="Engine\RenderManager.h" />
     <ClInclude Include="Engine\ResourceManager.h" />
     <ClInclude Include="Engine\Resources.h" />
     <ClInclude Include="Engine\Scene.h" />

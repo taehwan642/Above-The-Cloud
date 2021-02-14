@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "Texture.h"
 #include "ResourceManager.h"
+#include "RenderManager.h"
 #include "TextureEffect.h"
 USING(Engine)
 
@@ -36,6 +37,7 @@ INT TextureEffect::Update(const FLOAT& dt)
 	if (texturesize <= currentTextureIndex)
 		return OBJDEAD;
 	DynamicUI::Update(dt);
+	Engine::RenderManager::GetInstance()->AddRenderObject(ID_EFFECT, this);
 	return OBJALIVE;
 }
 
@@ -46,7 +48,6 @@ void TextureEffect::LateUpdate(const FLOAT& dt)
 
 void TextureEffect::Render(const FLOAT& dt)
 {
-	DynamicUI::Update(dt);
 	DynamicUI::currentTextureindex = currentTextureIndex;
 	DynamicUI::Render(dt);
 }

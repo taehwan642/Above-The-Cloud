@@ -6,6 +6,7 @@
 #include "../Engine/Collider.h"
 #include "../Engine/CollisionManager.h"
 #include "../Engine/Shader.h"
+#include "../Engine/RenderManager.h"
 #include "Cloud.h"
 
 Cloud::Cloud(void)
@@ -25,6 +26,7 @@ Cloud::Cloud(void)
 	colliderdata.center = &transform->position;
 	colliderdata.radius = 1;
 	colliderdata.tag = L"Cloud";
+
 }
 
 Cloud::~Cloud(void)
@@ -42,6 +44,7 @@ void Cloud::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObje
 INT Cloud::Update(const float& dt)
 {
 	GameObject::Update(dt);
+	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
 	return OBJALIVE;
 }
 

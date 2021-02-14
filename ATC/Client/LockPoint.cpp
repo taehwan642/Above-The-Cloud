@@ -2,6 +2,7 @@
 #include "../Engine/Transform.h"
 #include "PlayerObserver.h"
 #include "../Engine/SubjectManager.h"
+#include "../Engine/RenderManager.h"
 #include "LockPoint.h"
 
 LockPoint::LockPoint(void) :
@@ -22,6 +23,7 @@ INT LockPoint::Update(const FLOAT& dt)
 {
 	transform->rotation.z += 1.f * dt;
 	Engine::StaticUI::Update(dt);
+	Engine::RenderManager::GetInstance()->AddRenderObject(ID_UI, this);
 	return OBJALIVE;
 }
 

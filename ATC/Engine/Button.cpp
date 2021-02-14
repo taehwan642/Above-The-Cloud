@@ -1,6 +1,7 @@
 #include "DXUT.h"
 #include "Transform.h"
 #include "RaycastManager.h"
+#include "RenderManager.h"
 #include "Button.h"
 
 USING(Engine)
@@ -16,7 +17,9 @@ Button::~Button(void)
 
 INT Button::Update(const FLOAT& dt)
 {
-	return DynamicUI::Update(dt);
+	DynamicUI::Update(dt);
+	RenderManager::GetInstance()->AddRenderObject(ID_UI, this);
+	return OBJALIVE;
 }
 
 void Button::LateUpdate(const FLOAT& dt)

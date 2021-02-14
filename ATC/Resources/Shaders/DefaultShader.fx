@@ -67,7 +67,7 @@ technique Default
 	{
 		ZEnable = false;
 		ZWriteEnable = false;
-		CullMode = cw;
+		CullMode = none;
 		VertexShader = compile vs_3_0 VS_MAIN();
 		PixelShader = compile ps_3_0 PS_MAIN();
 	}

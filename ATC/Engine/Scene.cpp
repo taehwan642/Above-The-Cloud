@@ -1,5 +1,6 @@
 #include "DXUT.h"
 #include "Layer.h"
+#include "RenderManager.h"
 #include "Scene.h"
 
 USING(Engine)
@@ -60,6 +61,7 @@ void Scene::Exit(void)
 		}
 	}
 	layergroup.clear();
+
 }
 
 void Scene::ResetDevice(void)

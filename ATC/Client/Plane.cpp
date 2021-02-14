@@ -14,6 +14,7 @@
 #include "../Engine/CollisionManager.h"
 #include "../Engine/ObjectManager.h"
 #include "Missile.h"
+#include "../Engine/RenderManager.h"
 #include "Plane.h"
 
 bool testfly = true;
@@ -62,6 +63,7 @@ Plane::Plane(void)
 	colliderdata.center = &transform->position;
 	colliderdata.radius = 1;
 	colliderdata.tag = L"player";
+
 }
 
 Plane::~Plane(void)
@@ -117,6 +119,7 @@ INT Plane::Update(const FLOAT& dt)
 		transform->Rotate(Engine::Transform::RotType::LOOK, 2.5f * dt);
 
 	//transform->position += directionVector * dt * 1000;
+	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
 
 	return OBJALIVE;
 }

@@ -127,7 +127,7 @@ bool CollisionManager::MouseRaySphereInteresection(out float& _distanceOut, out 
 			_targetposition = dynamic_cast<Transform*>(dst->GetComponent(L"Transform"))->position;
 			dstObject = dst;
 
-			float x = sqrtf(radiusquare - orthogonallengthsqare);
+			float x = fabsf(sqrtf(radiusquare - orthogonallengthsqare));
 
 			float t1 = x - dot;
 			float t2 = x + dot;
@@ -139,10 +139,10 @@ bool CollisionManager::MouseRaySphereInteresection(out float& _distanceOut, out 
 
 			// pos1 error 고쳐야함
 
-			//Engine::EffectManager::GetInstance()->
-				//SpawnTextureEffect(pos1, nullptr, 3.3f, L"muzzleFlash");
 			Engine::EffectManager::GetInstance()->
-				SpawnTextureEffect(pos2, nullptr, 3.3f, L"muzzleFlash");
+				SpawnTextureEffect(pos1, nullptr, 3.3f, L"muzzleFlash");
+			//Engine::EffectManager::GetInstance()->
+				//SpawnTextureEffect(pos2, nullptr, 3.3f, L"muzzleFlash");
 
 			return true;
 		}

@@ -5,10 +5,11 @@
 #include "../Engine/ResourceManager.h"
 #include "../Engine/Collider.h"
 #include "../Engine/CollisionManager.h"
+#include "../Engine/RenderManager.h"
 #include "MonsterBullet.h"
 
 MonsterBullet::MonsterBullet(void) :
-	direction(0,0,0)
+	direction(0, 0, 0)
 {
 	transform = new Engine::Transform();
 	transform->scale = { 1.7,1.7,1.7 };
@@ -29,6 +30,7 @@ MonsterBullet::MonsterBullet(void) :
 	transform->scale = { 0.05f, 0.05f, 0.05f };
 
 	memcpy(&transform->worldMatrix._41, transform->position, sizeof(D3DXVECTOR3));
+
 }
 
 MonsterBullet::~MonsterBullet(void)
@@ -61,6 +63,8 @@ INT MonsterBullet::Update(const FLOAT& dt)
 	else
 		alivetime -= dt;
 	GameObject::Update(dt);
+	if (isActive)
+		Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
 	return OBJALIVE;
 }
 

@@ -376,7 +376,6 @@ enum LAYERKEY
     UI
 };
 
-
 template <typename T>
 DWORD Safe_Release(T& t)
 {
@@ -507,6 +506,15 @@ enum Stage
     STAGE1,
     STAGE2,
     STAGE3
+};
+
+enum RenderID
+{
+    ID_NOLIGHT,
+    ID_NORMALMESH,
+    ID_EFFECT,
+    ID_UI,
+    ID_RENDEREND
 };
 
 #endif

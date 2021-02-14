@@ -3,6 +3,7 @@
 #include "../Engine/StaticMesh.h"
 #include "../Engine/Shader.h"
 #include "../Engine/Transform.h"
+#include "../Engine/RenderManager.h"
 #include "SkySphere.h"
 
 SkySphere::SkySphere(void)
@@ -23,6 +24,7 @@ SkySphere::~SkySphere(void)
 INT SkySphere::Update(const float& dt)
 {
 	GameObject::Update(dt);
+	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NOLIGHT, this);
 	return OBJALIVE;
 }
 

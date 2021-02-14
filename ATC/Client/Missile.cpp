@@ -8,6 +8,7 @@
 #include "../Engine/SubjectManager.h"
 #include "../Engine/Shader.h"
 #include "PlayerObserver.h"
+#include "../Engine/RenderManager.h"
 #include "Missile.h"
 
 Missile::Missile(void)
@@ -38,6 +39,7 @@ Missile::Missile(void)
 	trail = new Engine::Trail();
 	trail->Initalize(&transform->worldMatrix, 1024, 0.03f, 1, 3, L"TrailTexture");
 	componentgroup.emplace(L"Trail", trail);
+
 }
 
 Missile::~Missile(void)
@@ -69,16 +71,20 @@ void Missile::SetInformation(void)
 	trail->ClearData();
 
 	isActive = true;
+
+	homingtime = 1.5f;
 }
 
 void Missile::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)
 {
-	
+
 }
 
 INT Missile::Update(const FLOAT& dt)
 {
 	GameObject::Update(dt);
+	if (isActive)
+		Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
 	return OBJALIVE;
 }
 
@@ -91,7 +97,7 @@ void Missile::LateUpdate(const FLOAT& dt)
 
 	trail->AddNewTrail(trailpos[0], trailpos[1], dt);
 
-	if ((ob->GetMissileLock() != nullptr && ob->GetMissileLock()->GetActive() != false) 
+	if ((ob->GetMissileLock() != nullptr && ob->GetMissileLock()->GetActive() != false)
 		&& homingtime <= 0)
 	{
 		D3DXVECTOR3 dstPos =
@@ -99,7 +105,7 @@ void Missile::LateUpdate(const FLOAT& dt)
 			(ob->GetMissileLock()->GetComponent(L"Transform"))->position;
 		D3DXVECTOR3 look = dstPos - transform->position;
 		D3DXVec3Normalize(&look, &look);
-		
+
 		D3DXVECTOR3 right;
 		D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
 		D3DXVec3Normalize(&right, &right);
@@ -125,7 +131,7 @@ void Missile::LateUpdate(const FLOAT& dt)
 		D3DXVec3Normalize(&dir, &dir);
 		transform->position += dir * 20 * dt;
 	}
-	
+
 	GameObject::LateUpdate(dt);
 }
 
@@ -141,7 +147,7 @@ void Missile::Render(const FLOAT& dt)
 	tempeffect->EndPass();
 	tempeffect->End();
 	//collider->RenderCollider();
-	
+
 	GameObject::Render(dt);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
