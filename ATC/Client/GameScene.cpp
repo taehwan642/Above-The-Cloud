@@ -9,7 +9,6 @@
 #include "../Engine/GraphicsManager.h"
 #include "AimPoint.h"
 #include "HealthPointGroup.h"
-#include "Monster1.h"
 #include "../Engine/ObjectManager.h"
 #include "../Engine/CollisionManager.h"
 #include "LockPoint.h"
@@ -18,7 +17,7 @@
 
 void GameScene::AddStage1Data(void)
 {
-	MonsterSpawnManager::GetInstance()->AddSpawnData(STAGE1, MONSTER1, 3);
+	MonsterSpawnManager::GetInstance()->AddSpawnData(STAGE1, MONSTER1, 1);
 }
 
 void GameScene::AddStage2Data(void)
@@ -35,28 +34,30 @@ void GameScene::Start(void)
 {
 	Engine::GraphicsManager::GetInstance()->CreateSprite();
 	Engine::Layer* l = new Engine::Layer();
+	Engine::Layer* l2 = new Engine::Layer();
 	Engine::Layer* effect = new Engine::Layer();
-	layergroup.emplace(L"테스트", l);
-	layergroup.emplace(L"Effect", effect);
+	Engine::Layer* Uii = new Engine::Layer();
+
+	layergroup.emplace(OBJ1, l);
+	layergroup.emplace(OBJ2, l2);
+	layergroup.emplace(EFFECT, effect);
+	layergroup.emplace(UI, Uii);
 	SkySphere* s = new SkySphere();
 
 	HealthPointGroup* h = new HealthPointGroup();
 	
 	Cloud* t1 = new Cloud();
 
-	Monster1* sp = new Monster1();
-
-	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Plane>(L"테스트", L"테스트");
+	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Plane>(OBJ2, L"테스트");
 	PlaneCamera* c = new PlaneCamera();
 	AimPoint* ui = new AimPoint(L"AimPoint");
 	LockPoint* ui2 = new LockPoint();
-	Scene::AddGameObject(L"테스트", L"테스트", c);
-	Scene::AddGameObject(L"테스트", L"UI", ui);
-	Scene::AddGameObject(L"테스트", L"UI", ui2);
-	Scene::AddGameObject(L"테스트", L"UI", h);
-	Scene::AddGameObject(L"테스트", L"테스트", s);
-	Scene::AddGameObject(L"테스트", L"테스트", t1);
-	Scene::AddGameObject(L"테스트", L"테스트", sp);
+	Scene::AddGameObject(OBJ1, L"a", s);
+	Scene::AddGameObject(OBJ2, L"테스트", c);
+	Scene::AddGameObject(UI, L"UI", ui);
+	Scene::AddGameObject(UI, L"UI", ui2);
+	Scene::AddGameObject(UI, L"UI", h);
+	Scene::AddGameObject(OBJ2, L"테스트", t1);
 	
 	AddStage1Data();
 	AddStage2Data();

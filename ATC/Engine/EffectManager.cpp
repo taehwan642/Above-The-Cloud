@@ -17,6 +17,6 @@ void EffectManager::SpawnTextureEffect(const D3DXVECTOR3& _position, Transform* 
 	else
 		texeffect = new TextureEffect(_texturetag, _position, _alivetime);
 
-	SceneManager::GetInstance()->AddGameObject(L"Effect", _layertag, texeffect);
+	SceneManager::GetInstance()->AddGameObject(OBJ2, _layertag, texeffect);
 	return;
 }

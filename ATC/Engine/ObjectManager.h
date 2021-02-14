@@ -11,9 +11,9 @@ class ObjectManager final :
 {
 public:
     template<class T>
-    T* GetActiveFalsedObject(const std::wstring& _layertag, const std::wstring& _objecttag)
+    T* GetActiveFalsedObject(LAYERKEY _layerKey, const std::wstring& _objecttag)
     {
-        Layer* l = SceneManager::GetInstance()->GetCurrentSceneLayer(_layertag);
+        Layer* l = SceneManager::GetInstance()->GetCurrentSceneLayer(_layerKey);
         for (auto& iter : l->gameobjectgroup[_objecttag])
         {
             if (iter->isActive == false)
@@ -24,10 +24,10 @@ public:
 
 
     template<class T>
-    T* AddObjectAtLayer(const std::wstring& _layertag, const std::wstring& _objecttag)
+    T* AddObjectAtLayer(LAYERKEY _layerKey, const std::wstring& _objecttag)
     {
         T* object = new T();
-        Layer* l = SceneManager::GetInstance()->GetCurrentSceneLayer(_layertag);
+        Layer* l = SceneManager::GetInstance()->GetCurrentSceneLayer(_layerKey);
         l->AddGameObject(_objecttag, object);
         return dynamic_cast<T*>(object);
     }

@@ -71,8 +71,6 @@ void MonsterBullet::LateUpdate(const FLOAT& dt)
 
 void MonsterBullet::Render(const FLOAT& dt)
 {
-	if (isActive == false)
-		return;
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	shader->SetupTable(transform->worldMatrix);
 	UINT pass = 0;

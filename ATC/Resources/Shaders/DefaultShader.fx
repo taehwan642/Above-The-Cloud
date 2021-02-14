@@ -63,4 +63,12 @@ technique Default
 		VertexShader = compile vs_3_0 VS_MAIN();
 		PixelShader = compile ps_3_0 PS_MAIN();
 	}
+	pass SkySphere
+	{
+		ZEnable = false;
+		ZWriteEnable = false;
+		CullMode = cw;
+		VertexShader = compile vs_3_0 VS_MAIN();
+		PixelShader = compile ps_3_0 PS_MAIN();
+	}
 };

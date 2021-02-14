@@ -4,16 +4,16 @@
 
 USING(Engine)
 
-void Layer::AddGameObject(std::wstring _objecttag, GameObject* _object)
+void Layer::AddGameObject(const std::wstring& _objectKey, GameObject* _object)
 {
 	if (_object == nullptr)
 		return;
 	
-	auto& iter = gameobjectgroup.find(_objecttag);
+	auto& iter = gameobjectgroup.find(_objectKey);
 	if (iter == gameobjectgroup.end())
-		gameobjectgroup[_objecttag] = std::list<GameObject*>();
+		gameobjectgroup[_objectKey] = std::list<GameObject*>();
 
-	gameobjectgroup[_objecttag].push_back(_object);
+	gameobjectgroup[_objectKey].push_back(_object);
 }
 
 void Layer::Update(const FLOAT& dt)
@@ -24,7 +24,6 @@ void Layer::Update(const FLOAT& dt)
 		auto& iter_end = objectlist.second.end();
 		for (; iter != iter_end;)
 		{
-			
 			if ((*iter)->Update(dt) == OBJDEAD)
 			{
 				Safe_Release(*iter);
@@ -42,7 +41,8 @@ void Layer::LateUpdate(const FLOAT& dt)
 	{
 		for (auto& object : objectlist.second)
 		{
-			object->LateUpdate(dt);
+			if (object->GetActive() == true)
+				object->LateUpdate(dt);
 		}
 	}
 }
@@ -53,7 +53,8 @@ void Layer::Render(const FLOAT& dt)
 	{
 		for (auto& object : objectlist.second)
 		{
-			object->Render(dt);
+			if (object->GetActive() == true)
+				object->Render(dt);
 		}
 	}
 }

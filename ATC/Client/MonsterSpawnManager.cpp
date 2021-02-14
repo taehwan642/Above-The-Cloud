@@ -4,6 +4,7 @@
 #include "Monster2.h"
 #include "../Engine/SubjectManager.h"
 #include "PlayerObserver.h"
+#include "../Engine/Transform.h"
 #include "MonsterSpawnManager.h"
 
 MonsterSpawnManager::MonsterSpawnManager()
@@ -37,10 +38,10 @@ void MonsterSpawnManager::SpawnMonstersByData(const Stage& _stage)
 			{
 				for (int i = 0; i < (*iterator).second; ++i)
 				{
-					Monster1* monster1 = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Monster1>(L"테스트", L"Monster1");
+					Monster1* monster1 = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Monster1>(OBJ2, L"Monster1");
 					if (monster1 == nullptr)
 					{
-						monster1 = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Monster1>(L"테스트", L"Monster1");
+						monster1 = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Monster1>(OBJ2, L"Monster1");
 					}
 					else
 						monster1->SetActive(true);
@@ -51,10 +52,10 @@ void MonsterSpawnManager::SpawnMonstersByData(const Stage& _stage)
 			{
 				for (int i = 0; i < (*iterator).second; ++i)
 				{
-					Monster2* monster2 = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Monster2>(L"테스트", L"Monster2");
+					Monster2* monster2 = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Monster2>(OBJ2, L"Monster2");
 					if (monster2 == nullptr)
 					{
-						monster2 = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Monster2>(L"테스트", L"Monster2");
+						monster2 = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Monster2>(OBJ2, L"Monster2");
 					}
 					else
 						monster2->SetActive(true);

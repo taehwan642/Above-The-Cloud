@@ -116,7 +116,7 @@ INT Plane::Update(const FLOAT& dt)
 	if (DXUTIsKeyDown('D'))
 		transform->Rotate(Engine::Transform::RotType::LOOK, 2.5f * dt);
 
-	transform->position += directionVector * dt * 1000;
+	//transform->position += directionVector * dt * 1000;
 
 	return OBJALIVE;
 }
@@ -152,11 +152,11 @@ void Plane::LateUpdate(const FLOAT& dt)
 
 	if (DXUTWasKeyPressed('E'))
 	{
-		Missile* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Missile>(L"테스트", L"BULLET");
+		Missile* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Missile>(OBJ2, L"BULLET");
 
 		if (m == nullptr)
 		{
-			m = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Missile>(L"테스트", L"BULLET");
+			m = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Missile>(OBJ2, L"BULLET");
 			m->SetInformation();
 		}
 		else

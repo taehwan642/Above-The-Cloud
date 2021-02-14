@@ -17,9 +17,9 @@ public:
 
     void SetScene(std::wstring _name);
 
-    Layer* GetCurrentSceneLayer(std::wstring _layertag);
+    Layer* GetCurrentSceneLayer(LAYERKEY _layerKey);
     
-    void AddGameObject(std::wstring _layername, std::wstring _objectname, GameObject* _gameObject);
+    void AddGameObject(LAYERKEY _layerKey, std::wstring _objectname, GameObject* _gameObject);
 
     void SceneUpdate(const float& dt);
     void SceneLateUpdate(const FLOAT& dt);

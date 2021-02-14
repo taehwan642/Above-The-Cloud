@@ -368,6 +368,15 @@ void      WINAPI DXUTDestroyState(); // Optional method to destroy DXUT's memory
 const int windowWidth = 1280;
 const int windowHeight = 720;
 
+enum LAYERKEY
+{
+    OBJ1,
+    OBJ2,
+    EFFECT,
+    UI
+};
+
+
 template <typename T>
 DWORD Safe_Release(T& t)
 {

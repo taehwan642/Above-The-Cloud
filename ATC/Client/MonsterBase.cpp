@@ -37,29 +37,24 @@ INT MonsterBase::Update(const FLOAT& dt)
 	if (Hp <= 0)
 		isActive = false;
 	
-	if (isActive == true)
-	{
-		if (movementspeed < 0)
-			Movement(dt);
-		else
-			movementspeed -= dt;
-
-		if (!movementqueue.empty())
-		{
-			if (movementqueue.front()())
-			{
-				movementqueue.pop();
-			}
-		}
-	}
-
 	Engine::GameObject::Update(dt);
 	return OBJALIVE;
 }
 
 void MonsterBase::LateUpdate(const FLOAT& dt)
 {
-	
+	if (movementspeed < 0)
+		Movement(dt);
+	else
+		movementspeed -= dt;
+
+	if (!movementqueue.empty())
+	{
+		if (movementqueue.front()())
+		{
+			movementqueue.pop();
+		}
+	}
 	Engine::GameObject::LateUpdate(dt);
 }
 

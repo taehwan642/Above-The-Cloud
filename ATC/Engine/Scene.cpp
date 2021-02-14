@@ -4,25 +4,25 @@
 
 USING(Engine)
 
-void Scene::AddGameObject(std::wstring _layertag, std::wstring _objecttag, GameObject* _object)
+void Scene::AddGameObject(LAYERKEY _layerKey, std::wstring _objecttag, GameObject* _object)
 {
-	auto& iter = layergroup.find(_layertag);
+	auto& iter = layergroup.find(_layerKey);
 	if (iter != layergroup.end())
-		layergroup[_layertag]->AddGameObject(_objecttag, _object);
+		layergroup[_layerKey]->AddGameObject(_objecttag, _object);
 	else
 	{
 		Layer* l = new Layer();
-		layergroup.emplace(_layertag, l);
+		layergroup.emplace(_layerKey, l);
 		l->AddGameObject(_objecttag, _object);
 		l = nullptr;
 	}
 }
 
-Layer* Scene::GetLayer(std::wstring _layertag)
+Layer* Scene::GetLayer(LAYERKEY _layerKey)
 {
-	auto& iter = layergroup.find(_layertag);
+	auto& iter = layergroup.find(_layerKey);
 	if (iter != layergroup.end())
-		return layergroup[_layertag];
+		return layergroup[_layerKey];
 	return nullptr;
 }
 

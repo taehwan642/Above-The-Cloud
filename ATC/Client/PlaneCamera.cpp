@@ -95,7 +95,7 @@ void PlaneCamera::LateUpdate(const FLOAT& dt)
 	{
 		D3DXMATRIX im;
 		D3DXMatrixIdentity(&im);
-		D3DXMatrixTranslation(&im, 0, 0, 12);
+		D3DXMatrixTranslation(&im, 0, 0, 62);
 		DEVICE->SetTransform(D3DTS_VIEW, &im);
 	}
 	DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);

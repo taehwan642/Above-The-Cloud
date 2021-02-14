@@ -14,7 +14,7 @@ public:
 
 	std::map<std::wstring, std::list<GameObject*>> gameobjectgroup; // 일반 GameObject* 로 변경 필요
 
-	void AddGameObject(std::wstring _objecttag, GameObject* _object);
+	void AddGameObject(const std::wstring& _objectKey, GameObject* _object);
 
 	void Update(const FLOAT& dt);
 	void LateUpdate(const FLOAT& dt);

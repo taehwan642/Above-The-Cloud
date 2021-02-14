@@ -17,7 +17,7 @@ MenuScene::~MenuScene(void)
 void MenuScene::Start(void)
 {
 	Engine::Layer* l = new Engine::Layer();
-	layergroup.emplace(L"Layer", l);
+	layergroup.emplace(UI, l);
 
 	startButton = new Engine::Button(L"Start", { 0, 0, 5 });
 	startButton->SetButtonFunction([]() {Engine::SceneManager::GetInstance()->SetScene(L"∞‘¿”"); });

@@ -39,7 +39,7 @@ void SkySphere::Render(const FLOAT& dt)
 	LPD3DXEFFECT effect = shader->GetEffect();
 	UINT pass;
 	effect->Begin(&pass, 0);
-	effect->BeginPass(0);
+	effect->BeginPass(1);
 	skysphere->RenderMesh();
 	effect->EndPass();
 	effect->End();

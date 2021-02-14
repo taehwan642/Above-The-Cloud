@@ -20,17 +20,17 @@ void SceneManager::SetScene(std::wstring _name)
 	currentScene->Start();
 }
 
-Layer* SceneManager::GetCurrentSceneLayer(std::wstring _layertag)
+Layer* SceneManager::GetCurrentSceneLayer(LAYERKEY _layerKey)
 {
 	if (currentScene != nullptr)
-		return currentScene->GetLayer(_layertag);
+		return currentScene->GetLayer(_layerKey);
 	return nullptr;
 }
 
-void SceneManager::AddGameObject(std::wstring _layername, std::wstring _objectname, GameObject* _gameObject)
+void SceneManager::AddGameObject(LAYERKEY _layerKey, std::wstring _objectname, GameObject* _gameObject)
 {
 	if(currentScene != nullptr)
-		currentScene->AddGameObject(_layername, _objectname, _gameObject);
+		currentScene->AddGameObject(_layerKey, _objectname, _gameObject);
 }
 
 void SceneManager::SceneUpdate(const float& dt)

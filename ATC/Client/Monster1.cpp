@@ -23,17 +23,16 @@ Monster1::Monster1(void)
 	transform = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transform);
 	transform->scale = { 0.1f, 0.1f, 0.1f };
-	transform->position = { 10, 10, 10 };
-
+	transform->position = { 0,0,-30 };
 	observer = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
-	collider = new Engine::Collider(3, &transform->position);
+	collider = new Engine::Collider(6, &transform->position);
 	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
 	componentgroup.emplace(L"collider", collider);
 	colliderdata.center = &transform->position;
-	colliderdata.radius = 3;
+	colliderdata.radius = 6;
 	colliderdata.tag = L"Monster";
 	animationkey = 1;
 	mesh->SetAnimationSet(animationkey);
@@ -50,11 +49,11 @@ void Monster1::Movement(const FLOAT& dt)
 	int s = rand() % 2;
 	if (s == 0)
 	{
-		MonsterBullet* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<MonsterBullet>(L"테스트", L"MONSTERBULLET");
+		MonsterBullet* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<MonsterBullet>(OBJ2, L"MONSTERBULLET");
 		D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 		if (m == nullptr)
 		{
-			m = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<MonsterBullet>(L"테스트", L"MONSTERBULLET");
+			m = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<MonsterBullet>(OBJ2, L"MONSTERBULLET");
 			m->SetInformation(transform->position, dir);
 		}
 		else
@@ -67,10 +66,10 @@ void Monster1::Movement(const FLOAT& dt)
 		float x = (rand() % 100) - (rand() % 50);
 		float y = (rand() % 100) - (rand() % 50);
 		float z = (rand() % 100) - (rand() % 50);
-		movementqueue.emplace([=]()-> bool
-			{
-				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(x, y, z), dt, 10);
-			});
+		//movementqueue.emplace([=]()-> bool
+			//{
+				//return transform->Vec3Lerp(transform->position, D3DXVECTOR3(x, y, z), dt, 10);
+			//});
 	}
 }
 
@@ -97,6 +96,9 @@ INT Monster1::Update(const FLOAT& dt)
 
 	ObjectState state = static_cast<ObjectState>(MonsterBase::Update(dt));
 	
+	//if (mesh->GetIsAnimationEnd() == true)
+		//std::cout << "SIABL" << std::endl;
+
 	return OBJALIVE;
 }
 
@@ -107,9 +109,6 @@ void Monster1::LateUpdate(const FLOAT& dt)
 
 void Monster1::Render(const FLOAT& dt)
 {
-	if (isActive == false)
-		return;
-
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	mesh->PlayAnimation(dt);
 	shader->SetupTable(transform->worldMatrix);
@@ -120,9 +119,7 @@ void Monster1::Render(const FLOAT& dt)
 	mesh->RenderMesh(tempeffect);
 	tempeffect->EndPass();
 	tempeffect->End();
-
-	//collider->RenderCollider();
-
+	collider->RenderCollider();
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	MonsterBase::Render(dt);
 }
