@@ -28,6 +28,8 @@ void MonsterBase::SetInformation(const D3DXVECTOR3& _position)
 {
 	transform->position = _position;
 	Hp = FullHP;
+	currentState = MONSTERIDLE;
+	mesh->SetAnimationSet(currentState);
 	isActive = true;
 }
 

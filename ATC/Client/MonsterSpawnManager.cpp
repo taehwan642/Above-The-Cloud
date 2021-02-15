@@ -9,10 +9,17 @@
 
 D3DXVECTOR3 MonsterSpawnManager::RandomPositionForMonster(void)
 {
-	float rx = static_cast<float>((rand() % 10)) / 10;
-	float ry = static_cast<float>((rand() % 10)) / 10;
-	float rz = static_cast<float>((rand() % 10)) / 10;
-	D3DXVECTOR3 randomPosition = { rx,ry,rz };
+	INT r;
+	FLOAT rx = static_cast<float>((rand() % 10)) / 10;
+	r = rand() % 2;
+	r == 0 ? rx *= -1 : 0;
+	FLOAT ry = static_cast<float>((rand() % 10)) / 10;
+	r = rand() % 2;
+	r == 0 ? ry *= -1 : 0; 
+	FLOAT rz = static_cast<float>((rand() % 10)) / 10;
+	r = rand() % 2;
+	r == 0 ? rz *= -1 : 0;
+	D3DXVECTOR3 randomPosition = { rx, ry, rz };
 	D3DXVec3Normalize(&randomPosition, &randomPosition);
 	randomPosition *= 100;
 	return randomPosition;
