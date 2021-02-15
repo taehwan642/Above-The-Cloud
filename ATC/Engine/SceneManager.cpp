@@ -33,7 +33,7 @@ void SceneManager::AddGameObject(LAYERKEY _layerKey, std::wstring _objectname, G
 		currentScene->AddGameObject(_layerKey, _objectname, _gameObject);
 }
 
-void SceneManager::SceneUpdate(const float& dt)
+void SceneManager::SceneUpdate(const FLOAT& dt)
 {
 	if (currentScene)
 	currentScene->Update(dt);
@@ -43,12 +43,6 @@ void SceneManager::SceneLateUpdate(const FLOAT& dt)
 {
 	if (currentScene)
 		currentScene->LateUpdate(dt);
-}
-
-void SceneManager::SceneRender(const FLOAT& dt)
-{
-	if (currentScene)
-		currentScene->Render(dt);
 }
 
 void SceneManager::LostDevice(void)

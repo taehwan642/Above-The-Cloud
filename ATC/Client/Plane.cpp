@@ -118,7 +118,7 @@ INT Plane::Update(const FLOAT& dt)
 	if (DXUTIsKeyDown('D'))
 		transform->Rotate(Engine::Transform::RotType::LOOK, 2.5f * dt);
 
-	//transform->position += directionVector * dt * 1000;
+	transform->position += directionVector * dt * 1000;
 	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
 
 	return OBJALIVE;

@@ -43,14 +43,6 @@ void Scene::LateUpdate(const FLOAT& dt)
 	}
 }
 
-void Scene::Render(const FLOAT& dt)
-{
-	for (auto& layer : layergroup)
-	{
-		layer.second->Render(dt);
-	}
-}
-
 void Scene::Exit(void)
 {
 	for (auto& layer : layergroup)

@@ -17,7 +17,7 @@
 
 void GameScene::AddStage1Data(void)
 {
-	MonsterSpawnManager::GetInstance()->AddSpawnData(STAGE1, MONSTER1, 1);
+	MonsterSpawnManager::GetInstance()->AddSpawnData(STAGE1, MONSTER1, 5);
 }
 
 void GameScene::AddStage2Data(void)
@@ -80,11 +80,6 @@ void GameScene::LateUpdate(const FLOAT& dt)
 	Engine::CollisionManager::GetInstance()->CheckCollision(MISSILE, MONSTER);
 	Engine::CollisionManager::GetInstance()->CheckCollision(PLAYER, MONSTERMISSILE);
 	Scene::LateUpdate(dt);
-}
-
-void GameScene::Render(const FLOAT& dt)
-{
-	Scene::Render(dt);
 }
 
 void GameScene::Exit(void)

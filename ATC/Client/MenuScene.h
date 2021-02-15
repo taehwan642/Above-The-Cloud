@@ -16,7 +16,6 @@ public:
     void Start(void) override;
     void Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
-    void Render(const FLOAT& dt) override;
     void Exit(void) override;
 
     void Free(void) override;

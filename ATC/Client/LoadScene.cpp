@@ -44,11 +44,6 @@ void LoadScene::LateUpdate(const FLOAT& dt)
 	Scene::LateUpdate(dt);
 }
 
-void LoadScene::Render(const FLOAT& dt)
-{
-	Scene::Render(dt);
-}
-
 void LoadScene::Exit(void)
 {
 	Scene::Exit();

@@ -24,7 +24,6 @@ public:
 	virtual void Start(void) PURE;
 	virtual void Update(const FLOAT& dt);
 	virtual void LateUpdate(const FLOAT& dt);
-	virtual void Render(const FLOAT& dt);
 	virtual void Exit(void);
 
 	void Free(void) override;

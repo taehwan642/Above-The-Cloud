@@ -47,18 +47,6 @@ void Layer::LateUpdate(const FLOAT& dt)
 	}
 }
 
-void Layer::Render(const FLOAT& dt)
-{
-	for (auto& objectlist : gameobjectgroup)
-	{
-		for (auto& object : objectlist.second)
-		{
-			if (object->GetActive() == true)
-				object->Render(dt);
-		}
-	}
-}
-
 void Layer::ResetDevice(void)
 {
 	for (auto& objectlist : gameobjectgroup)

@@ -45,11 +45,6 @@ void MenuScene::LateUpdate(const FLOAT& dt)
 	Scene::LateUpdate(dt);
 }
 
-void MenuScene::Render(const FLOAT& dt)
-{
-	Scene::Render(dt);
-}
-
 void MenuScene::Exit(void)
 {
 	Scene::Exit();

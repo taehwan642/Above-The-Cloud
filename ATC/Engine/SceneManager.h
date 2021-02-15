@@ -21,9 +21,8 @@ public:
     
     void AddGameObject(LAYERKEY _layerKey, std::wstring _objectname, GameObject* _gameObject);
 
-    void SceneUpdate(const float& dt);
+    void SceneUpdate(const FLOAT& dt);
     void SceneLateUpdate(const FLOAT& dt);
-    void SceneRender(const FLOAT& dt);
     void LostDevice(void);
     void ResetDevice(void);
 

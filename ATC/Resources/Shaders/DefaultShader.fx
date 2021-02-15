@@ -45,11 +45,20 @@ VertexShaderOutput VS_MAIN(VertexShaderInput Input)
 	return OutPut;
 }
 
-float4 PS_MAIN(PixelShaderInput Input) : COLOR0
+struct PixelShaderOutput
 {
-	float4 vColor = tex2D(BaseSampler, Input.vTexUV);
+	float4 diffuse : COLOR0;
+	float4 normal : COLOR1;
+};
 
-	return vColor;
+
+PixelShaderOutput PS_MAIN(PixelShaderInput Input)
+{
+	PixelShaderOutput PixelOut = (PixelShaderOutput)0;
+	PixelOut.diffuse = tex2D(BaseSampler, Input.vTexUV);
+	//PixelOut.normal = /* 노말 반환 값*/;
+
+	return PixelOut;
 }
 
 technique Default

@@ -45,7 +45,6 @@ void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTime, flo
 
     if( SUCCEEDED( pd3dDevice->BeginScene() ) )
     {
-        //Engine::SceneManager::GetInstance()->SceneRender(fElapsedTime);
         Engine::RenderManager::GetInstance()->RenderObject(fElapsedTime);
         V( pd3dDevice->EndScene() );
     }

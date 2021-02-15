@@ -34,8 +34,8 @@ Monster1::Monster1(void)
 	colliderdata.center = &transform->position;
 	colliderdata.radius = 6;
 	colliderdata.tag = L"Monster";
-	animationkey = 1;
-	mesh->SetAnimationSet(animationkey);
+	currentState = 0;
+	mesh->SetAnimationSet(currentState);
 }
 
 Monster1::~Monster1(void)
@@ -49,6 +49,8 @@ void Monster1::Movement(const FLOAT& dt)
 	int s = rand() % 2;
 	if (s == 0)
 	{
+		currentState = MONSTERSHOOT;
+		mesh->SetAnimationSet(currentState);
 		MonsterBullet* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<MonsterBullet>(OBJ2, L"MONSTERBULLET");
 		D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 		if (m == nullptr)
@@ -66,10 +68,10 @@ void Monster1::Movement(const FLOAT& dt)
 		float x = (rand() % 100) - (rand() % 50);
 		float y = (rand() % 100) - (rand() % 50);
 		float z = (rand() % 100) - (rand() % 50);
-		//movementqueue.emplace([=]()-> bool
-			//{
-				//return transform->Vec3Lerp(transform->position, D3DXVECTOR3(x, y, z), dt, 10);
-			//});
+		movementqueue.emplace([=]()-> bool
+			{
+				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(x, y, z), dt, 10);
+			});
 	}
 }
 
@@ -96,9 +98,6 @@ INT Monster1::Update(const FLOAT& dt)
 
 	ObjectState state = static_cast<ObjectState>(MonsterBase::Update(dt));
 	
-	//if (mesh->GetIsAnimationEnd() == true)
-		//std::cout << "SIABL" << std::endl;
-
 	return OBJALIVE;
 }
 

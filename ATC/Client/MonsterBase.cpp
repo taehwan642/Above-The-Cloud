@@ -24,6 +24,13 @@ void MonsterBase::GetHit(const FLOAT& _damageamount)
 	Hp -= _damageamount;
 }
 
+void MonsterBase::SetInformation(const D3DXVECTOR3& _position)
+{
+	transform->position = _position;
+	Hp = FullHP;
+	isActive = true;
+}
+
 void MonsterBase::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)
 {
 	if (_objectTag == L"Missile")
@@ -35,11 +42,9 @@ void MonsterBase::CollisionEvent(const std::wstring& _objectTag, GameObject* _ga
 
 INT MonsterBase::Update(const FLOAT& dt)
 {
-	if (Hp <= 0)
-		isActive = false;
-	
 	Engine::GameObject::Update(dt);
-	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
+	if (isActive)
+		Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
 	return OBJALIVE;
 }
 
@@ -57,6 +62,29 @@ void MonsterBase::LateUpdate(const FLOAT& dt)
 			movementqueue.pop();
 		}
 	}
+
+	if (Hp <= 0)
+	{
+		currentState = MONSTERDIE;
+		mesh->SetAnimationSet(currentState);
+	}
+
+	if (currentState == MONSTERSHOOT)
+	{
+		if (mesh->GetIsAnimationEnd() == true)
+		{
+			currentState = MONSTERIDLE;
+			mesh->SetAnimationSet(currentState);
+		}
+	}
+	else if (currentState == MONSTERDIE)
+	{
+		if (mesh->GetIsAnimationEnd() == true)
+		{
+			isActive = false;
+		}
+	}
+
 	Engine::GameObject::LateUpdate(dt);
 }
 

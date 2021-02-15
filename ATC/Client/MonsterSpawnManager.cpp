@@ -7,6 +7,17 @@
 #include "../Engine/Transform.h"
 #include "MonsterSpawnManager.h"
 
+D3DXVECTOR3 MonsterSpawnManager::RandomPositionForMonster(void)
+{
+	float rx = static_cast<float>((rand() % 10)) / 10;
+	float ry = static_cast<float>((rand() % 10)) / 10;
+	float rz = static_cast<float>((rand() % 10)) / 10;
+	D3DXVECTOR3 randomPosition = { rx,ry,rz };
+	D3DXVec3Normalize(&randomPosition, &randomPosition);
+	randomPosition *= 100;
+	return randomPosition;
+}
+
 MonsterSpawnManager::MonsterSpawnManager()
 {
 	observer = new PlayerObserver();
@@ -42,9 +53,10 @@ void MonsterSpawnManager::SpawnMonstersByData(const Stage& _stage)
 					if (monster1 == nullptr)
 					{
 						monster1 = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Monster1>(OBJ2, L"Monster1");
+						monster1->SetInformation(RandomPositionForMonster());
 					}
 					else
-						monster1->SetActive(true);
+						monster1->SetInformation(RandomPositionForMonster());
 				}
 				break;
 			}
@@ -56,9 +68,10 @@ void MonsterSpawnManager::SpawnMonstersByData(const Stage& _stage)
 					if (monster2 == nullptr)
 					{
 						monster2 = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Monster2>(OBJ2, L"Monster2");
+						monster2->SetInformation(RandomPositionForMonster());
 					}
 					else
-						monster2->SetActive(true);
+						monster2->SetInformation(RandomPositionForMonster());
 				}
 				break;
 			}

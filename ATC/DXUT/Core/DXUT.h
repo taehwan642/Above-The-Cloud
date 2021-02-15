@@ -439,6 +439,12 @@ struct D3DXMESHCONTAINER_DERIVED :
     D3DXMATRIX* renderingMatrix;
 };
 
+struct ViewPortVertex
+{
+    D3DXVECTOR4 pos;
+    D3DXVECTOR2 uv;
+};
+
 enum class PlayerInfos : UINT
 {
     PLAYERTRANSFORM,
@@ -464,11 +470,11 @@ enum class EnemyPatterns
 
 enum ObjectTag
 {
-    PLAYER, // 플레이어쪽의 태그 (플레이어 & 플레이어 총알 또는 미사일)
+    PLAYER,
     MISSILE,
-    MONSTER, // 적쪽의 태그 (적 & 적 총알 또는 미사일)
+    MONSTER,
     MONSTERMISSILE,
-    INTERACTIVEOBJ, // 구름같은 부딪혔을때 효과를 주는 OBJ
+    INTERACTIVEOBJ,
     OBJEND
 };
 
@@ -515,6 +521,13 @@ enum RenderID
     ID_EFFECT,
     ID_UI,
     ID_RENDEREND
+};
+
+enum MONSTERSTATE : UINT
+{
+    MONSTERIDLE,
+    MONSTERSHOOT,
+    MONSTERDIE
 };
 
 #endif

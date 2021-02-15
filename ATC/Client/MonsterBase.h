@@ -14,8 +14,9 @@ class MonsterBase :
 {
 private:
 protected:
-    UINT animationkey = 0;
+    UINT currentState = MONSTERIDLE;
     INT Hp = 5;
+    INT FullHP = 5;
     FLOAT movementspeed = 1.0f;
     Engine::Transform* transform;
     Engine::Shader* shader;
@@ -32,6 +33,8 @@ public:
 
     virtual void Movement(const FLOAT& dt) {};
     std::queue<std::function<bool(void)>> movementqueue;
+
+    void SetInformation(const D3DXVECTOR3& _position);
 
     void CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject) override;
     

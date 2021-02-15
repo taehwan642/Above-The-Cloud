@@ -72,7 +72,7 @@ bool AnimationController::IsAnimationEnd(void)
     D3DXTRACK_DESC trackInfo;
     ZeroMemory(&trackInfo, sizeof(D3DXTRACK_DESC));
     anicontroller->GetTrackDesc(currentTrack, &trackInfo);
-    if (trackInfo.Position >= period - 0.1)
+    if (trackInfo.Position >= period - 0.01)
         return true;
 
     return false;

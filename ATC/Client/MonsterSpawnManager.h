@@ -7,6 +7,7 @@ class MonsterSpawnManager final :
 private:
     PlayerObserver* observer = nullptr;
     std::map<Stage, std::list<std::pair<MonsterType, UINT>>> monsterSpawnDatas;
+    D3DXVECTOR3 RandomPositionForMonster(void);
 protected:
 public:
     explicit MonsterSpawnManager();
