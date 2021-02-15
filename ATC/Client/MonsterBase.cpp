@@ -31,6 +31,7 @@ void MonsterBase::SetInformation(const D3DXVECTOR3& _position)
 	currentState = MONSTERIDLE;
 	mesh->SetAnimationSet(currentState);
 	isActive = true;
+	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
 }
 
 void MonsterBase::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)

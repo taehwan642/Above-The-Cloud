@@ -29,7 +29,6 @@ Monster1::Monster1(void)
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
 	collider = new Engine::Collider(6, &transform->position);
-	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
 	componentgroup.emplace(L"collider", collider);
 	colliderdata.center = &transform->position;
 	colliderdata.radius = 6;
@@ -65,9 +64,9 @@ void Monster1::Movement(const FLOAT& dt)
 	}
 	else if (s == 1)
 	{
-		float x = (rand() % 100) - (rand() % 50);
-		float y = (rand() % 100) - (rand() % 50);
-		float z = (rand() % 100) - (rand() % 50);
+		FLOAT x = (rand() % 100) - (rand() % 50);
+		FLOAT y = (rand() % 100) - (rand() % 50);
+		FLOAT z = (rand() % 100) - (rand() % 50);
 		movementqueue.emplace([=]()-> bool
 			{
 				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(x, y, z), dt, 10);

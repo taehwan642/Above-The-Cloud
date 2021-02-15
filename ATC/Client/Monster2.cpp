@@ -27,13 +27,15 @@ Monster2::Monster2(void)
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
 	collider = new Engine::Collider(6, &transform->position);
-	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
 	componentgroup.emplace(L"collider", collider);
 	colliderdata.center = &transform->position;
 	colliderdata.radius = 6;
 	colliderdata.tag = L"Monster";
 	currentState = MONSTERIDLE;
 	mesh->SetAnimationSet(currentState);
+
+	Hp = 10;
+	FullHP = 10;
 }
 
 Monster2::~Monster2(void)
@@ -42,21 +44,43 @@ Monster2::~Monster2(void)
 
 void Monster2::Movement(const FLOAT& dt)
 {
-	movementspeed = 5.f;
-
-	currentState = MONSTERSHOOT;
-	mesh->SetAnimationSet(currentState);
-	D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
-	D3DXVec3Normalize(&dir, &dir);
-	D3DXVECTOR3 pos = transform->position + dir * 6;
-	Monster1* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Monster1>(OBJ2, L"Monster1");
-	if (m == nullptr)
+	INT r = rand() % 2;
+	if(r == 0)
 	{
-		m = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Monster1>(OBJ2, L"Monster1");
-		m->SetInformation(pos);
+		currentState = MONSTERSHOOT;
+		mesh->SetAnimationSet(currentState);
+		D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+		D3DXVec3Normalize(&dir, &dir);
+		D3DXVECTOR3 pos = transform->position + dir * 6;
+		Monster1* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Monster1>(OBJ2, L"Monster1");
+		if (m == nullptr)
+		{
+			m = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Monster1>(OBJ2, L"Monster1");
+			m->SetInformation(pos);
+		}
+		else
+			m->SetInformation(pos);
+		movementspeed = 5.f;
 	}
 	else
-		m->SetInformation(pos);
+	{
+		FLOAT x = (rand() % 100) - (rand() % 50);
+		FLOAT y = (rand() % 100) - (rand() % 50);
+		FLOAT z = (rand() % 100) - (rand() % 50);
+
+		moveDirection = { x,y,z };
+		movementspeed = 2;
+	}
+}
+
+void Monster2::SetInformation(const D3DXVECTOR3& _position)
+{
+	FLOAT x = (rand() % 100) - (rand() % 50);
+	FLOAT y = (rand() % 100) - (rand() % 50);
+	FLOAT z = (rand() % 100) - (rand() % 50);
+
+	moveDirection = { x,y,z };
+	MonsterBase::SetInformation(_position);
 }
 
 INT Monster2::Update(const FLOAT& dt)
@@ -67,6 +91,29 @@ INT Monster2::Update(const FLOAT& dt)
 
 void Monster2::LateUpdate(const FLOAT& dt)
 {
+	D3DXVECTOR3 look = moveDirection - transform->position;
+	D3DXVec3Normalize(&look, &look);
+
+	D3DXVECTOR3 right;
+	D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
+	D3DXVec3Normalize(&right, &right);
+
+	D3DXVECTOR3 up;
+	D3DXVec3Cross(&up, &look, &right);
+	D3DXVec3Normalize(&up, &up);
+
+	D3DXMATRIX matRot;
+	D3DXMatrixIdentity(&matRot);
+	memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
+	memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
+	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
+	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
+	if (currentState == MONSTERIDLE)
+	{
+		D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+		D3DXVec3Normalize(&dir, &dir);
+		transform->position += dir * 5 * dt;
+	}
 	MonsterBase::LateUpdate(dt);
 }
 

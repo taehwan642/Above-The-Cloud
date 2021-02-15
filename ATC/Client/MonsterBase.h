@@ -34,7 +34,7 @@ public:
     virtual void Movement(const FLOAT& dt) {};
     std::queue<std::function<bool(void)>> movementqueue;
 
-    void SetInformation(const D3DXVECTOR3& _position);
+    virtual void SetInformation(const D3DXVECTOR3& _position);
 
     void CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject) override;
     
