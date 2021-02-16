@@ -90,6 +90,17 @@ void DynamicUI::Render(const FLOAT& dt)
 		D3DXMatrixInverse(&matBill, NULL, &matBill);
 		memcpy(&matBill._41, &transform->worldMatrix._41, sizeof(D3DXVECTOR3));
 
+		D3DXVECTOR3 r, u, f;
+		memcpy(&r, &matBill._11, sizeof(D3DXVECTOR3));
+		memcpy(&u, &matBill._21, sizeof(D3DXVECTOR3));
+		memcpy(&f, &matBill._31, sizeof(D3DXVECTOR3));
+		r *= D3DXVec3Length(&transform->scale);
+		u *= D3DXVec3Length(&transform->scale);
+		f *= D3DXVec3Length(&transform->scale);
+		memcpy(&matBill._11, &r, sizeof(D3DXVECTOR3));
+		memcpy(&matBill._21, &u, sizeof(D3DXVECTOR3));
+		memcpy(&matBill._31, &f, sizeof(D3DXVECTOR3));
+
 		DEVICE->SetTransform(D3DTS_WORLD, &matBill);
 	}
 	else

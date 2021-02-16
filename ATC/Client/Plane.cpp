@@ -129,34 +129,41 @@ void Plane::LateUpdate(const FLOAT& dt)
 	float a;
 	D3DXVECTOR3 p;
 	D3DXVECTOR3 pos1, pos2;
-	if (DXUTIsKeyDown(VK_SPACE))
+
+	if (shootDelay <= 0)
 	{
-		for (int i = 0; i < 4; ++i)
-			Engine::EffectManager::GetInstance()->
-			SpawnTextureEffect(effectpos[i], transform, 0.3f, L"muzzleFlash");
-		if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, p, pos1, pos2, MONSTER))
+		if (DXUTIsKeyDown(VK_SPACE))
 		{
-			D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
-			D3DXVECTOR3 pos = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._41);
-
-			float angle = 0;
-			D3DXVECTOR3 direc = pos - p;
-			D3DXVec3Normalize(&direc, &direc);
-			D3DXVec3Normalize(&dir, &dir);
-			angle = D3DXVec3Dot(&dir, &direc);
-			if (angle < -0.31f)
+			for (int i = 0; i < 4; ++i)
+				Engine::EffectManager::GetInstance()->
+				SpawnTextureEffect(effectpos[i], { 0.7f,0.7f,0.7f }, transform, 0.05f, L"muzzleFlash");
+			if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, p, pos1, pos2, MONSTER))
 			{
-				GameObject* g = Engine::CollisionManager::GetInstance()->dstObject;
-				g->CollisionEvent(L"PlayerShoot", this);
+				D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+				D3DXVECTOR3 pos = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._41);
 
-				Engine::EffectManager::GetInstance()->
-					SpawnTextureEffect(pos1, nullptr, 0.3f, L"muzzleFlash");
-				Engine::EffectManager::GetInstance()->
-					SpawnTextureEffect(pos2, nullptr, 0.3f, L"muzzleFlash");
+				float angle = 0;
+				D3DXVECTOR3 direc = pos - p;
+				D3DXVec3Normalize(&direc, &direc);
+				D3DXVec3Normalize(&dir, &dir);
+				angle = D3DXVec3Dot(&dir, &direc);
+				if (angle < -0.31f)
+				{
+					GameObject* g = Engine::CollisionManager::GetInstance()->dstObject;
+					g->CollisionEvent(L"PlayerShoot", this);
+
+					Engine::EffectManager::GetInstance()->
+						SpawnTextureEffect(pos1, { 2,2,2 }, nullptr, 0.05f, L"Hit");
+					Engine::EffectManager::GetInstance()->
+						SpawnTextureEffect(pos2, { 2,2,2 }, nullptr, 0.05f, L"Hit");
+				}
+
 			}
-
+			shootDelay = 0.2f;
 		}
 	}
+	else
+		shootDelay -= dt;
 
 	if (DXUTWasKeyPressed('E'))
 	{
@@ -177,7 +184,7 @@ void Plane::LateUpdate(const FLOAT& dt)
 	dstObject = Engine::CollisionManager::GetInstance()->GetClosestObject(MONSTER, transform->position,
 		directionVector, -0.61f);
 	Engine::SubjectManager::GetInstance()->SetData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);
-	
+
 
 	GameObject::LateUpdate(dt);
 }

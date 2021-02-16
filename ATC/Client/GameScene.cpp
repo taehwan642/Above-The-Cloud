@@ -87,6 +87,7 @@ void GameScene::Exit(void)
 	Engine::CollisionManager::GetInstance()->ClearData();
 	Engine::SubjectManager::GetInstance()->ClearObservers();
 	Engine::GraphicsManager::GetInstance()->DeleteSprite();
+	MonsterSpawnManager::GetInstance()->DeleteDatas();
 	Scene::Exit();
 }
 

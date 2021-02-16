@@ -6,18 +6,20 @@
 #include "TextureEffect.h"
 USING(Engine)
 
-TextureEffect::TextureEffect(const std::wstring& _texturetag, const D3DXVECTOR3& _position, Transform* _parent, const FLOAT& _alivetime) :
+TextureEffect::TextureEffect(const std::wstring& _texturetag, const D3DXVECTOR3& _position, const D3DXVECTOR3& _scale, Transform* _parent, const FLOAT& _alivetime) :
 	DynamicUI(_texturetag, _parent),
 	textureChangedelta(_alivetime)
 {
 	transform->position = _position;
+	transform->scale = _scale;
 }
 
-TextureEffect::TextureEffect(const std::wstring& _texturetag, const D3DXVECTOR3& _position, const FLOAT& _alivetime) :
+TextureEffect::TextureEffect(const std::wstring& _texturetag, const D3DXVECTOR3& _position, const D3DXVECTOR3& _scale, const FLOAT& _alivetime) :
 	DynamicUI(_texturetag),
 	textureChangedelta(_alivetime)
 {
 	transform->position = _position;
+	transform->scale = _scale;
 }
 
 TextureEffect::~TextureEffect(void)

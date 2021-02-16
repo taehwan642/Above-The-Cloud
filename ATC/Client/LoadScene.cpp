@@ -23,7 +23,7 @@ void LoadScene::Start(void)
 	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"Monster1.X", L"Monster1");
 	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"cloud.X", L"Cloud");
 	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"missilepivottest.X", L"Missile");
-	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/muzzleflash.png", L"muzzleFlash", 1);
+	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/muzzleflash (%d).png", L"muzzleFlash", 3);
 	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/Lock.png", L"LockPoint", 1);
 	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"MonsterBullet.X", L"MonsterBullet");
 	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/Start.png", L"Start", 1);
@@ -31,6 +31,7 @@ void LoadScene::Start(void)
 	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/Settings.png", L"Settings", 1);
 	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/Exit.png", L"Exit", 1);
 	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"Monster2.X", L"Monster2");
+	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/hit (%d).png", L"Hit", 3);
 
 	Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
 }

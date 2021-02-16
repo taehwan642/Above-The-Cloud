@@ -36,10 +36,9 @@ void MonsterBase::SetInformation(const D3DXVECTOR3& _position)
 
 void MonsterBase::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)
 {
-	if (_objectTag == L"Missile")
+	if (_objectTag == L"Missile" || _objectTag == L"PlayerShoot")
 	{
 		--Hp;
-		_gameObject->SetActive(false);
 	}
 }
 

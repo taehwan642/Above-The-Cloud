@@ -77,7 +77,10 @@ void Missile::SetInformation(void)
 
 void Missile::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)
 {
-
+	if (_objectTag == L"Monster")
+	{
+		isActive = false;
+	}
 }
 
 INT Missile::Update(const FLOAT& dt)

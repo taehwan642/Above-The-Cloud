@@ -14,6 +14,7 @@ class Plane final :
 private:
     FLOAT invincibletime = 1.f;
     Engine::GameObject* dstObject = nullptr;
+    FLOAT shootDelay = 0.3f;
 
 protected:
     D3DXVECTOR3 lookVector = { 0,0,-1 };

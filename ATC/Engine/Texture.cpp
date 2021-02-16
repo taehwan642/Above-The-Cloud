@@ -31,7 +31,7 @@ HRESULT Texture::LoadTexture(std::wstring _filepath, const UINT& _texturecount)
 	else
 	{
 		TCHAR finalfilepath[MAX_PATH] = L"";
-		for (size_t i = 0; i < texturescount; ++i)
+		for (size_t i = 1; i <= texturescount; ++i)
 		{
 			wsprintf(finalfilepath, _filepath.c_str(), i);
 

@@ -9,6 +9,7 @@ private:
 protected:
 public:
     void SpawnTextureEffect(const D3DXVECTOR3& _position,
+                            const D3DXVECTOR3& _scale,
                             Transform* _transform,
                             const FLOAT& _alivetime,
                             const std::wstring& _texturetag,
