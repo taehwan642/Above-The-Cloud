@@ -26,10 +26,10 @@ Monster2::Monster2(void)
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
-	collider = new Engine::Collider(6, &transform->position);
+	collider = new Engine::Collider(3, &transform->position);
 	componentgroup.emplace(L"collider", collider);
 	colliderdata.center = &transform->position;
-	colliderdata.radius = 6;
+	colliderdata.radius = 3;
 	colliderdata.tag = L"Monster";
 	currentState = MONSTERIDLE;
 	mesh->SetAnimationSet(currentState);

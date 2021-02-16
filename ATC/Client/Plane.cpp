@@ -128,13 +128,13 @@ void Plane::LateUpdate(const FLOAT& dt)
 {
 	float a;
 	D3DXVECTOR3 p;
-
+	D3DXVECTOR3 pos1, pos2;
 	if (DXUTIsKeyDown(VK_SPACE))
 	{
 		for (int i = 0; i < 4; ++i)
 			Engine::EffectManager::GetInstance()->
 			SpawnTextureEffect(effectpos[i], transform, 0.3f, L"muzzleFlash");
-		if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, p, MONSTER))
+		if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, p, pos1, pos2, MONSTER))
 		{
 			D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 			D3DXVECTOR3 pos = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._41);
@@ -148,6 +148,11 @@ void Plane::LateUpdate(const FLOAT& dt)
 			{
 				GameObject* g = Engine::CollisionManager::GetInstance()->dstObject;
 				g->CollisionEvent(L"PlayerShoot", this);
+
+				Engine::EffectManager::GetInstance()->
+					SpawnTextureEffect(pos1, nullptr, 0.3f, L"muzzleFlash");
+				Engine::EffectManager::GetInstance()->
+					SpawnTextureEffect(pos2, nullptr, 0.3f, L"muzzleFlash");
 			}
 
 		}

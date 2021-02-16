@@ -30,6 +30,8 @@ public:
     bool MouseRaySphereInteresection(
         out float& _distanceOut,
         out D3DXVECTOR3& _targetposition,
+        out D3DXVECTOR3& _pos1,
+        out D3DXVECTOR3& _pos2,
         in ObjectTag _dsttag);
 
     GameObject* GetClosestObject(in ObjectTag _dsttag, in const D3DXVECTOR3& _srcpos, in const D3DXVECTOR3& _srcdir, in const float _angle);

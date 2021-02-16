@@ -107,7 +107,8 @@ void CollisionManager::CheckCollision(ObjectTag _src, ObjectTag _dst)
 	}
 }
 
-bool CollisionManager::MouseRaySphereInteresection(out float& _distanceOut, out D3DXVECTOR3& _targetposition, in ObjectTag _dsttag)
+bool CollisionManager::MouseRaySphereInteresection(out float& _distanceOut, out D3DXVECTOR3& _targetposition, out D3DXVECTOR3& _pos1,
+	out D3DXVECTOR3& _pos2, in ObjectTag _dsttag)
 {
 	GetWorldMouse();
 	for (auto& dst : colliderdatas[_dsttag])
@@ -127,22 +128,13 @@ bool CollisionManager::MouseRaySphereInteresection(out float& _distanceOut, out 
 			_targetposition = dynamic_cast<Transform*>(dst->GetComponent(L"Transform"))->position;
 			dstObject = dst;
 
-			float x = fabsf(sqrtf(radiusquare - orthogonallengthsqare));
-
-			float t1 = x - dot;
+			float x = sqrtf(radiusquare - orthogonallengthsqare);
 			float t2 = x + dot;
-			D3DXVECTOR3 pos1 = rayPos + rayDir * t1;
+			D3DXVECTOR3 pos1 = rayPos + rayDir * (dot - sqrtf(radiusquare - orthogonallengthsqare));
 			D3DXVECTOR3 pos2 = rayPos + rayDir * t2;
 
-			std::cout << "P1 : " << pos1.x << " " << pos1.y << " " << pos1.z << std::endl;
-			std::cout << "P2 : " << pos2.x << " " << pos2.y << " " << pos2.z << std::endl;
-
-			// pos1 error 고쳐야함
-
-			Engine::EffectManager::GetInstance()->
-				SpawnTextureEffect(pos1, nullptr, 3.3f, L"muzzleFlash");
-			//Engine::EffectManager::GetInstance()->
-				//SpawnTextureEffect(pos2, nullptr, 3.3f, L"muzzleFlash");
+			_pos1 = pos1;
+			_pos2 = pos2;
 
 			return true;
 		}

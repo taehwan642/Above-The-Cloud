@@ -28,10 +28,10 @@ Monster1::Monster1(void)
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
-	collider = new Engine::Collider(6, &transform->position);
+	collider = new Engine::Collider(3, &transform->position);
 	componentgroup.emplace(L"collider", collider);
 	colliderdata.center = &transform->position;
-	colliderdata.radius = 6;
+	colliderdata.radius = 3;
 	colliderdata.tag = L"Monster";
 	currentState = 0;
 	mesh->SetAnimationSet(currentState);
@@ -117,7 +117,7 @@ void Monster1::Render(const FLOAT& dt)
 	mesh->RenderMesh(tempeffect);
 	tempeffect->EndPass();
 	tempeffect->End();
-	collider->RenderCollider();
+	//collider->RenderCollider();
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	MonsterBase::Render(dt);
 }
