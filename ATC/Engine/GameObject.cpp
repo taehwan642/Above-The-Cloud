@@ -47,7 +47,7 @@ void GameObject::Render(const FLOAT& dt)
 
 void GameObject::Free(void)
 {
-	for (auto it : componentgroup)
+	for (auto& it : componentgroup)
 	{
 		Safe_Release(it.second);
 	}

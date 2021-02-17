@@ -47,16 +47,8 @@ void DynamicUI::CreateBuffer(void)
 
 	ib->Unlock();
 }
-DynamicUI::DynamicUI(std::wstring _texturetag, bool _billboardenable) :
-	UIBase(_texturetag),
-	isbillboard(_billboardenable)
-{
-	CreateBuffer();
-}
 
-DynamicUI::DynamicUI(std::wstring _texturetag, Transform* _parent, bool _billboardenable) :
-	UIBase(_texturetag, _parent),
-	isbillboard(_billboardenable)
+DynamicUI::DynamicUI(void)
 {
 	CreateBuffer();
 }

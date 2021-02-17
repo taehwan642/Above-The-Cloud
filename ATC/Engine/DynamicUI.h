@@ -1,7 +1,7 @@
 #pragma once
 #include "UIBase.h"
 NAMESPACE(Engine)
-class DynamicUI : // Buffer 사용한 Billboard. Enemy Lock & AimPoint같은 동적 UI를 위한 클래스
+class DynamicUI :
     public UIBase
 {
 private:
@@ -17,13 +17,17 @@ protected:
     DWORD idxsize = 0;
     D3DFORMAT idxfmt;
 public:
-    explicit DynamicUI(std::wstring _texturetag, bool _billboardenable = true);
-    explicit DynamicUI(std::wstring _texturetag, Transform* _parent, bool _billboardenable = true);
+    explicit DynamicUI(void);
     virtual ~DynamicUI(void);
 
     INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
+
+    void SetBillBoardEnable(bool _isbillboardenable)
+    {
+        isbillboard = _isbillboardenable;
+    };
 
     void Free(void) override;
 };

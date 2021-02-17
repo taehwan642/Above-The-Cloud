@@ -8,27 +8,25 @@ USING(Engine)
 
 UIBase::UIBase(void)
 {
-
-}
-
-UIBase::UIBase(std::wstring _texturetag)
-{
-	texture = dynamic_cast<Texture*>(ResourceManager::GetInstance()->LoadResource(_texturetag));
-	componentgroup.emplace(L"Texture", texture);
+	texture = new Texture();
 	transform = new Transform();
-	componentgroup.emplace(L"Transform", transform);
-}
-
-UIBase::UIBase(std::wstring _texturetag, Transform* _parent)
-{
-	texture = dynamic_cast<Texture*>(ResourceManager::GetInstance()->LoadResource(_texturetag));
-	componentgroup.emplace(L"Texture", texture);
-	transform = new Transform(_parent);
 	componentgroup.emplace(L"Transform", transform);
 }
 
 UIBase::~UIBase(void)
 {
+}
+
+void UIBase::SetInformation(const std::wstring& _textureTag, Transform* _parent)
+{
+	if (textureTag != _textureTag)
+	{
+		Safe_Release(texture);
+		texture = dynamic_cast<Texture*>(ResourceManager::GetInstance()->LoadResource(_textureTag));
+		textureTag = _textureTag;
+	}
+	if (_parent != nullptr)
+		transform->SetParent(_parent);
 }
 
 void UIBase::SetUITexture(const UINT& _index)
@@ -54,5 +52,6 @@ void UIBase::Render(const FLOAT& dt)
 
 void UIBase::Free(void)
 {
+	Safe_Release(texture);
 	GameObject::Free();
 }

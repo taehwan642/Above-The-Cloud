@@ -12,13 +12,14 @@ protected:
     D3DXVECTOR2 pivot = { 0.5f,0.5f };
     Transform* transform = nullptr;
     Texture* texture = nullptr;
+    std::wstring textureTag = L"";
+    bool isInitalized = false;
     UINT currentTextureindex = 0;
 public:
     explicit UIBase(void);
-    explicit UIBase(std::wstring _texturetag);
-    explicit UIBase(std::wstring _texturetag, Transform* _parent);
     virtual ~UIBase(void);
 
+    void SetInformation(const std::wstring& _textureTag, Transform* _parent = nullptr);
     void SetUITexture(const UINT& _index);
     
     INT Update(const FLOAT& dt) override;
