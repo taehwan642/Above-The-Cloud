@@ -52,14 +52,8 @@ void Monster2::Movement(const FLOAT& dt)
 		D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 		D3DXVec3Normalize(&dir, &dir);
 		D3DXVECTOR3 pos = transform->position + dir * 6;
-		Monster1* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Monster1>(OBJ2, L"Monster1");
-		if (m == nullptr)
-		{
-			m = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Monster1>(OBJ2, L"Monster1");
-			m->SetInformation(pos);
-		}
-		else
-			m->SetInformation(pos);
+		Monster1* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Monster1>(OBJ2, L"Monster1");
+		m->SetInformation(pos);
 		movementspeed = 5.f;
 	}
 	else

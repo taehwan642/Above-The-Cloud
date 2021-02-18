@@ -50,17 +50,11 @@ void Monster1::Movement(const FLOAT& dt)
 	{
 		currentState = MONSTERSHOOT;
 		mesh->SetAnimationSet(currentState);
-		MonsterBullet* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<MonsterBullet>(OBJ2, L"MONSTERBULLET");
 		D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
-		if (m == nullptr)
-		{
-			m = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<MonsterBullet>(OBJ2, L"MONSTERBULLET");
-			m->SetInformation(transform->position, dir);
-		}
-		else
-		{
-			m->SetInformation(transform->position, dir);
-		}
+
+
+		MonsterBullet* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<MonsterBullet>(OBJ2, L"MONSTERBULLET");
+		m->SetInformation(transform->position, dir);
 	}
 	else if (s == 1)
 	{
@@ -96,7 +90,7 @@ INT Monster1::Update(const FLOAT& dt)
 	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
 
 	ObjectState state = static_cast<ObjectState>(MonsterBase::Update(dt));
-	
+
 	return OBJALIVE;
 }
 

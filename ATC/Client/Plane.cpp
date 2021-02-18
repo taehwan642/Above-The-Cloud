@@ -8,7 +8,6 @@
 #include "../Engine/Trail.h"
 #include "../Engine/RaycastManager.h"
 #include "../Engine/ObjectManager.h"
-#include "../Engine/EffectManager.h"
 #include "../Engine/TextureEffect.h"
 #include "../Engine/Collider.h"
 #include "../Engine/CollisionManager.h"
@@ -135,8 +134,12 @@ void Plane::LateUpdate(const FLOAT& dt)
 		if (DXUTIsKeyDown(VK_SPACE))
 		{
 			for (int i = 0; i < 4; ++i)
-				Engine::EffectManager::GetInstance()->
-				SpawnTextureEffect(effectpos[i], { 0.7f,0.7f,0.7f }, transform, 0.05f, L"muzzleFlash");
+			{
+				Engine::TextureEffect* texeffect = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Engine::TextureEffect>(EFFECT, L"Effect");
+				texeffect->SetInformation(L"muzzleFlash", 
+					effectpos[i], { 0.7f,0.7f,0.7f }, 
+					transform, 0.05f);
+			}
 			if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, p, pos1, pos2, MONSTER))
 			{
 				D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
@@ -152,10 +155,15 @@ void Plane::LateUpdate(const FLOAT& dt)
 					GameObject* g = Engine::CollisionManager::GetInstance()->dstObject;
 					g->CollisionEvent(L"PlayerShoot", this);
 
-					Engine::EffectManager::GetInstance()->
-						SpawnTextureEffect(pos1, { 2,2,2 }, nullptr, 0.05f, L"Hit");
-					Engine::EffectManager::GetInstance()->
-						SpawnTextureEffect(pos2, { 2,2,2 }, nullptr, 0.05f, L"Hit");
+					Engine::TextureEffect* texeffect1 = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Engine::TextureEffect>(EFFECT, L"Effect");
+					texeffect1->SetInformation(L"Hit",
+						pos1, { 2,2,2 },
+						nullptr, 0.05f);
+
+					Engine::TextureEffect* texeffect2 = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Engine::TextureEffect>(EFFECT, L"Effect");
+					texeffect2->SetInformation(L"Hit",
+						pos2, { 2,2,2 },
+						nullptr, 0.05f);
 				}
 
 			}
@@ -167,17 +175,8 @@ void Plane::LateUpdate(const FLOAT& dt)
 
 	if (DXUTWasKeyPressed('E'))
 	{
-		Missile* m = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Missile>(OBJ2, L"BULLET");
-
-		if (m == nullptr)
-		{
-			m = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Missile>(OBJ2, L"BULLET");
-			m->SetInformation();
-		}
-		else
-		{
-			m->SetInformation();
-		}
+		Missile * m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Missile>(OBJ2, L"BULLET");
+		m->SetInformation();
 	}
 
 	D3DXVec3Normalize(&directionVector, &directionVector);

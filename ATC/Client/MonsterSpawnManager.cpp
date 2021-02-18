@@ -56,14 +56,8 @@ void MonsterSpawnManager::SpawnMonstersByData(const Stage& _stage)
 			{
 				for (int i = 0; i < (*iterator).second; ++i)
 				{
-					Monster1* monster1 = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Monster1>(OBJ2, L"Monster1");
-					if (monster1 == nullptr)
-					{
-						monster1 = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Monster1>(OBJ2, L"Monster1");
-						monster1->SetInformation(RandomPositionForMonster());
-					}
-					else
-						monster1->SetInformation(RandomPositionForMonster());
+					Monster1* monster1 = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Monster1>(OBJ2, L"Monster1");
+					monster1->SetInformation(RandomPositionForMonster());
 				}
 				break;
 			}
@@ -71,14 +65,8 @@ void MonsterSpawnManager::SpawnMonstersByData(const Stage& _stage)
 			{
 				for (int i = 0; i < (*iterator).second; ++i)
 				{
-					Monster2* monster2 = Engine::ObjectManager::GetInstance()->GetActiveFalsedObject<Monster2>(OBJ2, L"Monster2");
-					if (monster2 == nullptr)
-					{
-						monster2 = Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Monster2>(OBJ2, L"Monster2");
-						monster2->SetInformation(RandomPositionForMonster());
-					}
-					else
-						monster2->SetInformation(RandomPositionForMonster());
+					Monster2* monster2 = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Monster2>(OBJ2, L"Monster2");
+					monster2->SetInformation(RandomPositionForMonster());
 				}
 				break;
 			}

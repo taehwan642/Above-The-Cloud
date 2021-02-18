@@ -1,7 +1,6 @@
 #include "DXUT.h"
 #include "GameObject.h"
 #include "Transform.h"
-#include "EffectManager.h"
 #include "CollisionManager.h"
 USING(Engine)
 

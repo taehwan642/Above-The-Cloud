@@ -204,19 +204,16 @@
     <Filter Include="2Client\1GameObject\0Camera\1MenuCamera">
       <UniqueIdentifier>{ef7b9004-8e29-41d0-b233-054982343049}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1Engine\6Manager\7CollisionManager">
-      <UniqueIdentifier>{bb45b7e9-cfe5-479f-9667-287cb5b0e934}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1Engine\6Manager\6EffectManager">
-      <UniqueIdentifier>{b8171779-4bb8-41bc-9b08-02b6daccd1dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2Client\3Manager">
       <UniqueIdentifier>{29b55aa0-5609-4e2a-818e-d4824efcc995}</UniqueIdentifier>
     </Filter>
     <Filter Include="2Client\3Manager\0MonsterSpawnManager">
       <UniqueIdentifier>{f1a73837-ef53-4df6-a55a-dbbdb905b0c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1Engine\6Manager\8RendererManager">
+    <Filter Include="1Engine\6Manager\6CollisionManager">
+      <UniqueIdentifier>{bb45b7e9-cfe5-479f-9667-287cb5b0e934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\6Manager\7RendererManager">
       <UniqueIdentifier>{104b434d-9683-463d-b6bf-801854c3e450}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -373,9 +370,6 @@
     <ClCompile Include="Engine\RaycastManager.cpp">
       <Filter>1Engine\6Manager\4RaycastManager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\EffectManager.cpp">
-      <Filter>1Engine\6Manager\6EffectManager</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\TextureEffect.cpp">
       <Filter>1Engine\9TextureEffect</Filter>
     </ClCompile>
@@ -386,7 +380,7 @@
       <Filter>1Engine\4Component\7Collider</Filter>
     </ClCompile>
     <ClCompile Include="Engine\CollisionManager.cpp">
-      <Filter>1Engine\6Manager\7CollisionManager</Filter>
+      <Filter>1Engine\6Manager\6CollisionManager</Filter>
     </ClCompile>
     <ClCompile Include="Client\Missile.cpp">
       <Filter>2Client\1GameObject\6Missile</Filter>
@@ -437,7 +431,7 @@
       <Filter>2Client\3Manager\0MonsterSpawnManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\RenderManager.cpp">
-      <Filter>1Engine\6Manager\8RendererManager</Filter>
+      <Filter>1Engine\6Manager\7RendererManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -537,9 +531,6 @@
     <ClInclude Include="Engine\RaycastManager.h">
       <Filter>1Engine\6Manager\4RaycastManager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\EffectManager.h">
-      <Filter>1Engine\6Manager\6EffectManager</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\TextureEffect.h">
       <Filter>1Engine\9TextureEffect</Filter>
     </ClInclude>
@@ -550,7 +541,7 @@
       <Filter>1Engine\4Component\7Collider</Filter>
     </ClInclude>
     <ClInclude Include="Engine\CollisionManager.h">
-      <Filter>1Engine\6Manager\7CollisionManager</Filter>
+      <Filter>1Engine\6Manager\6CollisionManager</Filter>
     </ClInclude>
     <ClInclude Include="Client\Missile.h">
       <Filter>2Client\1GameObject\6Missile</Filter>
@@ -601,7 +592,7 @@
       <Filter>2Client\3Manager\0MonsterSpawnManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\RenderManager.h">
-      <Filter>1Engine\6Manager\8RendererManager</Filter>
+      <Filter>1Engine\6Manager\7RendererManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
