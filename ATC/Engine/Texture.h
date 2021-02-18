@@ -14,7 +14,11 @@ public:
     virtual ~Texture(void);
 
     size_t GetTexturesCount(void) { return texturescount; }
-    LPDIRECT3DTEXTURE9 GetTextureByIndex(const UINT& _textureindex) { return textures[_textureindex]; }
+    LPDIRECT3DTEXTURE9 GetTextureByIndex(const UINT& _textureindex) {
+        if (_textureindex >= textures.size())
+            return nullptr;
+        return textures[_textureindex];
+    }
 
     HRESULT LoadTexture(std::wstring _filepath, const UINT& _texturecount = 1);
 

@@ -31,13 +31,13 @@ void StaticUI::SetPosition(const D3DXVECTOR2& _position)
 
 INT StaticUI::Update(const FLOAT& dt)
 {
-	GameObject::Update(dt);
+	UIBase::Update(dt);
 	return OBJALIVE;
 }
 
 void StaticUI::LateUpdate(const FLOAT& dt)
 {
-	GameObject::LateUpdate(dt);
+	UIBase::LateUpdate(dt);
 }
 
 void StaticUI::Render(const FLOAT& dt)
@@ -51,13 +51,15 @@ void StaticUI::Render(const FLOAT& dt)
 	GraphicsManager::GetInstance()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 
 	LPDIRECT3DTEXTURE9 uiTexture = texture->GetTextureByIndex(currentTextureindex);
+	if (uiTexture == nullptr)
+		return;
 	D3DSURFACE_DESC desc;
 	uiTexture->GetLevelDesc(0, &desc);
 	D3DXVECTOR3 center = { pivot.x * desc.Width, pivot.y * desc.Height, 0 };
 	GraphicsManager::GetInstance()->GetSprite()->Draw(texture->GetTextureByIndex(currentTextureindex),
 		NULL, &center, NULL, D3DCOLOR_RGBA(255, 255, 255, 255));
 	GraphicsManager::GetInstance()->GetSprite()->End();
-	GameObject::Render(dt);
+	UIBase::Render(dt);
 }
 
 void StaticUI::Free(void)

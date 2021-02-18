@@ -71,8 +71,6 @@ void GameScene::Update(const FLOAT& dt)
 	Engine::CollisionManager::GetInstance()->UpdateData();
 	if (DXUTWasKeyPressed('P'))
 		Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
-	Engine::Layer* l = Scene::GetLayer(EFFECT);
-	std::cout << l->gameobjectgroup[L"Effect"].size() << std::endl;
 	Scene::Update(dt);
 }
 

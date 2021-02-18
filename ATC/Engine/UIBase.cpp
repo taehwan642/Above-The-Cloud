@@ -24,6 +24,11 @@ void UIBase::SetInformation(const std::wstring& _textureTag, Transform* _parent)
 		Safe_Release(texture);
 		texture = dynamic_cast<Texture*>(ResourceManager::GetInstance()->LoadResource(_textureTag));
 		textureTag = _textureTag;
+		if (textureInitalized == false)
+		{
+			componentgroup.emplace(L"Texture", texture);
+			textureInitalized = true;
+		}
 	}
 	if (_parent != nullptr)
 		transform->SetParent(_parent);
@@ -52,6 +57,5 @@ void UIBase::Render(const FLOAT& dt)
 
 void UIBase::Free(void)
 {
-	Safe_Release(texture);
 	GameObject::Free();
 }

@@ -6,6 +6,7 @@ Texture::Texture(void)
 }
 
 Texture::Texture(const Texture& cp) :
+	Resources(cp),
 	textures(cp.textures),
 	texturescount(cp.texturescount)
 {

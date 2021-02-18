@@ -13,7 +13,7 @@ protected:
     Transform* transform = nullptr;
     Texture* texture = nullptr;
     std::wstring textureTag = L"";
-    bool isInitalized = false;
+    bool textureInitalized = false;
     UINT currentTextureindex = 0;
 public:
     explicit UIBase(void);
