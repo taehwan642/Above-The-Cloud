@@ -12,7 +12,7 @@
 Cloud::Cloud(void)
 {
 	shader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dyshader"));
-	transform = new Engine::Transform(/*observer->GetTransform()*/);
+	transform = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transform);
 	componentgroup.emplace(L"Shader", shader);
 	transform->scale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);

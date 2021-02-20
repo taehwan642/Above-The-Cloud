@@ -20,6 +20,8 @@ void PlayerObserver::UpdateObserver(UINT _flag)
 	case PlayerInfos::PLAYERMISSILELOCKOBJECT:
 		missileLock = reinterpret_cast<Engine::GameObject*>(data);
 		break;
+	case PlayerInfos::PLAYERDEAD:
+		playerDead = *reinterpret_cast<bool*>(data);
 	default:
 		break;
 	}

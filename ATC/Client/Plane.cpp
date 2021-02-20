@@ -30,6 +30,7 @@ Plane::Plane(void)
 	Engine::SubjectManager::GetInstance()->AddData(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM), transform);
 	Engine::SubjectManager::GetInstance()->AddData(static_cast<UINT>(PlayerInfos::PLAYERHEALTH), &healthpoint);
 	Engine::SubjectManager::GetInstance()->AddData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);
+	Engine::SubjectManager::GetInstance()->AddData(static_cast<UINT>(PlayerInfos::PLAYERDEAD), &isDead);
 
 	testdynamic->SetParent(&transform->worldMatrix);
 
@@ -78,6 +79,11 @@ void Plane::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObje
 			--healthpoint;
 			Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
 			invincibletime = 1.f;
+			if (healthpoint <= 0)
+			{
+				isDead = true;
+				Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERDEAD));
+			}
 		}
 	}
 }
@@ -118,8 +124,14 @@ INT Plane::Update(const FLOAT& dt)
 		transform->Rotate(Engine::Transform::RotType::LOOK, 2.5f * dt);
 
 	transform->position += directionVector * dt * 1000;
-	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
+	
+	if (transform->position.y <= -50.f)
+	{
+		isDead = true;
+		Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERDEAD));
+	}
 
+	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
 	return OBJALIVE;
 }
 
@@ -165,7 +177,6 @@ void Plane::LateUpdate(const FLOAT& dt)
 						pos2, { 2,2,2 },
 						nullptr, 0.05f);
 				}
-
 			}
 			shootDelay = 0.2f;
 		}
@@ -183,7 +194,6 @@ void Plane::LateUpdate(const FLOAT& dt)
 	dstObject = Engine::CollisionManager::GetInstance()->GetClosestObject(MONSTER, transform->position,
 		directionVector, -0.61f);
 	Engine::SubjectManager::GetInstance()->SetData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);
-
 
 	GameObject::LateUpdate(dt);
 }

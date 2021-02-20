@@ -15,6 +15,7 @@ private:
     FLOAT invincibletime = 1.f;
     Engine::GameObject* dstObject = nullptr;
     FLOAT shootDelay = 0.3f;
+    bool isDead = false;
 
 protected:
     D3DXVECTOR3 lookVector = { 0,0,-1 };
