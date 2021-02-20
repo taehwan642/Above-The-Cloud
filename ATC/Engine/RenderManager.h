@@ -7,6 +7,11 @@ class RenderManager :
 {
 private:
     std::list<GameObject*> renderObjects[4];
+    void RenderNoLight(void);
+    void RenderNormalMesh(void);
+    void RenderAlphaTexture(void);
+    void RenderEffect(void);
+
 protected:
 public:
     void AddRenderObject(RenderID id, GameObject* _object);

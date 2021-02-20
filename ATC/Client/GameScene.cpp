@@ -13,6 +13,7 @@
 #include "../Engine/CollisionManager.h"
 #include "LockPoint.h"
 #include "MonsterSpawnManager.h"
+#include "Sea.h"
 #include "GameScene.h"
 
 void GameScene::AddStage1Data(void)
@@ -47,8 +48,8 @@ void GameScene::Start(void)
 	HealthPointGroup* h = new HealthPointGroup();
 	
 	Cloud* t1 = new Cloud();
-
 	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Plane>(OBJ2, L"테스트");
+	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Sea>(OBJ1, L"테스트");
 	PlaneCamera* c = new PlaneCamera();
 	AimPoint* ui = new AimPoint(L"AimPoint");
 	LockPoint* ui2 = new LockPoint();

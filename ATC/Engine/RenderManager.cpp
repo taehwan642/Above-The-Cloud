@@ -3,6 +3,34 @@
 #include "RenderManager.h"
 USING(Engine)
 
+void RenderManager::RenderNoLight(void)
+{
+	// Light false
+}
+
+void RenderManager::RenderNormalMesh(void)
+{
+
+}
+
+void RenderManager::RenderAlphaTexture(void)
+{
+
+}
+
+void RenderManager::RenderEffect(void)
+{
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	DEVICE->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	DEVICE->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
+
+
+	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+}
+
 void RenderManager::AddRenderObject(RenderID id, GameObject* _object)
 {
 	renderObjects[id].emplace_back(_object);
