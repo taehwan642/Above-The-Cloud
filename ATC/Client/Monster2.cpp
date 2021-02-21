@@ -58,7 +58,6 @@ void Monster2::Movement(const FLOAT& dt)
 	}
 	else
 	{
-		// y -30미만으로가면 dir 재설정
 		FLOAT x = (rand() % 100) - (rand() % 50);
 		FLOAT y = (rand() % 100) - (rand() % 50);
 		FLOAT z = (rand() % 100) - (rand() % 50);
@@ -106,6 +105,11 @@ void Monster2::LateUpdate(const FLOAT& dt)
 	if (currentState == MONSTERIDLE)
 	{
 		D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+
+		D3DXVECTOR3 temp = transform->position + dir * 5;
+		if (temp.y <= -50)
+			moveDirection *= -1.f;
+
 		D3DXVec3Normalize(&dir, &dir);
 		transform->position += dir * 5 * dt;
 	}

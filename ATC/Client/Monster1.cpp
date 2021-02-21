@@ -58,9 +58,10 @@ void Monster1::Movement(const FLOAT& dt)
 	}
 	else if (s == 1)
 	{
-		// y -30 ¹Ì¸¸
 		FLOAT x = (rand() % 100) - (rand() % 50);
 		FLOAT y = (rand() % 100) - (rand() % 50);
+		while (y <= -50)
+			y = (rand() % 100) - (rand() % 50);
 		FLOAT z = (rand() % 100) - (rand() % 50);
 		movementqueue.emplace([=]()-> bool
 			{
