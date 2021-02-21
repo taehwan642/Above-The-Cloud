@@ -37,6 +37,8 @@ public:
     virtual void SetInformation(const D3DXVECTOR3& _position);
 
     void CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject) override;
+
+    UINT GetCurrentMonsterState(void) const const { return currentState; }
     
     INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;

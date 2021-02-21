@@ -59,7 +59,7 @@ void MonsterBase::LateUpdate(const FLOAT& dt)
 
 	if (!movementqueue.empty())
 	{
-		if (movementqueue.front()())
+		if (currentState != MONSTERDIE && movementqueue.front()())
 		{
 			movementqueue.pop();
 		}
@@ -81,7 +81,8 @@ void MonsterBase::LateUpdate(const FLOAT& dt)
 	}
 	else if (currentState == MONSTERDIE)
 	{
-		if (mesh->GetIsAnimationEnd() == true)
+		transform->position.y -= 30 * dt;
+		if (transform->position.y <= -50)
 		{
 			isActive = false;
 		}

@@ -14,6 +14,7 @@
 #include "../Engine/ObjectManager.h"
 #include "Missile.h"
 #include "../Engine/RenderManager.h"
+#include "MonsterBase.h"
 #include "Plane.h"
 
 bool testfly = true;
@@ -124,7 +125,7 @@ INT Plane::Update(const FLOAT& dt)
 		transform->Rotate(Engine::Transform::RotType::LOOK, 2.5f * dt);
 
 	transform->position += directionVector * dt * 1000;
-	
+
 	if (transform->position.y <= -50.f)
 	{
 		isDead = true;
@@ -148,8 +149,8 @@ void Plane::LateUpdate(const FLOAT& dt)
 			for (int i = 0; i < 4; ++i)
 			{
 				Engine::TextureEffect* texeffect = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Engine::TextureEffect>(EFFECT, L"Effect");
-				texeffect->SetInformation(L"muzzleFlash", 
-					effectpos[i], { 0.7f,0.7f,0.7f }, 
+				texeffect->SetInformation(L"muzzleFlash",
+					effectpos[i], { 0.7f,0.7f,0.7f },
 					transform, 0.05f);
 			}
 			if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, p, pos1, pos2, MONSTER))
@@ -186,14 +187,15 @@ void Plane::LateUpdate(const FLOAT& dt)
 
 	if (DXUTWasKeyPressed('E'))
 	{
-		Missile * m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Missile>(OBJ2, L"BULLET");
+		Missile* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Missile>(OBJ2, L"BULLET");
 		m->SetInformation();
 	}
 
 	D3DXVec3Normalize(&directionVector, &directionVector);
 	dstObject = Engine::CollisionManager::GetInstance()->GetClosestObject(MONSTER, transform->position,
 		directionVector, -0.61f);
-	Engine::SubjectManager::GetInstance()->SetData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);
+	if (dstObject != nullptr && dynamic_cast<MonsterBase*>(dstObject)->GetCurrentMonsterState() != MONSTERDIE)
+		Engine::SubjectManager::GetInstance()->SetData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);
 
 	GameObject::LateUpdate(dt);
 }

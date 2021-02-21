@@ -9,6 +9,7 @@
 
 D3DXVECTOR3 MonsterSpawnManager::RandomPositionForMonster(void)
 {
+	// y -30 미만으로 띄우기
 	INT r;
 	FLOAT rx = static_cast<float>((rand() % 10)) / 10;
 	r = rand() % 2;

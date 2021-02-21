@@ -58,6 +58,7 @@ void Monster2::Movement(const FLOAT& dt)
 	}
 	else
 	{
+		// y -30미만으로가면 dir 재설정
 		FLOAT x = (rand() % 100) - (rand() % 50);
 		FLOAT y = (rand() % 100) - (rand() % 50);
 		FLOAT z = (rand() % 100) - (rand() % 50);
