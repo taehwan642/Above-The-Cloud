@@ -219,6 +219,12 @@
     <Filter Include="2Client\1GameObject\8Sea">
       <UniqueIdentifier>{0ae461a6-c62e-4418-9a3a-f273b0d40b32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\1GameObject\2Plane\0Plane">
+      <UniqueIdentifier>{c3f77b1a-8c74-4f79-a11a-d06072367a10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\2Plane\1PlaneShadow">
+      <UniqueIdentifier>{ede399cc-9f85-4076-9572-0f214316ba81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -400,9 +406,6 @@
     <ClCompile Include="Client\MonsterBullet.cpp">
       <Filter>2Client\1GameObject\5Monsters\1MonsterBullets</Filter>
     </ClCompile>
-    <ClCompile Include="Client\Plane.cpp">
-      <Filter>2Client\1GameObject\2Plane</Filter>
-    </ClCompile>
     <ClCompile Include="Client\Cloud.cpp">
       <Filter>2Client\1GameObject\7Cloud</Filter>
     </ClCompile>
@@ -438,6 +441,12 @@
     </ClCompile>
     <ClCompile Include="Client\Sea.cpp">
       <Filter>2Client\1GameObject\8Sea</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\Plane.cpp">
+      <Filter>2Client\1GameObject\2Plane\0Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\PlaneShadow.cpp">
+      <Filter>2Client\1GameObject\2Plane\1PlaneShadow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -564,9 +573,6 @@
     <ClInclude Include="Client\MonsterBullet.h">
       <Filter>2Client\1GameObject\5Monsters\1MonsterBullets</Filter>
     </ClInclude>
-    <ClInclude Include="Client\Plane.h">
-      <Filter>2Client\1GameObject\2Plane</Filter>
-    </ClInclude>
     <ClInclude Include="Client\Cloud.h">
       <Filter>2Client\1GameObject\7Cloud</Filter>
     </ClInclude>
@@ -602,6 +608,12 @@
     </ClInclude>
     <ClInclude Include="Client\Sea.h">
       <Filter>2Client\1GameObject\8Sea</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\Plane.h">
+      <Filter>2Client\1GameObject\2Plane\0Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\PlaneShadow.h">
+      <Filter>2Client\1GameObject\2Plane\1PlaneShadow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
