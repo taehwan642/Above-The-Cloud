@@ -33,6 +33,7 @@ void LoadScene::Start(void)
 	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"Monster2.X", L"Monster2");
 	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/hit (%d).png", L"Hit", 3);
 	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"seatest.X", L"Sea");
+	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/shadow.png", L"Shadow", 1);
 	Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
 }
 

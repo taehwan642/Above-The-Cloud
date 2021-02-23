@@ -8,6 +8,7 @@ class Trail;
 class TextureEffect;
 class Collider;
 END
+class Shadow;
 class Plane final :
     public Engine::GameObject
 {
@@ -16,6 +17,8 @@ private:
     Engine::GameObject* dstObject = nullptr;
     FLOAT shootDelay = 0.3f;
     bool isDead = false;
+
+    Shadow* shadow = nullptr;
 
 protected:
     D3DXVECTOR3 lookVector = { 0,0,-1 };

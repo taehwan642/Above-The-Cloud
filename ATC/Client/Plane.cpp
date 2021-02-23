@@ -15,6 +15,7 @@
 #include "Missile.h"
 #include "../Engine/RenderManager.h"
 #include "MonsterBase.h"
+#include "Shadow.h"
 #include "Plane.h"
 
 bool testfly = true;
@@ -65,6 +66,7 @@ Plane::Plane(void)
 	colliderdata.radius = 1;
 	colliderdata.tag = L"player";
 
+	shadow = new Shadow(transform, { 1,1,1 });
 }
 
 Plane::~Plane(void)
@@ -133,6 +135,7 @@ INT Plane::Update(const FLOAT& dt)
 	}
 
 	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
+	shadow->Update(dt);
 	return OBJALIVE;
 }
 
@@ -196,7 +199,7 @@ void Plane::LateUpdate(const FLOAT& dt)
 		directionVector, -0.61f);
 	if (dstObject != nullptr && dynamic_cast<MonsterBase*>(dstObject)->GetCurrentMonsterState() != MONSTERDIE)
 		Engine::SubjectManager::GetInstance()->SetData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);
-
+	shadow->LateUpdate(dt);
 	GameObject::LateUpdate(dt);
 }
 
@@ -217,11 +220,13 @@ void Plane::Render(const FLOAT& dt)
 
 	collider->RenderCollider();
 
+	shadow->Render(dt);
 	GameObject::Render(dt);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
 void Plane::Free(void)
 {
+	shadow->Free();
 	GameObject::Free();
 }

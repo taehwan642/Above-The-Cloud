@@ -219,11 +219,8 @@
     <Filter Include="2Client\1GameObject\8Sea">
       <UniqueIdentifier>{0ae461a6-c62e-4418-9a3a-f273b0d40b32}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Client\1GameObject\2Plane\0Plane">
-      <UniqueIdentifier>{c3f77b1a-8c74-4f79-a11a-d06072367a10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2Client\1GameObject\2Plane\1PlaneShadow">
-      <UniqueIdentifier>{ede399cc-9f85-4076-9572-0f214316ba81}</UniqueIdentifier>
+    <Filter Include="2Client\1GameObject\9Shadow">
+      <UniqueIdentifier>{78c80751-4004-41e0-bc7b-b628fa92469d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -442,11 +439,11 @@
     <ClCompile Include="Client\Sea.cpp">
       <Filter>2Client\1GameObject\8Sea</Filter>
     </ClCompile>
-    <ClCompile Include="Client\Plane.cpp">
-      <Filter>2Client\1GameObject\2Plane\0Plane</Filter>
+    <ClCompile Include="Client\Shadow.cpp">
+      <Filter>2Client\1GameObject\9Shadow</Filter>
     </ClCompile>
-    <ClCompile Include="Client\PlaneShadow.cpp">
-      <Filter>2Client\1GameObject\2Plane\1PlaneShadow</Filter>
+    <ClCompile Include="Client\Plane.cpp">
+      <Filter>2Client\1GameObject\2Plane</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -609,11 +606,11 @@
     <ClInclude Include="Client\Sea.h">
       <Filter>2Client\1GameObject\8Sea</Filter>
     </ClInclude>
-    <ClInclude Include="Client\Plane.h">
-      <Filter>2Client\1GameObject\2Plane\0Plane</Filter>
+    <ClInclude Include="Client\Shadow.h">
+      <Filter>2Client\1GameObject\9Shadow</Filter>
     </ClInclude>
-    <ClInclude Include="Client\PlaneShadow.h">
-      <Filter>2Client\1GameObject\2Plane\1PlaneShadow</Filter>
+    <ClInclude Include="Client\Plane.h">
+      <Filter>2Client\1GameObject\2Plane</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
