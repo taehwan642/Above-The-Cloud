@@ -13,7 +13,7 @@ Shadow::Shadow(Engine::Transform* _objectTransform, const D3DXVECTOR3& _scale)
 	objectTransform = _objectTransform;
 	DynamicUI::SetInformation(L"Shadow");
 	SetBillBoardEnable(false);
-	transform->scale = _scale;
+	shadowScale = _scale;
 	D3DXMATRIX mRot;
 	D3DXMatrixRotationX(&mRot, D3DXToRadian(90.f));
 	D3DXQUATERNION quaternion;
@@ -29,7 +29,9 @@ Shadow::~Shadow(void)
 INT Shadow::Update(const FLOAT& dt)
 {
 	transform->position = { objectTransform->position.x, -48.f, objectTransform->position.z };
-	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NOLIGHT,this);
+	transform->scale = shadowScale * (objectTransform->position.y - -48.f);
+
+	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH,this);
 	DynamicUI::Update(dt);
 	return OBJALIVE;
 }

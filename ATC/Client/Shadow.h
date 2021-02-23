@@ -9,6 +9,7 @@ class Shadow :
 {
 private:
     Engine::Transform* objectTransform;
+    D3DXVECTOR3 shadowScale = { 1,1,1 };
 protected:
 public:
     explicit Shadow(void);

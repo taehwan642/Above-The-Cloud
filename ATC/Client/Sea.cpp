@@ -26,7 +26,7 @@ Sea::~Sea(void)
 INT Sea::Update(const FLOAT& dt)
 {
 	GameObject::Update(dt);
-	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
+	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NOLIGHT, this);
 	return OBJALIVE;
 }
 

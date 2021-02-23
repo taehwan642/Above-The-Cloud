@@ -78,9 +78,6 @@
     <Filter Include="1Engine\4Component\4Shader">
       <UniqueIdentifier>{0bdee1bc-45bb-49a6-b107-5607a8c89d7a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1Engine\4Component\4Shader\0Default">
-      <UniqueIdentifier>{9f19bae3-af5c-4a38-9397-67bdb4e0fd72}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1Engine\4Component\3Mesh\1DynamicMesh">
       <UniqueIdentifier>{341c3da8-fdcc-46db-97db-6cd042104687}</UniqueIdentifier>
     </Filter>
@@ -221,6 +218,12 @@
     </Filter>
     <Filter Include="2Client\1GameObject\9Shadow">
       <UniqueIdentifier>{78c80751-4004-41e0-bc7b-b628fa92469d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4Component\4Shader\2ShadowShader">
+      <UniqueIdentifier>{ad6c8b13-8c95-4100-82b6-1b765b1bd9ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4Component\4Shader\0DefaultShader">
+      <UniqueIdentifier>{9f19bae3-af5c-4a38-9397-67bdb4e0fd72}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -615,10 +618,13 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\DefaultShader.fx">
-      <Filter>1Engine\4Component\4Shader\0Default</Filter>
+      <Filter>1Engine\4Component\4Shader\0DefaultShader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\DynamicMeshShader.fx">
       <Filter>1Engine\4Component\4Shader\1DynamicMeshShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\ShadowShader.fx">
+      <Filter>1Engine\4Component\4Shader\2ShadowShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
