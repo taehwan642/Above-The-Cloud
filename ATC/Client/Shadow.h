@@ -3,12 +3,14 @@
 
 NAMESPACE(Engine)
 class Transform;
+class Shadow;
 END
 class Shadow :
     public Engine::DynamicUI
 {
 private:
     Engine::Transform* objectTransform;
+    Engine::Shader* shader;
     D3DXVECTOR3 shadowScale = { 1,1,1 };
 protected:
 public:

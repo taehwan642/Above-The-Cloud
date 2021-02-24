@@ -2,6 +2,8 @@
 #include "../Engine/Transform.h"
 #include "../Engine/Texture.h"
 #include "../Engine/RenderManager.h"
+#include "../Engine/Shader.h"
+#include "../Engine/ResourceManager.h"
 #include "Shadow.h"
 
 Shadow::Shadow(void)
@@ -20,6 +22,8 @@ Shadow::Shadow(Engine::Transform* _objectTransform, const D3DXVECTOR3& _scale)
 	D3DXQuaternionRotationMatrix(&quaternion, &mRot);
 	transform->curQuaternion = quaternion;
 	transform->quaternion = quaternion;
+	shader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"ShadowShader"));
+	componentgroup.emplace(L"Shader", shader);
 }
 
 Shadow::~Shadow(void)
@@ -43,7 +47,18 @@ void Shadow::LateUpdate(const FLOAT& dt)
 
 void Shadow::Render(const FLOAT& dt)
 {
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	DEVICE->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	DEVICE->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
+
 	DynamicUI::Render(dt);
+	texture->RenderTexture(DynamicUI::currentTextureindex);
+	DynamicUI::RenderBuffer();
+
+	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
 void Shadow::Free(void)

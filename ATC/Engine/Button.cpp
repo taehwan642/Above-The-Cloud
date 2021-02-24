@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "RaycastManager.h"
 #include "RenderManager.h"
+#include "Texture.h"
 #include "Button.h"
 
 USING(Engine)
@@ -30,7 +31,18 @@ void Button::LateUpdate(const FLOAT& dt)
 
 void Button::Render(const FLOAT& dt)
 {
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	DEVICE->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	DEVICE->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
+
 	DynamicUI::Render(dt);
+	texture->RenderTexture(DynamicUI::currentTextureindex);
+	DynamicUI::RenderBuffer();
+
+	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
 bool Button::IsMouseOn(void)

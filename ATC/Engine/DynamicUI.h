@@ -24,6 +24,8 @@ public:
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
 
+    void RenderBuffer(void);
+
     void SetBillBoardEnable(bool _isbillboardenable)
     {
         isbillboard = _isbillboardenable;

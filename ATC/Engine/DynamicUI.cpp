@@ -65,11 +65,13 @@ INT DynamicUI::Update(const FLOAT& dt)
 
 void DynamicUI::LateUpdate(const FLOAT& dt)
 {
+	
 	UIBase::LateUpdate(dt);
 }
 
 void DynamicUI::Render(const FLOAT& dt)
 {
+
 	if (isbillboard)
 	{
 		D3DXMATRIX matBill;
@@ -97,20 +99,15 @@ void DynamicUI::Render(const FLOAT& dt)
 	}
 	else
 		DEVICE->SetTransform(D3DTS_WORLD, &transform->worldMatrix);
-	
-	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-	DEVICE->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-	DEVICE->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
-	texture->RenderTexture(currentTextureindex);
-	DXUTGetD3D9Device()->SetStreamSource(0, vb, 0, vtxsize);
-	DXUTGetD3D9Device()->SetFVF(vtxFVF);
-	DXUTGetD3D9Device()->SetIndices(ib);
-	DXUTGetD3D9Device()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, vtxcnt, 0, tricnt);
-	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
-	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	UIBase::Render(dt);
+}
+
+void DynamicUI::RenderBuffer(void)
+{
+	DEVICE->SetStreamSource(0, vb, 0, vtxsize);
+	DEVICE->SetFVF(vtxFVF);
+	DEVICE->SetIndices(ib);
+	DEVICE->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, vtxcnt, 0, tricnt);
 }
 
 void DynamicUI::Free(void)
