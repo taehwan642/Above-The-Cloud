@@ -98,38 +98,8 @@ PS_OUT PS_MAIN(PS_IN In)
 
 technique Default_Technique
 {
-	//pass Default_Rendering
-	//{
-	//	AlphaTestEnable = true;
-	//	Alpharef = 0;
-	//	AlphaFunc = Greater;
-
-	//	VertexShader = compile vs_3_0 VS_MAIN();
-	//	PixelShader = compile ps_3_0 PS_MAIN();
-	//}
-	//pass Default_Rendering
-	//{
-	//	AlphaTestEnable = true;
-	//	Alpharef = 0;
-	//	AlphaFunc = Greater;
-
-	//	VertexShader = compile vs_3_0 VS_MAIN();
-	//	PixelShader = compile ps_3_0 PS_MAIN();
-	//}
-	//pass Default_Rendering
-	//{
-	//	AlphaTestEnable = true;
-	//	Alpharef = 0;
-	//	AlphaFunc = Greater;
-
-	//	VertexShader = compile vs_3_0 VS_MAIN();
-	//	PixelShader = compile ps_3_0 PS_MAIN();
-	//}
 	pass Alpha
 	{
-		//AlphaTestEnable = true;
-		//Alpharef = 0;
-		//AlphaFunc = Greater;
 		AlphaBlendenable = true;
 		srcBlend = SrcAlpha;
 		destBlend = InvSrcAlpha;

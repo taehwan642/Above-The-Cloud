@@ -9,6 +9,7 @@ class Shadow :
     public Engine::DynamicUI
 {
 private:
+    FLOAT alpha;
     Engine::Transform* objectTransform;
     Engine::Shader* shader;
     D3DXVECTOR3 shadowScale = { 1,1,1 };

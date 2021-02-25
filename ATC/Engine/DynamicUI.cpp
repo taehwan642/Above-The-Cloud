@@ -65,7 +65,6 @@ INT DynamicUI::Update(const FLOAT& dt)
 
 void DynamicUI::LateUpdate(const FLOAT& dt)
 {
-	
 	UIBase::LateUpdate(dt);
 }
 

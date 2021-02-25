@@ -9,6 +9,8 @@
 #include "../Engine/Collider.h"
 #include "PlayerObserver.h"
 #include "../Engine/RenderManager.h"
+#include "../Engine/ObjectManager.h"
+#include "../Engine/TextureEffect.h"
 #include "MonsterBase.h"
 
 MonsterBase::MonsterBase(void)
@@ -84,6 +86,15 @@ void MonsterBase::LateUpdate(const FLOAT& dt)
 		transform->position.y -= 30 * dt;
 		if (transform->position.y <= -50)
 		{
+			for (int i = 0; i < 1; ++i)
+			{
+				Engine::TextureEffect* t =
+					Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Engine::TextureEffect>(EFFECT, L"Effect");
+				t->SetInformation(L"Explosion",
+					{ transform->position.x, -45, transform->position.z },
+					{ 5,5,5 }, nullptr, 0.05f);
+			}
+
 			isActive = false;
 		}
 	}

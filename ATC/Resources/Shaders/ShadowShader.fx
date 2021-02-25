@@ -49,17 +49,15 @@ VertexShaderOutput VS_MAIN(VertexShaderInput Input)
 
 struct PixelShaderOutput
 {
-	float4 diffuse : COLOR0;
-	float4 normal : COLOR1;
+	vector diffuse : COLOR0;
 };
 
 
 PixelShaderOutput PS_MAIN(PixelShaderInput Input)
 {
 	PixelShaderOutput PixelOut = (PixelShaderOutput)0;
-	float4 tex = tex2D(BaseSampler, Input.vTexUV);
-	PixelOut.diffuse = float4(tex.xyz, alpha);
-
+	PixelOut.diffuse = tex2D(BaseSampler, Input.vTexUV) * alpha;
+	//PixelOut.diffuse.a -= 1;
 	return PixelOut;
 }
 

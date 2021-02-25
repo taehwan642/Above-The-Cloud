@@ -25,7 +25,7 @@ HRESULT Texture::LoadTexture(std::wstring _filepath, const UINT& _texturecount)
 	texturescount = _texturecount;
 	if (_texturecount <= 1)
 	{
-		if(FAILED(D3DXCreateTextureFromFile(DEVICE, _filepath.c_str(), &texture)))
+		if (FAILED(D3DXCreateTextureFromFile(DEVICE, _filepath.c_str(), &texture)))
 			return E_FAIL;
 		textures.emplace_back(texture);
 	}
@@ -36,9 +36,9 @@ HRESULT Texture::LoadTexture(std::wstring _filepath, const UINT& _texturecount)
 		{
 			wsprintf(finalfilepath, _filepath.c_str(), i);
 
-			if(FAILED(D3DXCreateTextureFromFile(DEVICE, finalfilepath, &texture)))
+			if (FAILED(D3DXCreateTextureFromFile(DEVICE, finalfilepath, &texture)))
 				return E_FAIL;
-			
+
 			textures.emplace_back(texture);
 		}
 	}
@@ -47,6 +47,8 @@ HRESULT Texture::LoadTexture(std::wstring _filepath, const UINT& _texturecount)
 
 void Texture::RenderTexture(LPD3DXEFFECT& _effect, const UINT& _index)
 {
+	if (textures.size() <= _index)
+		return;
 	_effect->SetTexture((D3DXHANDLE)L"g_BaseTexture", textures[_index]);
 }
 
@@ -60,7 +62,7 @@ void Texture::RenderTexture(const UINT& _index)
 
 void Texture::Render(const FLOAT& dt)
 {
-	
+
 }
 
 Resources* Texture::Clone(void)

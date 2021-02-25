@@ -35,6 +35,7 @@ void LoadScene::Start(void)
 	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::STATIC, L"Resources/Meshes/Static/", L"seatest.X", L"Sea");
 	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/shadow.png", L"Shadow", 1);
 	Engine::ResourceManager::GetInstance()->AddShader(L"Resources/Shaders/ShadowShader.fx", L"ShadowShader");
+	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/explosion (%d).png", L"Explosion", 4);
 	Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
 }
 

@@ -158,6 +158,6 @@ void Missile::Render(const FLOAT& dt)
 void Missile::Free(void)
 {
 	Engine::SubjectManager::GetInstance()->UnSubscribe(ob);
-	ob->Release();
+	Safe_Release(ob);
 	GameObject::Free();
 }

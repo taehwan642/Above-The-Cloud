@@ -39,6 +39,7 @@ void TextureEffect::LateUpdate(const FLOAT& dt)
 
 void TextureEffect::Render(const FLOAT& dt)
 {
+	DynamicUI::Update(dt); // for Transform's World Matrix Update
 	DynamicUI::currentTextureindex = currentTextureIndex;
 
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
@@ -58,11 +59,11 @@ void TextureEffect::Render(const FLOAT& dt)
 void TextureEffect::SetInformation(const std::wstring& _texturetag, const D3DXVECTOR3& _position, const D3DXVECTOR3& _scale, Transform* _parent, const FLOAT& _alivetime)
 {
 	UIBase::SetInformation(_texturetag, _parent);
-	isActive = true;
 	currentTextureIndex = 0;
 	textureChangedelta = _alivetime;
 	transform->position = _position;
 	transform->scale = _scale;
+	isActive = true;
 }
 
 void TextureEffect::Free(void)

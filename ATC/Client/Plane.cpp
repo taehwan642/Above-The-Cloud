@@ -227,6 +227,6 @@ void Plane::Render(const FLOAT& dt)
 
 void Plane::Free(void)
 {
-	shadow->Free();
+	Safe_Release(shadow);
 	GameObject::Free();
 }

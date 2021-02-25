@@ -13,6 +13,7 @@ Shadow::Shadow(void)
 Shadow::Shadow(Engine::Transform* _objectTransform, const D3DXVECTOR3& _scale)
 {
 	objectTransform = _objectTransform;
+	objectTransform->AddReference();
 	DynamicUI::SetInformation(L"Shadow");
 	SetBillBoardEnable(false);
 	shadowScale = _scale;
@@ -59,9 +60,24 @@ void Shadow::Render(const FLOAT& dt)
 	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
+
+	//shader->SetupTable(transform->worldMatrix);
+	//LPD3DXEFFECT tempEffect = shader->GetEffect();
+	//UINT pass = 0;
+	//tempEffect->SetFloat((D3DXHANDLE)"alpha", alpha);
+	//tempEffect->Begin(&pass, 0);
+	//tempEffect->BeginPass(0);
+	//texture->RenderTexture(tempEffect, DynamicUI::currentTextureindex);
+	//tempEffect->CommitChanges();
+	//DynamicUI::Render(dt);
+	//DynamicUI::RenderBuffer();
+	//tempEffect->EndPass();
+	//tempEffect->End();
 }
 
 void Shadow::Free(void)
 {
+	Safe_Release(objectTransform);
 	DynamicUI::Free();
 }
