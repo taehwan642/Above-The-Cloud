@@ -27,6 +27,8 @@ void UIBase::SetInformation(const std::wstring& _textureTag, Transform* _parent)
 	}
 	if (_parent != nullptr)
 		transform->SetParent(_parent);
+	else
+		transform->ReleaseParent();
 }
 
 void UIBase::SetUITexture(const UINT& _index)

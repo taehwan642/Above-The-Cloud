@@ -44,18 +44,18 @@ VertexShaderOutput VS_MAIN(VertexShaderInput Input)
 	matWV = mul(g_matWorld, g_matView);
 	matWVP = mul(matWV, g_matProj);
 
-	float A = 5;	// amplitude
-	float L = 50;	// wavelength
-	float w = 2 * 3.1416 / L;
+	float amplitude = 8;
+	float wavelength = 50;
+	float w = 2 * 3.1416 / wavelength;
 	float Q = 0.5;
 
 	float3 P0 = Input.vPosition.xyz;
 	float2 D = float2(0, 1);
 	float dotD = dot(P0.xz, D);
-	float C = cos(w * dotD + fTime * 30);
-	float S = sin(w * dotD + fTime * 30);
+	float C = cos(w * dotD + fTime * 3);
+	float S = sin(w * dotD + fTime * 3);
 
-	float3 P = float3(P0.x + Q * A * C * D.x, A * S, P0.z + Q * A * C * D.y);
+	float3 P = float3(P0.x + Q * amplitude * C * D.x, amplitude * S, P0.z + Q * amplitude * C * D.y);
 
 	OutPut.vPosition = mul(float4(P, 1), matWVP);
 

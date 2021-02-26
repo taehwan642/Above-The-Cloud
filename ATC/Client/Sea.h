@@ -14,6 +14,7 @@ private:
     Engine::Transform* transform;
 protected:
 public:
+    float sceneTime = 0.f;
     explicit Sea(void);
     virtual ~Sea(void);
 

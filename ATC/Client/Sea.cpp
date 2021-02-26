@@ -15,7 +15,7 @@ Sea::Sea(void)
 	componentgroup.emplace(L"Transform", transform);
 	mesh = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Sea"));
 	componentgroup.emplace(L"Mesh", mesh);
-	shader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"defaultShader"));
+	shader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"SeaShader"));
 	componentgroup.emplace(L"Shader", shader);
 }
 
@@ -42,6 +42,8 @@ void Sea::Render(const FLOAT& dt)
 
 	UINT pass = 0;
 	LPD3DXEFFECT tempeffect = shader->GetEffect();
+	sceneTime += dt;
+	tempeffect->SetValue((D3DXHANDLE)"fTime", &sceneTime, sizeof(float));
 	tempeffect->Begin(&pass, 0);
 	tempeffect->BeginPass(0);
 	mesh->RenderMesh(tempeffect);

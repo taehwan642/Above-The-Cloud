@@ -24,9 +24,9 @@ INT TextureEffect::Update(const FLOAT& dt)
 	}
 
 	size_t texturesize = texture->GetTexturesCount();
+	DynamicUI::Update(dt);
 	if (texturesize <= currentTextureIndex)
 		isActive = false;
-	DynamicUI::Update(dt);
 	if (isActive == true)
 		Engine::RenderManager::GetInstance()->AddRenderObject(ID_EFFECT, this);
 	return OBJALIVE;
@@ -39,7 +39,6 @@ void TextureEffect::LateUpdate(const FLOAT& dt)
 
 void TextureEffect::Render(const FLOAT& dt)
 {
-	DynamicUI::Update(dt); // for Transform's World Matrix Update
 	DynamicUI::currentTextureindex = currentTextureIndex;
 
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
@@ -62,6 +61,7 @@ void TextureEffect::SetInformation(const std::wstring& _texturetag, const D3DXVE
 	currentTextureIndex = 0;
 	textureChangedelta = _alivetime;
 	transform->position = _position;
+	memcpy(&transform->worldMatrix._41, &transform->position, sizeof(D3DXVECTOR3));
 	transform->scale = _scale;
 	isActive = true;
 }

@@ -70,7 +70,6 @@ void DynamicUI::LateUpdate(const FLOAT& dt)
 
 void DynamicUI::Render(const FLOAT& dt)
 {
-
 	if (isbillboard)
 	{
 		D3DXMATRIX matBill;
