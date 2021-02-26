@@ -521,6 +521,7 @@
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\DefaultShader.fx" />
     <FxCompile Include="Resources\Shaders\DynamicMeshShader.fx" />
+    <FxCompile Include="Resources\Shaders\SeaShader.fx" />
     <FxCompile Include="Resources\Shaders\ShadowShader.fx" />
   </ItemGroup>
   <ItemGroup>

@@ -225,6 +225,9 @@
     <Filter Include="1Engine\4Component\4Shader\0DefaultShader">
       <UniqueIdentifier>{9f19bae3-af5c-4a38-9397-67bdb4e0fd72}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\4Component\4Shader\3SeaShader">
+      <UniqueIdentifier>{72551fd2-f0e9-4cf1-86a9-304acbf4606c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -625,6 +628,9 @@
     </FxCompile>
     <FxCompile Include="Resources\Shaders\ShadowShader.fx">
       <Filter>1Engine\4Component\4Shader\2ShadowShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\SeaShader.fx">
+      <Filter>1Engine\4Component\4Shader\3SeaShader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
