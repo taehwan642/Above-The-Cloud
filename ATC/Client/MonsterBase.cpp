@@ -86,12 +86,13 @@ void MonsterBase::LateUpdate(const FLOAT& dt)
 		transform->position.y -= 30 * dt;
 		if (transform->position.y <= -50)
 		{
-			for (int i = 0; i < 1; ++i)
+			for (int i = 0; i < 3; ++i)
 			{
 				Engine::TextureEffect* t =
 					Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Engine::TextureEffect>(EFFECT, L"Effect");
+				float distance = (rand() % 6) - (rand() % 6);
 				t->SetInformation(L"Explosion",
-					{ transform->position.x, -45, transform->position.z },
+					{ transform->position.x + distance, -45, transform->position.z + distance },
 					{ 5,5,5 }, nullptr, 0.05f);
 			}
 

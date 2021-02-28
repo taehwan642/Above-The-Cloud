@@ -47,28 +47,36 @@ INT PlaneCamera::Update(const FLOAT& dt)
 	{
 		targetplane = !targetplane;
 	}
-	D3DXVECTOR3 look = *D3DXVec3Normalize(&D3DXVECTOR3(), reinterpret_cast<D3DXVECTOR3*>(&targetTransform->worldMatrix._31));
-	D3DXVECTOR3 position = *reinterpret_cast<D3DXVECTOR3*>(&targetTransform->worldMatrix._41);
-	
-	transform->position = position + look * cameraDistance;
 
-	look *= -1.f;
+	if (observer->GetIsPlayerDead() == false)
+	{
+		D3DXVECTOR3 look = *D3DXVec3Normalize(&D3DXVECTOR3(), reinterpret_cast<D3DXVECTOR3*>(&targetTransform->worldMatrix._31));
+		D3DXVECTOR3 position = *reinterpret_cast<D3DXVECTOR3*>(&targetTransform->worldMatrix._41);
 
-	D3DXVECTOR3 right;
-	D3DXVec3Normalize(&right, reinterpret_cast<D3DXVECTOR3*>(&observer->GetTransform()->worldMatrix._11));
+		transform->position = position + look * cameraDistance;
 
-	right *= -1.f;
+		look *= -1.f;
 
-	D3DXVECTOR3 up;
-	D3DXVec3Cross(&up, &look, &right);
-	D3DXVec3Normalize(&up, &up);
+		D3DXVECTOR3 right;
+		D3DXVec3Normalize(&right, reinterpret_cast<D3DXVECTOR3*>(&observer->GetTransform()->worldMatrix._11));
 
-	D3DXMATRIX matRot;
-	D3DXMatrixIdentity(&matRot);
-	memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
-	memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
-	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
-	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
+		right *= -1.f;
+
+		D3DXVECTOR3 up;
+		D3DXVec3Cross(&up, &look, &right);
+		D3DXVec3Normalize(&up, &up);
+
+		D3DXMATRIX matRot;
+		D3DXMatrixIdentity(&matRot);
+		memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
+		memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
+		memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
+		D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
+	}
+	else
+	{
+		// Go Back
+	}
 
 	GameObject::Update(dt);
 	return OBJALIVE;
@@ -77,7 +85,7 @@ INT PlaneCamera::Update(const FLOAT& dt)
 void PlaneCamera::LateUpdate(const FLOAT& dt)
 {
 	D3DXMATRIX matView;
-	if (lookback)
+	if (observer->GetIsPlayerDead() == false && lookback)
 	{
 		D3DXVECTOR3 reverse = -(*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31));
 		memcpy(&transform->worldMatrix._31, reverse, sizeof(D3DXVECTOR3));
