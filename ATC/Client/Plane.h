@@ -16,9 +16,13 @@ private:
     FLOAT invincibletime = 1.f;
     Engine::GameObject* dstObject = nullptr;
     FLOAT shootDelay = 0.3f;
+
+    FLOAT deadExplosionEffectSpawntime = 0.5f;
     bool isDead = false;
 
     Shadow* shadow = nullptr;
+
+    void PlayerDead(bool _isDeadbyCollision);
 
 protected:
     D3DXVECTOR3 lookVector = { 0,0,-1 };

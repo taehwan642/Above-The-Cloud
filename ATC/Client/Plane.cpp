@@ -18,7 +18,42 @@
 #include "Shadow.h"
 #include "Plane.h"
 
-bool testfly = true;
+void Plane::PlayerDead(bool _isDeadbyCollision)
+{
+	for (int i = 0; i < 5; ++i)
+	{
+		Engine::TextureEffect* t =
+			Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Engine::TextureEffect>(EFFECT, L"Effect");
+		float distance = (rand() % 10) - (rand() % 10);
+		float y = _isDeadbyCollision ? transform->position.y : -45;
+		t->SetInformation(L"Explosion",
+			{ transform->position.x + distance, y, transform->position.z + distance },
+			{ 5,5,5 }, nullptr, 0.05f);
+	}
+
+	D3DXVECTOR3 look = D3DXVECTOR3(transform->position.x, -100, transform->position.z);
+	D3DXVec3Normalize(&look, &look);
+	look *= -1.f;
+
+	D3DXVECTOR3 right;
+	D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
+	D3DXVec3Normalize(&right, &right);
+
+	D3DXVECTOR3 up;
+	D3DXVec3Cross(&up, &look, &right);
+	D3DXVec3Normalize(&up, &up);
+
+	D3DXMATRIX matRot;
+	D3DXMatrixIdentity(&matRot);
+	memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
+	memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
+	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
+	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
+
+	UINT aniset = 0;
+	testdynamic->SetAnimationSet(aniset);
+}
+
 Plane::Plane(void)
 {
 	testshader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dyshader"));
@@ -84,6 +119,7 @@ void Plane::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObje
 			invincibletime = 1.f;
 			if (healthpoint <= 0)
 			{
+				PlayerDead(true);
 				isDead = true;
 				Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERDEAD));
 			}
@@ -107,29 +143,47 @@ INT Plane::Update(const FLOAT& dt)
 
 	directionVector = -(*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31));
 
-	if (DXUTWasKeyPressed('U'))
+
+
+	if (isDead == false)
 	{
-		UINT aniset = testfly ? 0 : 1;
-		testfly = !testfly;
-		testdynamic->SetAnimationSet(aniset);
+		if (DXUTIsKeyDown('W'))
+			transform->Rotate(Engine::Transform::RotType::RIGHT, 1.0f * dt);
+
+		if (DXUTIsKeyDown('S'))
+			transform->Rotate(Engine::Transform::RotType::RIGHT, -1.0f * dt);
+
+		if (DXUTIsKeyDown('A'))
+			transform->Rotate(Engine::Transform::RotType::LOOK, -2.5f * dt);
+
+		if (DXUTIsKeyDown('D'))
+			transform->Rotate(Engine::Transform::RotType::LOOK, 2.5f * dt);
 	}
-
-	if (DXUTIsKeyDown('W'))
-		transform->Rotate(Engine::Transform::RotType::RIGHT, 1.0f * dt);
-
-	if (DXUTIsKeyDown('S'))
-		transform->Rotate(Engine::Transform::RotType::RIGHT, -1.0f * dt);
-
-	if (DXUTIsKeyDown('A'))
-		transform->Rotate(Engine::Transform::RotType::LOOK, -2.5f * dt);
-
-	if (DXUTIsKeyDown('D'))
+	else
+	{
 		transform->Rotate(Engine::Transform::RotType::LOOK, 2.5f * dt);
-
+		if (deadExplosionEffectSpawntime <= 0)
+		{
+			for (int i = 0; i < 5; ++i)
+			{
+				Engine::TextureEffect* t =
+					Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Engine::TextureEffect>(EFFECT, L"Effect");
+				float distance = (rand() % 10) - (rand() % 10);
+				t->SetInformation(L"Explosion",
+					{ transform->position.x + distance, transform->position.y, transform->position.z + distance },
+					{ 5,5,5 }, nullptr, 0.05f);
+			}
+			deadExplosionEffectSpawntime = 0.5f;
+		}
+		else
+			deadExplosionEffectSpawntime -= dt;
+		
+	}
 	transform->position += directionVector * dt * 1000;
 
-	if (transform->position.y <= -50.f)
+	if (isDead == false && transform->position.y <= -50.f)
 	{
+		PlayerDead(false);
 		isDead = true;
 		Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERDEAD));
 	}

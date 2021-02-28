@@ -75,7 +75,23 @@ INT PlaneCamera::Update(const FLOAT& dt)
 	}
 	else
 	{
-		// Go Back
+		D3DXVECTOR3 playerlook = observer->GetTransform()->position - transform->position;
+		D3DXVec3Normalize(&playerlook, &playerlook);
+
+		D3DXVECTOR3 right;
+		D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &playerlook);
+		D3DXVec3Normalize(&right, &right);
+
+		D3DXVECTOR3 up;
+		D3DXVec3Cross(&up, &playerlook, &right);
+		D3DXVec3Normalize(&up, &up);
+
+		D3DXMATRIX matRot;
+		D3DXMatrixIdentity(&matRot);
+		memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
+		memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
+		memcpy(&matRot._31, &playerlook, sizeof(D3DXVECTOR3));
+		D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
 	}
 
 	GameObject::Update(dt);
