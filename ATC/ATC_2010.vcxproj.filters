@@ -228,6 +228,12 @@
     <Filter Include="1Engine\4Component\4Shader\3SeaShader">
       <UniqueIdentifier>{72551fd2-f0e9-4cf1-86a9-304acbf4606c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters\0Monster\3BossDashGun">
+      <UniqueIdentifier>{7dc7d168-3f02-40d9-a140-9e29f90f18ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters\0Monster\4BossShootGun">
+      <UniqueIdentifier>{aad9c8cd-f828-401d-a6e9-2fa1c9eb1166}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -451,6 +457,15 @@
     <ClCompile Include="Client\Plane.cpp">
       <Filter>2Client\1GameObject\2Plane</Filter>
     </ClCompile>
+    <ClCompile Include="Client\Boss.cpp">
+      <Filter>2Client\1GameObject\5Monsters\0Monster\2Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\BossShootGun.cpp">
+      <Filter>2Client\1GameObject\5Monsters\0Monster\4BossShootGun</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\BossDashGun.cpp">
+      <Filter>2Client\1GameObject\5Monsters\0Monster\3BossDashGun</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -617,6 +632,15 @@
     </ClInclude>
     <ClInclude Include="Client\Plane.h">
       <Filter>2Client\1GameObject\2Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\Boss.h">
+      <Filter>2Client\1GameObject\5Monsters\0Monster\2Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\BossShootGun.h">
+      <Filter>2Client\1GameObject\5Monsters\0Monster\4BossShootGun</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\BossDashGun.h">
+      <Filter>2Client\1GameObject\5Monsters\0Monster\3BossDashGun</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

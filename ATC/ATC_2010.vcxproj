@@ -389,6 +389,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Client\AimPoint.cpp" />
+    <ClCompile Include="Client\Boss.cpp" />
+    <ClCompile Include="Client\BossDashGun.cpp" />
+    <ClCompile Include="Client\BossShootGun.cpp" />
     <ClCompile Include="Client\MenuCamera.cpp" />
     <ClCompile Include="Client\PlaneCamera.cpp" />
     <ClCompile Include="Client\HealthPoint.cpp" />
@@ -442,6 +445,9 @@
     <ClCompile Include="Engine\Transform.cpp" />
     <ClCompile Include="Engine\UIBase.cpp" />
     <ClInclude Include="Client\AimPoint.h" />
+    <ClInclude Include="Client\Boss.h" />
+    <ClInclude Include="Client\BossDashGun.h" />
+    <ClInclude Include="Client\BossShootGun.h" />
     <ClInclude Include="Client\MenuCamera.h" />
     <ClInclude Include="Client\MonsterSpawnManager.h" />
     <ClInclude Include="Client\PlaneCamera.h" />
