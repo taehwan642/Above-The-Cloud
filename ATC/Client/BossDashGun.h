@@ -1,6 +1,6 @@
 #pragma once
 #include "MonsterBase.h"
-class BossDashGun :
+class BossDashGun final :
     public MonsterBase
 {
 };

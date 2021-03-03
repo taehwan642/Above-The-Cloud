@@ -5,7 +5,7 @@ class Shader;
 class StaticMesh;
 class Transform;
 END
-class Sea :
+class Sea final :
     public Engine::GameObject
 {
 private:

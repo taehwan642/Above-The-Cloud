@@ -5,7 +5,7 @@ NAMESPACE(Engine)
 class Transform;
 class Shadow;
 END
-class Shadow :
+class Shadow final :
     public Engine::DynamicUI
 {
 private:

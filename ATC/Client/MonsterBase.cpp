@@ -11,6 +11,7 @@
 #include "../Engine/RenderManager.h"
 #include "../Engine/ObjectManager.h"
 #include "../Engine/TextureEffect.h"
+#include "Shadow.h"
 #include "MonsterBase.h"
 
 MonsterBase::MonsterBase(void)
@@ -34,6 +35,8 @@ void MonsterBase::SetInformation(const D3DXVECTOR3& _position)
 	mesh->SetAnimationSet(currentState);
 	isActive = true;
 	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
+	if (shadow == nullptr)
+		shadow = new Shadow(transform, { 1,1,1 });
 }
 
 void MonsterBase::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)
@@ -48,7 +51,10 @@ INT MonsterBase::Update(const FLOAT& dt)
 {
 	Engine::GameObject::Update(dt);
 	if (isActive)
+	{
 		Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH, this);
+		shadow->Update(dt);
+	}
 	return OBJALIVE;
 }
 
@@ -100,15 +106,18 @@ void MonsterBase::LateUpdate(const FLOAT& dt)
 		}
 	}
 
+	shadow->LateUpdate(dt);
 	Engine::GameObject::LateUpdate(dt);
 }
 
 void MonsterBase::Render(const FLOAT& dt)
 {
+	shadow->Render(dt);
 	Engine::GameObject::Render(dt);
 }
 
 void MonsterBase::Free(void)
 {
+	Safe_Release(shadow);
 	Engine::GameObject::Free();
 }

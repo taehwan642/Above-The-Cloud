@@ -8,11 +8,14 @@ class Shader;
 class Collider;
 END
 class PlayerObserver;
+class Shadow;
 
 class MonsterBase :
     public Engine::GameObject
 {
 private:
+    Shadow* shadow = nullptr;
+
 protected:
     UINT currentState = MONSTERIDLE;
     INT Hp = 5;
