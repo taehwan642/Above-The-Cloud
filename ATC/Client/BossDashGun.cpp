@@ -19,8 +19,7 @@ BossDashGun::BossDashGun(void)
 	componentgroup.emplace(L"Mesh", mesh);
 	transform = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transform);
-	transform->scale = { 0.1f, 0.1f, 0.1f };
-	transform->position = { 0,0,-30 };
+	transform->scale = { 0.15f, 0.15f, 0.15f };
 	observer = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));

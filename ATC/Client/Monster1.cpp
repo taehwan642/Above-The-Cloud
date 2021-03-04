@@ -65,7 +65,7 @@ void Monster1::Movement(const FLOAT& dt)
 		FLOAT z = (rand() % 100) - (rand() % 50);
 		movementqueue.emplace([=]()-> bool
 			{
-				return transform->Vec3Lerp(transform->position, D3DXVECTOR3(x, y, z), dt, 10);
+				return transform->Lerp(transform->position, D3DXVECTOR3(x, y, z), dt, 10);
 			});
 	}
 }

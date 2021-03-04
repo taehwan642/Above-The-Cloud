@@ -9,6 +9,7 @@
 #include "../Engine/Collider.h"
 #include "PlayerObserver.h"
 #include "../Engine/ObjectManager.h"
+#include "MonsterBullet.h"
 #include "BossDashGun.h"
 #include "BossShootGun.h"
 #include "Boss.h"
@@ -39,24 +40,70 @@ Boss::Boss(void)
 	FullHP = 10;
 
 	bossDashgunTop = new BossDashGun;
-	bossDashgunTop->SetInformation({ 0,20,0 });
+	bossDashgunTop->SetInformation(transform->position);
 	bossDashgunBottom = new BossDashGun;
-	bossDashgunBottom->SetInformation({ 0,50,0 });
+	bossDashgunBottom->SetInformation(transform->position);
+
+	revolvePoint = new Engine::Transform(transform);
+	componentgroup.emplace(L"revolvePoint", revolvePoint);
+
+	revolve1 = new Engine::Transform(revolvePoint);
+	componentgroup.emplace(L"revolve1", revolve1);
+	revolve1->position = { 0,150,0 };
+
+	revolve2 = new Engine::Transform(revolvePoint);
+	componentgroup.emplace(L"revolve2", revolve2);
+	revolve2->position = { 0,-150,0 };
+
+	t1 = dynamic_cast<Engine::Transform*>(bossDashgunTop->GetComponent(L"Transform"));
+	t2 = dynamic_cast<Engine::Transform*>(bossDashgunBottom->GetComponent(L"Transform"));
+	t1->AddReference();
+	t2->AddReference();
 }
 
 Boss::~Boss(void)
 {
 }
 
+void Boss::SetInformation(const D3DXVECTOR3& _position)
+{
+	MonsterBase::SetInformation(_position);
+	t1->position = transform->position;
+	t2->position = transform->position;
+	memcpy(&t1->worldMatrix._41, &transform->position, sizeof(D3DXVECTOR3));
+	memcpy(&t2->worldMatrix._41, &transform->position, sizeof(D3DXVECTOR3));
+}
+
 void Boss::Movement(const FLOAT& dt)
 {
+	movementspeed = 2.f;
+
+	int s = 0;//rand() % 2;
+	if (s == 1)
+	{
+		FLOAT x = (rand() % 100) - (rand() % 50);
+		FLOAT y = (rand() % 100) - (rand() % 50);
+		while (y <= -50)
+			y = (rand() % 100) - (rand() % 50);
+		FLOAT z = (rand() % 100) - (rand() % 50);
+		movementqueue.emplace([=]()-> bool
+			{
+				return transform->Lerp(transform->position, D3DXVECTOR3(x, y, z), dt, 10);
+			});
+	}
 }
 
 INT Boss::Update(const FLOAT& dt)
 {
+	MonsterBase::Update(dt);
+	D3DXVECTOR3 p1, p2;
+	memcpy(&p1, &revolve1->worldMatrix._41, sizeof(D3DXVECTOR3));
+	memcpy(&p2, &revolve2->worldMatrix._41, sizeof(D3DXVECTOR3));
+	t1->Lerp(t1->position, p1, dt * 3);
+	t2->Lerp(t2->position, p2, dt * 3);
+	//std::cout << t1->position.x << " " << t1->position.y << " " << t1->position.z << std::endl;
 	bossDashgunTop->Update(dt);
 	bossDashgunBottom->Update(dt);
-	MonsterBase::Update(dt);
 	return OBJALIVE;
 }
 
@@ -107,6 +154,8 @@ void Boss::Free(void)
 {
 	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
 	observer->Release();
+	Safe_Release(t1);
+	Safe_Release(t2);
 	Safe_Release(bossDashgunTop);
 	Safe_Release(bossDashgunBottom);
 	MonsterBase::Free();

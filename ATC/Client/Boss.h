@@ -1,5 +1,8 @@
 #pragma once
 #include "MonsterBase.h"
+NAMESPACE(Engine)
+class Transform;
+END
 class BossDashGun;
 class BossShootGun;
 class Boss final :
@@ -8,11 +11,23 @@ class Boss final :
 private:
     BossDashGun* bossDashgunTop;
     BossDashGun* bossDashgunBottom;
+
+    D3DXVECTOR3 revolvePos = { 0,0,0 };
+    D3DXVECTOR3 revolvepos1 = { 0,150,0 };
+    D3DXVECTOR3 revolvepos2 = { 0,-150,0 };
+
+    Engine::Transform* revolvePoint = nullptr;
+    Engine::Transform* revolve1 = nullptr;
+    Engine::Transform* revolve2 = nullptr;
+    Engine::Transform* t1 = nullptr;
+    Engine::Transform* t2 = nullptr;
 protected:
 public:
     explicit Boss(void);
     virtual ~Boss(void);
 
+    void SetInformation(const D3DXVECTOR3& _position) override;
+   
     void Movement(const FLOAT& dt) override;
 
     INT Update(const FLOAT& dt) override;
