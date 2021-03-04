@@ -37,6 +37,10 @@ void LoadScene::Start(void)
 	Engine::ResourceManager::GetInstance()->AddShader(L"Resources/Shaders/ShadowShader.fx", L"ShadowShader");
 	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/explosion (%d).png", L"Explosion", 4);
 	Engine::ResourceManager::GetInstance()->AddShader(L"Resources/Shaders/SeaShader.fx", L"SeaShader");
+	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"Boss.X", L"Boss");
+	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"BossDashGun.X", L"BossDashGun");
+	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"BossShootGun.X", L"BossShootGun");
+
 	Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
 }
 

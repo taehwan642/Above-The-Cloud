@@ -5,6 +5,9 @@
 #include "../Engine/SubjectManager.h"
 #include "PlayerObserver.h"
 #include "../Engine/Transform.h"
+#include "Boss.h"
+#include "BossDashGun.h"
+#include "BossShootGun.h"
 #include "MonsterSpawnManager.h"
 
 D3DXVECTOR3 MonsterSpawnManager::RandomPositionForMonster(void)
@@ -69,6 +72,22 @@ void MonsterSpawnManager::SpawnMonstersByData(const Stage& _stage)
 				break;
 			}
 			case BOSS:
+			{
+				for (int i = 0; i < (*iterator).second; ++i)
+				{
+					Boss* boss = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Boss>(OBJ2, L"Boss");
+					boss->SetInformation(RandomPositionForMonster());
+				}
+				break;
+			}
+			case BOSSDASHGUN:
+			{
+				for (int i = 0; i < (*iterator).second; ++i)
+				{
+				}
+				break;
+			}
+			case BOSSSHOOTGUN:
 			{
 				for (int i = 0; i < (*iterator).second; ++i)
 				{

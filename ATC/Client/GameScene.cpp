@@ -18,7 +18,7 @@
 
 void GameScene::AddStage1Data(void)
 {
-	MonsterSpawnManager::GetInstance()->AddSpawnData(STAGE1, MONSTER2, 5);
+	MonsterSpawnManager::GetInstance()->AddSpawnData(STAGE1, BOSS, 1);
 }
 
 void GameScene::AddStage2Data(void)

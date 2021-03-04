@@ -500,7 +500,9 @@ enum MonsterType
 {
     MONSTER1,
     MONSTER2,
-    BOSS
+    BOSS,
+    BOSSDASHGUN,
+    BOSSSHOOTGUN
 };
 
 struct MonsterSpawnData
