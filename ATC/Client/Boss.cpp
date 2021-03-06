@@ -47,14 +47,6 @@ Boss::Boss(void)
 	revolvePoint = new Engine::Transform(transform);
 	componentgroup.emplace(L"revolvePoint", revolvePoint);
 
-	revolve1 = new Engine::Transform(revolvePoint);
-	componentgroup.emplace(L"revolve1", revolve1);
-	revolve1->position = { 0,150,0 };
-
-	revolve2 = new Engine::Transform(revolvePoint);
-	componentgroup.emplace(L"revolve2", revolve2);
-	revolve2->position = { 0,-150,0 };
-
 	t1 = dynamic_cast<Engine::Transform*>(bossDashgunTop->GetComponent(L"Transform"));
 	t2 = dynamic_cast<Engine::Transform*>(bossDashgunBottom->GetComponent(L"Transform"));
 	t1->AddReference();
@@ -78,7 +70,7 @@ void Boss::Movement(const FLOAT& dt)
 {
 	movementspeed = 2.f;
 
-	int s = 0;//rand() % 2;
+	int s = 1;//rand() % 2;
 	if (s == 1)
 	{
 		FLOAT x = (rand() % 100) - (rand() % 50);
@@ -96,11 +88,22 @@ void Boss::Movement(const FLOAT& dt)
 INT Boss::Update(const FLOAT& dt)
 {
 	MonsterBase::Update(dt);
-	D3DXVECTOR3 p1, p2;
-	memcpy(&p1, &revolve1->worldMatrix._41, sizeof(D3DXVECTOR3));
-	memcpy(&p2, &revolve2->worldMatrix._41, sizeof(D3DXVECTOR3));
-	t1->Lerp(t1->position, p1, dt * 3);
-	t2->Lerp(t2->position, p2, dt * 3);
+
+	float radius = 8.f;
+	float speed = 10.f;
+	time += dt * speed;
+	
+	// NEED TO FIX radius, speed
+	// NEED TO FIX revolveLerpPoint Initalize
+	// NEED TO ADD Transform's worldPosition, localPosition
+
+	D3DXVECTOR3 revolvePosition = *reinterpret_cast<D3DXVECTOR3*>(&revolvePoint->worldMatrix._41);
+	D3DXVec3Lerp(&revolveLerpPoint, &revolveLerpPoint, &revolvePosition, dt * 5);
+	t1->position = { revolveLerpPoint.x + (radius * cos(time)),
+					 revolveLerpPoint.y + (radius * sin(time)),
+					 revolveLerpPoint.z};
+	t2->position = {};
+
 	//std::cout << t1->position.x << " " << t1->position.y << " " << t1->position.z << std::endl;
 	bossDashgunTop->Update(dt);
 	bossDashgunBottom->Update(dt);
