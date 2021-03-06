@@ -14,15 +14,11 @@ private:
 
     D3DXVECTOR3 revolveLerpPoint = { 0,0,0 };
 
-    D3DXVECTOR3 revolvePos = { 0,0,0 };
-    D3DXVECTOR3 revolvepos1 = { 0,150,0 };
-    D3DXVECTOR3 revolvepos2 = { 0,-150,0 };
-
     Engine::Transform* revolvePoint = nullptr;
     Engine::Transform* t1 = nullptr;
     Engine::Transform* t2 = nullptr;
 
-    float time = 0.f;
+    float theta[4];
 protected:
 public:
     explicit Boss(void);

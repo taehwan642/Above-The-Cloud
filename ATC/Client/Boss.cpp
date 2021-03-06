@@ -51,6 +51,15 @@ Boss::Boss(void)
 	t2 = dynamic_cast<Engine::Transform*>(bossDashgunBottom->GetComponent(L"Transform"));
 	t1->AddReference();
 	t2->AddReference();
+
+	// cos(0) = 1, sin(0) = 0
+	theta[0] = 0; 
+	// cos(PI) = -1, sin(PI) = 0
+	theta[1] = D3DX_PI; 
+	// cos(PI/2) = 0, sin(PI/2) = 1
+	theta[2] = D3DX_PI / 2; 
+	// cos{(3*PI)/2} = 0, sin{(3*PI)/2} = -1
+	theta[3] = (3 * D3DX_PI) / 2; 
 }
 
 Boss::~Boss(void)
@@ -91,7 +100,11 @@ INT Boss::Update(const FLOAT& dt)
 
 	float radius = 8.f;
 	float speed = 10.f;
-	time += dt * speed;
+	
+	for (int i = 0; i < 4; ++i)
+	{
+		theta[i] += dt * speed;
+	}
 	
 	// NEED TO FIX radius, speed
 	// NEED TO FIX revolveLerpPoint Initalize
@@ -99,8 +112,8 @@ INT Boss::Update(const FLOAT& dt)
 
 	D3DXVECTOR3 revolvePosition = *reinterpret_cast<D3DXVECTOR3*>(&revolvePoint->worldMatrix._41);
 	D3DXVec3Lerp(&revolveLerpPoint, &revolveLerpPoint, &revolvePosition, dt * 5);
-	t1->position = { revolveLerpPoint.x + (radius * cos(time)),
-					 revolveLerpPoint.y + (radius * sin(time)),
+	t1->position = { revolveLerpPoint.x + (radius * cos(theta[0])),
+					 revolveLerpPoint.y + (radius * sin(theta[0])),
 					 revolveLerpPoint.z};
 	t2->position = {};
 
