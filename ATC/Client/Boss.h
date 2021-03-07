@@ -9,15 +9,12 @@ class Boss final :
     public MonsterBase
 {
 private:
-    BossDashGun* bossDashgunTop;
-    BossDashGun* bossDashgunBottom;
+    BossDashGun* bossDashGuns = nullptr;
 
     D3DXVECTOR3 revolveLerpPoint = { 0,0,0 };
 
     Engine::Transform* revolvePoint = nullptr;
-    Engine::Transform* t1 = nullptr;
-    Engine::Transform* t2 = nullptr;
-
+    Engine::Transform* gunTransforms[4];
     float theta[4];
 protected:
 public:
