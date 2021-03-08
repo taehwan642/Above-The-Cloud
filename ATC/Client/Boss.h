@@ -9,7 +9,8 @@ class Boss final :
     public MonsterBase
 {
 private:
-    BossDashGun* bossDashGuns = nullptr;
+    BossDashGun* bossDashGuns[2];
+    BossShootGun* bossShootGuns[2];
 
     D3DXVECTOR3 revolveLerpPoint = { 0,0,0 };
 

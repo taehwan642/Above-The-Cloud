@@ -42,15 +42,28 @@ Boss::Boss(void)
 	revolvePoint = new Engine::Transform(transform);
 	componentgroup.emplace(L"revolvePoint", revolvePoint);
 
-	bossDashGuns = new BossDashGun[2];
-	for (int i = 0; i < 2; ++i)
-		bossDashGuns[i].SetInformation(transform->position);
-
 	for (int i = 0; i < 2; ++i)
 	{
-		gunTransforms[i] = dynamic_cast<Engine::Transform*>(bossDashGuns[i].GetComponent(L"Transform"));
-		gunTransforms[i]->AddReference();
+		bossDashGuns[i] = new BossDashGun();
+		bossDashGuns[i]->SetInformation(transform->position);
+		bossShootGuns[i] = new BossShootGun();
+		bossShootGuns[i]->SetInformation(transform->position);
 	}
+
+	for (int i = 0; i < 4; ++i)
+	{
+		if (i < 2)
+		{
+			gunTransforms[i] = dynamic_cast<Engine::Transform*>(bossDashGuns[i]->GetComponent(L"Transform"));
+			gunTransforms[i]->AddReference();
+		}
+		else
+		{
+			gunTransforms[i] = dynamic_cast<Engine::Transform*>(bossDashGuns[i]->GetComponent(L"Transform"));
+			gunTransforms[i]->AddReference();
+		}
+	}
+
 
 	// cos(0) = 1, sin(0) = 0
 	theta[0] = 0;
@@ -59,7 +72,7 @@ Boss::Boss(void)
 	// cos(PI/2) = 0, sin(PI/2) = 1
 	theta[2] = D3DX_PI / 2;
 	// cos{(3*PI)/2} = 0, sin{(3*PI)/2} = -1
-	theta[3] = (3 * D3DX_PI) / 2;
+	theta[3] = -(D3DX_PI / 2);
 }
 
 Boss::~Boss(void)
@@ -69,12 +82,12 @@ Boss::~Boss(void)
 void Boss::SetInformation(const D3DXVECTOR3& _position)
 {
 	MonsterBase::SetInformation(_position);
-	gunTransforms[0]->position = transform->position;
-	gunTransforms[1]->position = transform->position;
-	memcpy(&gunTransforms[0]->worldMatrix._41, &transform->position, sizeof(D3DXVECTOR3));
-	memcpy(&gunTransforms[1]->worldMatrix._41, &transform->position, sizeof(D3DXVECTOR3));
+	for (int i = 0; i < 4; ++i)
+	{
+		gunTransforms[i]->position = transform->position;
+		memcpy(&gunTransforms[i]->worldMatrix._41, &transform->position, sizeof(D3DXVECTOR3));
+	}
 	revolveLerpPoint = transform->position;
-	//memcpy(&revolveLerpPoint, &revolvePoint->worldMatrix._41, sizeof(D3DXVECTOR3));
 }
 
 void Boss::Movement(const FLOAT& dt)
@@ -108,8 +121,6 @@ INT Boss::Update(const FLOAT& dt)
 		theta[i] += dt * speed;
 	}
 
-	// NEED TO FIX radius, speed
-	// NEED TO FIX revolveLerpPoint Initalize
 	// NEED TO ADD Transform's worldPosition, localPosition
 
 	D3DXVECTOR3 revolvePosition = *reinterpret_cast<D3DXVECTOR3*>(&revolvePoint->worldMatrix._41);
@@ -123,9 +134,19 @@ INT Boss::Update(const FLOAT& dt)
 					 revolveLerpPoint.y + (radius * sin(theta[1])),
 					 revolveLerpPoint.z };
 
+	gunTransforms[2]->position = { revolveLerpPoint.x + (radius * cos(theta[2])),
+					 revolveLerpPoint.y + (radius * sin(theta[2])),
+					 revolveLerpPoint.z };
+
+	gunTransforms[3]->position = { revolveLerpPoint.x + (radius * cos(theta[3])),
+					 revolveLerpPoint.y + (radius * sin(theta[3])),
+					 revolveLerpPoint.z };
+
 	//std::cout << t1->position.x << " " << t1->position.y << " " << t1->position.z << std::endl;
 	for (int i = 0; i < 2; ++i)
-		bossDashGuns[i].Update(dt);
+		bossDashGuns[i]->Update(dt);
+	for (int i = 0; i < 2; ++i)
+		bossShootGuns[i]->Update(dt);
 	return OBJALIVE;
 }
 
@@ -149,7 +170,9 @@ void Boss::LateUpdate(const FLOAT& dt)
 	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
 	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
 	for (int i = 0; i < 2; ++i)
-		bossDashGuns[i].LateUpdate(dt);
+		bossDashGuns[i]->LateUpdate(dt);
+	for (int i = 0; i < 2; ++i)
+		bossShootGuns[i]->LateUpdate(dt);
 	MonsterBase::LateUpdate(dt);
 }
 
@@ -167,7 +190,9 @@ void Boss::Render(const FLOAT& dt)
 	tempeffect->End();
 	//collider->RenderCollider();
 	for (int i = 0; i < 2; ++i)
-		bossDashGuns[i].Render(dt);
+		bossDashGuns[i]->Render(dt);
+	for (int i = 0; i < 2; ++i)
+		bossShootGuns[i]->Render(dt);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	MonsterBase::Render(dt);
 }
@@ -176,9 +201,11 @@ void Boss::Free(void)
 {
 	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
 	observer->Release();
-	//for (int i = 0; i < 2; ++i)
-		//Safe_Release(bossDashGuns[i]);
 	for (int i = 0; i < 2; ++i)
 		Safe_Release(gunTransforms[i]);
+	for (int i = 0; i < 2; ++i)
+		Safe_Release(bossDashGuns[i]);
+	for (int i = 0; i < 2; ++i)
+		Safe_Release(bossShootGuns[i]);
 	MonsterBase::Free();
 }
