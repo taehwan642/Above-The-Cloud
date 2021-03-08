@@ -37,6 +37,14 @@ BossDashGun::~BossDashGun(void)
 {
 }
 
+void BossDashGun::SetInformation(const D3DXVECTOR3& _position)
+{
+	if(isAttatched == false)
+		Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
+
+	MonsterBase::SetInformation(_position);
+}
+
 void BossDashGun::Movement(const FLOAT& dt)
 {
 }

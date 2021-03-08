@@ -41,6 +41,12 @@ Monster1::~Monster1(void)
 {
 }
 
+void Monster1::SetInformation(const D3DXVECTOR3& _position)
+{
+	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
+	MonsterBase::SetInformation(_position);
+}
+
 void Monster1::Movement(const FLOAT& dt)
 {
 	movementspeed = 2.f;

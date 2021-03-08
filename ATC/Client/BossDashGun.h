@@ -6,8 +6,12 @@ class BossDashGun final :
 private:
 protected:
 public:
+    bool isAttatched = false;
+
     explicit BossDashGun(void);
     virtual ~BossDashGun(void);
+
+    void SetInformation(const D3DXVECTOR3& _position) override;
 
     void Movement(const FLOAT& dt) override;
 

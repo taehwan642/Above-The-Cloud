@@ -45,8 +45,10 @@ Boss::Boss(void)
 	for (int i = 0; i < 2; ++i)
 	{
 		bossDashGuns[i] = new BossDashGun();
+		bossDashGuns[i]->isAttatched = true;
 		bossDashGuns[i]->SetInformation(transform->position);
 		bossShootGuns[i] = new BossShootGun();
+		bossShootGuns[i]->isAttatched = true;
 		bossShootGuns[i]->SetInformation(transform->position);
 	}
 
@@ -88,6 +90,8 @@ void Boss::SetInformation(const D3DXVECTOR3& _position)
 		memcpy(&gunTransforms[i]->worldMatrix._41, &transform->position, sizeof(D3DXVECTOR3));
 	}
 	revolveLerpPoint = transform->position;
+	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
+
 }
 
 void Boss::Movement(const FLOAT& dt)

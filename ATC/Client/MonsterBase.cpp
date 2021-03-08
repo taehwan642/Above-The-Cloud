@@ -34,7 +34,6 @@ void MonsterBase::SetInformation(const D3DXVECTOR3& _position)
 	currentState = MONSTERIDLE;
 	mesh->SetAnimationSet(currentState);
 	isActive = true;
-	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
 	if (shadow == nullptr)
 		shadow = new Shadow(transform, { 1,1,1 });
 }

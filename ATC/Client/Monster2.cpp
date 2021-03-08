@@ -74,6 +74,8 @@ void Monster2::SetInformation(const D3DXVECTOR3& _position)
 	FLOAT z = (rand() % 100) - (rand() % 50);
 
 	moveDirection = { x,y,z };
+	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
+
 	MonsterBase::SetInformation(_position);
 }
 
