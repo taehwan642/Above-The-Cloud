@@ -50,6 +50,8 @@ void BossShootGun::Movement(const FLOAT& dt)
 
 INT BossShootGun::Update(const FLOAT& dt)
 {
+	//lookat player
+	// º¸½º¶û ¶³¾îÁö¸é ¹Ù·Î Movement
 	MonsterBase::Update(dt);
 	return OBJALIVE;
 }

@@ -28,16 +28,16 @@ Boss::Boss(void)
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
-	collider = new Engine::Collider(3, &transform->position);
+	collider = new Engine::Collider(6, &transform->position);
 	componentgroup.emplace(L"collider", collider);
 	colliderdata.center = &transform->position;
-	colliderdata.radius = 3;
+	colliderdata.radius = 6;
 	colliderdata.tag = L"Monster";
 	currentState = MONSTERIDLE;
 	mesh->SetAnimationSet(currentState);
 
-	Hp = 10;
-	FullHP = 10;
+	Hp = 20;
+	FullHP = 20;
 
 	revolvePoint = new Engine::Transform(transform);
 	componentgroup.emplace(L"revolvePoint", revolvePoint);
@@ -110,6 +110,14 @@ void Boss::Movement(const FLOAT& dt)
 			{
 				return transform->Lerp(transform->position, D3DXVECTOR3(x, y, z), dt, 10);
 			});
+	}
+	else
+	{
+		// 무슨 공격인지 고르기
+		// 공격 1이면 revovle speed만 올려서 총쏘기
+		// 공격 2이면 revolvepoint 앞으로 보내서 총쏘기
+		// animation on
+
 	}
 }
 

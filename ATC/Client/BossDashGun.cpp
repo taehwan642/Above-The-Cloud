@@ -51,6 +51,8 @@ void BossDashGun::Movement(const FLOAT& dt)
 
 INT BossDashGun::Update(const FLOAT& dt)
 {
+	// lookat player
+	// º¸½º¶û ¶³¾îÁö¸é Á×±â
 	MonsterBase::Update(dt);
 	return OBJALIVE;
 }
