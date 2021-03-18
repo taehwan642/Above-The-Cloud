@@ -98,8 +98,8 @@ void Boss::Movement(const FLOAT& dt)
 {
 	movementspeed = 2.f;
 
-	int s = 1;//rand() % 2;
-	if (s == 1)
+	int s = 0;//rand() % 2;
+	if (s == 0)
 	{
 		FLOAT x = (rand() % 100) - (rand() % 50);
 		FLOAT y = (rand() % 100) - (rand() % 50);
@@ -113,9 +113,23 @@ void Boss::Movement(const FLOAT& dt)
 	}
 	else
 	{
-		// 무슨 공격인지 고르기
-		// 공격 1이면 revovle speed만 올려서 총쏘기
-		// 공격 2이면 revolvepoint 앞으로 보내서 총쏘기
+		int attrand = rand() % 2;
+		if (attrand == 0)
+		{
+			// 공격 1이면 revovle speed만 올려서 총쏘기
+			// 총 발사 위치 = revolvepoint
+			// speed 느리게
+			// 큰 총알 2개
+
+		}
+		else
+		{
+			// 공격 2이면 revolvepoint 앞으로 보내서 총쏘기
+			// distance 줄이고
+			// speed 빠르게
+			// recoil 줘서 연속공격 5번
+
+		}
 		// animation on
 
 	}

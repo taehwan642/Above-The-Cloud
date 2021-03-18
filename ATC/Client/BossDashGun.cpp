@@ -47,18 +47,36 @@ void BossDashGun::SetInformation(const D3DXVECTOR3& _position)
 
 void BossDashGun::Movement(const FLOAT& dt)
 {
+	// 보스랑 붙어있으면 X
+	// 아니면 보고있는 방향으로 Dash하거나
+	// 총한발 쏘기
 }
 
 INT BossDashGun::Update(const FLOAT& dt)
 {
-	// lookat player
-	// 보스랑 떨어지면 죽기
 	MonsterBase::Update(dt);
 	return OBJALIVE;
 }
 
 void BossDashGun::LateUpdate(const FLOAT& dt)
 {
+	D3DXVECTOR3 look = observer->GetTransform()->position - transform->position;
+	D3DXVec3Normalize(&look, &look);
+
+	D3DXVECTOR3 right;
+	D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
+	D3DXVec3Normalize(&right, &right);
+
+	D3DXVECTOR3 up;
+	D3DXVec3Cross(&up, &look, &right);
+	D3DXVec3Normalize(&up, &up);
+
+	D3DXMATRIX matRot;
+	D3DXMatrixIdentity(&matRot);
+	memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
+	memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
+	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
+	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
 	MonsterBase::LateUpdate(dt);
 }
 
