@@ -47,9 +47,22 @@ void BossShootGun::SetInformation(const D3DXVECTOR3& _position)
 void BossShootGun::Movement(const FLOAT& dt)
 {
 	// 보스랑 붙어있으면 X
-	// 안붙어있으면 
-	// 총 큰거하나쏘거나 
-	// 약한거 2개쏘거나
+	if (isAttatched == false)
+	{
+		int movementindex = rand() % 2;
+
+		// 약한거 2개쏘거나
+		if (movementindex == 0)
+		{
+
+		}
+
+		// 총 큰거하나쏘거나 
+		else
+		{
+
+		}
+	}
 
 }
 

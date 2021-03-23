@@ -100,7 +100,7 @@ void MonsterBase::LateUpdate(const FLOAT& dt)
 					{ transform->position.x + distance, -45, transform->position.z + distance },
 					{ 5,5,5 }, nullptr, 0.05f);
 			}
-
+			DieAction();
 			isActive = false;
 		}
 	}

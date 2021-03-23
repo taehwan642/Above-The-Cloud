@@ -38,6 +38,7 @@ public:
     std::queue<std::function<bool(void)>> movementqueue;
 
     virtual void SetInformation(const D3DXVECTOR3& _position);
+    virtual void DieAction(void) {};
 
     void CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject) override;
 

@@ -135,11 +135,20 @@ void Boss::Movement(const FLOAT& dt)
 	}
 }
 
+void Boss::DieAction(void)
+{
+	for (int i = 0; i < 2; ++i)
+	{
+		bossDashGuns[i]->isAttatched = false;
+		bossShootGuns[i]->isAttatched = false;
+	}
+}
+
 INT Boss::Update(const FLOAT& dt)
 {
 	MonsterBase::Update(dt);
 
-	float radius = 12.f;
+	float radius = 120.f;
 	float speed = 3.f;
 
 	for (int i = 0; i < 4; ++i)
@@ -149,24 +158,15 @@ INT Boss::Update(const FLOAT& dt)
 
 	// NEED TO ADD Transform's worldPosition, localPosition
 
-	D3DXVECTOR3 revolvePosition = *reinterpret_cast<D3DXVECTOR3*>(&revolvePoint->worldMatrix._41);
-	D3DXVec3Lerp(&revolveLerpPoint, &revolveLerpPoint, &revolvePosition, dt * 5);
+	for (int i = 0; i < 4; ++i)
+	{
+		D3DXVECTOR3 vec = {
+			(radius * cos(theta[i])),
+			(radius * sin(theta[i])),
+			0 };
 
-	gunTransforms[0]->position = { revolveLerpPoint.x + (radius * cos(theta[0])),
-					 revolveLerpPoint.y + (radius * sin(theta[0])),
-					 revolveLerpPoint.z };
-
-	gunTransforms[1]->position = { revolveLerpPoint.x + (radius * cos(theta[1])),
-					 revolveLerpPoint.y + (radius * sin(theta[1])),
-					 revolveLerpPoint.z };
-
-	gunTransforms[2]->position = { revolveLerpPoint.x + (radius * cos(theta[2])),
-					 revolveLerpPoint.y + (radius * sin(theta[2])),
-					 revolveLerpPoint.z };
-
-	gunTransforms[3]->position = { revolveLerpPoint.x + (radius * cos(theta[3])),
-					 revolveLerpPoint.y + (radius * sin(theta[3])),
-					 revolveLerpPoint.z };
+		D3DXVec3TransformCoord(&gunTransforms[i]->position, &vec, &revolvePoint->worldMatrix);
+	}
 
 	//std::cout << t1->position.x << " " << t1->position.y << " " << t1->position.z << std::endl;
 	for (int i = 0; i < 2; ++i)

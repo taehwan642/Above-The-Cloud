@@ -23,7 +23,8 @@ public:
     virtual ~Boss(void);
 
     void SetInformation(const D3DXVECTOR3& _position) override;
-   
+    void DieAction(void) override;
+
     void Movement(const FLOAT& dt) override;
 
     INT Update(const FLOAT& dt) override;

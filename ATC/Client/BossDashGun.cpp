@@ -47,9 +47,22 @@ void BossDashGun::SetInformation(const D3DXVECTOR3& _position)
 
 void BossDashGun::Movement(const FLOAT& dt)
 {
-	// 보스랑 붙어있으면 X
-	// 아니면 보고있는 방향으로 Dash하거나
-	// 총한발 쏘기
+	if (isAttatched == false)
+	{
+		int movementindex = rand() % 2;
+
+		// 보고있는 방향으로 Dash하거나
+		if (movementindex == 0)
+		{
+
+		}
+	
+		// 총한발 쏘기
+		else
+		{
+
+		}
+	}
 }
 
 INT BossDashGun::Update(const FLOAT& dt)
