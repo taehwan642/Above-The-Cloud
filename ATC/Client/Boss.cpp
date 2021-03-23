@@ -98,7 +98,7 @@ void Boss::Movement(const FLOAT& dt)
 {
 	movementspeed = 2.f;
 
-	int s = 0;//rand() % 2;
+	int s = 1;//rand() % 2;
 	if (s == 0)
 	{
 		FLOAT x = (rand() % 100) - (rand() % 50);
@@ -114,6 +114,7 @@ void Boss::Movement(const FLOAT& dt)
 	else
 	{
 		int attrand = rand() % 2;
+		attrand = 1;
 		if (attrand == 0)
 		{
 			// 공격 1이면 revovle speed만 올려서 총쏘기
@@ -124,11 +125,23 @@ void Boss::Movement(const FLOAT& dt)
 		}
 		else
 		{
-			// 공격 2이면 revolvepoint 앞으로 보내서 총쏘기
-			// distance 줄이고
+			radius = 200.f;
+			std::cout << "들어왓당" << std::endl;
+
+			movementqueue.emplace([&]()->bool 
+				{
+					delta += dt;
+					if (delta > 0.5f)
+					{
+						std::cout << "허ㅗ엥엥" << std::endl;
+						radius = defaultRadius;
+						delta = 0;
+						return true;
+					}
+					return false;
+				});
 			// speed 빠르게
 			// recoil 줘서 연속공격 5번
-
 		}
 		// animation on
 
@@ -148,9 +161,6 @@ INT Boss::Update(const FLOAT& dt)
 {
 	MonsterBase::Update(dt);
 
-	float radius = 120.f;
-	float speed = 3.f;
-
 	for (int i = 0; i < 4; ++i)
 	{
 		theta[i] += dt * speed;
@@ -164,8 +174,9 @@ INT Boss::Update(const FLOAT& dt)
 			(radius * cos(theta[i])),
 			(radius * sin(theta[i])),
 			0 };
-
-		D3DXVec3TransformCoord(&gunTransforms[i]->position, &vec, &revolvePoint->worldMatrix);
+		D3DXVECTOR3 lerpvec;
+		D3DXVec3TransformCoord(&lerpvec, &vec, &revolvePoint->worldMatrix);
+		D3DXVec3Lerp(&gunTransforms[i]->position, &gunTransforms[i]->position, &lerpvec, dt * 5);
 	}
 
 	//std::cout << t1->position.x << " " << t1->position.y << " " << t1->position.z << std::endl;

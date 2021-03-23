@@ -92,7 +92,6 @@ void BossShootGun::LateUpdate(const FLOAT& dt)
 	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
 	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
 
-
 	MonsterBase::LateUpdate(dt);
 }
 

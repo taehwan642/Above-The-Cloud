@@ -17,6 +17,15 @@ private:
     Engine::Transform* revolvePoint = nullptr;
     Engine::Transform* gunTransforms[4];
     float theta[4];
+
+    float defaultRadius = 120.f;
+    float defaultSpeed = 3.f;
+
+    float radius = 120.f;
+    float speed = 3.f;
+
+    float delta = 0.f;
+
 protected:
 public:
     explicit Boss(void);
