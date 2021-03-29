@@ -26,6 +26,9 @@ public:
     
     D3DXMATRIX worldMatrix;
 
+    D3DXVECTOR3 localPosition;
+    D3DXVECTOR3 worldPosition;
+
     void Update(const float& dt) override;
 
     void SetParent(Transform* _parent);

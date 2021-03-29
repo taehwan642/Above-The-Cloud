@@ -96,7 +96,7 @@ void Boss::SetInformation(const D3DXVECTOR3& _position)
 
 void Boss::Movement(const FLOAT& dt)
 {
-	movementspeed = 2.f;
+	movementspeed = 5.f;
 
 	int s = 1;//rand() % 2;
 	if (s == 0)
@@ -114,34 +114,74 @@ void Boss::Movement(const FLOAT& dt)
 	else
 	{
 		int attrand = rand() % 2;
-		attrand = 1;
+		attrand = 0;
 		if (attrand == 0)
 		{
-			// °ø°Ý 1ÀÌ¸é revovle speed¸¸ ¿Ã·Á¼­ ÃÑ½î±â
-			// ÃÑ ¹ß»ç À§Ä¡ = revolvepoint
-			// speed ´À¸®°Ô
-			// Å« ÃÑ¾Ë 2°³
-
+			movementqueue.emplace([=]() -> bool
+				{
+					revolvePoint->position.z = 90.f;
+					speed = defaultSpeed + 10;
+					radius = defaultRadius - 20;
+					delta += dt;
+					if (delta > 1.5f)
+					{
+						delta = 0;
+						return true;
+					}
+					return false;
+				});
+			movementqueue.emplace([=]()->bool
+				{
+					currentState = MONSTERSHOOT;
+					mesh->SetAnimationSet(currentState);
+					D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&revolvePoint->worldMatrix._31);
+					MonsterBullet* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<MonsterBullet>(OBJ2, L"MONSTERBULLET");
+					D3DXVECTOR3 pos = *reinterpret_cast<D3DXVECTOR3*>(&revolvePoint->worldMatrix._41);
+					m->SetInformation(pos, dir);
+					return true;
+				});
+			movementqueue.emplace([=]()->bool
+				{
+					revolvePoint->position.z = 0;
+					speed = defaultSpeed;
+					radius = defaultRadius;
+					delta = 0;
+					return true;
+				});
 		}
 		else
 		{
-			radius = 200.f;
-			std::cout << "µé¾î¿Ó´ç" << std::endl;
-
-			movementqueue.emplace([&]()->bool 
+			for (int i = 0; i < 5; ++i)
+			{
+				movementqueue.emplace([=]()->bool
+					{
+						radius = 200.f;
+						delta += dt;
+						if (delta > 0.5f)
+						{
+							delta = 0;
+							currentState = MONSTERSHOOT;
+							mesh->SetAnimationSet(currentState);
+							D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+							MonsterBullet* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<MonsterBullet>(OBJ2, L"MONSTERBULLET");
+							m->SetInformation(transform->position, dir);
+							
+							return true;
+						}
+						return false;
+					});
+			}
+			movementqueue.emplace([=]()->bool
 				{
 					delta += dt;
 					if (delta > 0.5f)
 					{
-						std::cout << "Çã¤Ç¿¨¿¨" << std::endl;
 						radius = defaultRadius;
 						delta = 0;
 						return true;
 					}
 					return false;
 				});
-			// speed ºü¸£°Ô
-			// recoil Áà¼­ ¿¬¼Ó°ø°Ý 5¹ø
 		}
 		// animation on
 

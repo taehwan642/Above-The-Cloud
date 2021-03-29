@@ -3,9 +3,11 @@
 
 USING(Engine)
 Transform::Transform(void) :
-	position(0,0,0),
+	position(0, 0, 0),
 	rotation(0, 0, 0),
-	scale(1, 1, 1)
+	scale(1, 1, 1),
+	localPosition(0, 0, 0),
+	worldPosition(0, 0, 0)
 {
 	D3DXMatrixIdentity(&worldMatrix);
 	D3DXQuaternionIdentity(&quaternion);
@@ -15,7 +17,9 @@ Transform::Transform(void) :
 Transform::Transform(Transform* _parent) :
 	position(0, 0, 0),
 	rotation(0, 0, 0),
-	scale(1, 1, 1)
+	scale(1, 1, 1),
+	localPosition(0, 0, 0),
+	worldPosition(0, 0, 0)
 {
 	SetParent(_parent);
 	D3DXMatrixIdentity(&worldMatrix);
@@ -58,7 +62,7 @@ void Transform::Update(const float& dt)
 	D3DXMATRIX S, R, T;
 	D3DXMATRIX rx, ry, rz;
 	D3DXMatrixScaling(&S, scale.x, scale.y, scale.z);
-	
+
 	D3DXQuaternionSlerp(&curQuaternion, &curQuaternion, &quaternion, dt * 3);
 
 	D3DXMATRIX matRot;
@@ -69,6 +73,9 @@ void Transform::Update(const float& dt)
 	worldMatrix = S * matRot * T;
 	if (parent != nullptr)
 		worldMatrix *= parent->worldMatrix;
+	
+	localPosition = position;
+	worldPosition = *reinterpret_cast<D3DXVECTOR3*>(&worldMatrix._41);
 }
 
 void Transform::Free(void)
