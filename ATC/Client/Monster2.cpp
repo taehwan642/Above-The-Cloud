@@ -21,14 +21,14 @@ Monster2::Monster2(void)
 	transform = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transform);
 	transform->scale = { 0.1f, 0.1f, 0.1f };
-	transform->position = { 0,0,-30 };
+	transform->localPosition = { 0,0,-30 };
 	observer = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
-	collider = new Engine::Collider(3, &transform->position);
+	collider = new Engine::Collider(3, &transform->localPosition);
 	componentgroup.emplace(L"collider", collider);
-	colliderdata.center = &transform->position;
+	colliderdata.center = &transform->localPosition;
 	colliderdata.radius = 3;
 	colliderdata.tag = L"Monster";
 	currentState = MONSTERIDLE;
@@ -51,7 +51,7 @@ void Monster2::Movement(const FLOAT& dt)
 		mesh->SetAnimationSet(currentState);
 		D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 		D3DXVec3Normalize(&dir, &dir);
-		D3DXVECTOR3 pos = transform->position + dir * 6;
+		D3DXVECTOR3 pos = transform->localPosition + dir * 6;
 		Monster1* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Monster1>(OBJ2, L"Monster1");
 		m->SetInformation(pos);
 		movementspeed = 5.f;
@@ -87,7 +87,7 @@ INT Monster2::Update(const FLOAT& dt)
 
 void Monster2::LateUpdate(const FLOAT& dt)
 {
-	D3DXVECTOR3 look = moveDirection - transform->position;
+	D3DXVECTOR3 look = moveDirection - transform->localPosition;
 	D3DXVec3Normalize(&look, &look);
 
 	D3DXVECTOR3 right;
@@ -108,12 +108,12 @@ void Monster2::LateUpdate(const FLOAT& dt)
 	{
 		D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 
-		D3DXVECTOR3 temp = transform->position + dir * 5;
+		D3DXVECTOR3 temp = transform->localPosition + dir * 5;
 		if (temp.y <= -50)
 			moveDirection *= -1.f;
 
 		D3DXVec3Normalize(&dir, &dir);
-		transform->position += dir * 5 * dt;
+		transform->localPosition += dir * 5 * dt;
 	}
 	MonsterBase::LateUpdate(dt);
 }

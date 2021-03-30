@@ -16,7 +16,7 @@ public:
 public:
     enum RotType : unsigned short { RIGHT, UP, LOOK };
 
-    D3DXVECTOR3 position;
+    D3DXVECTOR3 localPosition;
     D3DXVECTOR3 rotation;
 
     D3DXQUATERNION quaternion;
@@ -26,7 +26,6 @@ public:
     
     D3DXMATRIX worldMatrix;
 
-    D3DXVECTOR3 localPosition;
     D3DXVECTOR3 worldPosition;
 
     void Update(const float& dt) override;

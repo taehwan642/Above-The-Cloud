@@ -11,7 +11,7 @@ LockPoint::LockPoint(void) :
 	ob = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(ob);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT));
-	transform->position = { windowWidth / 2, windowHeight / 2, 0 };
+	transform->localPosition = { windowWidth / 2, windowHeight / 2, 0 };
 }
 
 LockPoint::~LockPoint(void)
@@ -32,13 +32,13 @@ void LockPoint::LateUpdate(const FLOAT& dt)
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT));
 	if (ob->GetMissileLock() == nullptr || ob->GetMissileLock()->GetActive() == false)
 	{
-		transform->position = { 9999,9999,999 };
+		transform->localPosition = { 9999,9999,999 };
 	}
 	else
 	{
 		D3DXVECTOR3 screenpos = 
 			dynamic_cast<Engine::Transform*>
-			(ob->GetMissileLock()->GetComponent(L"Transform"))->position;
+			(ob->GetMissileLock()->GetComponent(L"Transform"))->localPosition;
 
 		D3DXMATRIX matView;
 		DEVICE->GetTransform(D3DTS_VIEW, &matView);
@@ -55,9 +55,9 @@ void LockPoint::LateUpdate(const FLOAT& dt)
 		screenpos.y = (-screenpos.y + 1) * (viewport.Height * 0.5f);
 
 		if (screenpos.z <= 1)
-			transform->position = screenpos;
+			transform->localPosition = screenpos;
 		else
-			transform->position = { 9999,9999,999 };
+			transform->localPosition = { 9999,9999,999 };
 	}
 
 	Engine::StaticUI::LateUpdate(dt);

@@ -21,8 +21,8 @@ Missile::Missile(void)
 	shader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dyshader"));
 	componentgroup.emplace(L"Shader", shader);
 
-	collider = new Engine::Collider(1, &transform->position);
-	colliderdata.center = &transform->position;
+	collider = new Engine::Collider(1, &transform->localPosition);
+	colliderdata.center = &transform->localPosition;
 	colliderdata.radius = 1;
 	colliderdata.tag = L"Missile";
 
@@ -49,7 +49,7 @@ Missile::~Missile(void)
 
 void Missile::SetInformation(void)
 {
-	transform->position = ob->GetTransform()->position;
+	transform->localPosition = ob->GetTransform()->localPosition;
 
 	D3DXVECTOR3 vec;
 	vec = *reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._11);
@@ -105,8 +105,8 @@ void Missile::LateUpdate(const FLOAT& dt)
 	{
 		D3DXVECTOR3 dstPos =
 			dynamic_cast<Engine::Transform*>
-			(ob->GetMissileLock()->GetComponent(L"Transform"))->position;
-		D3DXVECTOR3 look = dstPos - transform->position;
+			(ob->GetMissileLock()->GetComponent(L"Transform"))->localPosition;
+		D3DXVECTOR3 look = dstPos - transform->localPosition;
 		D3DXVec3Normalize(&look, &look);
 
 		D3DXVECTOR3 right;
@@ -125,14 +125,14 @@ void Missile::LateUpdate(const FLOAT& dt)
 		D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
 		D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 		D3DXVec3Normalize(&dir, &dir);
-		transform->position += dir * 40 * dt;
+		transform->localPosition += dir * 40 * dt;
 	}
 	else
 	{
 		homingtime -= dt;
 		D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 		D3DXVec3Normalize(&dir, &dir);
-		transform->position += dir * 20 * dt;
+		transform->localPosition += dir * 20 * dt;
 	}
 
 	GameObject::LateUpdate(dt);

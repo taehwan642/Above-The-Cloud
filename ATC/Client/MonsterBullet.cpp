@@ -18,18 +18,18 @@ MonsterBullet::MonsterBullet(void) :
 	componentgroup.emplace(L"StaticMesh", mesh);
 	shader = dynamic_cast<Engine::Shader*>(Engine::ResourceManager::GetInstance()->LoadResource(L"dyshader"));
 	componentgroup.emplace(L"Shader", shader);
-	collider = new Engine::Collider(1.1f, &transform->position);
-	colliderdata.center = &transform->position;
+	collider = new Engine::Collider(1.1f, &transform->localPosition);
+	colliderdata.center = &transform->localPosition;
 	colliderdata.radius = 1.1f;
 	colliderdata.tag = L"MonsterBullet";
 
-	transform->position = { 99999,99999,99999 };
+	transform->localPosition = { 99999,99999,99999 };
 
 	componentgroup.emplace(L"collider", collider);
 
 	transform->scale = { 0.05f, 0.05f, 0.05f };
 
-	memcpy(&transform->worldMatrix._41, transform->position, sizeof(D3DXVECTOR3));
+	memcpy(&transform->worldMatrix._41, transform->localPosition, sizeof(D3DXVECTOR3));
 
 }
 
@@ -39,7 +39,7 @@ MonsterBullet::~MonsterBullet(void)
 
 void MonsterBullet::SetInformation(const D3DXVECTOR3& _position, const D3DXVECTOR3& _direction)
 {
-	transform->position = _position;
+	transform->localPosition = _position;
 	direction = _direction;
 	alivetime = 3.f;
 	isActive = true;
@@ -50,14 +50,14 @@ void MonsterBullet::CollisionEvent(const std::wstring& _objectTag, GameObject* _
 {
 	if (_objectTag == L"player")
 	{
-		transform->position = { 99999,99999,99999 };
+		transform->localPosition = { 99999,99999,99999 };
 		isActive = false;
 	}
 }
 
 INT MonsterBullet::Update(const FLOAT& dt)
 {
-	transform->position += direction * 500 * dt;
+	transform->localPosition += direction * 500 * dt;
 	if (alivetime <= 0)
 		isActive = false;
 	else

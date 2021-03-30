@@ -10,7 +10,7 @@
 Sea::Sea(void)
 {
 	transform = new Engine::Transform();
-	transform->position = { 0,-50,0 };
+	transform->localPosition = { 0,-50,0 };
 	transform->scale = { 10,1,10 };
 	componentgroup.emplace(L"Transform", transform);
 	mesh = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Sea"));

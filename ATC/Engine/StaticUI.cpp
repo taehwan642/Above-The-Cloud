@@ -25,8 +25,8 @@ StaticUI::~StaticUI(void)
 
 void StaticUI::SetPosition(const D3DXVECTOR2& _position)
 {
-	transform->position.x = _position.x;
-	transform->position.y = _position.y;
+	transform->localPosition.x = _position.x;
+	transform->localPosition.y = _position.y;
 }
 
 INT StaticUI::Update(const FLOAT& dt)
@@ -46,7 +46,7 @@ void StaticUI::Render(const FLOAT& dt)
 	D3DXMatrixTransformation2D(&m, nullptr, 0,
 		&D3DXVECTOR2(transform->scale.x, transform->scale.y),
 		nullptr, transform->rotation.z,
-		&D3DXVECTOR2(transform->position.x, transform->position.y));
+		&D3DXVECTOR2(transform->localPosition.x, transform->localPosition.y));
 	GraphicsManager::GetInstance()->GetSprite()->SetTransform(&m);
 	GraphicsManager::GetInstance()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 

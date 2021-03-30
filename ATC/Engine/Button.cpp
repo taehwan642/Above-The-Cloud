@@ -9,7 +9,7 @@ USING(Engine)
 Button::Button(const std::wstring& _texturetag, const D3DXVECTOR3& _position)
 {
 	UIBase::SetInformation(_texturetag);
-	transform->position = _position;
+	transform->localPosition = _position;
 	transform->scale = { 0.5f,0.5f,0.5f };
 }
 

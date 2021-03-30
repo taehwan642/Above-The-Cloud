@@ -21,7 +21,7 @@ void PlaneCamera::InitCamera(void)
 	componentgroup.emplace(L"Transform", transform);
 	componentgroup.emplace(L"TargetTransform", targetTransform);
 
-	targetTransform->position = { 0, 250, 0 };
+	targetTransform->localPosition = { 0, 250, 0 };
 
 	observer = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
@@ -31,6 +31,14 @@ void PlaneCamera::InitCamera(void)
 	targetTransform->SetParent(observer->GetTransform());
 
 	transform->curQuaternion = D3DXQUATERNION(0, 1, 0, 0);
+
+	D3DXMATRIX matProj;
+	D3DXMatrixPerspectiveFovLH(&matProj,
+		D3DXToRadian(70),
+		static_cast<float>(DXUTGetD3D9BackBufferSurfaceDesc()->Width) /
+		static_cast<float>(DXUTGetD3D9BackBufferSurfaceDesc()->Height),
+		0.01, 50000);
+	DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 
 bool targetplane = true;
@@ -53,7 +61,7 @@ INT PlaneCamera::Update(const FLOAT& dt)
 		D3DXVECTOR3 look = *D3DXVec3Normalize(&D3DXVECTOR3(), reinterpret_cast<D3DXVECTOR3*>(&targetTransform->worldMatrix._31));
 		D3DXVECTOR3 position = *reinterpret_cast<D3DXVECTOR3*>(&targetTransform->worldMatrix._41);
 
-		transform->position = position + look * cameraDistance;
+		transform->localPosition = position + look * cameraDistance;
 
 		look *= -1.f;
 
@@ -75,7 +83,7 @@ INT PlaneCamera::Update(const FLOAT& dt)
 	}
 	else
 	{
-		D3DXVECTOR3 playerlook = observer->GetTransform()->position - transform->position;
+		D3DXVECTOR3 playerlook = observer->GetTransform()->localPosition - transform->localPosition;
 		D3DXVec3Normalize(&playerlook, &playerlook);
 
 		D3DXVECTOR3 right;
@@ -108,12 +116,7 @@ void PlaneCamera::LateUpdate(const FLOAT& dt)
 	}
 	
 	D3DXMatrixInverse(&matView, 0, &transform->worldMatrix);
-	D3DXMATRIX matProj;
-	D3DXMatrixPerspectiveFovLH(&matProj,
-		D3DXToRadian(70),
-		static_cast<float>(DXUTGetD3D9BackBufferSurfaceDesc()->Width) /
-		static_cast<float>(DXUTGetD3D9BackBufferSurfaceDesc()->Height),
-		0.01, 50000);
+	
 	if(targetplane)
 		DEVICE->SetTransform(D3DTS_VIEW, &matView);
 	else
@@ -123,10 +126,9 @@ void PlaneCamera::LateUpdate(const FLOAT& dt)
 		D3DXMatrixTranslation(&im, 0, 0, 62);
 		DEVICE->SetTransform(D3DTS_VIEW, &im);
 	}
-	DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
-	worldCameraPosition = D3DXVECTOR4(transform->position, 1);
+	worldCameraPosition = D3DXVECTOR4(transform->localPosition, 1);
 
 	GameObject::LateUpdate(dt);
 }

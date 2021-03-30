@@ -33,8 +33,8 @@ Shadow::~Shadow(void)
 
 INT Shadow::Update(const FLOAT& dt)
 {
-	transform->position = { objectTransform->position.x, -48.f, objectTransform->position.z };
-	transform->scale = (objectTransform->position.y > -48) ?  shadowScale * (objectTransform->position.y - -48.f) : D3DXVECTOR3(0, 0, 0);
+	transform->localPosition = { objectTransform->localPosition.x, -48.f, objectTransform->localPosition.z };
+	transform->scale = (objectTransform->localPosition.y > -48) ?  shadowScale * (objectTransform->localPosition.y - -48.f) : D3DXVECTOR3(0, 0, 0);
 
 	Engine::RenderManager::GetInstance()->AddRenderObject(ID_NORMALMESH,this);
 	DynamicUI::Update(dt);

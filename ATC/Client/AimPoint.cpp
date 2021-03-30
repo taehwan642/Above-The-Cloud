@@ -21,7 +21,7 @@ INT AimPoint::Update(const FLOAT& dt)
 {
 	Engine::StaticUI::Update(dt);
 	D3DXVECTOR3 playerLook = -(*reinterpret_cast<D3DXVECTOR3*>(&ob->GetTransform()->worldMatrix._31));
-	D3DXVECTOR3 pos = ob->GetTransform()->position + playerLook * 5000;
+	D3DXVECTOR3 pos = ob->GetTransform()->localPosition + playerLook * 5000;
 
 	D3DXMATRIX			matView, matProj;
 	D3DVIEWPORT9		viewPort;
@@ -37,12 +37,12 @@ INT AimPoint::Update(const FLOAT& dt)
 
 	screenPos.y = (-screenPos.y + 1) * (viewPort.Height / 2);
 
-	transform->position = screenPos;
+	transform->localPosition = screenPos;
 	if (pointlock == true)
 	{
 		POINT p;
-		p.x = transform->position.x;
-		p.y = transform->position.y;
+		p.x = transform->localPosition.x;
+		p.y = transform->localPosition.y;
 		ClientToScreen(DXUTGetHWND(), &p);
 		::SetCursorPos(p.x, p.y);
 	}

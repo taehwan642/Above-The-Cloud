@@ -24,9 +24,9 @@ BossDashGun::BossDashGun(void)
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
-	collider = new Engine::Collider(3, &transform->position);
+	collider = new Engine::Collider(3, &transform->localPosition);
 	componentgroup.emplace(L"collider", collider);
-	colliderdata.center = &transform->position;
+	colliderdata.center = &transform->localPosition;
 	colliderdata.radius = 3;
 	colliderdata.tag = L"Monster";
 	currentState = 0;
@@ -73,7 +73,7 @@ INT BossDashGun::Update(const FLOAT& dt)
 
 void BossDashGun::LateUpdate(const FLOAT& dt)
 {
-	D3DXVECTOR3 look = observer->GetTransform()->position - transform->position;
+	D3DXVECTOR3 look = observer->GetTransform()->localPosition - transform->localPosition;
 	D3DXVec3Normalize(&look, &look);
 
 	D3DXVECTOR3 right;

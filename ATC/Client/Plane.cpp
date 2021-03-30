@@ -25,13 +25,13 @@ void Plane::PlayerDead(bool _isDeadbyCollision)
 		Engine::TextureEffect* t =
 			Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Engine::TextureEffect>(EFFECT, L"Effect");
 		float distance = (rand() % 10) - (rand() % 10);
-		float y = _isDeadbyCollision ? transform->position.y : -45;
+		float y = _isDeadbyCollision ? transform->localPosition.y : -45;
 		t->SetInformation(L"Explosion",
-			{ transform->position.x + distance, y, transform->position.z + distance },
+			{ transform->localPosition.x + distance, y, transform->localPosition.z + distance },
 			{ 5,5,5 }, nullptr, 0.05f);
 	}
 
-	D3DXVECTOR3 look = D3DXVECTOR3(transform->position.x, -100, transform->position.z);
+	D3DXVECTOR3 look = D3DXVECTOR3(transform->localPosition.x, -100, transform->localPosition.z);
 	D3DXVec3Normalize(&look, &look);
 	look *= -1.f;
 
@@ -94,10 +94,10 @@ Plane::Plane(void)
 	effectpos[2] = { 125 , -15, -300 };
 	effectpos[3] = { 190 , -15, -300 };
 
-	collider = new Engine::Collider(1, &transform->position);
+	collider = new Engine::Collider(1, &transform->localPosition);
 	Engine::CollisionManager::GetInstance()->PushData(PLAYER, this);
 	componentgroup.emplace(L"collider", collider);
-	colliderdata.center = &transform->position;
+	colliderdata.center = &transform->localPosition;
 	colliderdata.radius = 1;
 	colliderdata.tag = L"player";
 
@@ -170,7 +170,7 @@ INT Plane::Update(const FLOAT& dt)
 					Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Engine::TextureEffect>(EFFECT, L"Effect");
 				float distance = (rand() % 10) - (rand() % 10);
 				t->SetInformation(L"Explosion",
-					{ transform->position.x + distance, transform->position.y, transform->position.z + distance },
+					{ transform->localPosition.x + distance, transform->localPosition.y, transform->localPosition.z + distance },
 					{ 5,5,5 }, nullptr, 0.05f);
 			}
 			deadExplosionEffectSpawntime = 0.5f;
@@ -179,9 +179,9 @@ INT Plane::Update(const FLOAT& dt)
 			deadExplosionEffectSpawntime -= dt;
 		
 	}
-	transform->position += directionVector * dt * 1000;
+	transform->localPosition += directionVector * dt * 1000;
 
-	if (isDead == false && transform->position.y <= -50.f)
+	if (isDead == false && transform->localPosition.y <= -50.f)
 	{
 		PlayerDead(false);
 		isDead = true;
@@ -249,7 +249,7 @@ void Plane::LateUpdate(const FLOAT& dt)
 	}
 
 	D3DXVec3Normalize(&directionVector, &directionVector);
-	dstObject = Engine::CollisionManager::GetInstance()->GetClosestObject(MONSTER, transform->position,
+	dstObject = Engine::CollisionManager::GetInstance()->GetClosestObject(MONSTER, transform->localPosition,
 		directionVector, -0.61f);
 	if (dstObject != nullptr && dynamic_cast<MonsterBase*>(dstObject)->GetCurrentMonsterState() != MONSTERDIE)
 		Engine::SubjectManager::GetInstance()->SetData(static_cast<UINT>(PlayerInfos::PLAYERMISSILELOCKOBJECT), dstObject);

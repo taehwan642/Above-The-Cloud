@@ -60,8 +60,8 @@ void TextureEffect::SetInformation(const std::wstring& _texturetag, const D3DXVE
 	UIBase::SetInformation(_texturetag, _parent);
 	currentTextureIndex = 0;
 	textureChangedelta = _alivetime;
-	transform->position = _position;
-	memcpy(&transform->worldMatrix._41, &transform->position, sizeof(D3DXVECTOR3));
+	transform->localPosition = _position;
+	memcpy(&transform->worldMatrix._41, &transform->localPosition, sizeof(D3DXVECTOR3));
 	transform->scale = _scale;
 	isActive = true;
 }

@@ -29,7 +29,7 @@ void MonsterBase::GetHit(const FLOAT& _damageamount)
 
 void MonsterBase::SetInformation(const D3DXVECTOR3& _position)
 {
-	transform->position = _position;
+	transform->localPosition = _position;
 	Hp = FullHP;
 	currentState = MONSTERIDLE;
 	mesh->SetAnimationSet(currentState);
@@ -88,8 +88,8 @@ void MonsterBase::LateUpdate(const FLOAT& dt)
 	}
 	else if (currentState == MONSTERDIE)
 	{
-		transform->position.y -= 30 * dt;
-		if (transform->position.y <= -50)
+		transform->localPosition.y -= 30 * dt;
+		if (transform->localPosition.y <= -50)
 		{
 			for (int i = 0; i < 3; ++i)
 			{
@@ -97,7 +97,7 @@ void MonsterBase::LateUpdate(const FLOAT& dt)
 					Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Engine::TextureEffect>(EFFECT, L"Effect");
 				float distance = (rand() % 6) - (rand() % 6);
 				t->SetInformation(L"Explosion",
-					{ transform->position.x + distance, -45, transform->position.z + distance },
+					{ transform->localPosition.x + distance, -45, transform->localPosition.z + distance },
 					{ 5,5,5 }, nullptr, 0.05f);
 			}
 			DieAction();

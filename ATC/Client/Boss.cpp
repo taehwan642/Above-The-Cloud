@@ -23,14 +23,14 @@ Boss::Boss(void)
 	transform = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transform);
 	transform->scale = { 0.1f, 0.1f, 0.1f };
-	transform->position = { 0,0,-30 };
+	transform->localPosition = { 0,0,-30 };
 	observer = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
-	collider = new Engine::Collider(6, &transform->position);
+	collider = new Engine::Collider(6, &transform->localPosition);
 	componentgroup.emplace(L"collider", collider);
-	colliderdata.center = &transform->position;
+	colliderdata.center = &transform->localPosition;
 	colliderdata.radius = 6;
 	colliderdata.tag = L"Monster";
 	currentState = MONSTERIDLE;
@@ -46,10 +46,10 @@ Boss::Boss(void)
 	{
 		bossDashGuns[i] = new BossDashGun();
 		bossDashGuns[i]->isAttatched = true;
-		bossDashGuns[i]->SetInformation(transform->position);
+		bossDashGuns[i]->SetInformation(transform->localPosition);
 		bossShootGuns[i] = new BossShootGun();
 		bossShootGuns[i]->isAttatched = true;
-		bossShootGuns[i]->SetInformation(transform->position);
+		bossShootGuns[i]->SetInformation(transform->localPosition);
 	}
 
 	for (int i = 0; i < 4; ++i)
@@ -86,10 +86,10 @@ void Boss::SetInformation(const D3DXVECTOR3& _position)
 	MonsterBase::SetInformation(_position);
 	for (int i = 0; i < 4; ++i)
 	{
-		gunTransforms[i]->position = transform->position;
-		memcpy(&gunTransforms[i]->worldMatrix._41, &transform->position, sizeof(D3DXVECTOR3));
+		gunTransforms[i]->localPosition = transform->localPosition;
+		memcpy(&gunTransforms[i]->worldMatrix._41, &transform->localPosition, sizeof(D3DXVECTOR3));
 	}
-	revolveLerpPoint = transform->position;
+	revolveLerpPoint = transform->localPosition;
 	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
 
 }
@@ -108,7 +108,7 @@ void Boss::Movement(const FLOAT& dt)
 		FLOAT z = (rand() % 100) - (rand() % 50);
 		movementqueue.emplace([=]()-> bool
 			{
-				return transform->Lerp(transform->position, D3DXVECTOR3(x, y, z), dt, 10);
+				return transform->Lerp(transform->localPosition, D3DXVECTOR3(x, y, z), dt, 10);
 			});
 	}
 	else
@@ -119,7 +119,7 @@ void Boss::Movement(const FLOAT& dt)
 		{
 			movementqueue.emplace([=]() -> bool
 				{
-					revolvePoint->position.z = 90.f;
+					revolvePoint->localPosition.z = 90.f;
 					speed = defaultSpeed + 10;
 					radius = defaultRadius - 20;
 					delta += dt;
@@ -142,7 +142,7 @@ void Boss::Movement(const FLOAT& dt)
 				});
 			movementqueue.emplace([=]()->bool
 				{
-					revolvePoint->position.z = 0;
+					revolvePoint->localPosition.z = 0;
 					speed = defaultSpeed;
 					radius = defaultRadius;
 					delta = 0;
@@ -164,7 +164,7 @@ void Boss::Movement(const FLOAT& dt)
 							mesh->SetAnimationSet(currentState);
 							D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 							MonsterBullet* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<MonsterBullet>(OBJ2, L"MONSTERBULLET");
-							m->SetInformation(transform->position, dir);
+							m->SetInformation(transform->localPosition, dir);
 							
 							return true;
 						}
@@ -216,7 +216,7 @@ INT Boss::Update(const FLOAT& dt)
 			0 };
 		D3DXVECTOR3 lerpvec;
 		D3DXVec3TransformCoord(&lerpvec, &vec, &revolvePoint->worldMatrix);
-		D3DXVec3Lerp(&gunTransforms[i]->position, &gunTransforms[i]->position, &lerpvec, dt * 5);
+		D3DXVec3Lerp(&gunTransforms[i]->localPosition, &gunTransforms[i]->localPosition, &lerpvec, dt * 5);
 	}
 
 	//std::cout << t1->position.x << " " << t1->position.y << " " << t1->position.z << std::endl;
@@ -229,7 +229,7 @@ INT Boss::Update(const FLOAT& dt)
 
 void Boss::LateUpdate(const FLOAT& dt)
 {
-	D3DXVECTOR3 look = observer->GetTransform()->position - transform->position;
+	D3DXVECTOR3 look = observer->GetTransform()->localPosition - transform->localPosition;
 	D3DXVec3Normalize(&look, &look);
 
 	D3DXVECTOR3 right;

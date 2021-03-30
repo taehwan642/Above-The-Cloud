@@ -16,14 +16,14 @@ Cloud::Cloud(void)
 	componentgroup.emplace(L"Transform", transform);
 	componentgroup.emplace(L"Shader", shader);
 	transform->scale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
-	transform->position = { 5,5,50 };
+	transform->localPosition = { 5,5,50 };
 	mesh = dynamic_cast<Engine::StaticMesh*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Cloud"));
 	componentgroup.emplace(L"StaticMesh", mesh);
-	collider = new Engine::Collider(2, &transform->position);
+	collider = new Engine::Collider(2, &transform->localPosition);
 	componentgroup.emplace(L"collider", collider);
 	Engine::CollisionManager::GetInstance()->PushData(INTERACTIVEOBJ, this);
 
-	colliderdata.center = &transform->position;
+	colliderdata.center = &transform->localPosition;
 	colliderdata.radius = 1;
 	colliderdata.tag = L"Cloud";
 

@@ -23,14 +23,14 @@ Monster1::Monster1(void)
 	transform = new Engine::Transform();
 	componentgroup.emplace(L"Transform", transform);
 	transform->scale = { 0.1f, 0.1f, 0.1f };
-	transform->position = { 0,0,-30 };
+	transform->localPosition = { 0,0,-30 };
 	observer = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
 	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 
-	collider = new Engine::Collider(3, &transform->position);
+	collider = new Engine::Collider(3, &transform->localPosition);
 	componentgroup.emplace(L"collider", collider);
-	colliderdata.center = &transform->position;
+	colliderdata.center = &transform->localPosition;
 	colliderdata.radius = 3;
 	colliderdata.tag = L"Monster";
 	currentState = 0;
@@ -60,7 +60,7 @@ void Monster1::Movement(const FLOAT& dt)
 
 
 		MonsterBullet* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<MonsterBullet>(OBJ2, L"MONSTERBULLET");
-		m->SetInformation(transform->position, dir);
+		m->SetInformation(transform->localPosition, dir);
 	}
 	else if (s == 1)
 	{
@@ -71,14 +71,14 @@ void Monster1::Movement(const FLOAT& dt)
 		FLOAT z = (rand() % 100) - (rand() % 50);
 		movementqueue.emplace([=]()-> bool
 			{
-				return transform->Lerp(transform->position, D3DXVECTOR3(x, y, z), dt, 10);
+				return transform->Lerp(transform->localPosition, D3DXVECTOR3(x, y, z), dt, 10);
 			});
 	}
 }
 
 INT Monster1::Update(const FLOAT& dt)
 {
-	D3DXVECTOR3 look = observer->GetTransform()->position - transform->position;
+	D3DXVECTOR3 look = observer->GetTransform()->localPosition - transform->localPosition;
 	D3DXVec3Normalize(&look, &look);
 	look *= -1.f;
 
