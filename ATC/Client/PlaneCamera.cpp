@@ -59,7 +59,7 @@ INT PlaneCamera::Update(const FLOAT& dt)
 	if (observer->GetIsPlayerDead() == false)
 	{
 		D3DXVECTOR3 look = *D3DXVec3Normalize(&D3DXVECTOR3(), reinterpret_cast<D3DXVECTOR3*>(&targetTransform->worldMatrix._31));
-		D3DXVECTOR3 position = *reinterpret_cast<D3DXVECTOR3*>(&targetTransform->worldMatrix._41);
+		D3DXVECTOR3 position = targetTransform->worldPosition;
 
 		transform->localPosition = position + look * cameraDistance;
 

@@ -213,7 +213,7 @@ void Plane::LateUpdate(const FLOAT& dt)
 			if (Engine::CollisionManager::GetInstance()->MouseRaySphereInteresection(a, p, pos1, pos2, MONSTER))
 			{
 				D3DXVECTOR3 dir = -*reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
-				D3DXVECTOR3 pos = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._41);
+				D3DXVECTOR3 pos = transform->localPosition;
 
 				float angle = 0;
 				D3DXVECTOR3 direc = pos - p;

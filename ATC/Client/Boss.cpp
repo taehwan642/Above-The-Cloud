@@ -136,7 +136,7 @@ void Boss::Movement(const FLOAT& dt)
 					mesh->SetAnimationSet(currentState);
 					D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&revolvePoint->worldMatrix._31);
 					MonsterBullet* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<MonsterBullet>(OBJ2, L"MONSTERBULLET");
-					D3DXVECTOR3 pos = *reinterpret_cast<D3DXVECTOR3*>(&revolvePoint->worldMatrix._41);
+					D3DXVECTOR3 pos = revolvePoint->worldPosition;
 					m->SetInformation(pos, dir);
 					return true;
 				});
@@ -165,7 +165,6 @@ void Boss::Movement(const FLOAT& dt)
 							D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
 							MonsterBullet* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<MonsterBullet>(OBJ2, L"MONSTERBULLET");
 							m->SetInformation(transform->localPosition, dir);
-							
 							return true;
 						}
 						return false;
