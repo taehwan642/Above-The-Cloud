@@ -37,8 +37,12 @@ MonsterBullet::~MonsterBullet(void)
 {
 }
 
-void MonsterBullet::SetInformation(const D3DXVECTOR3& _position, const D3DXVECTOR3& _direction)
+void MonsterBullet::SetInformation(const D3DXVECTOR3& _position, const D3DXVECTOR3& _direction, int _damage)
 {
+	damage = _damage;
+	float scaleup = static_cast<float>(damage);
+	transform->scale = { 0.05f * scaleup, 0.05f * scaleup, 0.05f * scaleup };
+	colliderdata.radius = 1.1f * scaleup;
 	transform->localPosition = _position;
 	direction = _direction;
 	alivetime = 3.f;

@@ -137,7 +137,7 @@ void Boss::Movement(const FLOAT& dt)
 					D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&revolvePoint->worldMatrix._31);
 					MonsterBullet* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<MonsterBullet>(OBJ2, L"MONSTERBULLET");
 					D3DXVECTOR3 pos = revolvePoint->worldPosition;
-					m->SetInformation(pos, dir);
+					m->SetInformation(pos, dir, 3);
 					return true;
 				});
 			movementqueue.emplace([=]()->bool

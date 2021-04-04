@@ -10,6 +10,7 @@ class MonsterBullet final :
     public Engine::GameObject
 {
 private:
+    int damage = 1;
     float alivetime = 3.f;
     D3DXVECTOR3 direction;
     Engine::Transform* transform = nullptr;
@@ -21,7 +22,7 @@ public:
     explicit MonsterBullet(void);
     virtual ~MonsterBullet(void);
 
-    void SetInformation(const D3DXVECTOR3& position, const D3DXVECTOR3& _direction);
+    void SetInformation(const D3DXVECTOR3& position, const D3DXVECTOR3& _direction, int _damage = 1);
 
     void CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject) override;
     
