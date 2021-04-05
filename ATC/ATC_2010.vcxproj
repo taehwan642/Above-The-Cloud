@@ -392,6 +392,7 @@
     <ClCompile Include="Client\Boss.cpp" />
     <ClCompile Include="Client\BossDashGun.cpp" />
     <ClCompile Include="Client\BossShootGun.cpp" />
+    <ClCompile Include="Client\CutSceneCamera.cpp" />
     <ClCompile Include="Client\MenuCamera.cpp" />
     <ClCompile Include="Client\PlaneCamera.cpp" />
     <ClCompile Include="Client\HealthPoint.cpp" />
@@ -414,6 +415,7 @@
     <ClCompile Include="Engine\AnimationController.cpp" />
     <ClCompile Include="Engine\Base.cpp" />
     <ClCompile Include="Engine\Button.cpp" />
+    <ClCompile Include="Engine\Camera.cpp" />
     <ClCompile Include="Engine\Collider.cpp" />
     <ClCompile Include="Engine\CollisionManager.cpp" />
     <ClCompile Include="Engine\CollisionSphere.cpp" />
@@ -448,6 +450,7 @@
     <ClInclude Include="Client\Boss.h" />
     <ClInclude Include="Client\BossDashGun.h" />
     <ClInclude Include="Client\BossShootGun.h" />
+    <ClInclude Include="Client\CutSceneCamera.h" />
     <ClInclude Include="Client\MenuCamera.h" />
     <ClInclude Include="Client\MonsterSpawnManager.h" />
     <ClInclude Include="Client\PlaneCamera.h" />
@@ -471,6 +474,7 @@
     <ClInclude Include="Engine\AnimationController.h" />
     <ClInclude Include="Engine\Base.h" />
     <ClInclude Include="Engine\Button.h" />
+    <ClInclude Include="Engine\Camera.h" />
     <ClInclude Include="Engine\Collider.h" />
     <ClInclude Include="Engine\CollisionManager.h" />
     <ClInclude Include="Engine\CollisionSphere.h" />

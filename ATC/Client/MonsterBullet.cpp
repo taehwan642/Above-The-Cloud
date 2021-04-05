@@ -37,6 +37,11 @@ MonsterBullet::~MonsterBullet(void)
 {
 }
 
+int MonsterBullet::GetDamageValue(void) const
+{
+	return damage;
+}
+
 void MonsterBullet::SetInformation(const D3DXVECTOR3& _position, const D3DXVECTOR3& _direction, int _damage)
 {
 	damage = _damage;

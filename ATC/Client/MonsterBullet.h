@@ -22,6 +22,8 @@ public:
     explicit MonsterBullet(void);
     virtual ~MonsterBullet(void);
 
+    int GetDamageValue(void) const;
+
     void SetInformation(const D3DXVECTOR3& position, const D3DXVECTOR3& _direction, int _damage = 1);
 
     void CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject) override;

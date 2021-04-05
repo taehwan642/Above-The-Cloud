@@ -15,6 +15,7 @@
 #include "Missile.h"
 #include "../Engine/RenderManager.h"
 #include "MonsterBase.h"
+#include "MonsterBullet.h"
 #include "Shadow.h"
 #include "Plane.h"
 
@@ -114,7 +115,7 @@ void Plane::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObje
 	{
 		if (invincibletime <= 0)
 		{
-			--healthpoint;
+			_objectTag == L"MonsterBullet" ? healthpoint -= dynamic_cast<MonsterBullet*>(_gameObject)->GetDamageValue() : --healthpoint;
 			Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
 			invincibletime = 1.f;
 			if (healthpoint <= 0)

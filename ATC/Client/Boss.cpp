@@ -96,9 +96,9 @@ void Boss::SetInformation(const D3DXVECTOR3& _position)
 
 void Boss::Movement(const FLOAT& dt)
 {
-	movementspeed = 5.f;
+	movementspeed = 3.f;
 
-	int s = 1;//rand() % 2;
+	int s = rand() % 2;
 	if (s == 0)
 	{
 		FLOAT x = (rand() % 100) - (rand() % 50);
@@ -114,37 +114,40 @@ void Boss::Movement(const FLOAT& dt)
 	else
 	{
 		int attrand = rand() % 2;
-		attrand = 0;
 		if (attrand == 0)
 		{
-			movementqueue.emplace([=]() -> bool
-				{
-					revolvePoint->localPosition.z = 90.f;
-					speed = defaultSpeed + 10;
-					radius = defaultRadius - 20;
-					delta += dt;
-					if (delta > 1.5f)
+			for (int i = 0; i < 2; ++i)
+			{
+				movementqueue.emplace([=]() -> bool
 					{
-						delta = 0;
+						revolvePoint->localPosition.z = 90.f;
+						speed = defaultSpeed + 10;
+						radius = defaultRadius - 20;
+						delta += dt;
+						if (delta > 1.5f)
+						{
+							delta = 0;
+							return true;
+						}
+						return false;
+					});
+				movementqueue.emplace([=]()->bool
+					{
+						currentState = MONSTERSHOOT;
+						mesh->SetAnimationSet(currentState);
+						D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&revolvePoint->worldMatrix._31);
+						MonsterBullet* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<MonsterBullet>(OBJ2, L"MONSTERBULLET");
+						D3DXVECTOR3 pos = revolvePoint->worldPosition;
+						m->SetInformation(pos, dir, 2);
 						return true;
-					}
-					return false;
-				});
-			movementqueue.emplace([=]()->bool
-				{
-					currentState = MONSTERSHOOT;
-					mesh->SetAnimationSet(currentState);
-					D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&revolvePoint->worldMatrix._31);
-					MonsterBullet* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<MonsterBullet>(OBJ2, L"MONSTERBULLET");
-					D3DXVECTOR3 pos = revolvePoint->worldPosition;
-					m->SetInformation(pos, dir, 3);
-					return true;
-				});
+					});
+			}
 			movementqueue.emplace([=]()->bool
 				{
 					revolvePoint->localPosition.z = 0;
 					speed = defaultSpeed;
 					radius = defaultRadius;
+					movementspeed = 2.f;
 					delta = 0;
 					return true;
 				});
@@ -177,6 +180,7 @@ void Boss::Movement(const FLOAT& dt)
 					{
 						radius = defaultRadius;
 						delta = 0;
+						movementspeed = 2.f;
 						return true;
 					}
 					return false;

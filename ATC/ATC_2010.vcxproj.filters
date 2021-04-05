@@ -234,6 +234,12 @@
     <Filter Include="2Client\1GameObject\5Monsters\0Monster\4BossShootGun">
       <UniqueIdentifier>{aad9c8cd-f828-401d-a6e9-2fa1c9eb1166}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\1GameObject\0Camera\2CutSceneCamera">
+      <UniqueIdentifier>{d6c7227a-4476-4f64-b2ec-3ff0003a165a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4Component\8Camera">
+      <UniqueIdentifier>{ccfb5abe-cac3-44c2-8818-a098940b7042}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -466,6 +472,12 @@
     <ClCompile Include="Client\BossDashGun.cpp">
       <Filter>2Client\1GameObject\5Monsters\0Monster\3BossDashGun</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Camera.cpp">
+      <Filter>1Engine\4Component\8Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\CutSceneCamera.cpp">
+      <Filter>2Client\1GameObject\0Camera\2CutSceneCamera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -641,6 +653,12 @@
     </ClInclude>
     <ClInclude Include="Client\BossDashGun.h">
       <Filter>2Client\1GameObject\5Monsters\0Monster\3BossDashGun</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Camera.h">
+      <Filter>1Engine\4Component\8Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\CutSceneCamera.h">
+      <Filter>2Client\1GameObject\0Camera\2CutSceneCamera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
