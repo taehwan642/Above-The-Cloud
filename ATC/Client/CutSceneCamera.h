@@ -7,5 +7,6 @@ class CutSceneCamera final :
 private:
 protected:
 public:
+
 };
 
