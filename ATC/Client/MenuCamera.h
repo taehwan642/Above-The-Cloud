@@ -1,9 +1,16 @@
 #pragma once
 #include "../Engine/GameObject.h"
+
+NAMESPACE(Engine)
+class Transform;
+class Camera;
+END
+
 class MenuCamera final :
     public Engine::GameObject
 {
 private:
+    Engine::Camera* camera = nullptr;
     Engine::Transform* transform = nullptr;
 protected:
 public:

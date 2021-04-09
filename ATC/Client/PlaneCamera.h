@@ -2,18 +2,20 @@
 #include "../Engine/GameObject.h"
 NAMESPACE(Engine)
 class Transform;
+class Camera;
 END
 class PlayerObserver;
 class PlaneCamera final :
     public Engine::GameObject
 {
 private:
-protected:
     Engine::Transform* transform = nullptr;
     Engine::Transform* targetTransform = nullptr;
     PlayerObserver* observer;
     float cameraDistance = 10.f;
+    Engine::Camera* camera = nullptr;
 
+protected:
 public:
     bool lookback = false;
 

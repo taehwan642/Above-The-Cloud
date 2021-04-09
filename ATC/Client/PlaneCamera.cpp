@@ -3,6 +3,7 @@
 #include "../Engine/SubjectManager.h"
 #include "../Engine/Singleton.h"
 #include "PlayerObserver.h"
+#include "../Engine/Camera.h"
 #include "PlaneCamera.h"
 
 PlaneCamera::PlaneCamera(void)
