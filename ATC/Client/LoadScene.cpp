@@ -40,6 +40,8 @@ void LoadScene::Start(void)
 	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"Boss.X", L"Boss");
 	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"BossDashGun.X", L"BossDashGun");
 	Engine::ResourceManager::GetInstance()->AddMesh(MeshType::DYNAMIC, L"Resources/Meshes/Dynamic/", L"BossShootGun.X", L"BossShootGun");
+	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/Radar.png", L"RadarPlane", 1);
+	Engine::ResourceManager::GetInstance()->AddTexture(L"Resources/Textures/Radar.png", L"RadarDot", 1);
 
 	Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
 }

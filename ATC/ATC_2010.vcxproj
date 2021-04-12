@@ -405,6 +405,8 @@
     <ClCompile Include="Client\Monster2.cpp" />
     <ClCompile Include="Client\MonsterBase.cpp" />
     <ClCompile Include="Client\MonsterBullet.cpp" />
+    <ClCompile Include="Client\RadarDot.cpp" />
+    <ClCompile Include="Client\RadarPlane.cpp" />
     <ClCompile Include="Client\Shadow.cpp" />
     <ClCompile Include="Client\PlayerObserver.cpp" />
     <ClCompile Include="Client\Sea.cpp" />
@@ -464,6 +466,8 @@
     <ClInclude Include="Client\Monster2.h" />
     <ClInclude Include="Client\MonsterBase.h" />
     <ClInclude Include="Client\MonsterBullet.h" />
+    <ClInclude Include="Client\RadarDot.h" />
+    <ClInclude Include="Client\RadarPlane.h" />
     <ClInclude Include="Client\Shadow.h" />
     <ClInclude Include="Client\PlayerObserver.h" />
     <ClInclude Include="Client\Sea.h" />

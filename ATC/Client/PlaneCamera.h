@@ -11,7 +11,7 @@ class PlaneCamera final :
 private:
     Engine::Transform* transform = nullptr;
     Engine::Transform* targetTransform = nullptr;
-    PlayerObserver* observer;
+    PlayerObserver* observer = nullptr;
     float cameraDistance = 10.f;
     Engine::Camera* camera = nullptr;
 

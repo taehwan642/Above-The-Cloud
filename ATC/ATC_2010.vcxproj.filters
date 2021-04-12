@@ -240,6 +240,15 @@
     <Filter Include="1Engine\4Component\8Camera">
       <UniqueIdentifier>{ccfb5abe-cac3-44c2-8818-a098940b7042}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\1GameObject\3UI\3Radar">
+      <UniqueIdentifier>{fd1c69c1-1a7b-4def-b5e5-5bd89f17aa86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\3UI\3Radar\0RadarPlane">
+      <UniqueIdentifier>{f8215b2d-4851-4c74-9aac-c226220e303d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\3UI\3Radar\1RadarDot">
+      <UniqueIdentifier>{00898c09-68fb-46e9-aec1-da32c3f567a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -478,6 +487,12 @@
     <ClCompile Include="Client\CutSceneCamera.cpp">
       <Filter>2Client\1GameObject\0Camera\2CutSceneCamera</Filter>
     </ClCompile>
+    <ClCompile Include="Client\RadarPlane.cpp">
+      <Filter>2Client\1GameObject\3UI\3Radar\0RadarPlane</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\RadarDot.cpp">
+      <Filter>2Client\1GameObject\3UI\3Radar\1RadarDot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -659,6 +674,12 @@
     </ClInclude>
     <ClInclude Include="Client\CutSceneCamera.h">
       <Filter>2Client\1GameObject\0Camera\2CutSceneCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\RadarPlane.h">
+      <Filter>2Client\1GameObject\3UI\3Radar\0RadarPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\RadarDot.h">
+      <Filter>2Client\1GameObject\3UI\3Radar\1RadarDot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
