@@ -54,13 +54,13 @@ void GameScene::Start(void)
 	PlaneCamera* c = new PlaneCamera();
 	AimPoint* ui = new AimPoint(L"AimPoint");
 	LockPoint* ui2 = new LockPoint();
-	RadarPlane* radarplane = new RadarPlane();
 	Scene::AddGameObject(OBJ1, L"a", s);
 	Scene::AddGameObject(OBJ2, L"테스트", c);
 	Scene::AddGameObject(UI, L"UI", ui);
 	Scene::AddGameObject(UI, L"UI", ui2);
 	Scene::AddGameObject(UI, L"UI", h);
 	Scene::AddGameObject(OBJ2, L"테스트", t1);
+	RadarPlane* radarplane = new RadarPlane();
 	Scene::AddGameObject(UI, L"UI", radarplane);
 	
 	AddStage1Data();

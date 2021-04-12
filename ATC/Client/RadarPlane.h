@@ -1,9 +1,13 @@
 #pragma once
 #include "../Engine/StaticUI.h"
+
+class RadarDot;
 class RadarPlane final :
     public Engine::StaticUI
 {
 private:
+    std::list<RadarDot*> radardots;
+
 protected:
 public:
     explicit RadarPlane(void);
