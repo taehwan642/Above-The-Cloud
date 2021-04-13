@@ -2,11 +2,15 @@
 #include "../Engine/StaticUI.h"
 
 class RadarDot;
+class PlayerObserver;
 class RadarPlane final :
     public Engine::StaticUI
 {
 private:
-    std::list<RadarDot*> radardots;
+    D3DXVECTOR3 testPosition = { 0,0,0 };
+    PlayerObserver* observer = nullptr;
+    std::vector<D3DXVECTOR3> dotpositions;
+    std::vector<RadarDot*> dots;
 
 protected:
 public:
