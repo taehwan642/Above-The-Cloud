@@ -12,7 +12,7 @@ public:
 	explicit Layer(void) {};
 	virtual ~Layer(void) {};
 
-	std::map<std::wstring, std::list<GameObject*>> gameobjectgroup;
+	std::unordered_map<std::wstring, std::list<GameObject*>> gameobjectgroup;
 
 	void AddGameObject(const std::wstring& _objectKey, GameObject* _object);
 

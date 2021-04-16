@@ -50,11 +50,11 @@ void GameScene::Start(void)
 	
 	Cloud* t1 = new Cloud();
 	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Plane>(OBJ2, L"테스트");
-	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Sea>(OBJ1, L"테스트");
 	PlaneCamera* c = new PlaneCamera();
 	AimPoint* ui = new AimPoint(L"AimPoint");
 	LockPoint* ui2 = new LockPoint();
 	Scene::AddGameObject(OBJ1, L"a", s);
+	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Sea>(OBJ1, L"a");
 	Scene::AddGameObject(OBJ2, L"테스트", c);
 	Scene::AddGameObject(UI, L"UI", ui);
 	Scene::AddGameObject(UI, L"UI", ui2);

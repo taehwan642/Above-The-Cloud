@@ -7,10 +7,9 @@ class RadarPlane final :
     public Engine::StaticUI
 {
 private:
-    D3DXVECTOR3 testPosition = { 0,0,0 };
+    D3DXVECTOR3 testPosition = { 5,5,50 };
     PlayerObserver* observer = nullptr;
-    std::vector<D3DXVECTOR3> dotpositions;
-    std::vector<RadarDot*> dots;
+    std::vector<std::pair<RadarDot*, D3DXVECTOR3>> dotpositions;
 
 protected:
 public:

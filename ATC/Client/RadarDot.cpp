@@ -22,12 +22,12 @@ RadarDot::~RadarDot(void)
 
 INT RadarDot::Update(const FLOAT& dt)
 {
+    Engine::RenderManager::GetInstance()->AddRenderObject(ID_UI, this);
     return StaticUI::Update(dt);
 }
 
 void RadarDot::LateUpdate(const FLOAT& dt)
 {
-    Engine::RenderManager::GetInstance()->AddRenderObject(ID_UI, this);
     StaticUI::LateUpdate(dt);
 }
 

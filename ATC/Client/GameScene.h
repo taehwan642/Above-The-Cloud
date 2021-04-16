@@ -9,7 +9,6 @@ private:
     void AddStage1Data(void);
     void AddStage2Data(void);
     void AddStage3Data(void);
-
 protected:
 public:
     explicit GameScene(void) {};
