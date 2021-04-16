@@ -28,6 +28,7 @@ RadarPlane::~RadarPlane(void)
 
 INT RadarPlane::Update(const FLOAT& dt)
 {
+	dotpositions.clear();
 	D3DXVECTOR3 vec = testPosition - observer->GetTransform()->localPosition;
 	if (D3DXVec3LengthSq(&vec) < 250)
 	{
@@ -40,16 +41,15 @@ INT RadarPlane::Update(const FLOAT& dt)
 
 void RadarPlane::LateUpdate(const FLOAT& dt)
 {
-	for (const auto& pos : dotpositions)
-	{
-				
-	}
-
 	StaticUI::LateUpdate(dt);
 }
 
 void RadarPlane::Render(const FLOAT& dt)
 {
+	for (const auto& pos : dotpositions)
+	{
+
+	}
 	StaticUI::Render(dt);
 }
 
