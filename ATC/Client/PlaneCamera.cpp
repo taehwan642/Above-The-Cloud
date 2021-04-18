@@ -19,8 +19,10 @@ void PlaneCamera::InitCamera(void)
 {
 	transform = new Engine::Transform();
 	targetTransform = new Engine::Transform();
+	camera = new Engine::Camera();
 	componentgroup.emplace(L"Transform", transform);
 	componentgroup.emplace(L"TargetTransform", targetTransform);
+	componentgroup.emplace(L"Camera", camera);
 
 	targetTransform->localPosition = { 0, 250, 0 };
 
@@ -33,13 +35,10 @@ void PlaneCamera::InitCamera(void)
 
 	transform->curQuaternion = D3DXQUATERNION(0, 1, 0, 0);
 
-	D3DXMATRIX matProj;
-	D3DXMatrixPerspectiveFovLH(&matProj,
-		D3DXToRadian(70),
+	camera->SetProjectionMatrix(D3DXToRadian(70),
 		static_cast<float>(DXUTGetD3D9BackBufferSurfaceDesc()->Width) /
 		static_cast<float>(DXUTGetD3D9BackBufferSurfaceDesc()->Height),
 		0.01, 50000);
-	DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 
 bool targetplane = true;
@@ -119,18 +118,18 @@ void PlaneCamera::LateUpdate(const FLOAT& dt)
 	D3DXMatrixInverse(&matView, 0, &transform->worldMatrix);
 	
 	if(targetplane)
-		DEVICE->SetTransform(D3DTS_VIEW, &matView);
+		camera->SetViewMatrix(matView);
 	else
 	{
 		D3DXMATRIX im;
 		D3DXMatrixIdentity(&im);
 		D3DXMatrixTranslation(&im, 0, 0, 62);
-		DEVICE->SetTransform(D3DTS_VIEW, &im);
+		camera->SetViewMatrix(im);
 	}
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
 	worldCameraPosition = D3DXVECTOR4(transform->localPosition, 1);
-
+	camera->Render(dt);
 	GameObject::LateUpdate(dt);
 }
 
