@@ -252,6 +252,9 @@
     <Filter Include="2Client\2Observer\1MonsterObserver">
       <UniqueIdentifier>{205a6872-fbf0-4717-bc07-84390f2dc2bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\3Manager\1CameraManager">
+      <UniqueIdentifier>{66de4583-e3d3-4882-8b20-adc7246e442a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -499,6 +502,9 @@
     <ClCompile Include="Client\MonsterObserver.cpp">
       <Filter>2Client\2Observer\1MonsterObserver</Filter>
     </ClCompile>
+    <ClCompile Include="Client\CameraManager.cpp">
+      <Filter>2Client\3Manager\1CameraManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -689,6 +695,9 @@
     </ClInclude>
     <ClInclude Include="Client\MonsterObserver.h">
       <Filter>2Client\2Observer\1MonsterObserver</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\CameraManager.h">
+      <Filter>2Client\3Manager\1CameraManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

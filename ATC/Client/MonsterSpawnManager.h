@@ -10,7 +10,7 @@ private:
     D3DXVECTOR3 RandomPositionForMonster(void);
 protected:
 public:
-    explicit MonsterSpawnManager();
+    explicit MonsterSpawnManager(void);
     void AddSpawnData(const Stage& _stage, const MonsterType& _data, const UINT _monsterNum);
     void SpawnMonstersByData(const Stage& _stage);
     void DeleteDatas(void);

@@ -55,13 +55,13 @@ void Transform::Rotate(RotType _rotType, float _angle)
 	quaternion *= rot;
 }
 
-void Transform::Update(const float& dt)
+void Transform::Update(const FLOAT& dt)
 {
 	D3DXMATRIX S, R, T;
 	D3DXMATRIX rx, ry, rz;
 	D3DXMatrixScaling(&S, scale.x, scale.y, scale.z);
 
-	D3DXQuaternionSlerp(&curQuaternion, &curQuaternion, &quaternion, dt * 3);
+	D3DXQuaternionSlerp(&curQuaternion, &curQuaternion, &quaternion, dt * slerpSpeed);
 
 	D3DXMATRIX matRot;
 	D3DXMatrixRotationQuaternion(&matRot, &curQuaternion);

@@ -364,7 +364,7 @@ void      WINAPI DXUTDestroyState(); // Optional method to destroy DXUT's memory
 #define DEVICE DXUTGetD3D9Device()
 
 #define out 
-#define in
+#define in 
 
 const int windowWidth = 1280;
 const int windowHeight = 720;
@@ -532,6 +532,13 @@ enum MONSTERSTATE : UINT
     MONSTERIDLE,
     MONSTERSHOOT,
     MONSTERDIE
+};
+
+enum CAMERAINDEX : UINT
+{
+    CAM_MENU,
+    CAM_PLAYER,
+    CAM_CUTSCENE
 };
 
 #endif

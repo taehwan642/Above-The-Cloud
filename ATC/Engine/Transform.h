@@ -28,7 +28,9 @@ public:
 
     D3DXVECTOR3 worldPosition;
 
-    void Update(const float& dt) override;
+    FLOAT slerpSpeed = 3.f;
+
+    void Update(const FLOAT& dt) override;
 
     void SetParent(Transform* _parent);
     void ReleaseParent(void);

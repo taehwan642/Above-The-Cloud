@@ -9,6 +9,7 @@
 #include "Engine/RaycastManager.h"
 #include "Engine/RenderManager.h"
 #include "Client/MonsterSpawnManager.h"
+#include "Client/CameraManager.h"
 #include "Client/GameScene.h"
 #include "Client/MenuScene.h"
 #include "Client/LoadScene.h"
@@ -64,29 +65,32 @@ void CALLBACK OnD3D9LostDevice( void* pUserContext )
 void CALLBACK OnD3D9DestroyDevice( void* pUserContext )
 {
     Engine::GraphicsManager::GetInstance()->DeleteSprite();
-    Engine::GraphicsManager::GetInstance()->DestroyInstance();
+    Engine::GraphicsManager::DestroyInstance();
 
     Engine::SceneManager::GetInstance()->ReleaseScenes();
-    Engine::SceneManager::GetInstance()->DestroyInstance();
+    Engine::SceneManager::DestroyInstance();
 
-    Engine::ObjectManager::GetInstance()->DestroyInstance();
+    Engine::ObjectManager::DestroyInstance();
 
     Engine::ResourceManager::GetInstance()->ReleaseResources();
-    Engine::ResourceManager::GetInstance()->DestroyInstance();
+    Engine::ResourceManager::DestroyInstance();
 
     Engine::CollisionManager::GetInstance()->ClearData();
-    Engine::CollisionManager::GetInstance()->DestroyInstance();
+    Engine::CollisionManager::DestroyInstance();
     
     MonsterSpawnManager::GetInstance()->DeleteDatas();
-    MonsterSpawnManager::GetInstance()->DestroyInstance();
+    MonsterSpawnManager::DestroyInstance();
+
+    CameraManager::GetInstance()->DeleteCameraDatas();
+    CameraManager::DestroyInstance();
 
     Engine::RenderManager::GetInstance()->ReleaseAllObjects();
-    Engine::RenderManager::GetInstance()->DestroyInstance();
+    Engine::RenderManager::DestroyInstance();
 
     Engine::SubjectManager::GetInstance()->ClearObservers();
-    Engine::SubjectManager::GetInstance()->DestroyInstance();
+    Engine::SubjectManager::DestroyInstance();
 
-    Engine::RaycastManager::GetInstance()->DestroyInstance();
+    Engine::RaycastManager::DestroyInstance();
 }
 
 
