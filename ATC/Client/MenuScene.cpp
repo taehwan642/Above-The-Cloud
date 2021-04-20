@@ -3,6 +3,7 @@
 #include "../Engine/Button.h"
 #include "../Engine/SceneManager.h"
 #include "MenuCamera.h"
+#include "CameraManager.h"
 #include "MenuScene.h"
 
 MenuScene::MenuScene(void)
@@ -23,8 +24,11 @@ void MenuScene::Start(void)
 	startButton->SetButtonFunction([]() {Engine::SceneManager::GetInstance()->SetScene(L"°ÔÀÓ"); });
 	l->AddGameObject(L"Objects", startButton);
 
-	MenuCamera* cam = new MenuCamera();
-	l->AddGameObject(L"Objects", cam);
+	CameraManager::GetInstance()->AddCamera(CAM_MENU, new MenuCamera());
+	CameraManager::GetInstance()->SetCamera(CAM_MENU);
+
+	//MenuCamera* cam = new MenuCamera();
+	//l->AddGameObject(L"Objects", cam);
 }
 
 void MenuScene::Update(const FLOAT& dt)
@@ -38,15 +42,18 @@ void MenuScene::Update(const FLOAT& dt)
 	}
 		
 	Scene::Update(dt);
+	CameraManager::GetInstance()->UpdateCamera(dt);
 }
 
 void MenuScene::LateUpdate(const FLOAT& dt)
 {
 	Scene::LateUpdate(dt);
+	CameraManager::GetInstance()->LateUpdateCamera(dt);
 }
 
 void MenuScene::Exit(void)
 {
+	CameraManager::GetInstance()->DeleteCameraDatas();
 	Scene::Exit();
 }
 

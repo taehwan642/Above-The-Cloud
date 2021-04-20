@@ -15,6 +15,7 @@
 #include "MonsterSpawnManager.h"
 #include "Sea.h"
 #include "RadarPlane.h"
+#include "CameraManager.h"
 #include "GameScene.h"
 
 void GameScene::AddStage1Data(void)
@@ -50,12 +51,12 @@ void GameScene::Start(void)
 	
 	Cloud* t1 = new Cloud();
 	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Plane>(OBJ2, L"테스트");
-	PlaneCamera* c = new PlaneCamera();
+	//PlaneCamera* c = new PlaneCamera();
 	AimPoint* ui = new AimPoint(L"AimPoint");
 	LockPoint* ui2 = new LockPoint();
 	Scene::AddGameObject(OBJ1, L"a", s);
 	Engine::ObjectManager::GetInstance()->AddObjectAtLayer<Sea>(OBJ1, L"a");
-	Scene::AddGameObject(OBJ2, L"테스트", c);
+	//Scene::AddGameObject(OBJ2, L"테스트", c);
 	Scene::AddGameObject(UI, L"UI", ui);
 	Scene::AddGameObject(UI, L"UI", ui2);
 	Scene::AddGameObject(UI, L"UI", h);
@@ -68,6 +69,9 @@ void GameScene::Start(void)
 	AddStage3Data();
 
 	MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
+
+	CameraManager::GetInstance()->AddCamera(CAM_PLAYER, new PlaneCamera());
+	CameraManager::GetInstance()->SetCamera(CAM_PLAYER);
 }
 
 void GameScene::Update(const FLOAT& dt)
@@ -76,6 +80,7 @@ void GameScene::Update(const FLOAT& dt)
 	if (DXUTWasKeyPressed('P'))
 		Engine::SceneManager::GetInstance()->SetScene(L"메뉴");
 	Scene::Update(dt);
+	CameraManager::GetInstance()->UpdateCamera(dt);
 }
 
 void GameScene::LateUpdate(const FLOAT& dt)
@@ -84,6 +89,7 @@ void GameScene::LateUpdate(const FLOAT& dt)
 	Engine::CollisionManager::GetInstance()->CheckCollision(MISSILE, MONSTER);
 	Engine::CollisionManager::GetInstance()->CheckCollision(PLAYER, MONSTERMISSILE);
 	Scene::LateUpdate(dt);
+	CameraManager::GetInstance()->LateUpdateCamera(dt);
 }
 
 void GameScene::Exit(void)
@@ -92,6 +98,7 @@ void GameScene::Exit(void)
 	Engine::SubjectManager::GetInstance()->ClearObservers();
 	Engine::GraphicsManager::GetInstance()->DeleteSprite();
 	MonsterSpawnManager::GetInstance()->DeleteDatas();
+	CameraManager::GetInstance()->DeleteCameraDatas();
 	Scene::Exit();
 }
 

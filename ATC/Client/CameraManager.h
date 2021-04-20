@@ -13,8 +13,8 @@ public:
     void AddCamera(CAMERAINDEX _key, Engine::GameObject* _camera);
     void SetCamera(CAMERAINDEX _key);
 
-    void UpdateCamera(void);
-    void LateUpdateCamera(void);
+    void UpdateCamera(const FLOAT& dt);
+    void LateUpdateCamera(const FLOAT& dt);
     void DeleteCameraDatas(void);
 };
 
