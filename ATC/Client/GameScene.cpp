@@ -16,6 +16,7 @@
 #include "Sea.h"
 #include "RadarPlane.h"
 #include "CameraManager.h"
+#include "CutSceneCamera.h"
 #include "GameScene.h"
 
 void GameScene::AddStage1Data(void)
@@ -71,6 +72,7 @@ void GameScene::Start(void)
 	MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
 
 	CameraManager::GetInstance()->AddCamera(CAM_PLAYER, new PlaneCamera());
+	CameraManager::GetInstance()->AddCamera(CAM_CUTSCENE, new CutSceneCamera());
 	CameraManager::GetInstance()->SetCamera(CAM_PLAYER);
 }
 
@@ -79,6 +81,13 @@ void GameScene::Update(const FLOAT& dt)
 	Engine::CollisionManager::GetInstance()->UpdateData();
 	if (DXUTWasKeyPressed('P'))
 		Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
+
+	if (DXUTWasKeyPressed('I'))
+		CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
+	if (DXUTWasKeyPressed('J'))
+		CameraManager::GetInstance()->SetCamera(CAM_PLAYER);
+
+
 	Scene::Update(dt);
 	CameraManager::GetInstance()->UpdateCamera(dt);
 }

@@ -41,19 +41,12 @@ void PlaneCamera::InitCamera(void)
 		0.01, 50000);
 }
 
-bool targetplane = true;
-
 INT PlaneCamera::Update(const FLOAT& dt)
 {
 	if (DXUTWasKeyPressed('C'))
 	{
 		lookback = !lookback;
 		cameraDistance *= -1.0f;
-	}
-
-	if (DXUTWasKeyPressed('V'))
-	{
-		targetplane = !targetplane;
 	}
 
 	if (observer->GetIsPlayerDead() == false)
@@ -117,15 +110,7 @@ void PlaneCamera::LateUpdate(const FLOAT& dt)
 	
 	D3DXMatrixInverse(&matView, 0, &transform->worldMatrix);
 	
-	if(targetplane)
-		camera->SetViewMatrix(matView);
-	else
-	{
-		D3DXMATRIX im;
-		D3DXMatrixIdentity(&im);
-		D3DXMatrixTranslation(&im, 0, 0, 62);
-		camera->SetViewMatrix(im);
-	}
+	camera->SetViewMatrix(matView);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
 	worldCameraPosition = D3DXVECTOR4(transform->localPosition, 1);

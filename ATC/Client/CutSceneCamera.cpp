@@ -27,7 +27,10 @@ INT CutSceneCamera::Update(const FLOAT& dt)
 
 void CutSceneCamera::LateUpdate(const FLOAT& dt)
 {
-	
+	D3DXMATRIX im;
+	D3DXMatrixIdentity(&im);
+	D3DXMatrixTranslation(&im, 0, 0, 62);
+	camera->SetViewMatrix(im);
 	camera->Render(dt);
 	GameObject::LateUpdate(dt);
 }

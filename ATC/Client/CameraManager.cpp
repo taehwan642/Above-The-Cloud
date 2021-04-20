@@ -20,10 +20,7 @@ CameraManager::AddCamera(CAMERAINDEX _key, Engine::GameObject* _camera)
 void 
 CameraManager::SetCamera(CAMERAINDEX _key)
 {
-	if (currentCamera != nullptr)
-		currentCamera->SetActive(false);
 	currentCamera = cameraMap[_key];
-	currentCamera->SetActive(true);
 }
 
 void 
