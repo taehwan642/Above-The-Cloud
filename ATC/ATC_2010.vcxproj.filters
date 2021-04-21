@@ -228,12 +228,6 @@
     <Filter Include="1Engine\4Component\4Shader\3SeaShader">
       <UniqueIdentifier>{72551fd2-f0e9-4cf1-86a9-304acbf4606c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Client\1GameObject\5Monsters\0Monster\3BossDashGun">
-      <UniqueIdentifier>{7dc7d168-3f02-40d9-a140-9e29f90f18ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2Client\1GameObject\5Monsters\0Monster\4BossShootGun">
-      <UniqueIdentifier>{aad9c8cd-f828-401d-a6e9-2fa1c9eb1166}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2Client\1GameObject\0Camera\2CutSceneCamera">
       <UniqueIdentifier>{d6c7227a-4476-4f64-b2ec-3ff0003a165a}</UniqueIdentifier>
     </Filter>
@@ -254,6 +248,15 @@
     </Filter>
     <Filter Include="2Client\3Manager\1CameraManager">
       <UniqueIdentifier>{66de4583-e3d3-4882-8b20-adc7246e442a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters\0Monster\3BossGuns">
+      <UniqueIdentifier>{7585ac3e-86a2-4e68-88c4-79954db76bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters\0Monster\3BossGuns\0BossDashGun">
+      <UniqueIdentifier>{7dc7d168-3f02-40d9-a140-9e29f90f18ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\1GameObject\5Monsters\0Monster\3BossGuns\1BossShootGun">
+      <UniqueIdentifier>{aad9c8cd-f828-401d-a6e9-2fa1c9eb1166}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -482,10 +485,10 @@
       <Filter>2Client\1GameObject\5Monsters\0Monster\2Boss</Filter>
     </ClCompile>
     <ClCompile Include="Client\BossShootGun.cpp">
-      <Filter>2Client\1GameObject\5Monsters\0Monster\4BossShootGun</Filter>
+      <Filter>2Client\1GameObject\5Monsters\0Monster\3BossGuns\1BossShootGun</Filter>
     </ClCompile>
     <ClCompile Include="Client\BossDashGun.cpp">
-      <Filter>2Client\1GameObject\5Monsters\0Monster\3BossDashGun</Filter>
+      <Filter>2Client\1GameObject\5Monsters\0Monster\3BossGuns\0BossDashGun</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Camera.cpp">
       <Filter>1Engine\4Component\8Camera</Filter>
@@ -504,6 +507,9 @@
     </ClCompile>
     <ClCompile Include="Client\CameraManager.cpp">
       <Filter>2Client\3Manager\1CameraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\BossGuns.cpp">
+      <Filter>2Client\1GameObject\5Monsters\0Monster\3BossGuns</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -676,10 +682,10 @@
       <Filter>2Client\1GameObject\5Monsters\0Monster\2Boss</Filter>
     </ClInclude>
     <ClInclude Include="Client\BossShootGun.h">
-      <Filter>2Client\1GameObject\5Monsters\0Monster\4BossShootGun</Filter>
+      <Filter>2Client\1GameObject\5Monsters\0Monster\3BossGuns\1BossShootGun</Filter>
     </ClInclude>
     <ClInclude Include="Client\BossDashGun.h">
-      <Filter>2Client\1GameObject\5Monsters\0Monster\3BossDashGun</Filter>
+      <Filter>2Client\1GameObject\5Monsters\0Monster\3BossGuns\0BossDashGun</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Camera.h">
       <Filter>1Engine\4Component\8Camera</Filter>
@@ -698,6 +704,9 @@
     </ClInclude>
     <ClInclude Include="Client\CameraManager.h">
       <Filter>2Client\3Manager\1CameraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\BossGuns.h">
+      <Filter>2Client\1GameObject\5Monsters\0Monster\3BossGuns</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

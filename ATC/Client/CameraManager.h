@@ -9,7 +9,7 @@ private:
 
 protected:
 public:
-    explicit CameraManager(void);
+    explicit CameraManager(void) = default;
     void AddCamera(CAMERAINDEX _key, Engine::GameObject* _camera);
     void SetCamera(CAMERAINDEX _key);
 

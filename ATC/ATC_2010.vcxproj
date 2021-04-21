@@ -391,6 +391,7 @@
     <ClCompile Include="Client\AimPoint.cpp" />
     <ClCompile Include="Client\Boss.cpp" />
     <ClCompile Include="Client\BossDashGun.cpp" />
+    <ClCompile Include="Client\BossGuns.cpp" />
     <ClCompile Include="Client\BossShootGun.cpp" />
     <ClCompile Include="Client\CameraManager.cpp" />
     <ClCompile Include="Client\CutSceneCamera.cpp" />
@@ -453,6 +454,7 @@
     <ClInclude Include="Client\AimPoint.h" />
     <ClInclude Include="Client\Boss.h" />
     <ClInclude Include="Client\BossDashGun.h" />
+    <ClInclude Include="Client\BossGuns.h" />
     <ClInclude Include="Client\BossShootGun.h" />
     <ClInclude Include="Client\CameraManager.h" />
     <ClInclude Include="Client\CutSceneCamera.h" />

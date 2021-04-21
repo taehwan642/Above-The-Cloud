@@ -2,14 +2,10 @@
 #include "../Engine/GameObject.h"
 #include "CameraManager.h"
 
-CameraManager::CameraManager(void)
-{
-}
-
 void
 CameraManager::AddCamera(CAMERAINDEX _key, Engine::GameObject* _camera)
 {
-	auto iter = cameraMap.find(_key);
+	auto& const iter = cameraMap.find(_key);
 	if (iter == cameraMap.end())
 	{
 		_camera->SetActive(false);

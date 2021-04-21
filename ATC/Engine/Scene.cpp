@@ -7,7 +7,7 @@ USING(Engine)
 
 void Scene::AddGameObject(LAYERKEY _layerKey, std::wstring _objecttag, GameObject* _object)
 {
-	auto& iter = layergroup.find(_layerKey);
+	auto& const iter = layergroup.find(_layerKey);
 	if (iter != layergroup.end())
 		layergroup[_layerKey]->AddGameObject(_objecttag, _object);
 	else
@@ -21,7 +21,7 @@ void Scene::AddGameObject(LAYERKEY _layerKey, std::wstring _objecttag, GameObjec
 
 Layer* Scene::GetLayer(LAYERKEY _layerKey)
 {
-	auto& iter = layergroup.find(_layerKey);
+	auto& const iter = layergroup.find(_layerKey);
 	if (iter != layergroup.end())
 		return layergroup[_layerKey];
 	return nullptr;
@@ -29,7 +29,7 @@ Layer* Scene::GetLayer(LAYERKEY _layerKey)
 
 void Scene::Update(const FLOAT& dt)
 {
-	for (auto& layer : layergroup)
+	for (auto& const layer : layergroup)
 	{
 		layer.second->Update(dt);
 	}
@@ -37,7 +37,7 @@ void Scene::Update(const FLOAT& dt)
 
 void Scene::LateUpdate(const FLOAT& dt)
 {
-	for (auto& layer : layergroup)
+	for (auto& const layer : layergroup)
 	{
 		layer.second->LateUpdate(dt);
 	}
@@ -45,7 +45,7 @@ void Scene::LateUpdate(const FLOAT& dt)
 
 void Scene::Exit(void)
 {
-	for (auto& layer : layergroup)
+	for (auto& const layer : layergroup)
 	{
 		if (layer.second != nullptr)
 		{
@@ -58,7 +58,7 @@ void Scene::Exit(void)
 
 void Scene::ResetDevice(void)
 {
-	for (auto& layer : layergroup)
+	for (auto& const layer : layergroup)
 	{
 		layer.second->ResetDevice();
 	}
@@ -66,7 +66,7 @@ void Scene::ResetDevice(void)
 
 void Scene::LostDevice(void)
 {
-	for (auto& layer : layergroup)
+	for (auto& const layer : layergroup)
 	{
 		layer.second->LostDevice();
 	}
@@ -74,7 +74,7 @@ void Scene::LostDevice(void)
 
 void Scene::Free(void)
 {
-	for (auto& layer : layergroup)
+	for (auto& const layer : layergroup)
 	{
 		if (layer.second != nullptr)
 		{
