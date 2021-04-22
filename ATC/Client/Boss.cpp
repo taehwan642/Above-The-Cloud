@@ -204,23 +204,26 @@ INT Boss::Update(const FLOAT& dt)
 {
 	MonsterBase::Update(dt);
 
-	for (int i = 0; i < 4; ++i)
+	if (isActive == true)
 	{
-		theta[i] += dt * speed;
+		for (int i = 0; i < 4; ++i)
+		{
+			theta[i] += dt * speed;
+		}
+
+		for (int i = 0; i < 4; ++i)
+		{
+			D3DXVECTOR3 vec = {
+				(radius * cos(theta[i])),
+				(radius * sin(theta[i])),
+				0 };
+			D3DXVECTOR3 lerpvec;
+			D3DXVec3TransformCoord(&lerpvec, &vec, &revolvePoint->worldMatrix);
+			D3DXVec3Lerp(&gunTransforms[i]->localPosition, &gunTransforms[i]->localPosition, &lerpvec, dt * 5);
+		}
 	}
 
-	// NEED TO ADD Transform's worldPosition, localPosition
-
-	for (int i = 0; i < 4; ++i)
-	{
-		D3DXVECTOR3 vec = {
-			(radius * cos(theta[i])),
-			(radius * sin(theta[i])),
-			0 };
-		D3DXVECTOR3 lerpvec;
-		D3DXVec3TransformCoord(&lerpvec, &vec, &revolvePoint->worldMatrix);
-		D3DXVec3Lerp(&gunTransforms[i]->localPosition, &gunTransforms[i]->localPosition, &lerpvec, dt * 5);
-	}
+	
 
 	//std::cout << t1->position.x << " " << t1->position.y << " " << t1->position.z << std::endl;
 	for (int i = 0; i < 2; ++i)
@@ -253,6 +256,7 @@ void Boss::LateUpdate(const FLOAT& dt)
 		bossDashGuns[i]->LateUpdate(dt);
 	for (int i = 0; i < 2; ++i)
 		bossShootGuns[i]->LateUpdate(dt);
+
 	MonsterBase::LateUpdate(dt);
 }
 

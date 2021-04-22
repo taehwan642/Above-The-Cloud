@@ -21,7 +21,7 @@ void Layer::Update(const FLOAT& dt)
 	for (auto& objectlist : gameobjectgroup)
 	{
 		auto& iter = objectlist.second.begin();
-		auto& iter_end = objectlist.second.end();
+		const auto& iter_end = objectlist.second.end();
 		for (; iter != iter_end;)
 		{
 			if ((*iter)->Update(dt) == OBJDEAD)

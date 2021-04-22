@@ -39,10 +39,7 @@ BossDashGun::~BossDashGun(void)
 
 void BossDashGun::SetInformation(const D3DXVECTOR3& _position)
 {
-	if(isAttatched == false)
-		Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
-
-	MonsterBase::SetInformation(_position);
+	BossGuns::SetInformation(_position);
 }
 
 void BossDashGun::Movement(const FLOAT& dt)
@@ -67,30 +64,13 @@ void BossDashGun::Movement(const FLOAT& dt)
 
 INT BossDashGun::Update(const FLOAT& dt)
 {
-	MonsterBase::Update(dt);
+	BossGuns::Update(dt);
 	return OBJALIVE;
 }
 
 void BossDashGun::LateUpdate(const FLOAT& dt)
 {
-	D3DXVECTOR3 look = observer->GetTransform()->localPosition - transform->localPosition;
-	D3DXVec3Normalize(&look, &look);
-
-	D3DXVECTOR3 right;
-	D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
-	D3DXVec3Normalize(&right, &right);
-
-	D3DXVECTOR3 up;
-	D3DXVec3Cross(&up, &look, &right);
-	D3DXVec3Normalize(&up, &up);
-
-	D3DXMATRIX matRot;
-	D3DXMatrixIdentity(&matRot);
-	memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
-	memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
-	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
-	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
-	MonsterBase::LateUpdate(dt);
+	BossGuns::LateUpdate(dt);
 }
 
 void BossDashGun::Render(const FLOAT& dt)
@@ -107,12 +87,12 @@ void BossDashGun::Render(const FLOAT& dt)
 	tempeffect->End();
 	//collider->RenderCollider();
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	MonsterBase::Render(dt);
+	BossGuns::Render(dt);
 }
 
 void BossDashGun::Free(void)
 {
 	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
 	observer->Release();
-	MonsterBase::Free();
+	BossGuns::Free();
 }

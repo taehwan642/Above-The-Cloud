@@ -1,13 +1,11 @@
 #pragma once
-#include "MonsterBase.h"
+#include "BossGuns.h"
 class BossDashGun final :
-    public MonsterBase
+    public BossGuns
 {
 private:
 protected:
 public:
-    bool isAttatched = false;
-
     explicit BossDashGun(void);
     virtual ~BossDashGun(void);
 
