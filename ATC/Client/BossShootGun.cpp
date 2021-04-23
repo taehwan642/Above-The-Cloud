@@ -47,12 +47,21 @@ void BossShootGun::Movement(const FLOAT& dt)
 	// 보스랑 붙어있으면 X
 	if (isAttatched == false)
 	{
+		movementspeed = 1.f;
 		int movementindex = rand() % 2;
-
+		movementindex = 0;
 		// 약한거 2개쏘거나
 		if (movementindex == 0)
 		{
-
+			FLOAT x = (rand() % 100) - (rand() % 50);
+			FLOAT y = (rand() % 100) - (rand() % 50);
+			while (y <= -50)
+				y = (rand() % 100) - (rand() % 50);
+			FLOAT z = (rand() % 100) - (rand() % 50);
+			movementqueue.emplace([=]()-> bool
+				{
+					return transform->Lerp(transform->localPosition, D3DXVECTOR3(x, y, z), dt, 10);
+				});
 		}
 
 		// 총 큰거하나쏘거나 

@@ -46,12 +46,21 @@ void BossDashGun::Movement(const FLOAT& dt)
 {
 	if (isAttatched == false)
 	{
+		movementspeed = 1.f;
 		int movementindex = rand() % 2;
-
+		movementindex = 0;
 		// 보고있는 방향으로 Dash하거나
 		if (movementindex == 0)
 		{
-
+			FLOAT x = (rand() % 100) - (rand() % 50);
+			FLOAT y = (rand() % 100) - (rand() % 50);
+			while (y <= -50)
+				y = (rand() % 100) - (rand() % 50);
+			FLOAT z = (rand() % 100) - (rand() % 50);
+			movementqueue.emplace([=]()-> bool
+				{
+					return transform->Lerp(transform->localPosition, D3DXVECTOR3(x, y, z), dt, 10);
+				});
 		}
 	
 		// 총한발 쏘기

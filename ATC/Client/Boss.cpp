@@ -44,10 +44,10 @@ Boss::Boss(void)
 
 	for (int i = 0; i < 2; ++i)
 	{
-		bossDashGuns[i] = new BossDashGun();
+		bossDashGuns[i] = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<BossDashGun>(OBJ2,L"BossDashGun");
 		bossDashGuns[i]->isAttatched = true;
 		bossDashGuns[i]->SetInformation(transform->localPosition);
-		bossShootGuns[i] = new BossShootGun();
+		bossShootGuns[i] = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<BossShootGun>(OBJ2, L"BossShootGun");
 		bossShootGuns[i]->isAttatched = true;
 		bossShootGuns[i]->SetInformation(transform->localPosition);
 	}
@@ -226,10 +226,10 @@ INT Boss::Update(const FLOAT& dt)
 	
 
 	//std::cout << t1->position.x << " " << t1->position.y << " " << t1->position.z << std::endl;
-	for (int i = 0; i < 2; ++i)
+	/*for (int i = 0; i < 2; ++i)
 		bossDashGuns[i]->Update(dt);
 	for (int i = 0; i < 2; ++i)
-		bossShootGuns[i]->Update(dt);
+		bossShootGuns[i]->Update(dt);*/
 	return OBJALIVE;
 }
 
@@ -252,10 +252,10 @@ void Boss::LateUpdate(const FLOAT& dt)
 	memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
 	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
 	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
-	for (int i = 0; i < 2; ++i)
+	/*for (int i = 0; i < 2; ++i)
 		bossDashGuns[i]->LateUpdate(dt);
 	for (int i = 0; i < 2; ++i)
-		bossShootGuns[i]->LateUpdate(dt);
+		bossShootGuns[i]->LateUpdate(dt);*/
 
 	MonsterBase::LateUpdate(dt);
 }
@@ -273,10 +273,10 @@ void Boss::Render(const FLOAT& dt)
 	tempeffect->EndPass();
 	tempeffect->End();
 	//collider->RenderCollider();
-	for (int i = 0; i < 2; ++i)
+	/*for (int i = 0; i < 2; ++i)
 		bossDashGuns[i]->Render(dt);
 	for (int i = 0; i < 2; ++i)
-		bossShootGuns[i]->Render(dt);
+		bossShootGuns[i]->Render(dt);*/
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	MonsterBase::Render(dt);
 }
@@ -287,9 +287,9 @@ void Boss::Free(void)
 	observer->Release();
 	for (int i = 0; i < 2; ++i)
 		Safe_Release(gunTransforms[i]);
-	for (int i = 0; i < 2; ++i)
+	/*for (int i = 0; i < 2; ++i)
 		Safe_Release(bossDashGuns[i]);
 	for (int i = 0; i < 2; ++i)
-		Safe_Release(bossShootGuns[i]);
+		Safe_Release(bossShootGuns[i]);*/
 	MonsterBase::Free();
 }
