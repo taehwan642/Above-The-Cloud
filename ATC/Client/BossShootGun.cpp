@@ -9,6 +9,7 @@
 #include "../Engine/Collider.h"
 #include "PlayerObserver.h"
 #include "../Engine/ObjectManager.h"
+#include "MonsterBullet.h"
 #include "BossShootGun.h"
 
 BossShootGun::BossShootGun(void)
@@ -47,9 +48,8 @@ void BossShootGun::Movement(const FLOAT& dt)
 	// 보스랑 붙어있으면 X
 	if (isAttatched == false)
 	{
-		movementspeed = 1.f;
 		int movementindex = rand() % 2;
-		movementindex = 0;
+		movementindex = 1;
 		// 약한거 2개쏘거나
 		if (movementindex == 0)
 		{
@@ -62,12 +62,23 @@ void BossShootGun::Movement(const FLOAT& dt)
 				{
 					return transform->Lerp(transform->localPosition, D3DXVECTOR3(x, y, z), dt, 10);
 				});
+			movementspeed = 1.f;
 		}
 
 		// 총 큰거하나쏘거나 
 		else
 		{
-
+			movementqueue.emplace([=]()->bool
+				{
+					currentState = MONSTERSHOOT;
+					mesh->SetAnimationSet(currentState);
+					D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+					MonsterBullet* m = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<MonsterBullet>(OBJ2, L"MONSTERBULLET");
+					D3DXVECTOR3 pos = transform->localPosition;
+					m->SetInformation(pos, dir, 2);
+					return true;
+				});
+			movementspeed = 3.f;
 		}
 	}
 
