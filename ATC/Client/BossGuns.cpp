@@ -26,6 +26,11 @@ void BossGuns::SetInformation(const D3DXVECTOR3& _position)
 	MonsterBase::SetInformation(_position);
 }
 
+void BossGuns::UnAttatch(void)
+{
+	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
+}
+
 INT BossGuns::Update(const FLOAT& dt)
 {
 	return MonsterBase::Update(dt);

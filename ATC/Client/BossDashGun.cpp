@@ -48,7 +48,7 @@ void BossDashGun::Movement(const FLOAT& dt)
 	{
 		movementspeed = 1.f;
 		int movementindex = rand() % 2;
-		movementindex = 0;
+		movementindex = 1;
 		// 보고있는 방향으로 Dash하거나
 		if (movementindex == 0)
 		{
@@ -66,7 +66,25 @@ void BossDashGun::Movement(const FLOAT& dt)
 		// 총한발 쏘기
 		else
 		{
-
+			D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
+			std::cout << dir.x << " " << dir.y << " " << dir.z << std::endl;
+			movementqueue.emplace([=]()->bool
+				{
+					currentState = MONSTERSHOOT;
+					mesh->SetAnimationSet(currentState);
+					delta += dt;
+					if (delta < 2.f)
+					{
+						transform->localPosition += dir * 5;
+					}
+					else
+					{
+						delta = 0;
+						return true;
+					}
+					return false;
+				});
+			movementspeed = 3.f;
 		}
 	}
 }

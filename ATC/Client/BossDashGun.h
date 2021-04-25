@@ -4,6 +4,7 @@ class BossDashGun final :
     public BossGuns
 {
 private:
+    float delta{ 0.f };
 protected:
 public:
     explicit BossDashGun(void);

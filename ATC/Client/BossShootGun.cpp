@@ -92,8 +92,6 @@ INT BossShootGun::Update(const FLOAT& dt)
 
 void BossShootGun::LateUpdate(const FLOAT& dt)
 {
-	
-
 	BossGuns::LateUpdate(dt);
 }
 

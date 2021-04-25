@@ -196,7 +196,9 @@ void Boss::DieAction(void)
 	for (int i = 0; i < 2; ++i)
 	{
 		bossDashGuns[i]->isAttatched = false;
+		bossDashGuns[i]->UnAttatch();
 		bossShootGuns[i]->isAttatched = false;
+		bossShootGuns[i]->UnAttatch();
 	}
 }
 
