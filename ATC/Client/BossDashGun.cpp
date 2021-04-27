@@ -46,9 +46,8 @@ void BossDashGun::Movement(const FLOAT& dt)
 {
 	if (isAttatched == false)
 	{
-		movementspeed = 1.f;
+		movementspeed = 3.f;
 		int movementindex = rand() % 2;
-		movementindex = 1;
 		// 보고있는 방향으로 Dash하거나
 		if (movementindex == 0)
 		{
@@ -67,7 +66,6 @@ void BossDashGun::Movement(const FLOAT& dt)
 		else
 		{
 			D3DXVECTOR3 dir = *reinterpret_cast<D3DXVECTOR3*>(&transform->worldMatrix._31);
-			std::cout << dir.x << " " << dir.y << " " << dir.z << std::endl;
 			movementqueue.emplace([=]()->bool
 				{
 					currentState = MONSTERSHOOT;
@@ -75,7 +73,12 @@ void BossDashGun::Movement(const FLOAT& dt)
 					delta += dt;
 					if (delta < 2.f)
 					{
-						transform->localPosition += dir * 5;
+						transform->localPosition += dir * 10;
+						if (transform->localPosition.y < -50.f)
+						{
+							delta = 0;
+							return true;
+						}
 					}
 					else
 					{
@@ -84,7 +87,7 @@ void BossDashGun::Movement(const FLOAT& dt)
 					}
 					return false;
 				});
-			movementspeed = 3.f;
+			movementspeed = 6.f;
 		}
 	}
 }

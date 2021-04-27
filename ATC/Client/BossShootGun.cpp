@@ -49,8 +49,6 @@ void BossShootGun::Movement(const FLOAT& dt)
 	if (isAttatched == false)
 	{
 		int movementindex = rand() % 2;
-		movementindex = 1;
-		// ¾àÇÑ°Å 2°³½î°Å³ª
 		if (movementindex == 0)
 		{
 			FLOAT x = (rand() % 100) - (rand() % 50);
@@ -64,8 +62,6 @@ void BossShootGun::Movement(const FLOAT& dt)
 				});
 			movementspeed = 1.f;
 		}
-
-		// ÃÑ Å«°ÅÇÏ³ª½î°Å³ª 
 		else
 		{
 			movementqueue.emplace([=]()->bool
@@ -78,7 +74,7 @@ void BossShootGun::Movement(const FLOAT& dt)
 					m->SetInformation(pos, dir, 2);
 					return true;
 				});
-			movementspeed = 3.f;
+			movementspeed = 5.f;
 		}
 	}
 
