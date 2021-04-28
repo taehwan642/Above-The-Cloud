@@ -11,6 +11,7 @@ class CutSceneCamera final :
 private:
     Engine::Camera* camera = nullptr;
     Engine::Transform* transform = nullptr;
+    CUTSCENEINDEX index;
 protected:
 public:
     explicit CutSceneCamera(void);
