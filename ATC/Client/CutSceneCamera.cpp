@@ -20,6 +20,12 @@ CutSceneCamera::~CutSceneCamera(void)
 {
 }
 
+void
+CutSceneCamera::SetCutSceneIndex(CUTSCENEINDEX _index)
+{
+	index = _index;
+}
+
 INT 
 CutSceneCamera::Update(const FLOAT& dt)
 {
@@ -34,6 +40,7 @@ CutSceneCamera::LateUpdate(const FLOAT& dt)
 	case CUTSCENE_PLAYERDEAD: {break; }
 	case CUTSCENE_BOSSSPAWN: {break; }
 	case CUTSCENE_BOSSDEAD: {break; }
+	case CUTSCENE_NONE: {break; }
 	default:
 		break;
 	}
@@ -65,6 +72,12 @@ CutSceneCamera::LateUpdate(const FLOAT& dt)
 	camera->SetViewMatrix(im);
 	camera->Render(dt);
 	GameObject::LateUpdate(dt);
+}
+
+CUTSCENEINDEX 
+CutSceneCamera::GetCutSceneIndex(void) const
+{
+	return index;
 }
 
 void 

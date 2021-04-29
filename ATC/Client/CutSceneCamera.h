@@ -17,6 +17,9 @@ public:
     explicit CutSceneCamera(void);
     virtual ~CutSceneCamera(void);
 
+    void SetCutSceneIndex(CUTSCENEINDEX _index);
+    CUTSCENEINDEX GetCutSceneIndex(void) const;
+
     INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;

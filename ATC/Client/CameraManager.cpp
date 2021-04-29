@@ -17,6 +17,17 @@ void
 CameraManager::SetCamera(CAMERAINDEX _key)
 {
 	currentCamera = cameraMap[_key];
+	currentIndex = _key;
+}
+
+Engine::GameObject* CameraManager::GetCurrentCamera(void) const
+{
+	return currentCamera;
+}
+
+CAMERAINDEX CameraManager::GetCurrentIndex(void) const
+{
+	return currentIndex;
 }
 
 void 

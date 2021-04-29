@@ -82,6 +82,16 @@ void GameScene::Update(const FLOAT& dt)
 	if (DXUTWasKeyPressed('P'))
 		Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
 
+	if (CameraManager::GetInstance()->GetCurrentIndex() == CAM_CUTSCENE)
+	{
+		Engine::GameObject* cam = CameraManager::GetInstance()->GetCurrentCamera();
+		if (dynamic_cast<CutSceneCamera*>(cam)->GetCutSceneIndex() == CUTSCENE_NONE)
+		{
+			CameraManager::GetInstance()->SetCamera(CAM_PLAYER);
+		}
+	}
+
+
 	if (DXUTWasKeyPressed('I'))
 		CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
 	if (DXUTWasKeyPressed('J'))
