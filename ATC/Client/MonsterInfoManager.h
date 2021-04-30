@@ -9,7 +9,9 @@ class MonsterInfoManager final :
 {
 public:
 	// 원하는 태그의 Transform들의 list 받아오기
+	void AddTransformData(MonsterType _type, Engine::Transform* _transform);
 	// Transform을 원하는 태그의 list에 넣기
+	std::list<Engine::Transform*> GetListWithMonsterType(MonsterType _type);
 
 protected:
 
