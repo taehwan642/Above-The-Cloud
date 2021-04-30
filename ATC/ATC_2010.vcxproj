@@ -396,7 +396,7 @@
     <ClCompile Include="Client\CameraManager.cpp" />
     <ClCompile Include="Client\CutSceneCamera.cpp" />
     <ClCompile Include="Client\MenuCamera.cpp" />
-    <ClCompile Include="Client\MonsterObserver.cpp" />
+    <ClCompile Include="Client\MonsterInfoManager.cpp" />
     <ClCompile Include="Client\PlaneCamera.cpp" />
     <ClCompile Include="Client\HealthPoint.cpp" />
     <ClCompile Include="Client\HealthPointGroup.cpp" />
@@ -459,7 +459,7 @@
     <ClInclude Include="Client\CameraManager.h" />
     <ClInclude Include="Client\CutSceneCamera.h" />
     <ClInclude Include="Client\MenuCamera.h" />
-    <ClInclude Include="Client\MonsterObserver.h" />
+    <ClInclude Include="Client\MonsterInfoManager.h" />
     <ClInclude Include="Client\MonsterSpawnManager.h" />
     <ClInclude Include="Client\PlaneCamera.h" />
     <ClInclude Include="Client\HealthPoint.h" />

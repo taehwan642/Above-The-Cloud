@@ -243,9 +243,6 @@
     <Filter Include="2Client\1GameObject\3UI\3Radar\1RadarDot">
       <UniqueIdentifier>{00898c09-68fb-46e9-aec1-da32c3f567a0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Client\2Observer\1MonsterObserver">
-      <UniqueIdentifier>{205a6872-fbf0-4717-bc07-84390f2dc2bb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2Client\3Manager\1CameraManager">
       <UniqueIdentifier>{66de4583-e3d3-4882-8b20-adc7246e442a}</UniqueIdentifier>
     </Filter>
@@ -257,6 +254,9 @@
     </Filter>
     <Filter Include="2Client\1GameObject\5Monsters\0Monster\3BossGuns\1BossShootGun">
       <UniqueIdentifier>{aad9c8cd-f828-401d-a6e9-2fa1c9eb1166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Client\3Manager\2MonsterInfoManager">
+      <UniqueIdentifier>{cb773fc6-25dd-4adf-860c-cb52e8571c4a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -502,14 +502,14 @@
     <ClCompile Include="Client\RadarDot.cpp">
       <Filter>2Client\1GameObject\3UI\3Radar\1RadarDot</Filter>
     </ClCompile>
-    <ClCompile Include="Client\MonsterObserver.cpp">
-      <Filter>2Client\2Observer\1MonsterObserver</Filter>
-    </ClCompile>
     <ClCompile Include="Client\CameraManager.cpp">
       <Filter>2Client\3Manager\1CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="Client\BossGuns.cpp">
       <Filter>2Client\1GameObject\5Monsters\0Monster\3BossGuns</Filter>
+    </ClCompile>
+    <ClCompile Include="Client\MonsterInfoManager.cpp">
+      <Filter>2Client\3Manager\2MonsterInfoManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -699,14 +699,14 @@
     <ClInclude Include="Client\RadarDot.h">
       <Filter>2Client\1GameObject\3UI\3Radar\1RadarDot</Filter>
     </ClInclude>
-    <ClInclude Include="Client\MonsterObserver.h">
-      <Filter>2Client\2Observer\1MonsterObserver</Filter>
-    </ClInclude>
     <ClInclude Include="Client\CameraManager.h">
       <Filter>2Client\3Manager\1CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="Client\BossGuns.h">
       <Filter>2Client\1GameObject\5Monsters\0Monster\3BossGuns</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\MonsterInfoManager.h">
+      <Filter>2Client\3Manager\2MonsterInfoManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

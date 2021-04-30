@@ -503,12 +503,8 @@ enum MonsterType
     MONSTER2,
     BOSS,
     BOSSDASHGUN,
-    BOSSSHOOTGUN
-};
-
-struct MonsterSpawnData
-{
-    MonsterType type;
+    BOSSSHOOTGUN,
+    MONSTEREND
 };
 
 enum Stage
@@ -548,5 +544,4 @@ enum CUTSCENEINDEX : USHORT
     CUTSCENE_BOSSDEAD,
     CUTSCENE_NONE
 };
-
 #endif
