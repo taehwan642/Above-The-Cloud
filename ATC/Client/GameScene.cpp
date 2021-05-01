@@ -17,6 +17,7 @@
 #include "RadarPlane.h"
 #include "CameraManager.h"
 #include "CutSceneCamera.h"
+#include "MonsterInfoManager.h"
 #include "GameScene.h"
 
 void GameScene::AddStage1Data(void)
@@ -118,6 +119,7 @@ void GameScene::Exit(void)
 	Engine::GraphicsManager::GetInstance()->DeleteSprite();
 	MonsterSpawnManager::GetInstance()->DeleteDatas();
 	CameraManager::GetInstance()->DeleteCameraDatas();
+	MonsterInfoManager::GetInstance()->DeleteTransformDatas();
 	Scene::Exit();
 }
 

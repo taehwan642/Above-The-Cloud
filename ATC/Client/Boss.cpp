@@ -12,6 +12,7 @@
 #include "MonsterBullet.h"
 #include "BossDashGun.h"
 #include "BossShootGun.h"
+#include "MonsterInfoManager.h"
 #include "Boss.h"
 
 Boss::Boss(void)
@@ -75,6 +76,8 @@ Boss::Boss(void)
 	theta[2] = D3DX_PI / 2;
 	// cos{(3*PI)/2} = 0, sin{(3*PI)/2} = -1
 	theta[3] = -(D3DX_PI / 2);
+
+	MonsterInfoManager::GetInstance()->AddTransformData(BOSS, transform);
 }
 
 Boss::~Boss(void)
@@ -237,6 +240,9 @@ INT Boss::Update(const FLOAT& dt)
 
 void Boss::LateUpdate(const FLOAT& dt)
 {
+	//std::cout << "BOSS : " << transform->localPosition.x << " " << 
+	//	transform->localPosition.y << " " << transform->localPosition.z << " " << std::endl;
+
 	D3DXVECTOR3 look = observer->GetTransform()->localPosition - transform->localPosition;
 	D3DXVec3Normalize(&look, &look);
 

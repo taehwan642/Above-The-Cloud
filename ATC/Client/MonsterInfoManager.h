@@ -12,6 +12,10 @@ public:
 	void AddTransformData(MonsterType _type, Engine::Transform* _transform);
 	// Transform을 원하는 태그의 list에 넣기
 	std::list<Engine::Transform*> GetListWithMonsterType(MonsterType _type);
+	
+	// 죽었을 때 transform 데이터를 빼야함. 그렇다면 Transform이 아닌 Monster를 받아야할듯.
+
+	void DeleteTransformDatas(void);
 
 protected:
 

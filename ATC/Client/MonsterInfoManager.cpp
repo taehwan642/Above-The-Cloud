@@ -16,3 +16,10 @@ std::list<Engine::Transform*> MonsterInfoManager::GetListWithMonsterType(Monster
 {
     return monsterTransforms[_type];
 }
+
+void MonsterInfoManager::DeleteTransformDatas(void)
+{
+    for (auto& it : monsterTransforms)
+        it.second.clear();
+    monsterTransforms.clear();
+}

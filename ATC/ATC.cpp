@@ -10,6 +10,7 @@
 #include "Engine/RenderManager.h"
 #include "Client/MonsterSpawnManager.h"
 #include "Client/CameraManager.h"
+#include "Client/MonsterInfoManager.h"
 #include "Client/GameScene.h"
 #include "Client/MenuScene.h"
 #include "Client/LoadScene.h"
@@ -84,6 +85,9 @@ void CALLBACK OnD3D9DestroyDevice( void* pUserContext )
     CameraManager::GetInstance()->DeleteCameraDatas();
     CameraManager::DestroyInstance();
 
+    MonsterInfoManager::GetInstance()->DeleteTransformDatas();
+    MonsterInfoManager::DestroyInstance();
+
     Engine::RenderManager::GetInstance()->ReleaseAllObjects();
     Engine::RenderManager::DestroyInstance();
 
@@ -91,6 +95,7 @@ void CALLBACK OnD3D9DestroyDevice( void* pUserContext )
     Engine::SubjectManager::DestroyInstance();
 
     Engine::RaycastManager::DestroyInstance();
+
 }
 
 
