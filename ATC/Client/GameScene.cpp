@@ -74,7 +74,8 @@ void GameScene::Start(void)
 
 	CameraManager::GetInstance()->AddCamera(CAM_PLAYER, new PlaneCamera());
 	CameraManager::GetInstance()->AddCamera(CAM_CUTSCENE, new CutSceneCamera());
-	CameraManager::GetInstance()->SetCamera(CAM_PLAYER);
+	CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
+	CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_BOSSSPAWN);
 }
 
 void GameScene::Update(const FLOAT& dt)

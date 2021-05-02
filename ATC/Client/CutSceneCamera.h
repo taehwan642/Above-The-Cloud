@@ -11,7 +11,11 @@ class CutSceneCamera final :
 private:
     Engine::Camera* camera = nullptr;
     Engine::Transform* transform = nullptr;
-    CUTSCENEINDEX index;
+    CUTSCENEINDEX index{CUTSCENE_NONE};
+    float delta{ 0.0f };
+
+    void LookAtBoss(void);
+
 protected:
 public:
     explicit CutSceneCamera(void);

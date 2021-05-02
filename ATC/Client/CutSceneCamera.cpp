@@ -27,24 +27,15 @@ CutSceneCamera::SetCutSceneIndex(CUTSCENEINDEX _index)
 	index = _index;
 }
 
-INT 
-CutSceneCamera::Update(const FLOAT& dt)
+CUTSCENEINDEX
+CutSceneCamera::GetCutSceneIndex(void) const
 {
-	return GameObject::Update(dt);
+	return index;
 }
 
-void 
-CutSceneCamera::LateUpdate(const FLOAT& dt)
+void
+CutSceneCamera::LookAtBoss(void)
 {
-	switch (index)
-	{
-	case CUTSCENE_PLAYERDEAD: {break; }
-	case CUTSCENE_BOSSSPAWN: {break; }
-	case CUTSCENE_BOSSDEAD: {break; }
-	case CUTSCENE_NONE: {break; }
-	default:
-		break;
-	}
 	// 1. MonsterObserver에 위치 받아서
 	std::list<Engine::Transform*> list = MonsterInfoManager::GetInstance()->GetListWithMonsterType(BOSS);
 	// 2. 보스인지 확인하고
@@ -56,21 +47,54 @@ CutSceneCamera::LateUpdate(const FLOAT& dt)
 	// 4. 시간이 지나면 다시 연출 끝났다고 플래그 세우기
 	D3DXVECTOR3 playerlook = t->localPosition - transform->localPosition;
 	D3DXVec3Normalize(&playerlook, &playerlook);
-	
+
 	D3DXVECTOR3 right;
 	D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &playerlook);
 	D3DXVec3Normalize(&right, &right);
-	
+
 	D3DXVECTOR3 up;
 	D3DXVec3Cross(&up, &playerlook, &right);
 	D3DXVec3Normalize(&up, &up);
-	
+
 	D3DXMATRIX matRot;
 	D3DXMatrixIdentity(&matRot);
 	memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
 	memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
 	memcpy(&matRot._31, &playerlook, sizeof(D3DXVECTOR3));
 	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
+}
+
+INT 
+CutSceneCamera::Update(const FLOAT& dt)
+{
+	return GameObject::Update(dt);
+}
+
+void 
+CutSceneCamera::LateUpdate(const FLOAT& dt)
+{
+	delta += dt;
+	switch (index)
+	{
+	case CUTSCENE_PLAYERDEAD: {break; }
+	case CUTSCENE_BOSSSPAWN: 
+	{
+		if (delta < 3)
+		{
+			LookAtBoss();
+		}
+		else
+		{
+			delta = 0;
+			index = CUTSCENE_NONE;
+		}
+		break; 
+	}
+	case CUTSCENE_BOSSDEAD: {break; }
+	case CUTSCENE_NONE: {break; }
+	default:
+		break;
+	}
 
 	D3DXMATRIX im;
 	D3DXMatrixIdentity(&im);
@@ -78,12 +102,6 @@ CutSceneCamera::LateUpdate(const FLOAT& dt)
 	camera->SetViewMatrix(im);
 	camera->Render(dt);
 	GameObject::LateUpdate(dt);
-}
-
-CUTSCENEINDEX 
-CutSceneCamera::GetCutSceneIndex(void) const
-{
-	return index;
 }
 
 void 

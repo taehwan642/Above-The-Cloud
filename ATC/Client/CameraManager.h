@@ -11,8 +11,14 @@ private:
 protected:
 public:
     explicit CameraManager(void) = default;
+    CameraManager(const CameraManager&) = delete;
+    CameraManager(CameraManager&&) = delete;
+
     void AddCamera(CAMERAINDEX _key, Engine::GameObject* _camera);
     void SetCamera(CAMERAINDEX _key);
+
+    CUTSCENEINDEX GetCurrentCutScene(void) const;
+    void SetCurrentCutScene(CUTSCENEINDEX _index);
 
     Engine::GameObject* GetCurrentCamera(void) const;
     CAMERAINDEX GetCurrentIndex(void) const;
