@@ -2,6 +2,8 @@
 #include "../Engine/Camera.h"
 #include "../Engine/Transform.h"
 #include "MonsterInfoManager.h"
+#include "PlayerObserver.h"
+#include "../Engine/SubjectManager.h"
 #include "CutSceneCamera.h"
 
 CutSceneCamera::CutSceneCamera(void)
@@ -15,6 +17,10 @@ CutSceneCamera::CutSceneCamera(void)
 		static_cast<FLOAT>(DXUTGetD3D9BackBufferSurfaceDesc()->Height),
 		1,
 		500);
+
+	observer = new PlayerObserver();
+	Engine::SubjectManager::GetInstance()->Subscribe(observer);
+	Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERTRANSFORM));
 }
 
 CutSceneCamera::~CutSceneCamera(void)
@@ -33,6 +39,28 @@ CutSceneCamera::GetCutSceneIndex(void) const
 	return index;
 }
 
+void 
+CutSceneCamera::LookAt(const D3DXVECTOR3& _look)
+{
+	D3DXVECTOR3 look = _look;// = t->localPosition - transform->localPosition;
+	D3DXVec3Normalize(&look, &look);
+
+	D3DXVECTOR3 right;
+	D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &look);
+	D3DXVec3Normalize(&right, &right);
+
+	D3DXVECTOR3 up;
+	D3DXVec3Cross(&up, &look, &right);
+	D3DXVec3Normalize(&up, &up);
+
+	D3DXMATRIX matRot;
+	D3DXMatrixIdentity(&matRot);
+	memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
+	memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
+	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
+	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
+}
+
 void
 CutSceneCamera::LookAtBoss(void)
 {
@@ -43,25 +71,13 @@ CutSceneCamera::LookAtBoss(void)
 	Engine::Transform* t = *list.begin(); // 보스는 오로지 하나만 존재하기에.
 	//std::cout << "LIST : " << t->localPosition.x << " " << t->localPosition.y << " " << t->localPosition.z << " " << std::endl;
 	// 위 테스트 만족.
-	// 
 	// 4. 시간이 지나면 다시 연출 끝났다고 플래그 세우기
-	D3DXVECTOR3 playerlook = t->localPosition - transform->localPosition;
-	D3DXVec3Normalize(&playerlook, &playerlook);
+	LookAt(t->localPosition - transform->localPosition);
+}
 
-	D3DXVECTOR3 right;
-	D3DXVec3Cross(&right, &D3DXVECTOR3(0, 1, 0), &playerlook);
-	D3DXVec3Normalize(&right, &right);
-
-	D3DXVECTOR3 up;
-	D3DXVec3Cross(&up, &playerlook, &right);
-	D3DXVec3Normalize(&up, &up);
-
-	D3DXMATRIX matRot;
-	D3DXMatrixIdentity(&matRot);
-	memcpy(&matRot._11, &right, sizeof(D3DXVECTOR3));
-	memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
-	memcpy(&matRot._31, &playerlook, sizeof(D3DXVECTOR3));
-	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
+void CutSceneCamera::LookAtPlane(void)
+{
+	LookAt(observer->GetTransform()->localPosition - transform->localPosition);
 }
 
 INT 
@@ -73,12 +89,26 @@ CutSceneCamera::Update(const FLOAT& dt)
 void 
 CutSceneCamera::LateUpdate(const FLOAT& dt)
 {
-	delta += dt;
+
 	switch (index)
 	{
-	case CUTSCENE_PLAYERDEAD: {break; }
+	case CUTSCENE_PLAYERDEAD: 
+	{
+		delta += dt;
+		if (delta < 3)
+		{
+			LookAtPlane();
+		}
+		else
+		{
+			delta = 0;
+			index = CUTSCENE_NONE;
+		}
+		break; 
+	}
 	case CUTSCENE_BOSSSPAWN: 
 	{
+		delta += dt;
 		if (delta < 3)
 		{
 			LookAtBoss();
@@ -113,5 +143,7 @@ CutSceneCamera::Render(const FLOAT& dt)
 void 
 CutSceneCamera::Free(void)
 {
+	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
+	observer->Free();
 	GameObject::Free();
 }

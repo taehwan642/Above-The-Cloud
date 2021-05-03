@@ -5,10 +5,11 @@ class BossGuns :
 {
 private:
 protected:
+    explicit BossGuns(void);
+
 public:
     bool isAttatched = false;
 
-    explicit BossGuns(void);
     virtual ~BossGuns(void);
 
     void SetInformation(const D3DXVECTOR3& _position) override;

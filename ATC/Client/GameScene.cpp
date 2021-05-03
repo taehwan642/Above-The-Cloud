@@ -75,7 +75,7 @@ void GameScene::Start(void)
 	CameraManager::GetInstance()->AddCamera(CAM_PLAYER, new PlaneCamera());
 	CameraManager::GetInstance()->AddCamera(CAM_CUTSCENE, new CutSceneCamera());
 	CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
-	CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_BOSSSPAWN);
+	CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_PLAYERDEAD);
 }
 
 void GameScene::Update(const FLOAT& dt)
@@ -83,6 +83,11 @@ void GameScene::Update(const FLOAT& dt)
 	Engine::CollisionManager::GetInstance()->UpdateData();
 	if (DXUTWasKeyPressed('P'))
 		Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
+
+	if (DXUTWasKeyPressed('I'))
+		CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
+	if (DXUTWasKeyPressed('J'))
+		CameraManager::GetInstance()->SetCamera(CAM_PLAYER);
 
 	if (CameraManager::GetInstance()->GetCurrentIndex() == CAM_CUTSCENE)
 	{
@@ -92,13 +97,6 @@ void GameScene::Update(const FLOAT& dt)
 			CameraManager::GetInstance()->SetCamera(CAM_PLAYER);
 		}
 	}
-
-
-	if (DXUTWasKeyPressed('I'))
-		CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
-	if (DXUTWasKeyPressed('J'))
-		CameraManager::GetInstance()->SetCamera(CAM_PLAYER);
-
 
 	Scene::Update(dt);
 	CameraManager::GetInstance()->UpdateCamera(dt);
