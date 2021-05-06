@@ -112,5 +112,6 @@ void BossShootGun::Free(void)
 {
 	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
 	observer->Release();
+	std::cout <<  "BS : "<< transform->GetRefCount() << std::endl;
 	BossGuns::Free();
 }

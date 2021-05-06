@@ -76,6 +76,7 @@ void MonsterBase::LateUpdate(const FLOAT& dt)
 	{
 		currentState = MONSTERDIE;
 		mesh->SetAnimationSet(currentState);
+		DieAction();
 	}
 
 	if (currentState == MONSTERSHOOT)
@@ -100,7 +101,6 @@ void MonsterBase::LateUpdate(const FLOAT& dt)
 					{ transform->localPosition.x + distance, -45, transform->localPosition.z + distance },
 					{ 5,5,5 }, nullptr, 0.05f);
 			}
-			DieAction();
 			isActive = false;
 		}
 	}

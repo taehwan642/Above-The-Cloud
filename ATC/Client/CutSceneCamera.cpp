@@ -69,12 +69,19 @@ CutSceneCamera::LookAtBoss(void)
 	std::list<MonsterBase*> list = MonsterInfoManager::GetInstance()->GetListWithMonsterType(BOSS);
 	// 2. 보스인지 확인하고
 	// 3. 보스라면 그 위치 주소 받아서 바라보게 하기
-	MonsterBase* m = (*list.begin()); // 보스는 오로지 하나만 존재하기에.
-	Engine::Transform* t = dynamic_cast<Engine::Transform*>(m->GetComponent(L"Transform"));
-	//std::cout << "LIST : " << t->localPosition.x << " " << t->localPosition.y << " " << t->localPosition.z << " " << std::endl;
-	// 위 테스트 만족.
-	// 4. 시간이 지나면 다시 연출 끝났다고 플래그 세우기
-	LookAt(t->localPosition - transform->localPosition);
+	if (list.size() != 0)
+	{
+		MonsterBase* m = (*list.begin()); // 보스는 오로지 하나만 존재하기에.
+		Engine::Transform* t = dynamic_cast<Engine::Transform*>(m->GetComponent(L"Transform"));
+		//std::cout << "LIST : " << t->localPosition.x << " " << t->localPosition.y << " " << t->localPosition.z << " " << std::endl;
+		// 위 테스트 만족.
+		// 4. 시간이 지나면 다시 연출 끝났다고 플래그 세우기
+		LookAt(t->localPosition - transform->localPosition);
+	}
+	else
+	{
+		index = CUTSCENE_NONE;
+	}
 }
 
 void CutSceneCamera::LookAtPlane(void)
@@ -109,6 +116,7 @@ CutSceneCamera::LateUpdate(const FLOAT& dt)
 		break; 
 	}
 	case CUTSCENE_BOSSSPAWN: 
+	case CUTSCENE_BOSSDEAD: 
 	{
 		delta += dt;
 		if (delta < 3)
@@ -122,7 +130,6 @@ CutSceneCamera::LateUpdate(const FLOAT& dt)
 		}
 		break; 
 	}
-	case CUTSCENE_BOSSDEAD: {break; }
 	case CUTSCENE_NONE: {break; }
 	default:
 		break;
@@ -146,6 +153,6 @@ void
 CutSceneCamera::Free(void)
 {
 	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
-	observer->Free();
+	observer->Release();
 	GameObject::Free();
 }

@@ -10,6 +10,7 @@ private:
     D3DXVECTOR3 testPosition = { 5,5,50 };
     PlayerObserver* observer = nullptr;
     std::vector<std::pair<RadarDot*, D3DXVECTOR3>> dotpositions;
+    RadarDot* middledot{ nullptr };
 
 protected:
 public:

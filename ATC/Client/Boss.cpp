@@ -13,6 +13,7 @@
 #include "BossDashGun.h"
 #include "BossShootGun.h"
 #include "MonsterInfoManager.h"
+#include "CameraManager.h"
 #include "Boss.h"
 
 Boss::Boss(void)
@@ -62,7 +63,7 @@ Boss::Boss(void)
 		}
 		else
 		{
-			gunTransforms[i] = dynamic_cast<Engine::Transform*>(bossDashGuns[i]->GetComponent(L"Transform"));
+			gunTransforms[i] = dynamic_cast<Engine::Transform*>(bossShootGuns[i - 2]->GetComponent(L"Transform"));
 			gunTransforms[i]->AddReference();
 		}
 	}
@@ -203,13 +204,16 @@ void Boss::DieAction(void)
 		bossShootGuns[i]->isAttatched = false;
 		bossShootGuns[i]->UnAttatch();
 	}
+	
+	CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
+	CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_BOSSDEAD);
 }
 
 INT Boss::Update(const FLOAT& dt)
 {
 	MonsterBase::Update(dt);
 
-	if (isActive == true)
+	if (isActive == true && currentState != MONSTERDIE)
 	{
 		for (int i = 0; i < 4; ++i)
 		{
@@ -293,11 +297,8 @@ void Boss::Free(void)
 {
 	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
 	observer->Release();
-	for (int i = 0; i < 2; ++i)
+
+	for (int i = 0; i < 4; ++i)
 		Safe_Release(gunTransforms[i]);
-	/*for (int i = 0; i < 2; ++i)
-		Safe_Release(bossDashGuns[i]);
-	for (int i = 0; i < 2; ++i)
-		Safe_Release(bossShootGuns[i]);*/
 	MonsterBase::Free();
 }

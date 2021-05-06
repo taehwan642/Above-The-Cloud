@@ -10,6 +10,7 @@ protected:
 	virtual ~Base(void) {};
 	virtual void Free(void) PURE;
 public:
+	ULONG GetRefCount(void) const;
 	ULONG AddReference(void);
 	ULONG Release(void);
 };

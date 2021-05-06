@@ -3,6 +3,11 @@
 
 USING(Engine)
 
+ULONG Base::GetRefCount(void) const
+{
+	return refCount;
+}
+
 ULONG Base::AddReference(void)
 {
 	return refCount++;

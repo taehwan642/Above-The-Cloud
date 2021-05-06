@@ -124,5 +124,7 @@ void BossDashGun::Free(void)
 {
 	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
 	observer->Release();
+	std::cout << "BD : " << transform->GetRefCount() << std::endl;
+
 	BossGuns::Free();
 }

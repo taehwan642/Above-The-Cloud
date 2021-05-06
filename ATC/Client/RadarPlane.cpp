@@ -11,8 +11,8 @@ RadarPlane::RadarPlane(void) :
 	StaticUI(L"RadarPlane")
 {
 	transform->localPosition = { 1150, 600 , 0 };
-	RadarDot* dot = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<RadarDot>(UI, L"RadarDot");
-	dot->SetPosition(transform->localPosition);
+	middledot = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<RadarDot>(UI, L"RadarDot");
+	middledot->SetPosition(transform->localPosition);
 
 	observer = new PlayerObserver();
 	Engine::SubjectManager::GetInstance()->Subscribe(observer);
@@ -57,6 +57,8 @@ void RadarPlane::Render(const FLOAT& dt)
 
 void RadarPlane::Free(void)
 {
+	for (int i = 0; i < dotpositions.size(); ++i)
+		dotpositions.at(i).first->Release();
 	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
 	observer->Release();
 	StaticUI::Free();

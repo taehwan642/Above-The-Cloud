@@ -61,6 +61,7 @@ CameraManager::LateUpdateCamera(const FLOAT& dt)
 void
 CameraManager::DeleteCameraDatas(void)
 {
+	currentCamera = nullptr;
 	for (auto& it : cameraMap)
 	{
 		it.second->Release();
