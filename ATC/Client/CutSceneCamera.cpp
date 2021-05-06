@@ -4,6 +4,7 @@
 #include "MonsterInfoManager.h"
 #include "PlayerObserver.h"
 #include "../Engine/SubjectManager.h"
+#include "MonsterBase.h"
 #include "CutSceneCamera.h"
 
 CutSceneCamera::CutSceneCamera(void)
@@ -65,10 +66,11 @@ void
 CutSceneCamera::LookAtBoss(void)
 {
 	// 1. MonsterObserver에 위치 받아서
-	std::list<Engine::Transform*> list = MonsterInfoManager::GetInstance()->GetListWithMonsterType(BOSS);
+	std::list<MonsterBase*> list = MonsterInfoManager::GetInstance()->GetListWithMonsterType(BOSS);
 	// 2. 보스인지 확인하고
 	// 3. 보스라면 그 위치 주소 받아서 바라보게 하기
-	Engine::Transform* t = *list.begin(); // 보스는 오로지 하나만 존재하기에.
+	MonsterBase* m = (*list.begin()); // 보스는 오로지 하나만 존재하기에.
+	Engine::Transform* t = dynamic_cast<Engine::Transform*>(m->GetComponent(L"Transform"));
 	//std::cout << "LIST : " << t->localPosition.x << " " << t->localPosition.y << " " << t->localPosition.z << " " << std::endl;
 	// 위 테스트 만족.
 	// 4. 시간이 지나면 다시 연출 끝났다고 플래그 세우기

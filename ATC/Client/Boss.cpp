@@ -77,7 +77,7 @@ Boss::Boss(void)
 	// cos{(3*PI)/2} = 0, sin{(3*PI)/2} = -1
 	theta[3] = -(D3DX_PI / 2);
 
-	MonsterInfoManager::GetInstance()->AddTransformData(BOSS, transform);
+	MonsterInfoManager::GetInstance()->AddMonsterData(BOSS, this);
 }
 
 Boss::~Boss(void)

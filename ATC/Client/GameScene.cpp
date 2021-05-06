@@ -75,12 +75,13 @@ void GameScene::Start(void)
 	CameraManager::GetInstance()->AddCamera(CAM_PLAYER, new PlaneCamera());
 	CameraManager::GetInstance()->AddCamera(CAM_CUTSCENE, new CutSceneCamera());
 	CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
-	CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_PLAYERDEAD);
+	CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_BOSSSPAWN);
 }
 
 void GameScene::Update(const FLOAT& dt)
 {
 	Engine::CollisionManager::GetInstance()->UpdateData();
+	MonsterInfoManager::GetInstance()->CheckMonsterDead();
 	if (DXUTWasKeyPressed('P'))
 		Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
 
@@ -109,6 +110,7 @@ void GameScene::LateUpdate(const FLOAT& dt)
 	Engine::CollisionManager::GetInstance()->CheckCollision(PLAYER, MONSTERMISSILE);
 	Scene::LateUpdate(dt);
 	CameraManager::GetInstance()->LateUpdateCamera(dt);
+	
 }
 
 void GameScene::Exit(void)
