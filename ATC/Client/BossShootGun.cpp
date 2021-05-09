@@ -10,6 +10,7 @@
 #include "PlayerObserver.h"
 #include "../Engine/ObjectManager.h"
 #include "MonsterBullet.h"
+#include "MonsterInfoManager.h"
 #include "BossShootGun.h"
 
 BossShootGun::BossShootGun(void)
@@ -40,6 +41,7 @@ BossShootGun::~BossShootGun(void)
 
 void BossShootGun::SetInformation(const D3DXVECTOR3& _position)
 {
+	MonsterInfoManager::GetInstance()->AddMonsterData(MonsterType::BOSSSHOOTGUN, this);
 	BossGuns::SetInformation(_position);
 }
 
@@ -112,6 +114,5 @@ void BossShootGun::Free(void)
 {
 	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
 	observer->Release();
-	std::cout <<  "BS : "<< transform->GetRefCount() << std::endl;
 	BossGuns::Free();
 }

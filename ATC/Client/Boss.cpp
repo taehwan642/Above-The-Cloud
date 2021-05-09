@@ -44,9 +44,27 @@ Boss::Boss(void)
 	revolvePoint = new Engine::Transform(transform);
 	componentgroup.emplace(L"revolvePoint", revolvePoint);
 
+	// cos(0) = 1, sin(0) = 0
+	theta[0] = 0;
+	// cos(PI) = -1, sin(PI) = 0
+	theta[1] = D3DX_PI;
+	// cos(PI/2) = 0, sin(PI/2) = 1
+	theta[2] = D3DX_PI / 2;
+	// cos{(3*PI)/2} = 0, sin{(3*PI)/2} = -1
+	theta[3] = -(D3DX_PI / 2);
+}
+
+Boss::~Boss(void)
+{
+}
+
+void Boss::SetInformation(const D3DXVECTOR3& _position)
+{
+	MonsterBase::SetInformation(_position);
+	
 	for (int i = 0; i < 2; ++i)
 	{
-		bossDashGuns[i] = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<BossDashGun>(OBJ2,L"BossDashGun");
+		bossDashGuns[i] = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<BossDashGun>(OBJ2, L"BossDashGun");
 		bossDashGuns[i]->isAttatched = true;
 		bossDashGuns[i]->SetInformation(transform->localPosition);
 		bossShootGuns[i] = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<BossShootGun>(OBJ2, L"BossShootGun");
@@ -59,43 +77,28 @@ Boss::Boss(void)
 		if (i < 2)
 		{
 			gunTransforms[i] = dynamic_cast<Engine::Transform*>(bossDashGuns[i]->GetComponent(L"Transform"));
-			gunTransforms[i]->AddReference();
+			//gunTransforms[i]->AddReference();
 		}
 		else
 		{
 			gunTransforms[i] = dynamic_cast<Engine::Transform*>(bossShootGuns[i - 2]->GetComponent(L"Transform"));
-			gunTransforms[i]->AddReference();
+			//gunTransforms[i]->AddReference();
 		}
 	}
 
-
-	// cos(0) = 1, sin(0) = 0
-	theta[0] = 0;
-	// cos(PI) = -1, sin(PI) = 0
-	theta[1] = D3DX_PI;
-	// cos(PI/2) = 0, sin(PI/2) = 1
-	theta[2] = D3DX_PI / 2;
-	// cos{(3*PI)/2} = 0, sin{(3*PI)/2} = -1
-	theta[3] = -(D3DX_PI / 2);
-
-	MonsterInfoManager::GetInstance()->AddMonsterData(BOSS, this);
-}
-
-Boss::~Boss(void)
-{
-}
-
-void Boss::SetInformation(const D3DXVECTOR3& _position)
-{
-	MonsterBase::SetInformation(_position);
 	for (int i = 0; i < 4; ++i)
 	{
 		gunTransforms[i]->localPosition = transform->localPosition;
 		memcpy(&gunTransforms[i]->worldMatrix._41, &transform->localPosition, sizeof(D3DXVECTOR3));
 	}
-	revolveLerpPoint = transform->localPosition;
-	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
 
+	revolveLerpPoint = transform->localPosition;
+
+	CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
+	CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_BOSSSPAWN);
+
+	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
+	MonsterInfoManager::GetInstance()->AddMonsterData(BOSS, this);
 }
 
 void Boss::Movement(const FLOAT& dt)
@@ -235,10 +238,7 @@ INT Boss::Update(const FLOAT& dt)
 	
 
 	//std::cout << t1->position.x << " " << t1->position.y << " " << t1->position.z << std::endl;
-	/*for (int i = 0; i < 2; ++i)
-		bossDashGuns[i]->Update(dt);
-	for (int i = 0; i < 2; ++i)
-		bossShootGuns[i]->Update(dt);*/
+	
 	return OBJALIVE;
 }
 
@@ -264,11 +264,7 @@ void Boss::LateUpdate(const FLOAT& dt)
 	memcpy(&matRot._21, &up, sizeof(D3DXVECTOR3));
 	memcpy(&matRot._31, &look, sizeof(D3DXVECTOR3));
 	D3DXQuaternionRotationMatrix(&transform->quaternion, &matRot);
-	/*for (int i = 0; i < 2; ++i)
-		bossDashGuns[i]->LateUpdate(dt);
-	for (int i = 0; i < 2; ++i)
-		bossShootGuns[i]->LateUpdate(dt);*/
-
+	
 	MonsterBase::LateUpdate(dt);
 }
 
@@ -284,11 +280,7 @@ void Boss::Render(const FLOAT& dt)
 	mesh->RenderMesh(tempeffect);
 	tempeffect->EndPass();
 	tempeffect->End();
-	//collider->RenderCollider();
-	/*for (int i = 0; i < 2; ++i)
-		bossDashGuns[i]->Render(dt);
-	for (int i = 0; i < 2; ++i)
-		bossShootGuns[i]->Render(dt);*/
+	
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	MonsterBase::Render(dt);
 }
@@ -298,7 +290,7 @@ void Boss::Free(void)
 	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
 	observer->Release();
 
-	for (int i = 0; i < 4; ++i)
-		Safe_Release(gunTransforms[i]);
+	//for (int i = 0; i < 4; ++i)
+		//Safe_Release(gunTransforms[i]);
 	MonsterBase::Free();
 }

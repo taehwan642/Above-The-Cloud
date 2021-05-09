@@ -34,6 +34,8 @@ void MonsterBase::SetInformation(const D3DXVECTOR3& _position)
 	currentState = MONSTERIDLE;
 	mesh->SetAnimationSet(currentState);
 	isActive = true;
+	while (movementqueue.empty() == false)
+		movementqueue.pop();
 	if (shadow == nullptr)
 		shadow = new Shadow(transform, { 1,1,1 });
 }

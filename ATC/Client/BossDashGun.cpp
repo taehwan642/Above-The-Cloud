@@ -9,6 +9,7 @@
 #include "../Engine/Collider.h"
 #include "PlayerObserver.h"
 #include "../Engine/ObjectManager.h"
+#include "MonsterInfoManager.h"
 #include "BossDashGun.h"
 
 BossDashGun::BossDashGun(void)
@@ -39,6 +40,7 @@ BossDashGun::~BossDashGun(void)
 
 void BossDashGun::SetInformation(const D3DXVECTOR3& _position)
 {
+	MonsterInfoManager::GetInstance()->AddMonsterData(MonsterType::BOSSDASHGUN, this);
 	BossGuns::SetInformation(_position);
 }
 
@@ -124,7 +126,5 @@ void BossDashGun::Free(void)
 {
 	Engine::SubjectManager::GetInstance()->UnSubscribe(observer);
 	observer->Release();
-	std::cout << "BD : " << transform->GetRefCount() << std::endl;
-
 	BossGuns::Free();
 }

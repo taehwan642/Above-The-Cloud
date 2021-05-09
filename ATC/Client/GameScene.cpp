@@ -38,6 +38,8 @@ void GameScene::AddStage3Data(void)
 void GameScene::Start(void)
 {
 	Engine::GraphicsManager::GetInstance()->CreateSprite();
+
+
 	Engine::Layer* l = new Engine::Layer();
 	Engine::Layer* l2 = new Engine::Layer();
 	Engine::Layer* effect = new Engine::Layer();
@@ -69,26 +71,35 @@ void GameScene::Start(void)
 	AddStage1Data();
 	AddStage2Data();
 	AddStage3Data();
-
-	MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
-
 	CameraManager::GetInstance()->AddCamera(CAM_PLAYER, new PlaneCamera());
 	CameraManager::GetInstance()->AddCamera(CAM_CUTSCENE, new CutSceneCamera());
-	CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
-	CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_BOSSSPAWN);
+	MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
 }
 
 void GameScene::Update(const FLOAT& dt)
 {
 	Engine::CollisionManager::GetInstance()->UpdateData();
 	MonsterInfoManager::GetInstance()->CheckMonsterDead();
+
+	int value = 0;
+	
+	for (int i = 0; i < MONSTEREND; ++i)
+	{
+		std::list<MonsterBase*> l = MonsterInfoManager::GetInstance()->GetListWithMonsterType(MonsterType(i));
+		if (l.size() != 0)
+			++value;
+	}
+	//std::cout << value << std::endl;
+	if(value == 0)
+		MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
+
 	if (DXUTWasKeyPressed('P'))
 		Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
 
-	if (DXUTWasKeyPressed('I'))
+	/*if (DXUTWasKeyPressed('I'))
 		CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
 	if (DXUTWasKeyPressed('J'))
-		CameraManager::GetInstance()->SetCamera(CAM_PLAYER);
+		CameraManager::GetInstance()->SetCamera(CAM_PLAYER);*/
 
 	if (CameraManager::GetInstance()->GetCurrentIndex() == CAM_CUTSCENE)
 	{
