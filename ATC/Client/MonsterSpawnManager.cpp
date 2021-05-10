@@ -44,60 +44,54 @@ void MonsterSpawnManager::AddSpawnData(const Stage& _stage, const MonsterType& _
 
 void MonsterSpawnManager::SpawnMonstersByData(const Stage& _stage)
 {
-	for (auto& iter : monsterSpawnDatas[_stage])
+	std::cout << static_cast<int>(_stage) << std::endl;
+	for (const auto& iter : monsterSpawnDatas[_stage])
 	{
-		std::list<std::pair<MonsterType, UINT>>::const_iterator iterator = monsterSpawnDatas[_stage].begin();
-		std::list<std::pair<MonsterType, UINT>>::const_iterator iterend = monsterSpawnDatas[_stage].end();
-		
-		for (; iterator != iterend;)
+		switch (iter.first)
 		{
-			switch ((*iterator).first)
+		case MONSTER1:
+		{
+			for (int i = 0; i < iter.second; ++i)
 			{
-			case MONSTER1:
+				Monster1* monster1 = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Monster1>(OBJ2, L"Monster1");
+				monster1->SetInformation(RandomPositionForMonster());
+			}
+			break;
+		}
+		case MONSTER2:
+		{
+			for (int i = 0; i < iter.second; ++i)
 			{
-				for (int i = 0; i < (*iterator).second; ++i)
-				{
-					Monster1* monster1 = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Monster1>(OBJ2, L"Monster1");
-					monster1->SetInformation(RandomPositionForMonster());
-				}
-				break;
+				Monster2* monster2 = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Monster2>(OBJ2, L"Monster2");
+				monster2->SetInformation(RandomPositionForMonster());
 			}
-			case MONSTER2:
+			break;
+		}
+		case BOSS:
+		{
+			for (int i = 0; i < iter.second; ++i)
 			{
-				for (int i = 0; i < (*iterator).second; ++i)
-				{
-					Monster2* monster2 = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Monster2>(OBJ2, L"Monster2");
-					monster2->SetInformation(RandomPositionForMonster());
-				}
-				break;
+				Boss* boss = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Boss>(OBJ2, L"Boss");
+				boss->SetInformation(RandomPositionForMonster());
 			}
-			case BOSS:
+			break;
+		}
+		case BOSSDASHGUN:
+		{
+			for (int i = 0; i < iter.second; ++i)
 			{
-				for (int i = 0; i < (*iterator).second; ++i)
-				{
-					Boss* boss = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<Boss>(OBJ2, L"Boss");
-					boss->SetInformation(RandomPositionForMonster());
-				}
-				break;
 			}
-			case BOSSDASHGUN:
+			break;
+		}
+		case BOSSSHOOTGUN:
+		{
+			for (int i = 0; i < iter.second; ++i)
 			{
-				for (int i = 0; i < (*iterator).second; ++i)
-				{
-				}
-				break;
 			}
-			case BOSSSHOOTGUN:
-			{
-				for (int i = 0; i < (*iterator).second; ++i)
-				{
-				}
-				break;
-			}
-			default:
-				break;
-			}
-			++iterator;
+			break;
+		}
+		default:
+			break;
 		}
 	}
 }

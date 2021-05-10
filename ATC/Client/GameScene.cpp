@@ -22,23 +22,24 @@
 
 void GameScene::AddStage1Data(void)
 {
-	MonsterSpawnManager::GetInstance()->AddSpawnData(STAGE1, BOSS, 1);
+	MonsterSpawnManager::GetInstance()->AddSpawnData(STAGE1, MonsterType::MONSTER1, 3);
 }
 
 void GameScene::AddStage2Data(void)
 {
-
+	MonsterSpawnManager::GetInstance()->AddSpawnData(STAGE2, MonsterType::MONSTER1, 3);
+	MonsterSpawnManager::GetInstance()->AddSpawnData(STAGE2, MonsterType::MONSTER2, 1);
 }
 
 void GameScene::AddStage3Data(void)
 {
-
+	MonsterSpawnManager::GetInstance()->AddSpawnData(STAGE3, BOSS, 1);
 }
 
 void GameScene::Start(void)
 {
 	Engine::GraphicsManager::GetInstance()->CreateSprite();
-
+	stage = STAGE1;
 
 	Engine::Layer* l = new Engine::Layer();
 	Engine::Layer* l2 = new Engine::Layer();
@@ -73,6 +74,8 @@ void GameScene::Start(void)
 	AddStage3Data();
 	CameraManager::GetInstance()->AddCamera(CAM_PLAYER, new PlaneCamera());
 	CameraManager::GetInstance()->AddCamera(CAM_CUTSCENE, new CutSceneCamera());
+	CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
+	CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_PLAYERDEAD);
 	MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
 }
 
@@ -90,8 +93,19 @@ void GameScene::Update(const FLOAT& dt)
 			++value;
 	}
 	//std::cout << value << std::endl;
-	if(value == 0)
+	if (value == 0)
+	{
+		switch (stage)
+		{
+		case STAGE1:
+			stage = STAGE2;
+			break;
+		case STAGE2:
+			stage = STAGE3;
+			break;
+		}
 		MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
+	}
 
 	if (DXUTWasKeyPressed('P'))
 		Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");

@@ -10,6 +10,7 @@
 #include "PlayerObserver.h"
 #include "Monster1.h"
 #include "../Engine/ObjectManager.h"
+#include "MonsterInfoManager.h"
 #include "Monster2.h"
 
 Monster2::Monster2(void)
@@ -75,7 +76,7 @@ void Monster2::SetInformation(const D3DXVECTOR3& _position)
 
 	moveDirection = { x,y,z };
 	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
-
+	MonsterInfoManager::GetInstance()->AddMonsterData(MONSTER2, this);
 	MonsterBase::SetInformation(_position);
 }
 

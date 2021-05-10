@@ -10,6 +10,7 @@
 #include "PlayerObserver.h"
 #include "MonsterBullet.h"
 #include "../Engine/ObjectManager.h"
+#include "MonsterInfoManager.h"
 #include "Monster1.h"
 
 bool testcase = false;
@@ -44,6 +45,7 @@ Monster1::~Monster1(void)
 void Monster1::SetInformation(const D3DXVECTOR3& _position)
 {
 	Engine::CollisionManager::GetInstance()->PushData(MONSTER, this);
+	MonsterInfoManager::GetInstance()->AddMonsterData(MONSTER1, this);
 	MonsterBase::SetInformation(_position);
 }
 
