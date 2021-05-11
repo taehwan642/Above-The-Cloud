@@ -483,9 +483,9 @@ enum ObjectTag
 struct ColliderData
 {
     std::wstring tag;
-    FLOAT radius;
-    D3DXVECTOR3* center;
-    bool isinsidemanager = false;
+    FLOAT radius{0};
+    D3DXVECTOR3* center{ nullptr };
+    bool isinsidemanager{ false };
 };
 
 static D3DXVECTOR4 worldLightPosition = { 0, 50000, 0, 1 };

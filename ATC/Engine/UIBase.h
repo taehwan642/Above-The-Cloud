@@ -15,9 +15,10 @@ protected:
     std::wstring textureTag = L"";
     bool textureInitalized = false;
     UINT currentTextureindex = 0;
-public:
+    
     explicit UIBase(void);
     virtual ~UIBase(void);
+public:
 
     void SetInformation(const std::wstring& _textureTag, Transform* _parent = nullptr);
     void SetUITexture(const UINT& _index);

@@ -22,7 +22,8 @@ RadarDot::~RadarDot(void)
 
 INT RadarDot::Update(const FLOAT& dt)
 {
-    Engine::RenderManager::GetInstance()->AddRenderObject(ID_UI, this);
+    if (isActive == true)
+        Engine::RenderManager::GetInstance()->AddRenderObject(ID_UI, this);
     return StaticUI::Update(dt);
 }
 

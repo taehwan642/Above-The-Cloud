@@ -5,7 +5,11 @@
 #include "../Engine/ObjectManager.h"
 #include "../Engine/SubjectManager.h"
 #include "PlayerObserver.h"
+#include "MonsterInfoManager.h"
+#include "MonsterBase.h"
 #include "RadarPlane.h"
+
+// 스텐실 버퍼로 한번 해보기.
 
 RadarPlane::RadarPlane(void) :
 	StaticUI(L"RadarPlane")
@@ -29,18 +33,30 @@ INT RadarPlane::Update(const FLOAT& dt)
 		v.first->SetActive(false);
 	dotpositions.clear();
 
-	D3DXVECTOR3 vec = observer->GetTransform()->localPosition - testPosition;
 	
-	dotpositions.emplace_back(
-		Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<RadarDot>(UI, L"RadarDot"),
-		std::move(vec));
+	for (int i = 0; i < MONSTEREND; ++i)
+	{
+		for (auto& v : MonsterInfoManager::GetInstance()->GetListWithMonsterType(static_cast<MonsterType>(i)))
+		{
+			D3DXVECTOR3 mpos = dynamic_cast<Engine::Transform*>(v->GetComponent(L"Transform"))->localPosition;
+			//std::cout << "-POS : " << mpos.x << " " << mpos.y << " " << mpos.z << std::endl;
+			D3DXVECTOR3 vec = observer->GetTransform()->localPosition - mpos;
+			RadarDot* d = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<RadarDot>(UI, L"RadarDot");
+			d->SetActive(true); // 구조 왜 이거 active false면 transform의 업데이트가 되지 않는지 확인해보기. 뭔가 꼬였다!!!
+			dotpositions.emplace_back(d, vec);
+		}
+	}
 	
 	for (const auto& pos : dotpositions)
-		pos.first->SetPosition(D3DXVECTOR3(
-			transform->localPosition.x + pos.second.x, 
-			transform->localPosition.y + pos.second.z, 
-			transform->localPosition.z));
-	
+	{
+		//std::cout << "RESULT : " <<  pos.second.x << " " << pos.second.z << std::endl;
+		D3DXVECTOR3 result = { transform->localPosition.x + pos.second.x,
+							   transform->localPosition.y + pos.second.z,
+							   transform->localPosition.z };
+		//std::cout << "REAL RESULT : " << result.x << " " << result.y << std::endl;
+		pos.first->SetPosition(result);
+	}
+
 	Engine::RenderManager::GetInstance()->AddRenderObject(ID_UI, this);
 	return StaticUI::Update(dt);
 }
