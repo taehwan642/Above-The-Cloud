@@ -33,27 +33,44 @@ INT RadarPlane::Update(const FLOAT& dt)
 		v.first->SetActive(false);
 	dotpositions.clear();
 
-	
+	//D3DXVECTOR3 dir = -(*reinterpret_cast<D3DXVECTOR3*>(&observer->GetTransform()->worldMatrix._31));
+	//D3DXVec3Normalize(&dir, &dir);
+	//static float yaw = 0;
+	//yaw += dt * 2;
+	//D3DXMATRIX r;
+	//D3DXMatrixRotationQuaternion(&r, &observer->GetTransform()->curQuaternion);
+	//D3DXVECTOR3 rot = Engine::Transform::rotationMatrixToEulerAngles(r);
+	//D3DXQuaternionRotationYawPitchRoll(&transform->quaternion, 0, 0, yaw);
+
 	for (int i = 0; i < MONSTEREND; ++i)
 	{
 		for (auto& v : MonsterInfoManager::GetInstance()->GetListWithMonsterType(static_cast<MonsterType>(i)))
 		{
-			D3DXVECTOR3 mpos = dynamic_cast<Engine::Transform*>(v->GetComponent(L"Transform"))->localPosition;
-			//std::cout << "-POS : " << mpos.x << " " << mpos.y << " " << mpos.z << std::endl;
+			Engine::Transform* t = dynamic_cast<Engine::Transform*>(v->GetComponent(L"Transform"));
+			D3DXVECTOR3 mpos = t->localPosition;
 			D3DXVECTOR3 vec = observer->GetTransform()->localPosition - mpos;
+
 			RadarDot* d = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<RadarDot>(UI, L"RadarDot");
-			d->SetActive(true); // 구조 왜 이거 active false면 transform의 업데이트가 되지 않는지 확인해보기. 뭔가 꼬였다!!!
+			d->SetActive(true); // 이걸 안해주면 activefalse된 첫번째 애를 넘겨주기에 같은 값을 받아오게 됨.
+			//Engine::Transform* dotT = dynamic_cast<Engine::Transform*>(d->GetComponent(L"Transform"));
+			//
+			//D3DXVec3TransformNormal(
+			//	&dotT->localPosition,
+			//	&dotT->localPosition,
+			//	&transform->worldMatrix);
+
+			////d->ActiveTrue(transform);
+			//D3DXVECTOR3 res = vec + dotT->localPosition;
+			
 			dotpositions.emplace_back(d, vec);
 		}
 	}
-	
+
 	for (const auto& pos : dotpositions)
 	{
-		//std::cout << "RESULT : " <<  pos.second.x << " " << pos.second.z << std::endl;
 		D3DXVECTOR3 result = { transform->localPosition.x + pos.second.x,
 							   transform->localPosition.y + pos.second.z,
 							   transform->localPosition.z };
-		//std::cout << "REAL RESULT : " << result.x << " " << result.y << std::endl;
 		pos.first->SetPosition(result);
 	}
 

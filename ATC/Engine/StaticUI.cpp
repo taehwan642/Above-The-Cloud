@@ -43,10 +43,21 @@ void StaticUI::LateUpdate(const FLOAT& dt)
 void StaticUI::Render(const FLOAT& dt)
 {
 	D3DXMATRIX m;
-	D3DXMatrixTransformation2D(&m, nullptr, 0,
-		&D3DXVECTOR2(transform->scale.x, transform->scale.y),
-		nullptr, transform->rotation.z,
-		&D3DXVECTOR2(transform->localPosition.x, transform->localPosition.y));
+	if (transform->parent == nullptr)
+	{
+		D3DXMatrixTransformation2D(&m, nullptr, 0,
+			&D3DXVECTOR2(transform->scale.x, transform->scale.y),
+			nullptr, transform->rotation.z,
+			&D3DXVECTOR2(transform->localPosition.x, transform->localPosition.y));
+	}
+	else
+	{
+		D3DXMatrixTransformation2D(&m, nullptr, 0,
+			&D3DXVECTOR2(transform->scale.x, transform->scale.y),
+			nullptr, transform->rotation.z,
+			&D3DXVECTOR2(transform->worldPosition.x, transform->worldPosition.y));
+	}
+	
 	GraphicsManager::GetInstance()->GetSprite()->SetTransform(&m);
 	GraphicsManager::GetInstance()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 

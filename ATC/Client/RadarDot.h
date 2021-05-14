@@ -7,7 +7,6 @@ class RadarDot :
 private:
 protected:
 public:
-
     void SetPosition(const D3DXVECTOR3& _position);
 
     explicit RadarDot(void);
