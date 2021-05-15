@@ -49,7 +49,8 @@ INT RadarPlane::Update(const FLOAT& dt)
 			Engine::Transform* t = dynamic_cast<Engine::Transform*>(v->GetComponent(L"Transform"));
 			D3DXVECTOR3 mpos = t->localPosition;
 			D3DXVECTOR3 vec = observer->GetTransform()->localPosition - mpos;
-
+			if (D3DXVec2Length(&D3DXVECTOR2(vec.x, vec.z)) > 130) // distance check
+				continue;
 			RadarDot* d = Engine::ObjectManager::GetInstance()->CheckActiveFalsedObjectAndSpawn<RadarDot>(UI, L"RadarDot");
 			d->SetActive(true); // 이걸 안해주면 activefalse된 첫번째 애를 넘겨주기에 같은 값을 받아오게 됨.
 			//Engine::Transform* dotT = dynamic_cast<Engine::Transform*>(d->GetComponent(L"Transform"));
