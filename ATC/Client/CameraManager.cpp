@@ -44,6 +44,11 @@ CAMERAINDEX CameraManager::GetCurrentIndex(void) const
 	return currentIndex;
 }
 
+float CameraManager::GetDelta(void) const
+{
+	return dynamic_cast<CutSceneCamera*>(currentCamera)->delta;
+}
+
 void
 CameraManager::UpdateCamera(const FLOAT& dt)
 {

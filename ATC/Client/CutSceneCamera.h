@@ -14,7 +14,6 @@ private:
     Engine::Transform* transform = nullptr;
     CUTSCENEINDEX index{CUTSCENE_NONE};
     PlayerObserver* observer{ nullptr };
-    float delta{ 0.0f };
 
     void LookAt(const D3DXVECTOR3& _look);
     void LookAtBoss(void);
@@ -22,6 +21,7 @@ private:
 
 protected:
 public:
+    float delta{ 0.0f };
     explicit CutSceneCamera(void);
     virtual ~CutSceneCamera(void);
 

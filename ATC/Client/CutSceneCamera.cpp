@@ -5,6 +5,7 @@
 #include "PlayerObserver.h"
 #include "../Engine/SubjectManager.h"
 #include "MonsterBase.h"
+#include "../Engine/SceneManager.h"
 #include "CutSceneCamera.h"
 
 CutSceneCamera::CutSceneCamera(void)
@@ -98,9 +99,22 @@ CutSceneCamera::Update(const FLOAT& dt)
 void 
 CutSceneCamera::LateUpdate(const FLOAT& dt)
 {
-
 	switch (index)
 	{
+	case CUTSCENE_ENDGAME:
+	{
+		delta += dt;
+		if (delta < 3)
+		{
+			LookAtPlane();
+		}
+		else
+		{
+			delta = 0;
+			index = CUTSCENE_NONE;
+		}
+		break;
+	}
 	case CUTSCENE_PLAYERDEAD: 
 	{
 		delta += dt;

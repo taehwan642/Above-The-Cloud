@@ -22,6 +22,7 @@ public:
 
     Engine::GameObject* GetCurrentCamera(void) const;
     CAMERAINDEX GetCurrentIndex(void) const;
+    float GetDelta(void) const;
 
     void UpdateCamera(const FLOAT& dt);
     void LateUpdateCamera(const FLOAT& dt);

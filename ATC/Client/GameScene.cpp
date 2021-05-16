@@ -99,12 +99,21 @@ void GameScene::Update(const FLOAT& dt)
 		{
 		case STAGE1:
 			stage = STAGE2;
+			MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
 			break;
 		case STAGE2:
 			stage = STAGE3;
+			MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
+			break;
+		case STAGE3:
+			CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
+			CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_ENDGAME);
+			if (CameraManager::GetInstance()->GetDelta() > 2.5f)
+			{
+				Engine::SceneManager::GetInstance()->SetScene(L"¸Þ´º");
+			}
 			break;
 		}
-		MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
 	}
 
 	if (DXUTWasKeyPressed('P'))

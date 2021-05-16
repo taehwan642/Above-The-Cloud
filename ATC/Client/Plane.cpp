@@ -118,6 +118,7 @@ void Plane::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObje
 			_objectTag == L"MonsterBullet" ? healthpoint -= dynamic_cast<MonsterBullet*>(_gameObject)->GetDamageValue() : --healthpoint;
 			Engine::SubjectManager::GetInstance()->Notify(static_cast<UINT>(PlayerInfos::PLAYERHEALTH));
 			invincibletime = 1.f;
+			healthpoint = 5;
 			if (healthpoint <= 0)
 			{
 				PlayerDead(true);
