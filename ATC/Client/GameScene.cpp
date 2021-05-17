@@ -108,6 +108,7 @@ void GameScene::Update(const FLOAT& dt)
 		case STAGE3:
 			CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
 			CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_ENDGAME);
+			// 무한 모드 세팅
 			if (CameraManager::GetInstance()->GetDelta() > 2.5f)
 			{
 				Engine::SceneManager::GetInstance()->SetScene(L"메뉴");
