@@ -11,6 +11,8 @@ private:
     void AddStage3Data(void);
 protected:
 public:
+    bool isInfinity = false;
+
     explicit GameScene(void) {};
     virtual ~GameScene(void) {};
 
