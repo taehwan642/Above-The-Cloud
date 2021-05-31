@@ -3,10 +3,12 @@
 NAMESPACE(Engine)
 class Button;
 END
+class ShadowTest;
 class MenuScene final :
     public Engine::Scene
 {
 private:
+    ShadowTest* test;
     Engine::Button* startButton;
 protected:
 public:

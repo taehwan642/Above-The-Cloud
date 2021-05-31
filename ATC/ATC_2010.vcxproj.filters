@@ -511,6 +511,9 @@
     <ClCompile Include="Client\MonsterInfoManager.cpp">
       <Filter>2Client\3Manager\2MonsterInfoManager</Filter>
     </ClCompile>
+    <ClCompile Include="Client\ShadowTest.cpp">
+      <Filter>2Client\1GameObject\9Shadow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -707,6 +710,9 @@
     </ClInclude>
     <ClInclude Include="Client\MonsterInfoManager.h">
       <Filter>2Client\3Manager\2MonsterInfoManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\ShadowTest.h">
+      <Filter>2Client\1GameObject\9Shadow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
