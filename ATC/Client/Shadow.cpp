@@ -55,9 +55,20 @@ void Shadow::Render(const FLOAT& dt)
 	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	DEVICE->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	DEVICE->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	
+	D3DMATERIAL9 mtrl;// = InitMtrl(BLACK, BLACK, BLACK, BLACK, 0.0f);
+	mtrl.Diffuse = D3DXCOLOR(D3DCOLOR_XRGB(0, 0, 0));
+	mtrl.Ambient = D3DXCOLOR(D3DCOLOR_XRGB(0, 0, 0));
+	mtrl.Specular = D3DXCOLOR(D3DCOLOR_XRGB(0, 0, 0));
+	mtrl.Emissive = D3DXCOLOR(D3DCOLOR_XRGB(0, 0, 0));
+	mtrl.Power = 0.0f;
+	mtrl.Diffuse.a = 0.1f; // 50% Åõ¸íµµ
+
+	DEVICE->SetMaterial(&mtrl);
 	DynamicUI::Render(dt);
 	texture->RenderTexture(DynamicUI::currentTextureindex);
 	DynamicUI::RenderBuffer();
+	
 	DEVICE->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
