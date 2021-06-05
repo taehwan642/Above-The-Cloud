@@ -57,7 +57,7 @@ ShadowTest::ShadowTest()
 
 INT ShadowTest::Update(const FLOAT& dt)
 {
-	Engine::RenderManager::GetInstance()->AddRenderObject(RenderID::ID_UI, this);
+	Engine::RenderManager::GetInstance()->AddRenderObject(RenderID::ID_NORMALMESH, this);
 	GameObject::Update(dt);
 	return OBJALIVE;
 }
