@@ -18,6 +18,7 @@
 namespace TEST
 {
     LPDIRECT3DVERTEXBUFFER9 g_pVB = NULL;
+    LPDIRECT3DINDEXBUFFER9 g_pIB = NULL;
     struct CUSTOMVERTEX
     {
         FLOAT x, y, z;      // The untransformed, 3D position for the vertex
@@ -32,18 +33,23 @@ namespace TEST
         // Initialize three vertices for rendering a triangle
         CUSTOMVERTEX g_Vertices[] =
         {
-            { -1.0f,-1.0f, 0.0f, 0xffff0000, },
-            {  1.0f,-1.0f, 0.0f, 0xff0000ff, },
-            {  0.0f, 1.0f, 0.0f, 0xffffffff, },
+            { -1.0f, 1.0f, 0.0f, 0xffff0000, }, // 좌하단
+            {  1.0f, 1.0f, 0.0f, 0xffffffff, }, // 좌상단
+            {  1.0f,-1.0f, 0.0f, 0xff0000ff, }, // 우하단
+            {  -1.0f, -1.0f, 0.0f, 0xffffffff, }, // 우상단
         };
 
         // Create the vertex buffer.
-        if (FAILED(device->CreateVertexBuffer(3 * sizeof(CUSTOMVERTEX),
+        if (FAILED(device->CreateVertexBuffer(4 * sizeof(CUSTOMVERTEX),
             0, D3DFVF_CUSTOMVERTEX,
-            D3DPOOL_DEFAULT, &g_pVB, NULL)))
+            D3DPOOL_MANAGED, &g_pVB, NULL)))
         {
             return E_FAIL;
         }
+
+        if (FAILED(device->CreateIndexBuffer(2 * sizeof(INDEX16), 0, D3DFMT_INDEX16, D3DPOOL_MANAGED,
+            &g_pIB, NULL)))
+            return E_FAIL;
 
         // Fill the vertex buffer.
         VOID* pVertices;
@@ -51,6 +57,18 @@ namespace TEST
             return E_FAIL;
         memcpy(pVertices, g_Vertices, sizeof(g_Vertices));
         g_pVB->Unlock();
+
+        INDEX16* pindex;
+        if (FAILED(g_pIB->Lock(0, 0, (void**)&pindex, 0)))
+            return E_FAIL;
+        pindex[0]._0 = 0;
+        pindex[0]._1 = 1;
+        pindex[0]._2 = 2;
+
+        pindex[1]._0 = 0;
+        pindex[1]._1 = 2;
+        pindex[1]._2 = 3;
+        g_pIB->Unlock();
     }
 
     void Update(LPDIRECT3DDEVICE9 device)
@@ -66,18 +84,23 @@ namespace TEST
         UINT iTime = timeGetTime() % 1000;
         FLOAT fAngle = iTime * (2.0f * D3DX_PI) / 1000.0f;
         D3DXMatrixRotationY(&matWorld, fAngle);
-        device->SetTransform(D3DTS_WORLD, &matWorld);
+        D3DXMATRIX matTrans;
+        D3DXMatrixTranslation(&matTrans, 0, 0, 5);
+        D3DXMATRIX res = matWorld * matTrans;
+        device->SetTransform(D3DTS_WORLD, &res);
 
-        D3DXVECTOR3 vEyePt(0.0f, 3.0f, -5.0f);
-        D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
-        D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
-        D3DXMATRIXA16 matView;
-        D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
-        device->SetTransform(D3DTS_VIEW, &matView);
+        //D3DXVECTOR3 vEyePt(0.0f, 3.0f, -5.0f);
+        //D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
+        //D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
+        //D3DXMATRIXA16 matView;
+        //D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
+        //device->SetTransform(D3DTS_VIEW, &matView);
 
         device->SetStreamSource(0, g_pVB, 0, sizeof(CUSTOMVERTEX));
         device->SetFVF(D3DFVF_CUSTOMVERTEX);
-        device->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 1);
+        device->SetIndices(g_pIB);
+        DEVICE->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
+        //device->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
         DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
     }
 
@@ -85,7 +108,8 @@ namespace TEST
     {
         if (g_pVB != NULL)
             g_pVB->Release();
-
+        if (g_pIB != NULL)
+            g_pIB->Release();
     }
 }
 
@@ -124,8 +148,8 @@ void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTime, flo
 
     if( SUCCEEDED( pd3dDevice->BeginScene() ) )
     {
+        //TEST::Update(pd3dDevice);
         Engine::RenderManager::GetInstance()->RenderObject(fElapsedTime);
-        TEST::Update(pd3dDevice);
         V( pd3dDevice->EndScene() );
     }
     Engine::RenderManager::GetInstance()->ReleaseAllObjects();

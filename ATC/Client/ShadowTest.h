@@ -10,20 +10,21 @@ class ShadowTest :
     public Engine::GameObject
 {
 private:
-    LPDIRECT3DVERTEXBUFFER9 vb;
-    LPDIRECT3DINDEXBUFFER9 ib;
-    DWORD vtxsize = 0;
-    DWORD vtxcnt = 0;
-    DWORD vtxFVF = 0;
-    DWORD tricnt = 0;
-    DWORD idxsize = 0;
-    D3DFORMAT idxfmt;
-
-    Engine::Transform* transform = nullptr;
     Engine::Texture* texture = nullptr;
+    LPDIRECT3DVERTEXBUFFER9 g_pVB = NULL;
+    LPDIRECT3DINDEXBUFFER9 g_pIB = NULL;
+    struct CUSTOMVERTEX
+    {
+        FLOAT x, y, z;      // The untransformed, 3D position for the vertex
+        DWORD color;        // The vertex color
+        FLOAT u, v;
+    };
+#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1)
+
 
 public:
     explicit ShadowTest();
+    HRESULT Initialize(void);
     INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;
