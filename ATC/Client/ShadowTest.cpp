@@ -50,6 +50,9 @@ HRESULT ShadowTest::Initialize(void)
 
 ShadowTest::ShadowTest()
 {
+	transform = new Engine::Transform();
+	componentgroup.emplace(L"Transform", transform);
+	transform->localPosition.z = 5;
 	texture = dynamic_cast<Engine::Texture*>(Engine::ResourceManager::GetInstance()->LoadResource(L"Shadow"));
 	componentgroup.emplace(L"Texture", texture);
 	Initialize();
@@ -80,29 +83,21 @@ void ShadowTest::Render(const FLOAT& dt)
 	DEVICE->SetRenderState(D3DRS_LIGHTING, FALSE);
 	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE); // 알파블렌딩 사용
 
-	D3DXMATRIXA16 matWorld;
-
-	UINT iTime = timeGetTime() % 1000;
-	FLOAT fAngle = iTime * (2.0f * D3DX_PI) / 1000.0f;
-	//D3DXMatrixRotationY(&matWorld, fAngle);
-	D3DXMATRIX matTrans;
-	D3DXMatrixTranslation(&matTrans, 0, 0, 5);
-	D3DXMATRIX res = matTrans;
-	DEVICE->SetTransform(D3DTS_WORLD, &res);
+	DEVICE->SetTransform(D3DTS_WORLD, &transform->worldMatrix);
 
 	static int alpha = 0;
 	static float delta = 0;
 	delta += dt;
 	alpha =  (255.f - 255 * cos(delta * 10)) > 255 ? 255 : (255.f - 255 * cos(delta * 10));
+	
+	
 	CUSTOMVERTEX* pVertices;
 	if (FAILED(g_pVB->Lock(0, 0, (void**)&pVertices, 0)))
 		return;
-	std::cout << alpha << std::endl;
 	pVertices[0].color = D3DCOLOR_RGBA(0xff, 0xff, 0xff, alpha);
 	pVertices[1].color = D3DCOLOR_RGBA(0xff, 0xff, 0xff, alpha);
 	pVertices[2].color = D3DCOLOR_RGBA(0xff, 0xff, 0xff, alpha);
 	pVertices[3].color = D3DCOLOR_RGBA(0xff, 0xff, 0xff, alpha);
-
 	g_pVB->Unlock();
 
 	texture->RenderTexture(0);

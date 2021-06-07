@@ -10,6 +10,8 @@ class ShadowTest :
     public Engine::GameObject
 {
 private:
+    Engine::Transform* transform = nullptr;
+    Engine::Transform* objectTransform = nullptr;
     Engine::Texture* texture = nullptr;
     LPDIRECT3DVERTEXBUFFER9 g_pVB = NULL;
     LPDIRECT3DINDEXBUFFER9 g_pIB = NULL;
@@ -20,7 +22,6 @@ private:
         FLOAT u, v;
     };
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1)
-
 
 public:
     explicit ShadowTest();
