@@ -109,7 +109,6 @@ INT Shadow::Update(const FLOAT& dt)
 		if (res < 0)
 			res = 0;
 		alpha = res;
-		std::cout << alpha << std::endl;
 	}
 	// 
 	

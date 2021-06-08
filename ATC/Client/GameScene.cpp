@@ -106,12 +106,20 @@ void GameScene::Update(const FLOAT& dt)
 			MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
 			break;
 		case STAGE3:
-			CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
-			CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_ENDGAME);
-			// 무한 모드 세팅
-			if (CameraManager::GetInstance()->GetDelta() > 2.5f)
+			if (isInfinity == true)
 			{
-				Engine::SceneManager::GetInstance()->SetScene(L"메뉴");
+				stage = STAGE1;
+				MonsterSpawnManager::GetInstance()->SpawnMonstersByData(stage);
+			}
+			else
+			{
+				CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
+				CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_ENDGAME);
+				// 무한 모드 세팅
+				if (CameraManager::GetInstance()->GetDelta() > 2.5f)
+				{
+					Engine::SceneManager::GetInstance()->SetScene(L"메뉴");
+				}
 			}
 			break;
 		}
@@ -119,11 +127,6 @@ void GameScene::Update(const FLOAT& dt)
 
 	if (DXUTWasKeyPressed('P'))
 		Engine::SceneManager::GetInstance()->SetScene(L"메뉴");
-
-	/*if (DXUTWasKeyPressed('I'))
-		CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
-	if (DXUTWasKeyPressed('J'))
-		CameraManager::GetInstance()->SetCamera(CAM_PLAYER);*/
 
 	if (CameraManager::GetInstance()->GetCurrentIndex() == CAM_CUTSCENE)
 	{
