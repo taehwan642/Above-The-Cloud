@@ -99,6 +99,7 @@ CutSceneCamera::Update(const FLOAT& dt)
 void 
 CutSceneCamera::LateUpdate(const FLOAT& dt)
 {
+	std::cout << delta << std::endl;
 	switch (index)
 	{
 	case CUTSCENE_ENDGAME:
@@ -144,7 +145,7 @@ CutSceneCamera::LateUpdate(const FLOAT& dt)
 		}
 		break; 
 	}
-	case CUTSCENE_NONE: {break; }
+	case CUTSCENE_NONE: {delta = 0; break; }
 	default:
 		break;
 	}

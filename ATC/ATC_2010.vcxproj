@@ -394,6 +394,7 @@
     <ClCompile Include="Client\BossGuns.cpp" />
     <ClCompile Include="Client\BossShootGun.cpp" />
     <ClCompile Include="Client\CameraManager.cpp" />
+    <ClCompile Include="Client\CloudSpawnManager.cpp" />
     <ClCompile Include="Client\CutSceneCamera.cpp" />
     <ClCompile Include="Client\MenuCamera.cpp" />
     <ClCompile Include="Client\MonsterInfoManager.cpp" />
@@ -458,6 +459,7 @@
     <ClInclude Include="Client\BossGuns.h" />
     <ClInclude Include="Client\BossShootGun.h" />
     <ClInclude Include="Client\CameraManager.h" />
+    <ClInclude Include="Client\CloudSpawnManager.h" />
     <ClInclude Include="Client\CutSceneCamera.h" />
     <ClInclude Include="Client\MenuCamera.h" />
     <ClInclude Include="Client\MonsterInfoManager.h" />

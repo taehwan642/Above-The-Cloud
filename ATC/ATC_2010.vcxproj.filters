@@ -258,6 +258,9 @@
     <Filter Include="2Client\3Manager\2MonsterInfoManager">
       <UniqueIdentifier>{cb773fc6-25dd-4adf-860c-cb52e8571c4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Client\3Manager\4CloudSpawnManager">
+      <UniqueIdentifier>{8ca79362-f69c-47e1-b2fc-9fe862ea522d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -514,6 +517,9 @@
     <ClCompile Include="Client\ShadowTest.cpp">
       <Filter>2Client\1GameObject\9Shadow</Filter>
     </ClCompile>
+    <ClCompile Include="Client\CloudSpawnManager.cpp">
+      <Filter>2Client\3Manager\4CloudSpawnManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -713,6 +719,9 @@
     </ClInclude>
     <ClInclude Include="Client\ShadowTest.h">
       <Filter>2Client\1GameObject\9Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="Client\CloudSpawnManager.h">
+      <Filter>2Client\3Manager\4CloudSpawnManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
