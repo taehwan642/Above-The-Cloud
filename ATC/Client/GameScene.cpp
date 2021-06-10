@@ -92,7 +92,7 @@ void GameScene::Update(const FLOAT& dt)
 		if (l.size() != 0)
 			++value;
 	}
-	//std::cout << value << std::endl;
+
 	if (value == 0)
 	{
 		switch (stage)
@@ -116,7 +116,7 @@ void GameScene::Update(const FLOAT& dt)
 				CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
 				CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_ENDGAME);
 				// 무한 모드 세팅
-				if (CameraManager::GetInstance()->GetDelta() > 2.5f)
+				if (CameraManager::GetInstance()->GetDelta() > 5.0f)
 				{
 					Engine::SceneManager::GetInstance()->SetScene(L"메뉴");
 				}
@@ -124,9 +124,6 @@ void GameScene::Update(const FLOAT& dt)
 			break;
 		}
 	}
-
-	// 몬스터가 다 죽었다면 그 이후에 무한모드인지 아닌지 체크
-	// 무한모드가 아니고 스토리모드였다면 그냥 연출띄워주고 끝내기!
 
 	if (DXUTWasKeyPressed('P'))
 		Engine::SceneManager::GetInstance()->SetScene(L"메뉴");

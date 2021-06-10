@@ -32,7 +32,11 @@ CutSceneCamera::~CutSceneCamera(void)
 void
 CutSceneCamera::SetCutSceneIndex(CUTSCENEINDEX _index)
 {
-	index = _index;
+	if (index != _index)
+	{
+		index = _index;
+		delta = 0;
+	}
 }
 
 CUTSCENEINDEX
@@ -99,7 +103,7 @@ CutSceneCamera::Update(const FLOAT& dt)
 void 
 CutSceneCamera::LateUpdate(const FLOAT& dt)
 {
-	std::cout << delta << std::endl;
+	//std::cout << delta << std::endl;
 	switch (index)
 	{
 	case CUTSCENE_ENDGAME:
