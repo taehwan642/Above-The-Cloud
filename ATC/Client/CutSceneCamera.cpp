@@ -46,6 +46,13 @@ CutSceneCamera::GetCutSceneIndex(void) const
 }
 
 void 
+CutSceneCamera::ResetDeltaTime(void) // 아직 미사용
+{
+	delta = 0;
+	index = CUTSCENE_NONE;
+}
+
+void 
 CutSceneCamera::LookAt(const D3DXVECTOR3& _look)
 {
 	D3DXVECTOR3 look = _look;// = t->localPosition - transform->localPosition;
@@ -109,15 +116,6 @@ CutSceneCamera::LateUpdate(const FLOAT& dt)
 	case CUTSCENE_ENDGAME:
 	{
 		delta += dt;
-		if (delta < 3)
-		{
-			LookAtPlane();
-		}
-		else
-		{
-			delta = 0;
-			index = CUTSCENE_NONE;
-		}
 		break;
 	}
 	case CUTSCENE_PLAYERDEAD: 

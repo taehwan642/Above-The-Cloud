@@ -49,6 +49,7 @@ public:
 	void Update(const FLOAT& dt) override;
 	void Render(const FLOAT& dt) override;
 
+	size_t GetDataSize(void) const;
 	void ClearData(void);
 
 	void Free(void) override;

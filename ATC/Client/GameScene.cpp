@@ -116,7 +116,9 @@ void GameScene::Update(const FLOAT& dt)
 				CameraManager::GetInstance()->SetCamera(CAM_CUTSCENE);
 				CameraManager::GetInstance()->SetCurrentCutScene(CUTSCENE_ENDGAME);
 				// 무한 모드 세팅
-				if (CameraManager::GetInstance()->GetDelta() > 5.0f)
+				float dd = CameraManager::GetInstance()->GetDelta();
+				std::cout << dd << std::endl;
+				if (dd > 5.0f)
 				{
 					Engine::SceneManager::GetInstance()->SetScene(L"메뉴");
 				}

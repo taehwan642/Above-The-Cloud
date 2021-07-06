@@ -34,6 +34,8 @@ public:
     explicit Shadow(Engine::Transform* _objectTransform, const D3DXVECTOR3& _scale);
     virtual ~Shadow(void);
 
+    void ResetSize(void);
+
     INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;
     void Render(const FLOAT& dt) override;

@@ -89,6 +89,11 @@ Shadow::~Shadow(void)
 {
 }
 
+void Shadow::ResetSize(void)
+{
+	transform->scale = { 1,1,1 };
+}
+
 INT Shadow::Update(const FLOAT& dt)
 {
 	transform->localPosition = { objectTransform->localPosition.x, -42.f, objectTransform->localPosition.z };

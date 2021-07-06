@@ -38,6 +38,8 @@ void MonsterBase::SetInformation(const D3DXVECTOR3& _position)
 		movementqueue.pop();
 	if (shadow == nullptr)
 		shadow = new Shadow(transform, { 1,1,1 });
+	else
+		shadow->ResetSize();
 }
 
 void MonsterBase::CollisionEvent(const std::wstring& _objectTag, GameObject* _gameObject)

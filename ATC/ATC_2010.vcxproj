@@ -414,7 +414,6 @@
     <ClCompile Include="Client\Shadow.cpp" />
     <ClCompile Include="Client\PlayerObserver.cpp" />
     <ClCompile Include="Client\Sea.cpp" />
-    <ClCompile Include="Client\ShadowTest.cpp" />
     <ClCompile Include="Client\SkySphere.cpp" />
     <ClCompile Include="Client\Monster1.cpp" />
     <ClCompile Include="Client\Plane.cpp" />
@@ -448,6 +447,7 @@
     <ClCompile Include="Engine\StaticUI.cpp" />
     <ClCompile Include="Engine\Subject.cpp" />
     <ClCompile Include="Engine\SubjectManager.cpp" />
+    <ClCompile Include="Engine\Text.cpp" />
     <ClCompile Include="Engine\Texture.cpp" />
     <ClCompile Include="Engine\TextureEffect.cpp" />
     <ClCompile Include="Engine\Trail.cpp" />
@@ -480,7 +480,6 @@
     <ClInclude Include="Client\Shadow.h" />
     <ClInclude Include="Client\PlayerObserver.h" />
     <ClInclude Include="Client\Sea.h" />
-    <ClInclude Include="Client\ShadowTest.h" />
     <ClInclude Include="Client\SkySphere.h" />
     <ClInclude Include="Client\Monster1.h" />
     <ClInclude Include="Client\Plane.h" />
@@ -513,6 +512,7 @@
     <ClInclude Include="Engine\StaticUI.h" />
     <ClInclude Include="Engine\Subject.h" />
     <ClInclude Include="Engine\SubjectManager.h" />
+    <ClInclude Include="Engine\Text.h" />
     <ClInclude Include="Engine\Texture.h" />
     <ClInclude Include="Engine\TextureEffect.h" />
     <ClInclude Include="Engine\Trail.h" />

@@ -27,6 +27,7 @@ public:
 
     void SetCutSceneIndex(CUTSCENEINDEX _index);
     CUTSCENEINDEX GetCutSceneIndex(void) const;
+    void ResetDeltaTime(void);
 
     INT Update(const FLOAT& dt) override;
     void LateUpdate(const FLOAT& dt) override;

@@ -4,7 +4,6 @@
 #include "../Engine/SceneManager.h"
 #include "MenuCamera.h"
 #include "CameraManager.h"
-#include "ShadowTest.h"
 #include "MenuScene.h"
 
 MenuScene::MenuScene(void)
@@ -24,9 +23,6 @@ void MenuScene::Start(void)
 	startButton = new Engine::Button(L"Start", { 0, 0, 5 });
 	startButton->SetButtonFunction([]() {Engine::SceneManager::GetInstance()->SetScene(L"°ÔÀÓ"); });
 	l->AddGameObject(L"Objects", startButton);
-
-	test = new ShadowTest();
-	l->AddGameObject(L"Objects", test);
 
 	CameraManager::GetInstance()->AddCamera(CAM_MENU, new MenuCamera());
 	CameraManager::GetInstance()->SetCamera(CAM_MENU);

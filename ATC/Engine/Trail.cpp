@@ -168,6 +168,11 @@ void Trail::Render(const FLOAT& dt)
 	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 }
 
+size_t Trail::GetDataSize(void) const
+{
+	return trailDatas.size();
+}
+
 void Trail::ClearData(void)
 {
 	trailDatas.clear();
